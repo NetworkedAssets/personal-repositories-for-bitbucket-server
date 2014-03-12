@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.networkedassets.atlassian.stash</groupId>
     <artifactId>private-repositories-permissions-plugin</artifactId>
     <version>1.0-SNAPSHOT</version>
-
     <organization>
         <name>Example Company</name>
         <url>http://www.example.com/</url>
     </organization>
-
     <name>private-repositories-permissions-plugin</name>
     <description>This is the org.networkedassets.atlassian.stash:private-repositories-permissions-plugin plugin for Atlassian Stash.</description>
     <packaging>atlassian-plugin</packaging>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -29,7 +23,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
     <dependencies>
         <dependency>
             <groupId>com.atlassian.sal</groupId>
@@ -68,7 +61,6 @@
             <version>2.6</version>
             <scope>provided</scope>
         </dependency>
-
         <!-- WIRED TEST RUNNER DEPENDENCIES -->
         <dependency>
             <groupId>com.atlassian.plugins</groupId>
@@ -87,8 +79,25 @@
             <artifactId>gson</artifactId>
             <version>2.2.2-atlassian-1</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.6</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.1.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.8.5</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -103,7 +112,7 @@
                             <instanceId>stash</instanceId>
                             <version>${stash.version}</version>
                             <dataVersion>${stash.data.version}</dataVersion>
-                        </product>  
+                        </product>
                     </products>
                 </configuration>
             </plugin>
@@ -116,82 +125,56 @@
             </plugin>
         </plugins>
         <pluginManagement>
-        	<plugins>
-        		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-        		<plugin>
-        			<groupId>org.eclipse.m2e</groupId>
-        			<artifactId>lifecycle-mapping</artifactId>
-        			<version>1.0.0</version>
-        			<configuration>
-        				<lifecycleMappingMetadata>
-        					<pluginExecutions>
-        						<pluginExecution>
-        							<pluginExecutionFilter>
-        								<groupId>
-        									com.atlassian.maven.plugins
-        								</groupId>
-        								<artifactId>
-        									maven-amps-plugin
-        								</artifactId>
-        								<versionRange>
-        									[4.2.18,)
-        								</versionRange>
-        								<goals>
-        									<goal>
-        										filter-test-plugin-descriptor
-        									</goal>
-        								</goals>
-        							</pluginExecutionFilter>
-        							<action>
-        								<ignore></ignore>
-        							</action>
-        						</pluginExecution>
-        						<pluginExecution>
-        							<pluginExecutionFilter>
-        								<groupId>
-        									com.atlassian.maven.plugins
-        								</groupId>
-        								<artifactId>
-        									maven-stash-plugin
-        								</artifactId>
-        								<versionRange>
-        									[4.2.18,)
-        								</versionRange>
-        								<goals>
-        									<goal>
-        										generate-rest-docs
-        									</goal>
-        									<goal>
-        										copy-bundled-dependencies
-        									</goal>
-        									<goal>
-        										compress-resources
-        									</goal>
-        									<goal>
-        										generate-manifest
-        									</goal>
-        									<goal>
-        										filter-plugin-descriptor
-        									</goal>
-        								</goals>
-        							</pluginExecutionFilter>
-        							<action>
-        								<ignore></ignore>
-        							</action>
-        						</pluginExecution>
-        					</pluginExecutions>
-        				</lifecycleMappingMetadata>
-        			</configuration>
-        		</plugin>
-        	</plugins>
+            <plugins>
+                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>com.atlassian.maven.plugins</groupId>
+                                        <artifactId>maven-amps-plugin</artifactId>
+                                        <versionRange>[4.2.18,)</versionRange>
+                                        <goals>
+                                            <goal>filter-test-plugin-descriptor</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore/>
+                                    </action>
+                                </pluginExecution>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>com.atlassian.maven.plugins</groupId>
+                                        <artifactId>maven-stash-plugin</artifactId>
+                                        <versionRange>[4.2.18,)</versionRange>
+                                        <goals>
+                                            <goal>generate-rest-docs</goal>
+                                            <goal>copy-bundled-dependencies</goal>
+                                            <goal>compress-resources</goal>
+                                            <goal>generate-manifest</goal>
+                                            <goal>filter-plugin-descriptor</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore/>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
         </pluginManagement>
     </build>
-    
     <properties>
         <stash.version>2.11.3</stash.version>
         <stash.data.version>2.11.3</stash.data.version>
         <amps.version>4.2.18</amps.version>
         <plugin.testrunner.version>1.1.4</plugin.testrunner.version>
     </properties>
-    
 </project>
