@@ -12,6 +12,7 @@
 	<!-- add our i18n resource -->
 	<resource type="i18n" name="i18n"
 		location="private-repositories-permissions-plugin" />
+
 	<!-- add our web resources -->
 	<web-resource key="private-repositories-permissions-plugin-resources"
 		name="private-repositories-permissions-plugin Web Resources">
@@ -21,8 +22,8 @@
 		<resource type="download" name="private-repositories-permissions-plugin.js"
 			location="/js/private-repositories-permissions-plugin.js" />
 		<resource type="download" name="images/" location="/images" />
-		<context>private-repositories-permissions-plugin</context>
 	</web-resource>
+
 	<!-- publish our component -->
 	<component key="myPluginComponent"
 		class="org.networkedassets.atlassian.stash.private_repositories_permissions.MyPluginComponentImpl"
@@ -38,16 +39,32 @@
 		class="org.networkedassets.atlassian.stash.private_repositories_permissions.servlet.filter.PrivateRepositoryCreationFilter"
 		location="before-decoration" weight="100">
 		<description key="private-repository-creation-filter.description">The Private Repository Creation Filter
-			Plugin</description>
-		
+			Plugin
+		</description>
+
 		<url-pattern>/*</url-pattern>
 		<!-- <url-pattern>/users/user/repos/*</url-pattern> -->
 		<!-- <url-pattern>/mvc/projects/*/repos/*</url-pattern> -->
-		
+
 
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>
-		
 	</servlet-filter>
+
+	<web-panel key="private-repository-button-hiding-web-panel"
+		name="Private Repository Permissions Web Panel" location="stash.user.profile.header"
+		weight="20">
+		<label key="private-repository-button-hiding-web-panel"></label>
+		<resource name="view" type="static"><![CDATA[<script>jQuery(document).ready(function() {jQuery('a[href$="users/user/repos?create"], .repository-table, .repository-table-message, .aui-navgroup-inner a').remove();});</script><div style="display:none"></div>]]></resource>
+		<dependency>org.networkedassets.atlassian.stash.private_repositories_permissions:private-repositories-permissions-plugin-resources
+		</dependency>
+	</web-panel>
+
+	<web-item key="private-repository-administration-link-item"
+		name="Private Repository Permissions Admin Link" section="atl.admin/admin-general-section" weight="35">
+		<label key="private-repository-administration-link-item">Private repo permissions</label>
+		<link linkId="google_home">http://google.pl</link>
+	</web-item>
+
 </atlassian-plugin>

@@ -18,18 +18,24 @@ import org.slf4j.LoggerFactory;
 import com.atlassian.stash.exception.AuthorisationException;
 import com.atlassian.stash.user.Permission;
 import com.atlassian.stash.user.PermissionValidationService;
+import com.atlassian.stash.user.UserService;
 
 public class PrivateRepositoryCreationFilter implements Filter {
 
 	private final PermissionValidationService permissionValidationService;
+
+	private final UserService userService;
 
 	private static final Logger log = LoggerFactory
 			.getLogger(PrivateRepositoryCreationFilter.class);
 
 	private static final String FILTER_URI_REGEX = "/users/user/repos.*|/stash/mvc/projects/.*|.*/projects/~.*/repos";
 	
-	public PrivateRepositoryCreationFilter(PermissionValidationService permissionValidationService) {
+	private static final String FILTER_GROUP_SEARCH = ".*/repos/.*/permissions/groups.*";
+	
+	public PrivateRepositoryCreationFilter(PermissionValidationService permissionValidationService, UserService userService) {
 		this.permissionValidationService = permissionValidationService;
+		this.userService = userService;
 	}
 
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -48,15 +54,22 @@ public class PrivateRepositoryCreationFilter implements Filter {
 
 
 		if (uriMatchesFilter(uri)) {
-			log.warn("MATCH ! " + uri);
+			log.warn("MATCH ! {}", uri);
 			try {
 				permissionValidationService.validateForGlobal(Permission.ADMIN);
 				chain.doFilter(request, response);
 			} catch (AuthorisationException e) {
+				log.warn("Tried accessing forbidden URI {}", uri);
 				rejectRequest(httpRequest, httpResponse);
 			}
 		} else {
-			log.warn("NOT MATCHING " + uri);
+			
+			if (uri.matches(FILTER_GROUP_SEARCH)) {
+				log.warn("MATCHED GROUP SEARCH !! {}", uri);
+				
+			}
+			
+			log.warn("NONONONONONONONONO MATCH ! {}", uri);
 			chain.doFilter(request, response);
 		}
 	}
