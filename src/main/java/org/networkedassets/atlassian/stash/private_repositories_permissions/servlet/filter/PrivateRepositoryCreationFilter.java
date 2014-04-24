@@ -130,9 +130,7 @@ public class PrivateRepositoryCreationFilter implements Filter {
 	}
 
 	private List<Group> getGroupsAllowedToAccessPrivateRepositories() {
-		List<Group> groups = allowedGroupsService.all();
-		log.warn("Groups fetched {}", groups.size());
-		return groups;
+		return allowedGroupsService.all();
 	}
 
 	private void rejectRequest(HttpServletRequest httpRequest,
