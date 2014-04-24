@@ -209,6 +209,7 @@
 		</pluginManagement>
 	</build>
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<stash.version>2.12.1</stash.version>
 		<stash.data.version>2.12.1</stash.data.version>
 		<amps.version>4.2.18</amps.version>
