@@ -9,6 +9,19 @@
 		<param name="plugin-icon">images/pluginIcon.png</param>
 		<param name="plugin-logo">images/pluginLogo.png</param>
 	</plugin-info>
+
+	<ao key="${ao-key-name}">
+		<description>The AO module for this plugin.</description>
+		<entity>org.networkedassets.atlassian.stash.private_repositories_permissions.ao.Group</entity>
+	</ao>
+
+    <component-import key="ao" name="Active Objects service"
+                      interface="com.atlassian.activeobjects.external.ActiveObjects">
+        <description>Component to access Active Objects functionality from the plugin</description>
+    </component-import>
+    
+    <component key="allowedGroupsService" name="Allowed Groups Service" class="org.networkedassets.atlassian.stash.private_repositories_permissions.ao.AoAllowedGroupsService"/>
+    
 	<!-- add our i18n resource -->
 	<resource type="i18n" name="i18n"
 		location="private-repositories-permissions-plugin" />
@@ -62,7 +75,8 @@
 	</web-panel>
 
 	<web-item key="private-repository-administration-link-item"
-		name="Private Repository Permissions Admin Link" section="atl.admin/admin-general-section" weight="35">
+		name="Private Repository Permissions Admin Link" section="atl.admin/admin-general-section"
+		weight="35">
 		<label key="private-repository-administration-link-item">Private repo permissions</label>
 		<link linkId="google_home">http://google.pl</link>
 	</web-item>
