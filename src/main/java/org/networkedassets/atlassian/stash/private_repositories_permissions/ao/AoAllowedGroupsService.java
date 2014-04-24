@@ -7,6 +7,8 @@ import java.util.List;
 
 import net.java.ao.Query;
 
+import org.networkedassets.atlassian.stash.private_repositories_permissions.service.AllowedGroupsService;
+
 import com.atlassian.activeobjects.external.ActiveObjects;
 
 public class AoAllowedGroupsService implements AllowedGroupsService {

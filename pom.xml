@@ -31,6 +31,10 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>com.atlassian.plugins</groupId>
+			<artifactId>atlassian-plugins-webfragment</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.google.collections</groupId>
 			<artifactId>google-collections</artifactId>
 			<version>1.0</version>

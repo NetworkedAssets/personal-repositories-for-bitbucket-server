@@ -42,6 +42,9 @@
 	<component key="allowedGroupsService" name="Allowed Groups Service"
 		class="org.networkedassets.atlassian.stash.private_repositories_permissions.ao.AoAllowedGroupsService" />
 
+	<component key="userPermissionsExaminer" name="User Permissions Examiner"
+		class="org.networkedassets.atlassian.stash.private_repositories_permissions.service.UserPermissionsExaminer" />
+
 	<!-- import from the product container -->
 	<component-import key="applicationProperties"
 		interface="com.atlassian.sal.api.ApplicationProperties" />
@@ -65,8 +68,11 @@
 		weight="20">
 		<label key="private-repository-button-hiding-web-panel"></label>
 		<resource name="view" type="static"><![CDATA[<script>jQuery(document).ready(function() {jQuery('a[href$="users/user/repos?create"], .repository-table, .repository-table-message, .aui-navgroup-inner a').remove();});</script><div style="display:none"></div>]]></resource>
-		<dependency>org.networkedassets.atlassian.stash.private_repositories_permissions:private-repositories-permissions-plugin-resources
-		</dependency>
+		<!-- <dependency>org.networkedassets.atlassian.stash.private_repositories_permissions:private-repositories-permissions-plugin-resources
+		</dependency> -->
+		<condition key="canUsePrivateRepositoriesCondition"
+			class="org.networkedassets.atlassian.stash.private_repositories_permissions.web.CanUsePrivateRepositoriesCondition"
+			invert="true" />
 	</web-panel>
 
 </atlassian-plugin>
