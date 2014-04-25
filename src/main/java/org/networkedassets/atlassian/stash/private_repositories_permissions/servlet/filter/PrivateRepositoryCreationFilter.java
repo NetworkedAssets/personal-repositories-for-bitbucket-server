@@ -60,7 +60,6 @@ public class PrivateRepositoryCreationFilter implements Filter {
 
 	private void rejectRequest(HttpServletRequest httpRequest,
 			HttpServletResponse httpResponse) throws IOException {
-
 		PrintWriter writer = httpResponse.getWriter();
 
 		httpResponse.setStatus(401);

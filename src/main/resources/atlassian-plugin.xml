@@ -27,17 +27,6 @@
 	<resource type="i18n" name="i18n"
 		location="private-repositories-permissions-plugin" />
 
-	<!-- add our web resources -->
-	<web-resource key="private-repositories-permissions-plugin-resources"
-		name="private-repositories-permissions-plugin Web Resources">
-		<dependency>com.atlassian.auiplugin:ajs</dependency>
-		<resource type="download" name="private-repositories-permissions-plugin.css"
-			location="/css/private-repositories-permissions-plugin.css" />
-		<resource type="download" name="private-repositories-permissions-plugin.js"
-			location="/js/private-repositories-permissions-plugin.js" />
-		<resource type="download" name="images/" location="/images" />
-	</web-resource>
-
 	<!-- publish our components -->
 	<component key="allowedGroupsService" name="Allowed Groups Service"
 		class="org.networkedassets.atlassian.stash.private_repositories_permissions.ao.AoAllowedGroupsService" />
@@ -67,9 +56,15 @@
 		name="Private Repository Permissions Web Panel" location="stash.user.profile.header"
 		weight="20">
 		<label key="private-repository-button-hiding-web-panel"></label>
-		<resource name="view" type="static"><![CDATA[<script>jQuery(document).ready(function() {jQuery('a[href$="users/user/repos?create"], .repository-table, .repository-table-message, .aui-navgroup-inner a').remove();});</script><div style="display:none"></div>]]></resource>
-		<!-- <dependency>org.networkedassets.atlassian.stash.private_repositories_permissions:private-repositories-permissions-plugin-resources
-		</dependency> -->
+		<resource name="view" type="static">
+			<![CDATA[
+			<script>
+				jQuery(document).ready(function() {
+					jQuery('a[href$="users/user/repos?create"], .repository-table, .repository-table-message, .aui-navgroup-inner a').remove();
+				});
+			</script>
+			]]>
+		</resource>
 		<condition key="canUsePrivateRepositoriesCondition"
 			class="org.networkedassets.atlassian.stash.private_repositories_permissions.web.CanUsePrivateRepositoriesCondition"
 			invert="true" />
