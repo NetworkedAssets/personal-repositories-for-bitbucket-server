@@ -30,6 +30,9 @@
 	<!-- publish our components -->
 	<component key="allowedGroupsService" name="Allowed Groups Service"
 		class="org.networkedassets.atlassian.stash.private_repositories_permissions.ao.AoAllowedGroupsService" />
+		
+	<component key="allowedUsersService" name="Allowed Users Service"
+		class="org.networkedassets.atlassian.stash.private_repositories_permissions.ao.AoAllowedUsersService" />
 
 	<component key="userPermissionsExaminer" name="User Permissions Examiner"
 		class="org.networkedassets.atlassian.stash.private_repositories_permissions.service.UserPermissionsExaminer" />
