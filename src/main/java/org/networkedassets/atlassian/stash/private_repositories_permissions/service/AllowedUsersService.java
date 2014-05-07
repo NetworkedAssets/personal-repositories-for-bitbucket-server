@@ -7,7 +7,8 @@ import org.networkedassets.atlassian.stash.private_repositories_permissions.ao.U
 public interface AllowedUsersService {
 
 	List<User> all();
-	User allow(User user);
-	void disallow(User user);
+	boolean isAllowed(String userName);
+	void disallow(String userName);
+	User allow(String userName);
 	
 }

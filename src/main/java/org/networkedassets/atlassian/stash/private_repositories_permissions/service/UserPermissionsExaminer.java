@@ -3,6 +3,7 @@ package org.networkedassets.atlassian.stash.private_repositories_permissions.ser
 import java.util.List;
 
 import org.networkedassets.atlassian.stash.private_repositories_permissions.ao.Group;
+import org.networkedassets.atlassian.stash.private_repositories_permissions.ao.User;
 
 import com.atlassian.stash.user.StashAuthenticationContext;
 import com.atlassian.stash.user.StashUser;
@@ -13,16 +14,19 @@ public class UserPermissionsExaminer {
 	private final UserService userService;
 	private final StashAuthenticationContext authenthicationContext;
 	private final AllowedGroupsService allowedGroupsService;
+	private final AllowedUsersService allowedUsersService;
 	
 	private StashUser currentUser;
 	
 	public UserPermissionsExaminer(
 			UserService userService,
 			StashAuthenticationContext authenticationContext,
-			AllowedGroupsService allowedGroupsService) {
+			AllowedGroupsService allowedGroupsService,
+			AllowedUsersService allowedUsersService) {
 		this.userService = userService;
 		this.authenthicationContext = authenticationContext;
 		this.allowedGroupsService = allowedGroupsService;
+		this.allowedUsersService = allowedUsersService;
 	}
 	
 	public boolean canUsePrivateRepositories() {
@@ -40,15 +44,19 @@ public class UserPermissionsExaminer {
 	}
 
 	private boolean userAllowedToUsePrivateRepositories() {
-		return isUserInAllowedGroup(currentUser);
+		return isUserAllowed(currentUser) || isUserInAllowedGroup(currentUser);
+	}
+	
+	private boolean isUserAllowed(StashUser stashUser) {
+		return allowedUsersService.isAllowed(stashUser.getName());
 	}
 
-	private boolean isUserInAllowedGroup(StashUser currentUser) {
+	private boolean isUserInAllowedGroup(StashUser user) {
 
 		List<Group> groups = getGroupsAllowedToAccessPrivateRepositories();
 
 		for (Group group : groups) {
-			if (userService.isUserInGroup(currentUser, group.getName())) {
+			if (userService.isUserInGroup(user, group.getName())) {
 				return true;
 			}
 		}

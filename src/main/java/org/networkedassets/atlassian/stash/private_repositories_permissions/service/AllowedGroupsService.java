@@ -7,7 +7,7 @@ import org.networkedassets.atlassian.stash.private_repositories_permissions.ao.G
 public interface AllowedGroupsService {
 
 	List<Group> all();
-	Group allow(Group group);
-	void disallow(Group group);
+	void disallow(String groupName);
+	Group allow(String groupName);
 	
 }

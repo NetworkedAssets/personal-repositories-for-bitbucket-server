@@ -26,15 +26,20 @@ public class AoAllowedUsersService implements AllowedUsersService {
 	}
 
 	@Override
-	public User allow(User user) {
+	public User allow(String userName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void disallow(User user) {
+	public void disallow(String userName) {
 		// TODO Auto-generated method stub
-		
+	}
+
+	@Override
+	public boolean isAllowed(String userName) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

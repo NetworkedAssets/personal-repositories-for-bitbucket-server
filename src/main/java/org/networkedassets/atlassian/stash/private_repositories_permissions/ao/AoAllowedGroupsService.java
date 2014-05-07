@@ -26,13 +26,13 @@ public class AoAllowedGroupsService implements AllowedGroupsService {
 	}
 
 	@Override
-	public void disallow(Group group) {
+	public void disallow(String groupName) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public Group allow(Group group) {
+	public Group allow(String groupName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
