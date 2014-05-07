@@ -4,16 +4,12 @@ import java.util.List;
 
 import org.networkedassets.atlassian.stash.private_repositories_permissions.ao.Group;
 
-import com.atlassian.stash.exception.AuthorisationException;
-import com.atlassian.stash.user.Permission;
-import com.atlassian.stash.user.PermissionValidationService;
 import com.atlassian.stash.user.StashAuthenticationContext;
 import com.atlassian.stash.user.StashUser;
 import com.atlassian.stash.user.UserService;
 
 public class UserPermissionsExaminer {
 
-	private final PermissionValidationService permissionValidationService;
 	private final UserService userService;
 	private final StashAuthenticationContext authenthicationContext;
 	private final AllowedGroupsService allowedGroupsService;
@@ -21,11 +17,9 @@ public class UserPermissionsExaminer {
 	private StashUser currentUser;
 	
 	public UserPermissionsExaminer(
-			PermissionValidationService permissionValidationService,
 			UserService userService,
 			StashAuthenticationContext authenticationContext,
 			AllowedGroupsService allowedGroupsService) {
-		this.permissionValidationService = permissionValidationService;
 		this.userService = userService;
 		this.authenthicationContext = authenticationContext;
 		this.allowedGroupsService = allowedGroupsService;
@@ -33,12 +27,9 @@ public class UserPermissionsExaminer {
 	
 	public boolean canUsePrivateRepositories() {
 		currentUser = authenthicationContext.getCurrentUser();
+		
 		if (isUserAnonymous()) {
-			return true;
-		}
-
-		if (isCurrentUserAdmin()) {
-			return true;
+			return false;
 		}
 		
 		return userAllowedToUsePrivateRepositories();
@@ -46,15 +37,6 @@ public class UserPermissionsExaminer {
 
 	private boolean isUserAnonymous() {
 		return (currentUser == null);
-	}
-
-	private boolean isCurrentUserAdmin() {
-		try {
-			permissionValidationService.validateForGlobal(Permission.ADMIN);
-		} catch (AuthorisationException e) {
-			return false;
-		}
-		return true;
 	}
 
 	private boolean userAllowedToUsePrivateRepositories() {

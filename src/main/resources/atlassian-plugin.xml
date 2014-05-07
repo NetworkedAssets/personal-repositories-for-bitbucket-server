@@ -59,8 +59,8 @@
 		<resource name="view" type="static">
 			<![CDATA[
 			<script>
-				jQuery(document).ready(function() {
-					jQuery('a[href$="users/user/repos?create"], .repository-table, .repository-table-message, .aui-navgroup-inner a').remove();
+				AJS.toInit(function() {
+					AJS.$('a[href$="/repos?create"], .repository-table, .repository-table-message, .aui-navgroup-inner a').remove();
 				});
 			</script>
 			]]>
