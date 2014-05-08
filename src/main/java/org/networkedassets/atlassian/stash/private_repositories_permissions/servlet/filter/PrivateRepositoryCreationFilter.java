@@ -20,7 +20,7 @@ public class PrivateRepositoryCreationFilter implements Filter {
 
 	private final UserPermissionsExaminer userPermissionsExaminer;
 	
-	private static final String FORBIDDEN_URI_REGEX = "/users/user/repos.*|/stash/mvc/projects/.*|.*/projects/~.*/repos|.*/repos/.*/permissions/groups.*";
+	private static final String FORBIDDEN_URI_REGEX = ".*/projects/~.*/repos.*";
 	
 	private static final Logger log = LoggerFactory
 			.getLogger(PrivateRepositoryCreationFilter.class);
