@@ -1,7 +1,6 @@
 package org.networkedassets.atlassian.stash.private_repositories_permissions.servlet.filter;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -60,13 +59,7 @@ public class PrivateRepositoryCreationFilter implements Filter {
 
 	private void rejectRequest(HttpServletRequest httpRequest,
 			HttpServletResponse httpResponse) throws IOException {
-		PrintWriter writer = httpResponse.getWriter();
-
-		httpResponse.setStatus(401);
-		httpResponse.resetBuffer();
-
-		writer.print("");
-		writer.close();
+		httpResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "You are not allowed to see this.");
 	}
 
 }
