@@ -63,7 +63,7 @@
 		<dispatcher>INCLUDE</dispatcher>
 	</servlet-filter>
 
-	<web-item key="admin-menu-web-item" name="Admin Menu Web Item"
+	<web-item key="admin-private-repos" name="Admin Menu Web Item"
 		section="atl.admin/admin-general-section">
 		<description>Manage access right to Private Repositories</description>
 		<label>Private Repositories</label>
