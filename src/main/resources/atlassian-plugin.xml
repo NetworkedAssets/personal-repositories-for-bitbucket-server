@@ -27,10 +27,14 @@
 	<resource type="i18n" name="i18n"
 		location="private-repositories-permissions-plugin" />
 
+	<stash-resource key="templates-soy" name="Soy Templates">
+		<directory location="/templates/" />
+	</stash-resource>
+
 	<!-- publish our components -->
 	<component key="allowedGroupsService" name="Allowed Groups Service"
 		class="org.networkedassets.atlassian.stash.private_repositories_permissions.ao.AoAllowedGroupsService" />
-		
+
 	<component key="allowedUsersService" name="Allowed Users Service"
 		class="org.networkedassets.atlassian.stash.private_repositories_permissions.ao.AoAllowedUsersService" />
 
@@ -40,6 +44,10 @@
 	<!-- import from the product container -->
 	<component-import key="applicationProperties"
 		interface="com.atlassian.sal.api.ApplicationProperties" />
+
+	<component-import key="soyTemplateRenderer"
+		interface="com.atlassian.soy.renderer.SoyTemplateRenderer" />
+
 	<servlet-filter name="Private Repository Creation Filter"
 		i18n-name-key="private-repository-creation-filter.name" key="private-repository-creation-filter"
 		class="org.networkedassets.atlassian.stash.private_repositories_permissions.servlet.filter.PrivateRepositoryCreationFilter"
@@ -55,9 +63,22 @@
 		<dispatcher>INCLUDE</dispatcher>
 	</servlet-filter>
 
-	<web-panel key="private-repository-button-hiding-web-panel"
-		name="Private Repository Permissions Web Panel" location="stash.user.profile.header"
-		weight="20">
+	<web-item key="admin-menu-web-item" name="Admin Menu Web Item"
+		section="atl.admin/admin-general-section">
+		<description>Manage access right to Private Repositories</description>
+		<label>Private Repositories</label>
+		<link linkId="private_repositories">/plugins/servlet/privatereposadmin</link>
+	</web-item>
+
+	<servlet name="Administration Panel Servlet" key="administrationPanel"
+		class="org.networkedassets.atlassian.stash.private_repositories_permissions.servlet.AdministrationPanelServlet">
+		<description>Displays private repositories administration panel
+		</description>
+		<url-pattern>/privatereposadmin</url-pattern>
+	</servlet>
+
+	<web-panel key="button-hiding-web-panel" name="Private Repository Permissions Web Panel"
+		location="stash.user.profile.header" weight="20">
 		<label key="private-repository-button-hiding-web-panel"></label>
 		<resource name="view" type="static">
 			<![CDATA[
