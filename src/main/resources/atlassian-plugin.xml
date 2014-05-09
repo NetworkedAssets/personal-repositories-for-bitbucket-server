@@ -14,6 +14,8 @@
 		<description>The AO module for this plugin.</description>
 		<entity>org.networkedassets.atlassian.stash.private_repositories_permissions.ao.Group
 		</entity>
+		<entity>org.networkedassets.atlassian.stash.private_repositories_permissions.ao.User
+		</entity>
 	</ao>
 
 	<component-import key="ao" name="Active Objects service"
@@ -26,10 +28,6 @@
 	<!-- add our i18n resource -->
 	<resource type="i18n" name="i18n"
 		location="private-repositories-permissions-plugin" />
-
-	<stash-resource key="templates-soy" name="Soy Templates">
-		<directory location="/templates/" />
-	</stash-resource>
 
 	<!-- publish our components -->
 	<component key="allowedGroupsService" name="Allowed Groups Service"
@@ -45,9 +43,6 @@
 	<component-import key="applicationProperties"
 		interface="com.atlassian.sal.api.ApplicationProperties" />
 
-	<component-import key="soyTemplateRenderer"
-		interface="com.atlassian.soy.renderer.SoyTemplateRenderer" />
-
 	<servlet-filter name="Private Repository Creation Filter"
 		i18n-name-key="private-repository-creation-filter.name" key="private-repository-creation-filter"
 		class="org.networkedassets.atlassian.stash.private_repositories_permissions.servlet.filter.PrivateRepositoryCreationFilter"
@@ -62,6 +57,13 @@
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>
 	</servlet-filter>
+
+
+	<stash-resource key="templates-soy" name="Soy Templates">
+		<directory location="/templates/" />
+	</stash-resource>
+	 <component-import key="soyTemplateRenderer"
+		interface="com.atlassian.soy.renderer.SoyTemplateRenderer" />
 
 	<web-item key="admin-private-repos" name="Admin Menu Web Item"
 		section="atl.admin/admin-general-section">

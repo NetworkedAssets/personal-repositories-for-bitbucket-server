@@ -38,8 +38,8 @@ public class AoAllowedUsersService implements AllowedUsersService {
 
 	@Override
 	public boolean isAllowed(String userName) {
-		// TODO Auto-generated method stub
-		return false;
+		User[] users = ao.find(User.class, Query.select().where("name = ?", userName));
+		return users.length > 0;
 	}
 
 }
