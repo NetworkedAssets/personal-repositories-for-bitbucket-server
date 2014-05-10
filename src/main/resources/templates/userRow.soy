@@ -1,0 +1,23 @@
+{namespace admin}
+
+/**
+ * User table row
+ * @param user
+ */
+{template .userRow}
+<tr>
+	<td headers="user">
+		<div class="avatar-with-name" title="{$user.stashUser.displayName}">
+			<span class="aui-avatar aui-avatar-small user-avatar" data-username="{$user.stashUser.name}">
+				<span class="aui-avatar-inner">
+					<img src="{$user.avatar}" alt="{$user.stashUser.displayName}">
+				</span>
+			</span>
+			<a href="{$user.profileUrl}">{$user.stashUser.displayName}</a>
+		</div>
+	</td>
+	<td headers="actions">
+		<a href="#" class="delete-button" title="Remove user" data-for="{$user.stashUser.name}"><span class="aui-icon aui-icon-small aui-iconfont-remove"></span></a>
+	</td>
+</tr>
+{/template}

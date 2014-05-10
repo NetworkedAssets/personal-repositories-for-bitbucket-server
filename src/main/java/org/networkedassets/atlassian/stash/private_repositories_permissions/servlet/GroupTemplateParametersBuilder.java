@@ -17,20 +17,21 @@ public class GroupTemplateParametersBuilder {
 	private final AllowedGroupsService allowedGroupsService;
 	private final NavBuilder navBuilder;
 
-	public GroupTemplateParametersBuilder(AllowedGroupsService allowedGroupsService,
-			UserService userService, NavBuilder navBuilder) {
+	public GroupTemplateParametersBuilder(
+			AllowedGroupsService allowedGroupsService, UserService userService,
+			NavBuilder navBuilder) {
 		this.allowedGroupsService = allowedGroupsService;
 		this.navBuilder = navBuilder;
 	}
 
 	public List<Object> build() {
 		List<Object> groupParams = new ArrayList<Object>();
-		
+
 		List<Group> groups = allowedGroupsService.all();
 		for (Group group : groups) {
 			groupParams.add(createGroupParams(group));
 		}
-		
+
 		return groupParams;
 	}
 
@@ -38,9 +39,9 @@ public class GroupTemplateParametersBuilder {
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		String name = group.getName();
-		
+
 		params.put("name", name);
-		
+
 		Groups groupsNavBuilder = navBuilder.admin().groups();
 		params.put("viewUrl", groupsNavBuilder.view(name).buildRelative());
 		params.put("deleteUrl", groupsNavBuilder.delete(name).buildRelative());

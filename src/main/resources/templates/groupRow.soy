@@ -1,0 +1,19 @@
+{namespace admin}
+
+/**
+ * Group table row
+ * @param group
+ */
+{template .groupRow}
+<tr>
+	<td headers="group">
+		<span class="aui-avatar aui-avatar-small group-avatar" data-groupname="{$group.name}"></span>
+		<a href="{$group.viewUrl}" title="{$group.name}">{$group.name}</a>
+	</td>
+	<td headers="actions">
+		<a href="{$group.deleteUrl}" class="delete-button delete-group-link" title="Delete" data-for="{$group.name}">
+			<span class="aui-icon aui-icon-small aui-iconfont-remove"></span>
+		</a>
+	</td>
+</tr>
+{/template}

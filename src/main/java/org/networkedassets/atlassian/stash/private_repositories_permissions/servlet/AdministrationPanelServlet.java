@@ -47,8 +47,8 @@ public class AdministrationPanelServlet extends HttpServlet {
 			resp.setContentType("text/html;charset=UTF-8");
 
 			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("users", userTemplateParametersBuilder.build());
-			params.put("groups", groupTemplateParametersBuilder.build());
+//			params.put("users", userTemplateParametersBuilder.build());
+//			params.put("groups", groupTemplateParametersBuilder.build());
 
 			soyTemplateRenderer
 					.render(resp.getWriter(),

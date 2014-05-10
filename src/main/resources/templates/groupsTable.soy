@@ -1,0 +1,48 @@
+{namespace admin}
+
+/**
+ * Groups table
+ */
+{template .groupsTable}
+	{call aui.table}
+		{param id}group-users-table{/param}
+		{param theadContent}
+			<tr>
+				<th id="user"></th>
+				<th id="actions"></th>
+			</tr>
+			<tr class="users-multi-selector-container">
+				<th colspan="2">
+					{call aui.form.form}
+						{param action}{/param}
+						{param method}post{/param}
+						{param content}
+							{call aui.group.group}
+								{param content}
+	        						{call aui.group.item}
+	        							{param content}
+	        								{call aui.form.input}
+	        									{param type}text{/param}
+	        									{param id}userId{/param}
+	        								{/call}
+	        							{/param}
+	        						{/call}
+	        						{call aui.group.item}
+	        							{param content}
+	        								{call aui.form.button}
+	        									{param id}addGroup{/param}
+	        									{param text}Add{/param}
+	        								{/call}
+	        							{/param}
+	        						{/call}
+	        					{/param}
+							{/call}
+						{/param}
+					{/call}
+				</th>
+			</tr>
+		{/param}
+		{param content}
+		{/param}
+	{/call}
+{/template}
