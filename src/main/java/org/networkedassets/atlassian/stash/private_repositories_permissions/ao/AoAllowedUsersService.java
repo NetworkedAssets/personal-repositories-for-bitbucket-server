@@ -27,19 +27,32 @@ public class AoAllowedUsersService implements AllowedUsersService {
 
 	@Override
 	public User allow(String userName) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = ao.create(User.class);
+		user.setName(userName);
+		user.save();
+		return user;
 	}
 
 	@Override
 	public void disallow(String userName) {
-		// TODO Auto-generated method stub
+		User user = findUser(userName);
+		if (user != null) {
+			ao.delete(user);
+		}
 	}
 
 	@Override
 	public boolean isAllowed(String userName) {
+		return findUser(userName) != null;
+	}
+	
+	private User findUser(String userName) {
 		User[] users = ao.find(User.class, Query.select().where("name = ?", userName));
-		return users.length > 0;
+		if (users.length == 0) {
+			return null;
+		} else {
+			return users[0];
+		}
 	}
 
 }
