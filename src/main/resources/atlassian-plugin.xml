@@ -58,11 +58,19 @@
 		<dispatcher>INCLUDE</dispatcher>
 	</servlet-filter>
 
+	<web-resource key="web-resources">
+		<resource type="download" name="private-repos.css"
+			location="/css/private-repos.css">
+		</resource>
+	</web-resource>
 
 	<stash-resource key="templates-soy" name="Soy Templates">
 		<directory location="/templates/" />
+		<dependency>com.atlassian.stash.stash-web-plugin:global</dependency>
+		<dependency>com.atlassian.stash.stash-web-plugin:avatar</dependency>
+		<dependency>org.networkedassets.atlassian.stash.private-repositories-permissions-plugin:web-resources</dependency>
 	</stash-resource>
-	 <component-import key="soyTemplateRenderer"
+	<component-import key="soyTemplateRenderer"
 		interface="com.atlassian.soy.renderer.SoyTemplateRenderer" />
 
 	<web-item key="admin-private-repos" name="Admin Menu Web Item"

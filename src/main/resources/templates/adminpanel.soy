@@ -2,16 +2,136 @@
 
 /**
  * Displays admin panel
+ * @param users
  */
 {template .panel}
 	<html>
-	<head>
-	    <meta name="decorator" content="atl.admin">
-	    <meta name="activeTab" content="admin-private-repos">
-	    <title>XXX</title>
-	</head>
-	<body>
-	   fewfew
-	</body>
-	</html>
+<head>
+<meta name="decorator" content="atl.admin">
+<meta name="activeTab" content="admin-private-repos">
+{webResourceManager_requireResource('org.networkedassets.atlassian.stash.private-repositories-permissions-plugin:web-resources')}
+<title>Private Repositories Permissions</title>
+</head>
+<body>
+{call aui.group.group}
+    {param content}
+        {call aui.group.item}
+            {param content}
+                <h3>Users</h3>
+            {/param}
+        {/call}
+    {/param}
+{/call}
+{call aui.table}
+	{param id}group-users-table{/param}
+	{param theadContent}
+		<tr>
+			<th id="user"></th>
+			<th id="actions"></th>
+		</tr>
+		<tr class="users-multi-selector-container">
+			<th colspan="2">
+				{call aui.form.form}
+					{param action}{/param}
+					{param method}post{/param}
+					{param content}
+						{call aui.group.group}
+							{param content}
+        						{call aui.group.item}
+        							{param content}
+        								{call aui.form.input}
+        									{param type}text{/param}
+        									{param id}userId{/param}
+        								{/call}
+        							{/param}
+        						{/call}
+        						{call aui.group.item}
+        							{param content}
+        								{call aui.form.button}
+        									{param id}addUser{/param}
+        									{param text}Add{/param}
+        								{/call}
+        							{/param}
+        						{/call}
+        					{/param}
+						{/call}
+					{/param}
+				{/call}
+			</th>
+		</tr>
+	{/param}
+	{param content}
+		{foreach $user in $users}
+			<tr>
+				<td headers="user">
+					<div class="avatar-with-name" title="{$user.stashUser.displayName}">
+						<span class="aui-avatar aui-avatar-small user-avatar" data-username="{$user.stashUser.name}">
+							<span class="aui-avatar-inner">
+								<img src="{$user.avatar}" alt="{$user.stashUser.displayName}">
+							</span>
+						</span>
+						<a href="{$user.profileUrl}">Administrator</a>
+					</div>
+				</td>
+				<td headers="actions">
+					<a href="#" class="delete-button" title="Remove user" data-for="{$user.stashUser.name}"><span class="aui-icon aui-icon-small aui-iconfont-remove"></span></a>
+				</td>
+			</tr>
+		{/foreach}
+	{/param}
+{/call}
+
+{call aui.group.group}
+    {param content}
+        {call aui.group.item}
+            {param content}
+                <h3>Groups</h3>
+            {/param}
+        {/call}
+    {/param}
+{/call}
+{call aui.table}
+	{param id}group-users-table{/param}
+	{param theadContent}
+		<tr>
+			<th id="user"></th>
+			<th id="actions"></th>
+		</tr>
+		<tr class="users-multi-selector-container">
+			<th colspan="2">
+				{call aui.form.form}
+					{param action}{/param}
+					{param method}post{/param}
+					{param content}
+						{call aui.group.group}
+							{param content}
+        						{call aui.group.item}
+        							{param content}
+        								{call aui.form.input}
+        									{param type}text{/param}
+        									{param id}userId{/param}
+        								{/call}
+        							{/param}
+        						{/call}
+        						{call aui.group.item}
+        							{param content}
+        								{call aui.form.button}
+        									{param id}addGroup{/param}
+        									{param text}Add{/param}
+        								{/call}
+        							{/param}
+        						{/call}
+        					{/param}
+						{/call}
+					{/param}
+				{/call}
+			</th>
+		</tr>
+	{/param}
+	{param content}
+	{/param}
+{/call}
+
+</body>
+</html>
 {/template}
