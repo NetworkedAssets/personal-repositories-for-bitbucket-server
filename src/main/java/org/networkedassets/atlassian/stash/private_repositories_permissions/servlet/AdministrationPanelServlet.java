@@ -26,10 +26,13 @@ public class AdministrationPanelServlet extends HttpServlet {
 
 	private final UserTemplateParametersBuilder userTemplateParametersBuilder;
 
+	private final GroupTemplateParametersBuilder groupTemplateParametersBuilder;
+
 	public AdministrationPanelServlet(SoyTemplateRenderer soyTemplateRenderer,
-			UserTemplateParametersBuilder userTemplateParametersBuilder) {
+			UserTemplateParametersBuilder userTemplateParametersBuilder, GroupTemplateParametersBuilder groupTemplateParametersBuilder) {
 		this.soyTemplateRenderer = soyTemplateRenderer;
 		this.userTemplateParametersBuilder = userTemplateParametersBuilder;
+		this.groupTemplateParametersBuilder = groupTemplateParametersBuilder;
 	}
 
 	@Override
@@ -45,6 +48,7 @@ public class AdministrationPanelServlet extends HttpServlet {
 
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("users", userTemplateParametersBuilder.build());
+			params.put("groups", groupTemplateParametersBuilder.build());
 
 			soyTemplateRenderer
 					.render(resp.getWriter(),
