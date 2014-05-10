@@ -38,6 +38,9 @@
 
 	<component key="userPermissionsExaminer" name="User Permissions Examiner"
 		class="org.networkedassets.atlassian.stash.private_repositories_permissions.service.UserPermissionsExaminer" />
+		
+	<component key="userTemplateParametersBuilder" name="User Template Parameters Builder"
+		class="org.networkedassets.atlassian.stash.private_repositories_permissions.servlet.UserTemplateParametersBuilder" />
 
 	<!-- import from the product container -->
 	<component-import key="applicationProperties"
