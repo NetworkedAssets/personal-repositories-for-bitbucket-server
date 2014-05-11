@@ -21,10 +21,10 @@ public class GroupRestService {
 
 	private final AllowedGroupsService allowedGroupsService;
 
-	private final GroupInfoBuilder groupInfoBuilder;
+	private final GroupsInfoBuilder groupsInfoBuilder;
 
 	public GroupRestService(AllowedGroupsService allowedGroupsService,
-			GroupInfoBuilder groupInfoBuilder) {
+			GroupsInfoBuilder groupInfoBuilder) {
 		this.allowedGroupsService = allowedGroupsService;
 		this.groupInfoBuilder = groupInfoBuilder;
 	}

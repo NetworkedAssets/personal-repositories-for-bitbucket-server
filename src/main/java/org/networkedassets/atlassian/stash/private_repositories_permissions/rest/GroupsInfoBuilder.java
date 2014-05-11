@@ -8,12 +8,12 @@ import org.networkedassets.atlassian.stash.private_repositories_permissions.serv
 
 import com.atlassian.stash.nav.NavBuilder;
 
-public class GroupInfoBuilder {
+public class GroupsInfoBuilder {
 
 	private final AllowedGroupsService allowedGroupsService;
 	private final NavBuilder navBuilder;
 
-	public GroupInfoBuilder(AllowedGroupsService allowedGroupsService,
+	public GroupsInfoBuilder(AllowedGroupsService allowedGroupsService,
 			NavBuilder navBuilder) {
 		this.allowedGroupsService = allowedGroupsService;
 		this.navBuilder = navBuilder;

@@ -45,10 +45,10 @@
 	<component key="userRestService" name="User Rest Service"
 		class="org.networkedassets.atlassian.stash.private_repositories_permissions.rest.UserRestService" />
 
-	<component key="userInfoBuilder" name="User Info Builder"
+	<component key="usersInfoBuilder" name="User Info Builder"
 		class="org.networkedassets.atlassian.stash.private_repositories_permissions.rest.UsersInfoBuilder" />
 		
-	<component key="groupInfoBuilder" name="Group Info Builder"
+	<component key="groupsInfoBuilder" name="Group Info Builder"
 		class="GroupsInfoBuilder" />
 
 
