@@ -1,10 +1,8 @@
-package org.networkedassets.atlassian.stash.private_repositories_permissions.servlet;
+package org.networkedassets.atlassian.stash.private_repositories_permissions.rest;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.networkedassets.atlassian.stash.private_repositories_permissions.ao.User;
@@ -14,27 +12,27 @@ import com.atlassian.stash.nav.NavBuilder;
 import com.atlassian.stash.user.StashUser;
 import com.atlassian.stash.user.UserService;
 
-public class UserTemplateParametersBuilder {
+public class UsersInfoBuilder {
 
 	private final AllowedUsersService allowedUsersService;
 	private final UserService userService;
 	private final NavBuilder navBuilder;
 
-	public UserTemplateParametersBuilder(AllowedUsersService allowedUsersService,
+	public UsersInfoBuilder(AllowedUsersService allowedUsersService,
 			UserService userService, NavBuilder navBuilder) {
 		this.allowedUsersService = allowedUsersService;
 		this.userService = userService;
 		this.navBuilder = navBuilder;
 	}
 
-	public List<Object> build() {
-		List<Object> userParams = new ArrayList<Object>();
+	public List<UserInfo> build() {
+		List<UserInfo> usersInfo = new ArrayList<UserInfo>();
 		Set<? extends StashUser> stashUsers = getStashUsers();
 
 		for (StashUser stashUser : stashUsers) {
-			userParams.add(createUserParams(stashUser));
+			usersInfo.add(createUserInfo(stashUser));
 		}
-		return userParams;
+		return usersInfo;
 	}
 
 	private Set<? extends StashUser> getStashUsers() {
@@ -48,14 +46,16 @@ public class UserTemplateParametersBuilder {
 		return userService.getUsersByName(names);
 	}
 
-	private Map<String, Object> createUserParams(StashUser user) {
-		Map<String, Object> params = new HashMap<String, Object>();
+	private UserInfo createUserInfo(StashUser user) {
 
-		params.put("stashUser", user);
-		params.put("avatar", navBuilder.profile().avatar(64).buildAbsolute());
-		params.put("profileUrl", navBuilder.user(user).buildRelative());
+		UserInfo info = new UserInfo();
 
-		return params;
+		info.setAvatarUrl(navBuilder.profile().avatar(64).buildAbsolute());
+		info.setName(user.getName());
+		info.setDisplayName(user.getDisplayName());
+		info.setProfileUrl(navBuilder.user(user).buildRelative());
+
+		return info;
 	}
 
 }

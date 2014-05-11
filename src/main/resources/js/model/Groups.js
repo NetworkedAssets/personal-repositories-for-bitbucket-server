@@ -1,5 +1,6 @@
-define('Groups', ['Backbone', 'Group'], function(Backbone, Group) {
+define('Groups', ['backbone', 'Group'], function(Backbone, Group) {
 	return Backbone.Collection.extend({
+		url : '/stash/rest/privaterepos/1.0/groups',
 		model: Group
 	});
 });

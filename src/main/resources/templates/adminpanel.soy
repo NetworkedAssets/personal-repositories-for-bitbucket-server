@@ -1,10 +1,10 @@
-{namespace admin}
+{namespace PrivateRepos}
 
 /**
  * Displays admin panel
  */
-{template .panel}
-	<html>
+{template .adminPage}
+<html>
 <head>
 <meta name="decorator" content="atl.admin">
 <meta name="activeTab" content="admin-private-repos">
@@ -21,6 +21,8 @@
 	        {/call}
 	    {/param}
 	{/call}
+	<div id="users-table">
+	</div>
 	{call aui.group.group}
 	    {param content}
 	        {call aui.group.item}
@@ -30,6 +32,8 @@
 	        {/call}
 	    {/param}
 	{/call}
+	<div id="groups-table">
+	</div>
 </body>
 </html>
 {/template}

@@ -1,13 +1,18 @@
-define('Table', [ 'backbone', 'UserRowView' ], function(Backbone) {
+define('Table', [ 'backbone', 'underscore' ], function(Backbone, _) {
 	return Backbone.View.extend({
+		tagName : 'table',
+		initialize : function(options) {
+			_.bindAll(this, 'addChildView');
 
-		initialize : function() {
+			this.collection = options.collection;
+			this.collection.on('add', this.addChildView);
 		},
 
 		addChildView : function(model) {
-			this.el.append(new this.itemView({
+			var itemViewClass = this.itemView;
+			this.$el.append(new itemViewClass({
 				model : model
-			}).render());
+			}).render().el);
 		},
 
 		render : function() {

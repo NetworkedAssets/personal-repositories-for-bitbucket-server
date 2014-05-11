@@ -39,11 +39,15 @@
 	<component key="userPermissionsExaminer" name="User Permissions Examiner"
 		class="org.networkedassets.atlassian.stash.private_repositories_permissions.service.UserPermissionsExaminer" />
 
-	<component key="userTemplateParametersBuilder" name="User Template Parameters Builder"
-		class="org.networkedassets.atlassian.stash.private_repositories_permissions.servlet.UserTemplateParametersBuilder" />
-
 	<component key="groupTemplateParametersBuilder" name="Group Template Parameters Builder"
 		class="org.networkedassets.atlassian.stash.private_repositories_permissions.servlet.GroupTemplateParametersBuilder" />
+
+	<component key="userRestService" name="User Rest Service"
+		class="org.networkedassets.atlassian.stash.private_repositories_permissions.rest.UserRestService" />
+
+	<component key="userInfoBuilder" name="User Info Builder"
+		class="org.networkedassets.atlassian.stash.private_repositories_permissions.rest.UsersInfoBuilder" />
+
 
 	<!-- import from the product container -->
 	<component-import key="applicationProperties"
@@ -66,13 +70,16 @@
 
 	<web-resource key="web-resources">
 		<resource type="download" name="private-repos.css" location="/css/private-repos.css" />
-		<resource type="download" name="App" location="/js/BuiltApp.js" />
+		<transformation extension="soy">
+			<transformer key="soyTransformer" />
+		</transformation>
+		<resource type="download" name="userRow-soy.js" location="/templates/userRow.soy" />
+		<resource type="download" name="BuiltApp.js" location="/js/BuiltApp.js" />
 	</web-resource>
 
 	<stash-resource key="templates-soy" name="Soy Templates">
 		<directory location="/templates/" />
 		<dependency>com.atlassian.stash.stash-web-plugin:global</dependency>
-		<dependency>com.atlassian.stash.stash-web-plugin:avatar</dependency>
 		<dependency>org.networkedassets.atlassian.stash.private-repositories-permissions-plugin:web-resources
 		</dependency>
 	</stash-resource>
@@ -93,12 +100,14 @@
 		<url-pattern>/privatereposadmin</url-pattern>
 	</servlet>
 
-	<servlet name="Users Rest Servlet" key="userRest"
-		class="org.networkedassets.atlassian.stash.private_repositories_permissions.servlet.UserRestServlet">
-		<description>Displays private repositories administration panel
+	<rest key="privateReposRest" path="/privaterepos" version="1.0">
+		<description>Provides private repositories rest services.
 		</description>
-		<url-pattern>/privatereposadmin/user/*</url-pattern>
-	</servlet>
+	</rest>
+
+	<!-- <servlet name="Users Rest Servlet" key="userRest" class="org.networkedassets.atlassian.stash.private_repositories_permissions.servlet.UserRestServlet"> 
+		<description>Displays private repositories administration panel </description> 
+		<url-pattern>/privatereposadmin/user/*</url-pattern> </servlet> -->
 
 	<web-panel key="button-hiding-web-panel" name="Private Repository Permissions Web Panel"
 		location="stash.user.profile.header" weight="20">
