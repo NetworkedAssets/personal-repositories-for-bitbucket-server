@@ -108,10 +108,6 @@
 		</description>
 	</rest>
 
-	<!-- <servlet name="Users Rest Servlet" key="userRest" class="org.networkedassets.atlassian.stash.private_repositories_permissions.servlet.UserRestServlet"> 
-		<description>Displays private repositories administration panel </description> 
-		<url-pattern>/privatereposadmin/user/*</url-pattern> </servlet> -->
-
 	<web-panel key="button-hiding-web-panel" name="Private Repository Permissions Web Panel"
 		location="stash.user.profile.header" weight="20">
 		<label key="private-repository-button-hiding-web-panel"></label>
