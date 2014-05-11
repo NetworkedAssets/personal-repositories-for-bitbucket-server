@@ -26,13 +26,13 @@ public class GroupRestService {
 	public GroupRestService(AllowedGroupsService allowedGroupsService,
 			GroupsInfoBuilder groupInfoBuilder) {
 		this.allowedGroupsService = allowedGroupsService;
-		this.groupInfoBuilder = groupInfoBuilder;
+		this.groupsInfoBuilder = groupInfoBuilder;
 	}
 
 	@Path("groups")
 	@GET
 	public List<GroupInfo> getGroups() {
-		return groupInfoBuilder.build();
+		return groupsInfoBuilder.build();
 	}
 
 	@Path("group/${group}")
