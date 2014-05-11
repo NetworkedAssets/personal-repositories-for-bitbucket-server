@@ -3,7 +3,6 @@ package org.networkedassets.atlassian.stash.private_repositories_permissions.ser
 import java.util.List;
 
 import org.networkedassets.atlassian.stash.private_repositories_permissions.ao.Group;
-import org.networkedassets.atlassian.stash.private_repositories_permissions.ao.User;
 
 import com.atlassian.stash.user.StashAuthenticationContext;
 import com.atlassian.stash.user.StashUser;

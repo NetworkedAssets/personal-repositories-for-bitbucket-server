@@ -78,7 +78,7 @@
 		</transformation>
 		<resource type="download" name="userRow-soy.js" location="/templates/userRow.soy" />
 		<resource type="download" name="groupRow-soy.js" location="/templates/groupRow.soy" />
-		<resource type="download" name="groupsTable-soy.js" location="/templates/groupsTable.soy" />
+		<resource type="download" name="table-soy.js" location="/templates/table.soy" />
 		<resource type="download" name="BuiltApp.js" location="/js/BuiltApp.js" />
 	</web-resource>
 

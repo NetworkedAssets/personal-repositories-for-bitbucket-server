@@ -8,18 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.atlassian.soy.renderer.SoyException;
 import com.atlassian.soy.renderer.SoyTemplateRenderer;
 
 public class AdministrationPanelServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 5750547122008437666L;
-
-	private static final Logger log = LoggerFactory
-			.getLogger(AdministrationPanelServlet.class);
 
 	private final SoyTemplateRenderer soyTemplateRenderer;
 

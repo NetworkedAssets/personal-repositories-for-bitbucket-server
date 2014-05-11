@@ -4,7 +4,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.Lists.newArrayList;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import net.java.ao.Query;
@@ -12,7 +11,6 @@ import net.java.ao.Query;
 import org.networkedassets.atlassian.stash.private_repositories_permissions.service.AllowedGroupsService;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
-import com.atlassian.stash.user.StashUser;
 import com.atlassian.stash.user.UserService;
 import com.atlassian.stash.util.PageRequestImpl;
 
@@ -44,8 +42,21 @@ public class AoAllowedGroupsService implements AllowedGroupsService {
 
 	@Override
 	public Group allow(String groupName) {
+		return addGroup(groupName);
+	}
+
+	@Override
+	public List<Group> allow(List<String> groupNames) {
+		List<Group> groups = new ArrayList<Group>();
+		for (String name : groupNames) {
+			groups.add(addGroup(name));
+		}
+		return groups;
+	}
+
+	private Group addGroup(String name) {
 		Group group = ao.create(Group.class);
-		group.setName(groupName);
+		group.setName(name);
 		group.save();
 		return group;
 	}
@@ -69,13 +80,14 @@ public class AoAllowedGroupsService implements AllowedGroupsService {
 		List<String> filteredGroupNames = new ArrayList<String>();
 
 		for (String groupName : foundGroupNames) {
-			for (Group group : allowedGroups) {
-				if (groupName != group.getName()) {
-					filteredGroupNames.add(groupName);
-				}
-			}
+			filteredGroupNames.add(groupName);
+		}
+
+		for (Group group : allowedGroups) {
+			filteredGroupNames.remove(group.getName());
 		}
 
 		return filteredGroupNames;
 	}
+
 }

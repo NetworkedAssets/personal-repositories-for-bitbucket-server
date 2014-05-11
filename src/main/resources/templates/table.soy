@@ -2,8 +2,10 @@
 
 /**
  * Groups table
+ * 
+ * @param name
  */
-{template .groupsTable}
+{template .table}
 <thead>
 	<tr>
 		<th colspan="2" class="add-form-row">
@@ -15,18 +17,16 @@
 						{param content}
     						{call aui.group.item}
     							{param content}
-    								{call aui.form.select}
-    									{param id}groupId{/param}
+    								{call aui.form.input}
+    									{param name}search{/param}
     									{param extraClasses}search-input{/param}
-    									{param isMultiple}true{/param}
-    									{param options}{/param}
     								{/call}
     							{/param}
     						{/call}
     						{call aui.group.item}
     							{param content}
     								{call aui.form.button}
-    									{param id}addGroup{/param}
+    									{param name}add{/param}
     									{param text}Add{/param}
     								{/call}
     							{/param}
@@ -40,7 +40,7 @@
 		</th>
 	</tr>
 	<tr>
-		<th class="name-column">Name</th>
+		<th class="name-column">{$name}</th>
 		<th class="actions-column">Actions</th>
 	</tr>
 </thead>

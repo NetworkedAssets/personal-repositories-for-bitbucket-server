@@ -16,11 +16,6 @@ define('Table', [ 'backbone', 'underscore' ], function(Backbone, _) {
 			this.$('tbody').append(new itemViewClass({
 				model : model
 			}).render().el);
-		},
-
-		render : function() {
-			this.$el.html(this.template());
-			return this;
 		}
 
 	});
