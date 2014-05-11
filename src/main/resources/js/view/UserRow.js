@@ -5,7 +5,7 @@ define('UserRow', [ 'backbone' ], function(Backbone) {
 		template : PrivateRepos.userRow,
 
 		events : {
-			'click .delete' : 'onDelete'
+			'click .delete-button' : 'onDelete'
 		},
 
 		onDelete : function(e) {
