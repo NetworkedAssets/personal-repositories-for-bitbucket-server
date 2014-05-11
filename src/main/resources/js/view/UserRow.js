@@ -9,7 +9,8 @@ define('UserRow', [ 'backbone' ], function(Backbone) {
 		},
 
 		onDelete : function(e) {
-
+			this.model.destroy();
+			this.remove();
 		},
 
 		render : function() {
