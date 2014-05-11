@@ -67,8 +67,7 @@ public class AoAllowedUsersService implements AllowedUsersService {
 
 	@Override
 	public List<StashUser> findNotAllowed(String key) {
-		List<User> allowedUsers = Arrays.asList(ao.find(User.class, Query
-				.select().where("name LIKE ?", '%' + key + '%')));
+		List<User> allowedUsers = all();
 		Iterable<? extends StashUser> stashUsers = userService.findUsersByName(
 				key, new PageRequestImpl(0, MAX_FOUND_USERS)).getValues();
 
