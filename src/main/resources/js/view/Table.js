@@ -1,8 +1,9 @@
 define('Table', [ 'backbone', 'underscore' ], function(Backbone, _) {
 	return Backbone.View.extend({
-		
+
 		tagName : 'table',
-		
+		className : 'private-repos-permissions-table',
+
 		initialize : function(options) {
 			_.bindAll(this, 'addChildView');
 
@@ -12,12 +13,13 @@ define('Table', [ 'backbone', 'underscore' ], function(Backbone, _) {
 
 		addChildView : function(model) {
 			var itemViewClass = this.itemView;
-			this.$el.append(new itemViewClass({
+			this.$('tbody').append(new itemViewClass({
 				model : model
 			}).render().el);
 		},
 
 		render : function() {
+			this.$el.html(this.template());
 			return this;
 		}
 
