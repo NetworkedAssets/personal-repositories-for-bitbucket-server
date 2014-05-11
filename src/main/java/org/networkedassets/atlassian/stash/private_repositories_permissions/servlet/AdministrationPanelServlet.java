@@ -2,14 +2,12 @@ package org.networkedassets.atlassian.stash.private_repositories_permissions.ser
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.networkedassets.atlassian.stash.private_repositories_permissions.rest.UsersInfoBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,13 +23,8 @@ public class AdministrationPanelServlet extends HttpServlet {
 
 	private final SoyTemplateRenderer soyTemplateRenderer;
 
-	private final GroupTemplateParametersBuilder groupTemplateParametersBuilder;
-
-	public AdministrationPanelServlet(SoyTemplateRenderer soyTemplateRenderer,
-			UsersInfoBuilder userTemplateParametersBuilder,
-			GroupTemplateParametersBuilder groupTemplateParametersBuilder) {
+	public AdministrationPanelServlet(SoyTemplateRenderer soyTemplateRenderer) {
 		this.soyTemplateRenderer = soyTemplateRenderer;
-		this.groupTemplateParametersBuilder = groupTemplateParametersBuilder;
 	}
 
 	@Override
@@ -45,12 +38,11 @@ public class AdministrationPanelServlet extends HttpServlet {
 		try {
 			resp.setContentType("text/html;charset=UTF-8");
 
-			Map<String, Object> params = new HashMap<String, Object>();
-
 			soyTemplateRenderer
 					.render(resp.getWriter(),
 							"org.networkedassets.atlassian.stash.private-repositories-permissions-plugin:templates-soy",
-							"PrivateRepos.adminPage", params);
+							"PrivateRepos.adminPage",
+							new HashMap<String, Object>());
 
 		} catch (SoyException e) {
 			Throwable cause = e.getCause();

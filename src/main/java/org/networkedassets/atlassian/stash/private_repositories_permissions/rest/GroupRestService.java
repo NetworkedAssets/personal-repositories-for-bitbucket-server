@@ -31,13 +31,13 @@ public class GroupRestService {
 
 	@Path("groups")
 	@GET
-	public List<UserInfo> getUsers() {
+	public List<GroupInfo> getGroups() {
 		return groupInfoBuilder.build();
 	}
 
 	@Path("group/${group}")
 	@POST
-	public Response addUser(@Context UriInfo uriInfo,
+	public Response addGroup(@Context UriInfo uriInfo,
 			@PathParam("group") String groupName) {
 		this.allowedGroupsService.allow(groupName);
 		return Response.created(uriInfo.getAbsolutePath()).build();
@@ -45,7 +45,7 @@ public class GroupRestService {
 
 	@Path("group/${group}")
 	@DELETE
-	public Response deleteUser(@PathParam("group") String groupName) {
+	public Response deleteGroup(@PathParam("group") String groupName) {
 		this.allowedGroupsService.disallow(groupName);
 		return Response.ok().build();
 	}

@@ -47,6 +47,9 @@
 
 	<component key="userInfoBuilder" name="User Info Builder"
 		class="org.networkedassets.atlassian.stash.private_repositories_permissions.rest.UsersInfoBuilder" />
+		
+	<component key="groupInfoBuilder" name="Group Info Builder"
+		class="GroupsInfoBuilder" />
 
 
 	<!-- import from the product container -->
