@@ -1,5 +1,6 @@
 package org.networkedassets.atlassian.stash.private_repositories_permissions.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.DELETE;
@@ -46,6 +47,13 @@ public class GroupRestService {
 			@PathParam("group") String groupName) {
 		this.allowedGroupsService.allow(groupName);
 		return Response.created(uriInfo.getAbsolutePath()).build();
+	}
+	
+	@Path("list")
+	@POST
+	public Response addGroups(NamesList names) {
+		this.allowedGroupsService.allow(names.getNames());
+		return Response.ok().build();
 	}
 
 	@Path("group/{group}")

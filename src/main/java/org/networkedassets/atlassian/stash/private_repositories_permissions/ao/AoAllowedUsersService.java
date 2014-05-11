@@ -4,7 +4,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.Lists.newArrayList;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.java.ao.Query;
 
@@ -70,17 +72,20 @@ public class AoAllowedUsersService implements AllowedUsersService {
 		Iterable<? extends StashUser> stashUsers = userService.findUsersByName(
 				key, new PageRequestImpl(0, MAX_FOUND_USERS)).getValues();
 
-		List<StashUser> filteredUsers = new ArrayList<StashUser>();
-
+		Map<String, StashUser> usersMap = new HashMap<String, StashUser>();
+		
 		for (StashUser stashUser : stashUsers) {
-			for (User user : allowedUsers) {
-				if (stashUser.getName() != user.getName()) {
-					filteredUsers.add(stashUser);
-				}
-			}
+			usersMap.put(stashUser.getName(), stashUser);
+		}
+		
+		for (User user : allowedUsers) {
+			usersMap.remove(user.getName());
 		}
 
-		return filteredUsers;
+		List<StashUser> filtered = new ArrayList<StashUser>();
+		filtered.addAll(usersMap.values());
+		
+		return filtered;
 	}
 
 }

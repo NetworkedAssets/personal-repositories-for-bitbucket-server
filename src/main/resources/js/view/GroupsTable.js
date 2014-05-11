@@ -1,44 +1,18 @@
-define('GroupsTable', [ 'Table', 'GroupRow', 'underscore' ], function(Table,
-		GroupRow, _) {
+define('GroupsTable', [ 'Table', 'GroupRow', 'underscore', 'GroupBatch' ], function(Table,
+		GroupRow, _, GroupBatch) {
 	return Table.extend({
 		template : PrivateRepos.table,
 		itemView : GroupRow,
+		
+		searchUrl : function(term) {
+			return '/stash/rest/privaterepos/1.0/groups/find/' + term;
+		}, 
 
-		render : function() {
-			this.$el.html(this.template({
-				name : 'Group'
-			}));
-
-			var searchInput = this.$('.search-input');
-
-			searchInput.auiSelect2({
-				hasAvatar : true,
-				multiple : true,
-				minimumInputLength : 1,
-				ajax : {
-					url : function(term) {
-						return '/stash/rest/privaterepos/1.0/groups/find/'
-								+ term;
-					},
-					dataType : 'json',
-					results : function(data, page) {
-						results = _.map(data, function(object) {
-							return {
-								id : object.name,
-								text : object.name
-							}
-						});
-						return {
-							results : results
-						};
-					},
-					formatResult : function(object) {
-						return object.name;
-					}
-				}
+		handleAllow : function(values) {
+			var groupBatch = new GroupBatch({
+				names : values
 			});
-
-			return this;
+			groupBatch.save();
 		}
 	});
 });
