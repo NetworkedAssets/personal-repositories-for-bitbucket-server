@@ -26,8 +26,15 @@ public class UsersInfoBuilder {
 	}
 
 	public List<UserInfo> build() {
+		return build(allowedUsersService.all());
+	}
+
+	public List<UserInfo> build(List<User> users) {
+		return buildFromStashUsers(getStashUsers(users));
+	}
+
+	public List<UserInfo> buildFromStashUsers(List<StashUser> stashUsers) {
 		List<UserInfo> usersInfo = new ArrayList<UserInfo>();
-		Set<? extends StashUser> stashUsers = getStashUsers();
 
 		for (StashUser stashUser : stashUsers) {
 			usersInfo.add(createUserInfo(stashUser));
@@ -35,15 +42,16 @@ public class UsersInfoBuilder {
 		return usersInfo;
 	}
 
-	private Set<? extends StashUser> getStashUsers() {
-		List<User> users = allowedUsersService.all();
+	private List<StashUser> getStashUsers(List<User> users) {
 		Set<String> names = new HashSet<String>();
 
 		for (User user : users) {
 			names.add(user.getName());
 		}
-
-		return userService.getUsersByName(names);
+		
+		List<StashUser> stashUsers = new ArrayList<StashUser>();
+		stashUsers.addAll(userService.getUsersByName(names));
+		return stashUsers;
 	}
 
 	private UserInfo createUserInfo(StashUser user) {

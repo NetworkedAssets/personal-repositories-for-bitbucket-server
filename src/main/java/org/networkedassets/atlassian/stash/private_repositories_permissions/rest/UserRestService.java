@@ -25,13 +25,18 @@ public class UserRestService {
 			.getLogger(UserRestService.class);
 
 	private final AllowedUsersService allowedUsersService;
-
 	private final UsersInfoBuilder usersInfoBuilder;
 
 	public UserRestService(AllowedUsersService allowedUsersService,
 			UsersInfoBuilder usersInfoBuilder) {
 		this.allowedUsersService = allowedUsersService;
 		this.usersInfoBuilder = usersInfoBuilder;
+	}
+	
+	@Path("find/{key}")
+	@GET
+	public List<UserInfo> findUsers(@PathParam("key") String key) {
+		return usersInfoBuilder.buildFromStashUsers(allowedUsersService.findNotAllowed(key));
 	}
 
 	@Path("list")
@@ -44,7 +49,7 @@ public class UserRestService {
 	@POST
 	public Response addUser(@Context UriInfo uriInfo,
 			@PathParam("user") String userName) {
-		this.allowedUsersService.allow(userName);
+		allowedUsersService.allow(userName);
 		return Response.created(uriInfo.getAbsolutePath()).build();
 	}
 
@@ -52,7 +57,7 @@ public class UserRestService {
 	@DELETE
 	public Response deleteUser(@PathParam("user") String userName) {
 		log.warn("Delete entered");
-		this.allowedUsersService.disallow(userName);
+		allowedUsersService.disallow(userName);
 		return Response.ok().build();
 	}
 

@@ -6,10 +6,6 @@
 {template .groupsTable}
 <thead>
 	<tr>
-		<th class="name-column">Name</th>
-		<th class="actions-column">Actions</th>
-	</tr>
-	<tr>
 		<th colspan="2" class="add-form-row">
 			{call aui.form.form}
 				{param action}{/param}
@@ -19,10 +15,11 @@
 						{param content}
     						{call aui.group.item}
     							{param content}
-    								{call aui.form.input}
-    									{param type}text{/param}
+    								{call aui.form.select}
     									{param id}groupId{/param}
     									{param extraClasses}search-input{/param}
+    									{param isMultiple}true{/param}
+    									{param options}{/param}
     								{/call}
     							{/param}
     						{/call}
@@ -41,6 +38,10 @@
 				{/param}
 			{/call}
 		</th>
+	</tr>
+	<tr>
+		<th class="name-column">Name</th>
+		<th class="actions-column">Actions</th>
 	</tr>
 </thead>
 <tbody>

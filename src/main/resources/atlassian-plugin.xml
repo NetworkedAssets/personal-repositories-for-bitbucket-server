@@ -85,6 +85,7 @@
 	<stash-resource key="templates-soy" name="Soy Templates">
 		<directory location="/templates/" />
 		<dependency>com.atlassian.stash.stash-web-plugin:global</dependency>
+		<dependency>com.atlassian.auiplugin:aui-select2</dependency>
 		<dependency>org.networkedassets.atlassian.stash.private-repositories-permissions-plugin:web-resources
 		</dependency>
 	</stash-resource>
