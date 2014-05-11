@@ -27,14 +27,26 @@ public class AoAllowedGroupsService implements AllowedGroupsService {
 
 	@Override
 	public void disallow(String groupName) {
-		// TODO Auto-generated method stub
-		
+		Group group = findGroup(groupName);
+		if (group != null) {
+			ao.delete(group);
+		}
 	}
 
 	@Override
 	public Group allow(String groupName) {
-		// TODO Auto-generated method stub
-		return null;
+		Group group = ao.create(Group.class);
+		group.setName(groupName);
+		group.save();
+		return group;
 	}
 
+	private Group findGroup(String groupName) {
+		Group[] groups = ao.find(Group.class, Query.select().where("name = ?", groupName));
+		if (groups.length == 0) {
+			return null;
+		} else {
+			return groups[0];
+		}
+	}
 }

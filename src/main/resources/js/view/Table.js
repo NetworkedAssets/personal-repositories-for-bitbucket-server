@@ -1,6 +1,8 @@
 define('Table', [ 'backbone', 'underscore' ], function(Backbone, _) {
 	return Backbone.View.extend({
+		
 		tagName : 'table',
+		
 		initialize : function(options) {
 			_.bindAll(this, 'addChildView');
 

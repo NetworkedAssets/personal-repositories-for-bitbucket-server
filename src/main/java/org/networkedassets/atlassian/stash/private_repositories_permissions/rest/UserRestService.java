@@ -14,10 +14,15 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import org.networkedassets.atlassian.stash.private_repositories_permissions.service.AllowedUsersService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Path("/")
+@Path("/users/")
 @Produces({ MediaType.APPLICATION_JSON })
 public class UserRestService {
+
+	private final static Logger log = LoggerFactory
+			.getLogger(UserRestService.class);
 
 	private final AllowedUsersService allowedUsersService;
 
@@ -29,13 +34,13 @@ public class UserRestService {
 		this.usersInfoBuilder = usersInfoBuilder;
 	}
 
-	@Path("users")
+	@Path("list")
 	@GET
 	public List<UserInfo> getUsers() {
 		return usersInfoBuilder.build();
 	}
 
-	@Path("user/${user}")
+	@Path("user/{user}")
 	@POST
 	public Response addUser(@Context UriInfo uriInfo,
 			@PathParam("user") String userName) {
@@ -43,9 +48,10 @@ public class UserRestService {
 		return Response.created(uriInfo.getAbsolutePath()).build();
 	}
 
-	@Path("user/${user}")
+	@Path("user/{user}")
 	@DELETE
 	public Response deleteUser(@PathParam("user") String userName) {
+		log.warn("Delete entered");
 		this.allowedUsersService.disallow(userName);
 		return Response.ok().build();
 	}

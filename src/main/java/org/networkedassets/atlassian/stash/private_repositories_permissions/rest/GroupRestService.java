@@ -14,10 +14,15 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import org.networkedassets.atlassian.stash.private_repositories_permissions.service.AllowedGroupsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Path("/")
+@Path("/groups/")
 @Produces({ MediaType.APPLICATION_JSON })
 public class GroupRestService {
+
+	private final static Logger log = LoggerFactory
+			.getLogger(GroupRestService.class);
 
 	private final AllowedGroupsService allowedGroupsService;
 
@@ -29,13 +34,13 @@ public class GroupRestService {
 		this.groupsInfoBuilder = groupInfoBuilder;
 	}
 
-	@Path("groups")
+	@Path("list")
 	@GET
 	public List<GroupInfo> getGroups() {
 		return groupsInfoBuilder.build();
 	}
 
-	@Path("group/${group}")
+	@Path("group/{group}")
 	@POST
 	public Response addGroup(@Context UriInfo uriInfo,
 			@PathParam("group") String groupName) {
@@ -43,9 +48,10 @@ public class GroupRestService {
 		return Response.created(uriInfo.getAbsolutePath()).build();
 	}
 
-	@Path("group/${group}")
+	@Path("group/{group}")
 	@DELETE
 	public Response deleteGroup(@PathParam("group") String groupName) {
+		log.warn("Delete entered");
 		this.allowedGroupsService.disallow(groupName);
 		return Response.ok().build();
 	}

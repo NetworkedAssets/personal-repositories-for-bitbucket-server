@@ -24,7 +24,7 @@ define('PrivateRepos', [ 'jquery', 'UsersTable', 'Users', 'GroupsTable', 'Groups
 		},
 		
 		startGroupsTable : function() {
-			var groups = new Users();
+			var groups = new Groups();
 			var groupsTable = new GroupsTable({
 				collection: groups
 			});
