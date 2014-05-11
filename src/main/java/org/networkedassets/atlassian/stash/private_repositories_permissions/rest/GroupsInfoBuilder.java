@@ -29,14 +29,27 @@ public class GroupsInfoBuilder {
 
 		return groupsInfo;
 	}
+	
+	public List<GroupInfo> build(List<String> groupNames) {
+		List<GroupInfo> groupsInfo = new ArrayList<GroupInfo>();
 
+		for (String groupName : groupNames) {
+			groupsInfo.add(createGroupInfo(groupName));
+		}
+
+		return groupsInfo;
+	}
+	
 	private GroupInfo createGroupInfo(Group group) {
+		String name = group.getName();
+		return createGroupInfo(name);
+	}
+	
+	private GroupInfo createGroupInfo(String groupName) {
 		GroupInfo info = new GroupInfo();
 
-		String name = group.getName();
-
-		info.setName(name);
-		info.setViewUrl(navBuilder.admin().groups().view(name).buildRelative());
+		info.setName(groupName);
+		info.setViewUrl(navBuilder.admin().groups().view(groupName).buildRelative());
 
 		return info;
 	}

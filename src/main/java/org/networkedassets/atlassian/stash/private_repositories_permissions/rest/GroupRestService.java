@@ -55,5 +55,11 @@ public class GroupRestService {
 		this.allowedGroupsService.disallow(groupName);
 		return Response.ok().build();
 	}
+	
+	@Path("find/{key}")
+	@GET
+	public List<GroupInfo> findUsers(@PathParam("key") String key) {
+		return groupsInfoBuilder.build(allowedGroupsService.findNotAllowed(key));
+	}
 
 }
