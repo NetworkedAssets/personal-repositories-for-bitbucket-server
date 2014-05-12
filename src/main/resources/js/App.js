@@ -46,5 +46,5 @@ AJS.$(document).ready(function($) {
 			privateRepos.start();
 		});
 	};
-	setTimeout(go, 2000);
+	setTimeout(go, 10);
 }(AJS.$));

@@ -26,11 +26,14 @@ public class UserRestService {
 
 	private final AllowedUsersService allowedUsersService;
 	private final UsersInfoBuilder usersInfoBuilder;
+	private final AuthorizationVerifier authorizationVerifier;
 
 	public UserRestService(AllowedUsersService allowedUsersService,
-			UsersInfoBuilder usersInfoBuilder) {
+			UsersInfoBuilder usersInfoBuilder,
+			AuthorizationVerifier authorizationVerifier) {
 		this.allowedUsersService = allowedUsersService;
 		this.usersInfoBuilder = usersInfoBuilder;
+		this.authorizationVerifier = authorizationVerifier;
 	}
 	
 	@Path("find/{key}")

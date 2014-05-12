@@ -44,6 +44,9 @@
 		
 	<component key="groupRestService" name="Groups Rest Service"
 		class="org.networkedassets.atlassian.stash.private_repositories_permissions.rest.GroupRestService" />
+		
+	<component key="authorizationVerifier" name="Rest Authorization Verifier"
+		class="org.networkedassets.atlassian.stash.private_repositories_permissions.rest.AuthorizationVerifier" />
 
 	<component key="usersInfoBuilder" name="User Info Builder"
 		class="org.networkedassets.atlassian.stash.private_repositories_permissions.rest.UsersInfoBuilder" />
