@@ -1,6 +1,5 @@
 package org.networkedassets.atlassian.stash.private_repositories_permissions.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.DELETE;

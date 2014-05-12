@@ -11,8 +11,6 @@ import java.util.Map;
 import net.java.ao.Query;
 
 import org.networkedassets.atlassian.stash.private_repositories_permissions.service.AllowedUsersService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
 import com.atlassian.stash.user.StashUser;
@@ -21,8 +19,6 @@ import com.atlassian.stash.util.PageRequestImpl;
 
 public class AoAllowedUsersService implements AllowedUsersService {
 
-	private final static Logger log = LoggerFactory.getLogger(AoAllowedUsersService.class);
-	
 	private final static int MAX_FOUND_USERS = 20;
 
 	private final ActiveObjects ao;
