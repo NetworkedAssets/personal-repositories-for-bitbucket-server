@@ -71,7 +71,7 @@ public class AoAllowedUsersService implements AllowedUsersService {
 
 	private User findUser(String userName) {
 		User[] users = ao.find(User.class,
-				Query.select().where("name = ?", userName));
+				Query.select().where("NAME = ?", userName));
 		if (users.length == 0) {
 			return null;
 		} else {

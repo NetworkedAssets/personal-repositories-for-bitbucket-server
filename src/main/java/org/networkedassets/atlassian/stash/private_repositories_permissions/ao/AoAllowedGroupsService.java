@@ -63,7 +63,7 @@ public class AoAllowedGroupsService implements AllowedGroupsService {
 
 	private Group findGroup(String groupName) {
 		Group[] groups = ao.find(Group.class,
-				Query.select().where("name = ?", groupName));
+				Query.select().where("NAME = ?", groupName));
 		if (groups.length == 0) {
 			return null;
 		} else {
