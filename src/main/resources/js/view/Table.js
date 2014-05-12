@@ -2,7 +2,7 @@ define('Table', [ 'backbone', 'underscore' ], function(Backbone, _) {
 	return Backbone.View.extend({
 
 		tagName : 'table',
-		className : 'private-repos-permissions-table',
+		className : 'private-repos-permissions-table aui',
 
 		events : {
 			'click .allow-button' : 'onAllow'
@@ -30,9 +30,7 @@ define('Table', [ 'backbone', 'underscore' ], function(Backbone, _) {
 		},
 
 		render : function() {
-			this.$el.html(this.template({
-				name : 'Group'
-			}));
+			this.$el.html(this.template());
 
 			var searchInput = this.$('.search-input');
 			searchInput.auiSelect2({

@@ -44,7 +44,14 @@ public class UserRestService {
 	public List<UserInfo> getUsers() {
 		return usersInfoBuilder.build();
 	}
-
+	
+	@Path("list")
+	@POST
+	public Response addGroups(NamesList names) {
+		this.allowedUsersService.allow(names.getNames());
+		return Response.ok().build();
+	}
+	
 	@Path("user/{user}")
 	@POST
 	public Response addUser(@Context UriInfo uriInfo,

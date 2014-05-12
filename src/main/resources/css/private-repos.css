@@ -23,3 +23,11 @@
 .private-repos-permissions-table thead .actions-item {
 	width: 80px;
 }
+
+.private-repos-permissions-table tbody .actions {
+	width: 80px;
+}
+
+.private-repos-permissions-table tbody .delete-button {
+	margin-right: 20px;
+}

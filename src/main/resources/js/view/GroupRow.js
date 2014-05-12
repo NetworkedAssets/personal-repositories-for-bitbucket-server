@@ -9,6 +9,7 @@ define('GroupRow', [ 'backbone' ], function(Backbone) {
 		},
 
 		onDelete : function(e) {
+			e.preventDefault();
 			this.model.destroy();
 			this.remove();
 		},

@@ -49,4 +49,10 @@ public interface AllowedUsersService {
 	 */
 	List<StashUser> findNotAllowed(String key);
 
+	/**
+	 * Allows given users to access private repositories
+	 * @param names
+	 */
+	List<User> allow(List<String> names);
+
 }
