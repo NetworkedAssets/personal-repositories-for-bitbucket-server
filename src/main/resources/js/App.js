@@ -30,6 +30,7 @@ define('PrivateRepos', [ 'jquery', 'UsersTable', 'Users', 'GroupsTable',
 			});
 			$('#groups-table').html(groupsTable.render().el);
 			groups.fetch();
+			
 		}
 	});
 
@@ -37,11 +38,13 @@ define('PrivateRepos', [ 'jquery', 'UsersTable', 'Users', 'GroupsTable',
 });
 
 AJS.$(document).ready(function($) {
-
-	require([ "PrivateRepos" ], function(PrivateRepos) {
-		console.log('Starting Private Repos');
-		var privateRepos = new PrivateRepos();
-		privateRepos.start();
-	});
-
+	
+	var go = function() {
+		require([ "PrivateRepos" ], function(PrivateRepos) {
+			console.log('Starting Private Repos');
+			var privateRepos = new PrivateRepos();
+			privateRepos.start();
+		});
+	};
+	setTimeout(go, 2000);
 }(AJS.$));

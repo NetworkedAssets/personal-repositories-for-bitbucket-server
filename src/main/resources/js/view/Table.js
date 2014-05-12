@@ -13,6 +13,13 @@ define('Table', [ 'backbone', 'underscore' ], function(Backbone, _) {
 
 			this.collection = options.collection;
 			this.collection.on('add', this.addChildView);
+			this.collection.on('reset', this.addChildViews);
+		},
+		
+		addChildViews : function() {
+			this.collection.each(function(model) {
+				this.addChildView(model);
+			}, this);
 		},
 
 		addChildView : function(model) {
@@ -58,6 +65,10 @@ define('Table', [ 'backbone', 'underscore' ], function(Backbone, _) {
 			e.preventDefault();
 			var val = this.$('.search-input').select2('val');
 			this.handleAllow(val);
+		},
+		
+		clearSearchInput : function() {
+			this.$('.search-input').select2('val', null);
 		}
 
 	});
