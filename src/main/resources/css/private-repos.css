@@ -26,8 +26,9 @@
 
 .private-repos-permissions-table tbody .actions {
 	width: 80px;
+	text-align: right;
 }
 
 .private-repos-permissions-table tbody .delete-button {
-	margin-right: 20px;
+	margin-right: 10px;
 }
