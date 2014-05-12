@@ -6,21 +6,9 @@ Choose the attached .jar file.
 Plugin is activated.
 
 When first started, plugin disables Private Repositories for every user.
-To enable private repositories to some groups you have to do the following:
+To enable private repositories to some groups you have to
 
-The plugin will create two tables in your database.
-
-First table is there to keep the groups allowed to use private repositories:
-
-Table name is AO_5D617F_GROUP
-It contains a list of groups which are allowed to use private repositories.
-To allow a group insert group name to the table.
-i.e. INSERT INTO AO_5D617F_GROUP (NAME) VALUES ('employees');
-
-Second table is there to keep the users allowed to use private repositories:
-
-Table name is AO_5D617F_USER
-It contains a list of users which are allowed to use private repositories.
-To allow a group insert user name to the table.
-i.e. INSERT INTO AO_5D617F_USER (NAME) VALUES ('user');
-
+Log in as an administrator.
+Go to administration.
+Select "Private Repositories" from left hand menu.
+You can search and add single users as well as groups who can access private repositories here.

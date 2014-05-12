@@ -1,6 +1,6 @@
-define('Users', ['backbone', 'User'], function(Backbone, User) {
+define('Users', ['backbone', 'User', 'Config'], function(Backbone, User, Config) {
 	return Backbone.Collection.extend({
-		url : '/stash/rest/privaterepos/1.0/users/list',
+		url : Config.urlBase + '/users/list',
 		model: User
 	});
 });

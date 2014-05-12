@@ -30,7 +30,7 @@ define('PrivateRepos', [ 'jquery', 'UsersTable', 'Users', 'GroupsTable',
 			});
 			$('#groups-table').html(groupsTable.render().el);
 			groups.fetch();
-			
+
 		}
 	});
 
@@ -38,7 +38,7 @@ define('PrivateRepos', [ 'jquery', 'UsersTable', 'Users', 'GroupsTable',
 });
 
 AJS.$(document).ready(function($) {
-	
+
 	var go = function() {
 		require([ "PrivateRepos" ], function(PrivateRepos) {
 			console.log('Starting Private Repos');

@@ -1,6 +1,6 @@
-define('User', ['backbone'], function(Backbone) {
+define('User', ['backbone', 'Config'], function(Backbone, Config) {
 	return Backbone.Model.extend({
-		urlRoot : '/stash/rest/privaterepos/1.0/users/user',
+		urlRoot : Config.urlBase + '/users/user',
 		idAttribute : 'name'
 	});
 });

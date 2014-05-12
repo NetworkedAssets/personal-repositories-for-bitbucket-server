@@ -1,5 +1,5 @@
-define('GroupsTable', [ 'Table', 'GroupRow', 'underscore', 'GroupBatch' ], function(Table,
-		GroupRow, _, GroupBatch) {
+define('GroupsTable', [ 'Table', 'GroupRow', 'underscore', 'GroupBatch', 'Config' ], function(Table,
+		GroupRow, _, GroupBatch, Config) {
 	return Table.extend({
 		
 		initialize : function() {
@@ -11,7 +11,7 @@ define('GroupsTable', [ 'Table', 'GroupRow', 'underscore', 'GroupBatch' ], funct
 		itemView : GroupRow,
 		
 		searchUrl : function(term) {
-			return '/stash/rest/privaterepos/1.0/groups/find/' + term;
+			return Config.urlBase + '/groups/find/' + term;
 		}, 
 
 		handleAllow : function(values) {

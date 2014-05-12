@@ -1,5 +1,5 @@
-define('UsersTable', [ 'Table', 'UserRow', 'UserBatch' ], function(Table,
-		UserRow, UserBatch) {
+define('UsersTable', [ 'Table', 'UserRow', 'UserBatch', 'Config' ], function(Table,
+		UserRow, UserBatch, Config) {
 	return Table.extend({
 
 		template : PrivateRepos.table,
@@ -11,7 +11,7 @@ define('UsersTable', [ 'Table', 'UserRow', 'UserBatch' ], function(Table,
 		},
 
 		searchUrl : function(term) {
-			return '/stash/rest/privaterepos/1.0/users/find/' + term;
+			return  Config.urlBase + '/users/find/' + term;
 		},
 
 		handleAllow : function(values) {

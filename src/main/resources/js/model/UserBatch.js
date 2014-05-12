@@ -1,8 +1,8 @@
-define('UserBatch', ['backbone'], function(Backbone) {
+define('UserBatch', ['backbone', 'Config'], function(Backbone, Config) {
 	return Backbone.Model.extend({
 		defaults : {
 			names : []
 		},
-		url : '/stash/rest/privaterepos/1.0/users/list',
+		url : Config.urlBase + '/users/list',
 	});
 });

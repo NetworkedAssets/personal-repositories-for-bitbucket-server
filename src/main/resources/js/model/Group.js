@@ -1,6 +1,6 @@
-define('Group', ['backbone'], function(Backbone) {
+define('Group', ['backbone', 'Config'], function(Backbone, Config) {
 	return Backbone.Model.extend({
-		urlRoot : '/stash/rest/privaterepos/1.0/groups/group',
+		urlRoot : Config.urlBase + '/groups/group',
 		idAttribute : 'name'
 	});
 });

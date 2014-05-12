@@ -1,8 +1,8 @@
-define('GroupBatch', ['backbone'], function(Backbone) {
+define('GroupBatch', ['backbone', 'Config'], function(Backbone, Config) {
 	return Backbone.Model.extend({
 		defaults : {
 			names : []
 		},
-		url : '/stash/rest/privaterepos/1.0/groups/list',
+		url : Config.urlBase + '/groups/list',
 	});
 });
