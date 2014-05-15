@@ -47,11 +47,14 @@ public class AdministrationPanelServlet extends HttpServlet {
 		try {
 			resp.setContentType("text/html;charset=UTF-8");
 
+			HashMap<String, Object> params = new HashMap<String, Object>();
+			String baseApiPath = navBuilder.buildAbsolute() + "/rest/privaterepos/1.0";
+			params.put("baseApiPath", baseApiPath);
+
 			soyTemplateRenderer
 					.render(resp.getWriter(),
 							"org.networkedassets.atlassian.stash.private-repositories-permissions-plugin:templates-soy",
-							"PrivateRepos.adminPage",
-							new HashMap<String, Object>());
+							"PrivateRepos.adminPage", params);
 
 		} catch (SoyException e) {
 			Throwable cause = e.getCause();
