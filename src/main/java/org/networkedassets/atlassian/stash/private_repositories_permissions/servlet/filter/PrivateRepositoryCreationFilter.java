@@ -91,7 +91,7 @@ public class PrivateRepositoryCreationFilter implements Filter {
 		if (uriUser == null) {
 			return false;
 		}
-		return (uriUser == currentUserSlug);
+		return (uriUser.equals(currentUserSlug));
 	}
 
 	private void rejectRequest(HttpServletRequest httpRequest,
