@@ -8,17 +8,12 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import org.networkedassets.atlassian.stash.private_repositories_permissions.service.AllowedGroupsService;
-
-import com.atlassian.stash.exception.AuthorisationException;
-import com.atlassian.stash.user.Permission;
-import com.atlassian.stash.user.PermissionValidationService;
 
 @Path("/groups/")
 @Produces({ MediaType.APPLICATION_JSON })

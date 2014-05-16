@@ -14,15 +14,10 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import org.networkedassets.atlassian.stash.private_repositories_permissions.service.AllowedUsersService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Path("/users/")
 @Produces({ MediaType.APPLICATION_JSON })
 public class UserRestService {
-
-	private final static Logger log = LoggerFactory
-			.getLogger(UserRestService.class);
 
 	private final AllowedUsersService allowedUsersService;
 	private final UsersInfoBuilder usersInfoBuilder;
@@ -39,18 +34,21 @@ public class UserRestService {
 	@Path("find/{key}")
 	@GET
 	public List<UserInfo> findUsers(@PathParam("key") String key) {
+		this.authorizationVerifier.verify();
 		return usersInfoBuilder.buildFromStashUsers(allowedUsersService.findNotAllowed(key));
 	}
 
 	@Path("list")
 	@GET
 	public List<UserInfo> getUsers() {
+		this.authorizationVerifier.verify();
 		return usersInfoBuilder.build();
 	}
 	
 	@Path("list")
 	@POST
 	public Response addGroups(NamesList names) {
+		this.authorizationVerifier.verify();
 		this.allowedUsersService.allow(names.getNames());
 		return Response.ok().build();
 	}
@@ -59,6 +57,7 @@ public class UserRestService {
 	@POST
 	public Response addUser(@Context UriInfo uriInfo,
 			@PathParam("user") String userName) {
+		this.authorizationVerifier.verify();
 		allowedUsersService.allow(userName);
 		return Response.created(uriInfo.getAbsolutePath()).build();
 	}
@@ -66,7 +65,7 @@ public class UserRestService {
 	@Path("user/{user}")
 	@DELETE
 	public Response deleteUser(@PathParam("user") String userName) {
-		log.warn("Delete entered");
+		this.authorizationVerifier.verify();
 		allowedUsersService.disallow(userName);
 		return Response.ok().build();
 	}
