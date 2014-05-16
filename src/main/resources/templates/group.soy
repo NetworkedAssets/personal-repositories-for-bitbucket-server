@@ -17,3 +17,25 @@
 	</td>
 </tr>
 {/template}
+
+/**
+ * @param group
+ */
+{template .groupSearchResult}
+<span title="{$group.name}">
+	<span class="aui-avatar aui-avatar-small group-avatar" data-groupname="{$group.name}">
+	</span>{$group.name}
+</span>
+{/template}
+
+/**
+ * @param group
+ */
+{template .groupSearchSelection}
+<div>
+	<span title="{$group.name}">
+		<span class="aui-avatar aui-avatar-xsmall group-avatar" data-groupname="{$group.name}">
+		</span>{$group.name}
+	</span>
+</div>
+{/template}

@@ -14,6 +14,8 @@ class UserInfo {
 	private String avatarUrl;
 	@XmlElement
 	private String profileUrl;
+	@XmlElement
+	private String email;
 
 	public String getName() {
 		return name;
@@ -45,6 +47,14 @@ class UserInfo {
 
 	public void setProfileUrl(String profileUrl) {
 		this.profileUrl = profileUrl;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

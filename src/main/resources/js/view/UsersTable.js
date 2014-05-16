@@ -4,6 +4,13 @@ define('UsersTable', [ 'Table', 'UserRow', 'UserBatch', 'Config' ], function(Tab
 
 		template : PrivateRepos.table,
 		itemView : UserRow,
+		searchFormatResult : function(object) {
+			return PrivateRepos.userSearchResult({user: object}) 
+		},
+		
+		searchFormatSelection : function(object) {
+			return PrivateRepos.userSearchSelection({user: object})
+		},
 
 		initialize : function() {
 			Table.prototype.initialize.apply(this, arguments);

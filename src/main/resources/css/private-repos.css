@@ -34,3 +34,13 @@
 	width: 80px;
 	text-align: right;
 }
+
+.select2-result-label .email-address {
+	color: #707070;
+	font-size: 12px;
+	margin-left: 10px;
+}
+
+.select2-highlighted .select2-result-label .email-address {
+	color : #fff;
+}

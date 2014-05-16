@@ -7,6 +7,14 @@ define('GroupsTable', [ 'Table', 'GroupRow', 'underscore', 'GroupBatch', 'Config
 			_.bindAll(this, 'onAllowSuccess', 'handleAllow');
 		},
 		
+		searchFormatResult : function(object) {
+			return PrivateRepos.groupSearchResult({group: object}) 
+		},
+		
+		searchFormatSelection : function(object) {
+			return PrivateRepos.groupSearchSelection({group: object})
+		},
+		
 		template : PrivateRepos.table,
 		itemView : GroupRow,
 		

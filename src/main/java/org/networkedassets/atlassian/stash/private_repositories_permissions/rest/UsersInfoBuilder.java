@@ -62,6 +62,7 @@ public class UsersInfoBuilder {
 		info.setName(user.getName());
 		info.setDisplayName(user.getDisplayName());
 		info.setProfileUrl(navBuilder.user(user).buildRelative());
+		info.setEmail(user.getEmailAddress());
 
 		return info;
 	}

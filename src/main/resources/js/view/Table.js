@@ -3,6 +3,14 @@ define('Table', [ 'backbone', 'underscore' ], function(Backbone, _) {
 
 		tagName : 'table',
 		className : 'private-repos-permissions-table aui',
+		
+		searchFormatResult :function(object) {
+			return object.name;
+		},
+		
+		searchFormatSelection  : function(object) {
+			return object.name;
+		},
 
 		events : {
 			'click .allow-button' : 'onAllow'
@@ -41,20 +49,18 @@ define('Table', [ 'backbone', 'underscore' ], function(Backbone, _) {
 					url : this.searchUrl,
 					dataType : 'json',
 					results : function(data, page) {
-						results = _.map(data, function(object) {
-							return {
-								id : object.name,
-								text : object.name
-							};
+						var results = _.map(data, function(object) {
+							return _.extend(object, {
+								id : object.name
+							});
 						});
 						return {
 							results : results
 						};
-					},
-					formatResult : function(object) {
-						return object.name;
 					}
-				}
+				},
+				formatResult : this.searchFormatResult,
+				formatSelection : this.searchFormatSelection
 			});
 			return this;
 		},

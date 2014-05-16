@@ -41,7 +41,6 @@ AJS.$(document).ready(function($) {
 
 	var go = function() {
 		require([ "PrivateRepos" ], function(PrivateRepos) {
-			console.log('Starting Private Repos');
 			var privateRepos = new PrivateRepos();
 			privateRepos.start();
 		});
