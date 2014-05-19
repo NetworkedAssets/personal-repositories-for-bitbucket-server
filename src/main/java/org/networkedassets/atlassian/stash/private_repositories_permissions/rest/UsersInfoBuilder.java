@@ -58,7 +58,7 @@ public class UsersInfoBuilder {
 
 		UserInfo info = new UserInfo();
 
-		info.setAvatarUrl(navBuilder.profile().avatar(64).buildAbsolute());
+		info.setAvatarUrl(navBuilder.user(user).avatar(64).buildAbsolute());
 		info.setName(user.getName());
 		info.setDisplayName(user.getDisplayName());
 		info.setProfileUrl(navBuilder.user(user).buildRelative());
