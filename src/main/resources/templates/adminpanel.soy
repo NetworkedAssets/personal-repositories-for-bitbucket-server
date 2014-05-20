@@ -10,21 +10,20 @@
 <head>
 <meta name="decorator" content="atl.admin">
 <meta name="activeTab" content="admin-private-repos">
-<script type="text/javascript">
-{literal}
-define('Config', [], function() {
-	return {
-		urlBase : "{/literal}{$baseApiPath}{literal}"
-	};
-});
-{/literal}
-</script>
-
 {webResourceManager_requireResource('com.atlassian.auiplugin:aui-select2')}
 {webResourceManager_requireResource('org.networkedassets.atlassian.stash.private-repositories-permissions-plugin:web-resources')}
 <title>Private Repositories Permissions</title>
 </head>
 <body>
+	<script type="text/javascript">
+	{literal}
+	define('Config', [], function() {
+		return {
+			urlBase : "{/literal}{$baseApiPath}{literal}"
+		};
+	});
+	{/literal}
+	</script>
 	{call aui.group.group}
 	    {param content}
 	        {call aui.group.item}
