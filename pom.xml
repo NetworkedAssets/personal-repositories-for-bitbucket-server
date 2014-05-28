@@ -4,14 +4,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.networkedassets.atlassian.stash</groupId>
-	<artifactId>private-repositories-permissions-plugin</artifactId>
-	<version>0.9.9</version>
+	<artifactId>privaterepos</artifactId>
+	<version>0.9.10</version>
 	<organization>
 		<name>NetworkedAssets</name>
 		<url>http://www.networkedassets.com/</url>
 	</organization>
 	<name>private-repositories-permissions-plugin</name>
-	<description>This is private repositories permissions plugin for Atlassian Stash.</description>
+	<description>Private repositories permissions plugin for Atlassian Stash.</description>
 	<packaging>atlassian-plugin</packaging>
 	<dependencyManagement>
 		<dependencies>
@@ -69,7 +69,6 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.10</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -79,8 +78,8 @@
 		</dependency>
 		<dependency>
 			<groupId>com.atlassian.soy</groupId>
-    		<artifactId>soy-template-renderer-api</artifactId>
-    		<scope>provided</scope>
+			<artifactId>soy-template-renderer-api</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<!-- WIRED TEST RUNNER DEPENDENCIES -->
 		<dependency>
@@ -98,19 +97,16 @@
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
-			<version>2.2.2-atlassian-1</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.6.6</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.1.1</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -146,8 +142,8 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.6</source>
+					<target>1.6</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -225,8 +221,8 @@
 	</build>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<stash.version>3.0.1</stash.version>
-		<stash.data.version>3.0.1</stash.data.version>
+		<stash.version>2.12.1</stash.version>
+		<stash.data.version>2.12.1</stash.data.version>
 		<amps.version>4.2.20</amps.version>
 		<plugin.testrunner.version>1.1.4</plugin.testrunner.version>
 	</properties>

@@ -12,9 +12,9 @@
 
 	<ao key="ao-module">
 		<description>The AO module for this plugin.</description>
-		<entity>org.networkedassets.atlassian.stash.private_repositories_permissions.ao.Group
+		<entity>org.networkedassets.atlassian.stash.privaterepos.ao.Group
 		</entity>
-		<entity>org.networkedassets.atlassian.stash.private_repositories_permissions.ao.User
+		<entity>org.networkedassets.atlassian.stash.privaterepos.ao.User
 		</entity>
 	</ao>
 
@@ -27,32 +27,32 @@
 
 	<!-- add our i18n resource -->
 	<resource type="i18n" name="i18n"
-		location="private-repositories-permissions-plugin" />
+		location="/i18n" />
 
 	<!-- publish our components -->
 	<component key="allowedGroupsService" name="Allowed Groups Service"
-		class="org.networkedassets.atlassian.stash.private_repositories_permissions.ao.AoAllowedGroupsService" />
+		class="org.networkedassets.atlassian.stash.privaterepos.ao.AoAllowedGroupsService" />
 
 	<component key="allowedUsersService" name="Allowed Users Service"
-		class="org.networkedassets.atlassian.stash.private_repositories_permissions.ao.AoAllowedUsersService" />
+		class="org.networkedassets.atlassian.stash.privaterepos.ao.AoAllowedUsersService" />
 
 	<component key="userPermissionsExaminer" name="User Permissions Examiner"
-		class="org.networkedassets.atlassian.stash.private_repositories_permissions.service.UserPermissionsExaminer" />
+		class="org.networkedassets.atlassian.stash.privaterepos.service.UserPermissionsExaminer" />
 
 	<component key="userRestService" name="Users Rest Service"
-		class="org.networkedassets.atlassian.stash.private_repositories_permissions.rest.UserRestService" />
+		class="org.networkedassets.atlassian.stash.privaterepos.rest.UserRestService" />
 		
 	<component key="groupRestService" name="Groups Rest Service"
-		class="org.networkedassets.atlassian.stash.private_repositories_permissions.rest.GroupRestService" />
+		class="org.networkedassets.atlassian.stash.privaterepos.rest.GroupRestService" />
 		
 	<component key="authorizationVerifier" name="Rest Authorization Verifier"
-		class="org.networkedassets.atlassian.stash.private_repositories_permissions.rest.AuthorizationVerifier" />
+		class="org.networkedassets.atlassian.stash.privaterepos.rest.AuthorizationVerifier" />
 
 	<component key="usersInfoBuilder" name="User Info Builder"
-		class="org.networkedassets.atlassian.stash.private_repositories_permissions.rest.UsersInfoBuilder" />
+		class="org.networkedassets.atlassian.stash.privaterepos.rest.UsersInfoBuilder" />
 		
 	<component key="groupsInfoBuilder" name="Group Info Builder"
-		class="org.networkedassets.atlassian.stash.private_repositories_permissions.rest.GroupsInfoBuilder" />
+		class="org.networkedassets.atlassian.stash.privaterepos.rest.GroupsInfoBuilder" />
 
 
 	<!-- import from the product container -->
@@ -61,7 +61,7 @@
 
 	<servlet-filter name="Private Repository Creation Filter"
 		i18n-name-key="private-repository-creation-filter.name" key="private-repository-creation-filter"
-		class="org.networkedassets.atlassian.stash.private_repositories_permissions.servlet.filter.PrivateRepositoryCreationFilter"
+		class="org.networkedassets.atlassian.stash.privaterepos.servlet.filter.PrivateRepositoryCreationFilter"
 		location="before-decoration" weight="100">
 		<description key="private-repository-creation-filter.description">The Private Repository Creation Filter
 			Plugin
@@ -75,21 +75,32 @@
 	</servlet-filter>
 
 	<web-resource key="web-resources">
-		<resource type="download" name="private-repos.css" location="/css/private-repos.css" />
+		<resource type="download" name="privaterepos.css" location="/css/privaterepos.css" />
 		<transformation extension="soy">
 			<transformer key="soyTransformer" />
 		</transformation>
 		<resource type="download" name="table-soy.js" location="/templates/table.soy" />
 		<resource type="download" name="user-soy.js" location="/templates/user.soy" />
 		<resource type="download" name="group-soy.js" location="/templates/group.soy" />
-		<resource type="download" name="BuiltApp.js" location="/js/BuiltApp.js" />
+		<resource type="download" name="model/Group.js" location="/js/model/Group.js" />
+		<resource type="download" name="model/Groups.js" location="/js/model/Groups.js" />
+		<resource type="download" name="model/GroupBatch.js" location="/js/model/GroupBatch.js" />
+		<resource type="download" name="model/User.js" location="/js/model/User.js" />
+		<resource type="download" name="model/Users.js" location="/js/model/Users.js" />
+		<resource type="download" name="model/UserBatch.js" location="/js/model/UserBatch.js" />
+		<resource type="download" name="view/GroupRow.js" location="/js/view/GroupRow.js" />
+		<resource type="download" name="view/GroupsTable.js" location="/js/view/GroupsTable.js" />
+		<resource type="download" name="view/UserRow.js" location="/js/view/UserRow.js" />
+		<resource type="download" name="view/UsersTable.js" location="/js/view/UsersTable.js" />
+		<resource type="download" name="view/Table.js" location="/js/view/Table.js" />
+		<resource type="download" name="App.js" location="/js/App.js" />
 	</web-resource>
 
 	<stash-resource key="templates-soy" name="Soy Templates">
 		<directory location="/templates/" />
 		<dependency>com.atlassian.stash.stash-web-plugin:global</dependency>
 		<dependency>com.atlassian.auiplugin:aui-select2</dependency>
-		<dependency>org.networkedassets.atlassian.stash.private-repositories-permissions-plugin:web-resources
+		<dependency>org.networkedassets.atlassian.stash.privaterepos:web-resources
 		</dependency>
 	</stash-resource>
 	<component-import key="soyTemplateRenderer"
@@ -103,7 +114,7 @@
 	</web-item>
 
 	<servlet name="Administration Panel Servlet" key="administrationPanel"
-		class="org.networkedassets.atlassian.stash.private_repositories_permissions.servlet.AdministrationPanelServlet">
+		class="org.networkedassets.atlassian.stash.privaterepos.servlet.AdministrationPanelServlet">
 		<description>Displays private repositories administration panel
 		</description>
 		<url-pattern>/privatereposadmin</url-pattern>
@@ -127,7 +138,7 @@
 			]]>
 		</resource>
 		<condition key="canUsePrivateRepositoriesCondition"
-			class="org.networkedassets.atlassian.stash.private_repositories_permissions.web.CanUsePrivateRepositoriesCondition"
+			class="org.networkedassets.atlassian.stash.privaterepos.web.CanUsePrivateRepositoriesCondition"
 			invert="true" />
 	</web-panel>
 
