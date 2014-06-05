@@ -53,26 +53,13 @@
 		
 	<component key="groupsInfoBuilder" name="Group Info Builder"
 		class="org.networkedassets.atlassian.stash.privaterepos.rest.GroupsInfoBuilder" />
-
+		
+	<component key="repositoryCreationRequestListener" name="Repository Creation Request Listener"
+	class="org.networkedassets.atlassian.stash.privaterepos.service.RepositoryCreationRequestListener" />
 
 	<!-- import from the product container -->
 	<component-import key="applicationProperties"
 		interface="com.atlassian.sal.api.ApplicationProperties" />
-
-	<servlet-filter name="Private Repository Creation Filter"
-		i18n-name-key="private-repository-creation-filter.name" key="private-repository-creation-filter"
-		class="org.networkedassets.atlassian.stash.privaterepos.servlet.filter.PrivateRepositoryCreationFilter"
-		location="before-decoration" weight="100">
-		<description key="private-repository-creation-filter.description">The Private Repository Creation Filter
-			Plugin
-		</description>
-
-		<url-pattern>/*</url-pattern>
-
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
-		<dispatcher>INCLUDE</dispatcher>
-	</servlet-filter>
 
 	<web-resource key="web-resources">
 		<resource type="download" name="privaterepos.css" location="/css/privaterepos.css" />
