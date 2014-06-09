@@ -1,7 +1,7 @@
 package org.networkedassets.atlassian.stash.privaterepos.listeners;
 
-import org.networkedassets.atlassian.stash.privaterepos.service.PersonalRepositoriesService;
-import org.networkedassets.atlassian.stash.privaterepos.service.RepositoryTypeVerifier;
+import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepositoriesService;
+import org.networkedassets.atlassian.stash.privaterepos.repositories.RepositoryTypeVerifier;
 
 import com.atlassian.event.api.EventListener;
 import com.atlassian.stash.event.RepositoryCreatedEvent;

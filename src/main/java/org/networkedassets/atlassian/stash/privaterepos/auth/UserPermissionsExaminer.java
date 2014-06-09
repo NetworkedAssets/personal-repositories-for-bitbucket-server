@@ -1,8 +1,10 @@
-package org.networkedassets.atlassian.stash.privaterepos.service;
+package org.networkedassets.atlassian.stash.privaterepos.auth;
 
 import java.util.List;
 
-import org.networkedassets.atlassian.stash.privaterepos.ao.group.Group;
+import org.networkedassets.atlassian.stash.privaterepos.group.AllowedGroupsService;
+import org.networkedassets.atlassian.stash.privaterepos.group.Group;
+import org.networkedassets.atlassian.stash.privaterepos.user.AllowedUsersService;
 
 import com.atlassian.stash.user.StashAuthenticationContext;
 import com.atlassian.stash.user.StashUser;

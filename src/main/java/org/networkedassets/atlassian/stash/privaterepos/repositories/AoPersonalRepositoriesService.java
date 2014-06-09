@@ -1,11 +1,9 @@
-package org.networkedassets.atlassian.stash.privaterepos.ao.repositories;
+package org.networkedassets.atlassian.stash.privaterepos.repositories;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import net.java.ao.Query;
-
-import org.networkedassets.atlassian.stash.privaterepos.service.PersonalRepositoriesService;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
 import com.atlassian.stash.project.Project;

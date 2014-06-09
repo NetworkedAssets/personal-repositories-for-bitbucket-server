@@ -1,4 +1,4 @@
-package org.networkedassets.atlassian.stash.privaterepos.ao.user;
+package org.networkedassets.atlassian.stash.privaterepos.user;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.Lists.newArrayList;
@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import net.java.ao.Query;
-
-import org.networkedassets.atlassian.stash.privaterepos.service.AllowedUsersService;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
 import com.atlassian.stash.user.StashUser;

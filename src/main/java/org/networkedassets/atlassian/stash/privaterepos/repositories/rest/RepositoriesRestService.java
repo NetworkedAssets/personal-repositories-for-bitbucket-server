@@ -1,4 +1,4 @@
-package org.networkedassets.atlassian.stash.privaterepos.rest.repositories;
+package org.networkedassets.atlassian.stash.privaterepos.repositories.rest;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -9,7 +9,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.networkedassets.atlassian.stash.privaterepos.service.PersonalRepositoriesService;
+import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepositoriesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,12 +51,21 @@ public class RepositoriesRestService {
 		return Response.ok().build();
 
 	}
-	
+
 	@Path("user/{id}")
 	@GET
-	public Page<Repository> getUserRepositories(@PathParam("userId") Integer userId) {
+	public Page<Repository> getUserRepositories(
+			@PathParam("userId") Integer userId) {
 		// this.authorizationVerifier.verify();
 		return null;
 	}
 
+	@Path("repository/{id}")
+	@DELETE
+	public Response deleteRepository(
+			@PathParam("repositoryId") Integer repositoryId) {
+		// this.authorizationVerifier.verify();
+		return Response.ok().build();
+
+	}
 }

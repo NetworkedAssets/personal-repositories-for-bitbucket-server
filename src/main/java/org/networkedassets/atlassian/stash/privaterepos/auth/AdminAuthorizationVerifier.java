@@ -1,4 +1,4 @@
-package org.networkedassets.atlassian.stash.privaterepos.rest;
+package org.networkedassets.atlassian.stash.privaterepos.auth;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
@@ -7,11 +7,11 @@ import com.atlassian.stash.exception.AuthorisationException;
 import com.atlassian.stash.user.Permission;
 import com.atlassian.stash.user.PermissionValidationService;
 
-public class AuthorizationVerifier {
+public class AdminAuthorizationVerifier {
 
 	private final PermissionValidationService permissionValidationService;
 
-	public AuthorizationVerifier(
+	public AdminAuthorizationVerifier(
 			PermissionValidationService permissionValidationService) {
 		this.permissionValidationService = permissionValidationService;
 	}

@@ -1,6 +1,4 @@
-package org.networkedassets.atlassian.stash.privaterepos.service;
-
-import org.networkedassets.atlassian.stash.privaterepos.ao.repositories.PersonalRepository;
+package org.networkedassets.atlassian.stash.privaterepos.repositories;
 
 import com.atlassian.stash.repository.Repository;
 import com.atlassian.stash.user.StashUser;

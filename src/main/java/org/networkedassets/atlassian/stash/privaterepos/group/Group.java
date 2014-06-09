@@ -1,4 +1,4 @@
-package org.networkedassets.atlassian.stash.privaterepos.ao.group;
+package org.networkedassets.atlassian.stash.privaterepos.group;
 
 import net.java.ao.Entity;
 

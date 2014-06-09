@@ -1,4 +1,4 @@
-package org.networkedassets.atlassian.stash.privaterepos.service;
+package org.networkedassets.atlassian.stash.privaterepos.repositories;
 
 import com.atlassian.stash.project.ProjectType;
 import com.atlassian.stash.repository.Repository;

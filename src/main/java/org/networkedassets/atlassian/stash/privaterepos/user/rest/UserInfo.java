@@ -1,4 +1,4 @@
-package org.networkedassets.atlassian.stash.privaterepos.rest.user;
+package org.networkedassets.atlassian.stash.privaterepos.user.rest;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

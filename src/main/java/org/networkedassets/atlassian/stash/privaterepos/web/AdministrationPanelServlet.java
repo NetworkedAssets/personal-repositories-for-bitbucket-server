@@ -1,4 +1,4 @@
-package org.networkedassets.atlassian.stash.privaterepos.servlet;
+package org.networkedassets.atlassian.stash.privaterepos.web;
 
 import java.io.IOException;
 import java.util.HashMap;
