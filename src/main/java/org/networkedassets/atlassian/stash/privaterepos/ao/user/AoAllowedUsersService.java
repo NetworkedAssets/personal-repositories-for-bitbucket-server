@@ -1,4 +1,4 @@
-package org.networkedassets.atlassian.stash.privaterepos.ao;
+package org.networkedassets.atlassian.stash.privaterepos.ao.user;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.Lists.newArrayList;

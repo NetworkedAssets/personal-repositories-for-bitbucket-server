@@ -2,7 +2,7 @@ package org.networkedassets.atlassian.stash.privaterepos.service;
 
 import java.util.List;
 
-import org.networkedassets.atlassian.stash.privaterepos.ao.Group;
+import org.networkedassets.atlassian.stash.privaterepos.ao.group.Group;
 
 import com.atlassian.activeobjects.tx.Transactional;
 

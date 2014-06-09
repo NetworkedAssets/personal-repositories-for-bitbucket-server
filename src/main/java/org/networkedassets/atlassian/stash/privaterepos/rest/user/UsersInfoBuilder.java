@@ -1,11 +1,11 @@
-package org.networkedassets.atlassian.stash.privaterepos.rest;
+package org.networkedassets.atlassian.stash.privaterepos.rest.user;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.networkedassets.atlassian.stash.privaterepos.ao.User;
+import org.networkedassets.atlassian.stash.privaterepos.ao.user.User;
 import org.networkedassets.atlassian.stash.privaterepos.service.AllowedUsersService;
 
 import com.atlassian.stash.nav.NavBuilder;

@@ -1,9 +1,9 @@
-package org.networkedassets.atlassian.stash.privaterepos.rest;
+package org.networkedassets.atlassian.stash.privaterepos.rest.group;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.networkedassets.atlassian.stash.privaterepos.ao.Group;
+import org.networkedassets.atlassian.stash.privaterepos.ao.group.Group;
 import org.networkedassets.atlassian.stash.privaterepos.service.AllowedGroupsService;
 
 import com.atlassian.stash.nav.NavBuilder;

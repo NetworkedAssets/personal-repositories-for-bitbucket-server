@@ -1,4 +1,4 @@
-package org.networkedassets.atlassian.stash.privaterepos.rest;
+package org.networkedassets.atlassian.stash.privaterepos.rest.user;
 
 import java.util.List;
 
@@ -13,6 +13,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import org.networkedassets.atlassian.stash.privaterepos.rest.AuthorizationVerifier;
+import org.networkedassets.atlassian.stash.privaterepos.rest.NamesList;
 import org.networkedassets.atlassian.stash.privaterepos.service.AllowedUsersService;
 
 @Path("/users/")
