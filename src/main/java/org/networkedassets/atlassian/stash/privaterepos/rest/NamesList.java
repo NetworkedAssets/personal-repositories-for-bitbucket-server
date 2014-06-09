@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-class NamesList {
+public class NamesList {
 	@XmlElement private List<String> names;
 
 	public List<String> getNames() {
