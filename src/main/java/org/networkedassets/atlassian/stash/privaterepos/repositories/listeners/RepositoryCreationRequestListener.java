@@ -1,4 +1,4 @@
-package org.networkedassets.atlassian.stash.privaterepos.listeners;
+package org.networkedassets.atlassian.stash.privaterepos.repositories.listeners;
 
 import org.networkedassets.atlassian.stash.privaterepos.auth.UserPermissionsExaminer;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.RepositoryTypeVerifier;
