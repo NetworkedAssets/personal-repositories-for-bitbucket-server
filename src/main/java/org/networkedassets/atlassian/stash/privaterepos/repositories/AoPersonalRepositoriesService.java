@@ -3,6 +3,7 @@ package org.networkedassets.atlassian.stash.privaterepos.repositories;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import net.java.ao.Query;
@@ -22,18 +23,14 @@ import com.atlassian.stash.util.PageRequest;
 public class AoPersonalRepositoriesService implements
 		PersonalRepositoriesService {
 
-	private final ActiveObjects ao;
-	private final UserService userService;
-	private final RepositoryService repositoryService;
-	private final ProjectService projectService;
-
-	public AoPersonalRepositoriesService(ActiveObjects ao,
-			UserService userService, RepositoryService repositoryService, ProjectService projectService) {
-		this.ao = ao;
-		this.userService = userService;
-		this.repositoryService = repositoryService;
-		this.projectService = projectService;
-	}
+	@Autowired
+	private ActiveObjects ao;
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private RepositoryService repositoryService;
+	@Autowired
+	private ProjectService projectService;
 
 	@Override
 	public Page<? extends StashUser> findUsersHavingPersonalRepositories(

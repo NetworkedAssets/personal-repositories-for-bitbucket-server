@@ -1,14 +1,14 @@
 package org.networkedassets.atlassian.stash.privaterepos.group;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.Lists.newArrayList;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
 import net.java.ao.Query;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
 import com.atlassian.stash.user.UserService;
@@ -19,14 +19,11 @@ public class AoAllowedGroupsService implements AllowedGroupsService {
 
 	private static final int MAX_FOUND_USERS = 20;
 
-	private final ActiveObjects ao;
+	@Autowired
+	private ActiveObjects ao;
+	@Autowired
+	private UserService userService;
 
-	private final UserService userService;
-
-	public AoAllowedGroupsService(ActiveObjects ao, UserService userService) {
-		this.userService = userService;
-		this.ao = checkNotNull(ao);
-	}
 
 	@Override
 	public List<Group> all() {

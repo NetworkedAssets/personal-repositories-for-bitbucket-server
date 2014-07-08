@@ -1,13 +1,10 @@
 package org.networkedassets.atlassian.stash.privaterepos.repositories;
 
-import org.springframework.stereotype.Component;
-
 import com.atlassian.stash.repository.Repository;
 import com.atlassian.stash.user.StashUser;
 import com.atlassian.stash.util.Page;
 import com.atlassian.stash.util.PageRequest;
 
-@Component
 public interface PersonalRepositoriesService {
 
 	Page<? extends StashUser> findUsersHavingPersonalRepositories(

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.networkedassets.atlassian.stash.privaterepos.group.AllowedGroupsService;
 import org.networkedassets.atlassian.stash.privaterepos.group.Group;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.atlassian.stash.nav.NavBuilder;
@@ -12,14 +13,10 @@ import com.atlassian.stash.nav.NavBuilder;
 @Component
 public class GroupsInfoBuilder {
 
-	private final AllowedGroupsService allowedGroupsService;
-	private final NavBuilder navBuilder;
-
-	public GroupsInfoBuilder(AllowedGroupsService allowedGroupsService,
-			NavBuilder navBuilder) {
-		this.allowedGroupsService = allowedGroupsService;
-		this.navBuilder = navBuilder;
-	}
+	@Autowired
+	private AllowedGroupsService allowedGroupsService;
+	@Autowired
+	private NavBuilder navBuilder;
 
 	public List<GroupInfo> build() {
 		List<GroupInfo> groupsInfo = new ArrayList<GroupInfo>();

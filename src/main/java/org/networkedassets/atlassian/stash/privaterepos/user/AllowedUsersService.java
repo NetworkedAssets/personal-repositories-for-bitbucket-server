@@ -2,8 +2,6 @@ package org.networkedassets.atlassian.stash.privaterepos.user;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
 import com.atlassian.activeobjects.tx.Transactional;
 import com.atlassian.stash.user.StashUser;
 

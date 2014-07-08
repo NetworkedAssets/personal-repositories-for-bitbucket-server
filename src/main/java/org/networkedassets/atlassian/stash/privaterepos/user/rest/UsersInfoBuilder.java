@@ -7,23 +7,22 @@ import java.util.Set;
 
 import org.networkedassets.atlassian.stash.privaterepos.user.AllowedUsersService;
 import org.networkedassets.atlassian.stash.privaterepos.user.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.atlassian.stash.nav.NavBuilder;
 import com.atlassian.stash.user.StashUser;
 import com.atlassian.stash.user.UserService;
 
+@Component
 public class UsersInfoBuilder {
 
-	private final AllowedUsersService allowedUsersService;
-	private final UserService userService;
-	private final NavBuilder navBuilder;
-
-	public UsersInfoBuilder(AllowedUsersService allowedUsersService,
-			UserService userService, NavBuilder navBuilder) {
-		this.allowedUsersService = allowedUsersService;
-		this.userService = userService;
-		this.navBuilder = navBuilder;
-	}
+	@Autowired
+	private AllowedUsersService allowedUsersService;
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private NavBuilder navBuilder;
 
 	public List<UserInfo> build() {
 		return build(allowedUsersService.all());
@@ -48,7 +47,7 @@ public class UsersInfoBuilder {
 		for (User user : users) {
 			names.add(user.getName());
 		}
-		
+
 		List<StashUser> stashUsers = new ArrayList<StashUser>();
 		stashUsers.addAll(userService.getUsersByName(names));
 		return stashUsers;

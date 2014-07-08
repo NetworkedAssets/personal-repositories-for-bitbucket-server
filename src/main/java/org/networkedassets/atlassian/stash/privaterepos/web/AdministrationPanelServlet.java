@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.atlassian.soy.renderer.SoyException;
 import com.atlassian.soy.renderer.SoyTemplateRenderer;
 import com.atlassian.stash.exception.AuthorisationException;
@@ -19,17 +21,12 @@ public class AdministrationPanelServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 5750547122008437666L;
 
-	private final SoyTemplateRenderer soyTemplateRenderer;
-	private final PermissionValidationService permissionValidationService;
-	private final NavBuilder navBuilder;
-
-	public AdministrationPanelServlet(SoyTemplateRenderer soyTemplateRenderer,
-			PermissionValidationService permissionValidationService,
-			NavBuilder navBuilder) {
-		this.soyTemplateRenderer = soyTemplateRenderer;
-		this.permissionValidationService = permissionValidationService;
-		this.navBuilder = navBuilder;
-	}
+	@Autowired
+	private SoyTemplateRenderer soyTemplateRenderer;
+	@Autowired
+	private PermissionValidationService permissionValidationService;
+	@Autowired
+	private NavBuilder navBuilder;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)

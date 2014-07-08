@@ -5,6 +5,7 @@ import java.util.List;
 import org.networkedassets.atlassian.stash.privaterepos.group.AllowedGroupsService;
 import org.networkedassets.atlassian.stash.privaterepos.group.Group;
 import org.networkedassets.atlassian.stash.privaterepos.user.AllowedUsersService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.atlassian.stash.user.StashAuthenticationContext;
@@ -14,42 +15,33 @@ import com.atlassian.stash.user.UserService;
 @Component
 public class UserPermissionsExaminer {
 
-	private final UserService userService;
-	private final StashAuthenticationContext authenthicationContext;
-	private final AllowedGroupsService allowedGroupsService;
-	private final AllowedUsersService allowedUsersService;
-	
-	private StashUser currentUser;
-	
-	public UserPermissionsExaminer(
-			UserService userService,
-			StashAuthenticationContext authenticationContext,
-			AllowedGroupsService allowedGroupsService,
-			AllowedUsersService allowedUsersService) {
-		this.userService = userService;
-		this.authenthicationContext = authenticationContext;
-		this.allowedGroupsService = allowedGroupsService;
-		this.allowedUsersService = allowedUsersService;
-	}
-	
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private StashAuthenticationContext authenthicationContext;
+	@Autowired
+	private AllowedGroupsService allowedGroupsService;
+	@Autowired
+	private AllowedUsersService allowedUsersService;
+
 	public boolean canUsePrivateRepositories() {
-		currentUser = authenthicationContext.getCurrentUser();
-		
-		if (isUserAnonymous()) {
+		StashUser currentUser = authenthicationContext.getCurrentUser();
+
+		if (isUserAnonymous(currentUser)) {
 			return false;
 		}
-		
-		return userAllowedToUsePrivateRepositories();
+
+		return userAllowedToUsePrivateRepositories(currentUser);
 	}
 
-	private boolean isUserAnonymous() {
+	private boolean isUserAnonymous(StashUser currentUser) {
 		return (currentUser == null);
 	}
 
-	private boolean userAllowedToUsePrivateRepositories() {
+	private boolean userAllowedToUsePrivateRepositories(StashUser currentUser) {
 		return isUserAllowed(currentUser) || isUserInAllowedGroup(currentUser);
 	}
-	
+
 	private boolean isUserAllowed(StashUser stashUser) {
 		return allowedUsersService.isAllowed(stashUser.getName());
 	}

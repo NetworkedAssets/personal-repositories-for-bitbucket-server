@@ -16,6 +16,7 @@ import javax.ws.rs.core.UriInfo;
 import org.networkedassets.atlassian.stash.privaterepos.auth.AdminAuthorizationVerifier;
 import org.networkedassets.atlassian.stash.privaterepos.user.AllowedUsersService;
 import org.networkedassets.atlassian.stash.privaterepos.util.NamesList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,18 +24,13 @@ import org.springframework.stereotype.Component;
 @Produces({ MediaType.APPLICATION_JSON })
 public class UserRestService {
 
-	private final AllowedUsersService allowedUsersService;
-	private final UsersInfoBuilder usersInfoBuilder;
-	private final AdminAuthorizationVerifier authorizationVerifier;
+	@Autowired
+	private AllowedUsersService allowedUsersService;
+	@Autowired
+	private UsersInfoBuilder usersInfoBuilder;
+	@Autowired
+	private AdminAuthorizationVerifier authorizationVerifier;
 
-	public UserRestService(AllowedUsersService allowedUsersService,
-			UsersInfoBuilder usersInfoBuilder,
-			AdminAuthorizationVerifier authorizationVerifier) {
-		this.allowedUsersService = allowedUsersService;
-		this.usersInfoBuilder = usersInfoBuilder;
-		this.authorizationVerifier = authorizationVerifier;
-	}
-	
 	@Path("find/{key}")
 	@GET
 	public List<UserInfo> findUsers(@PathParam("key") String key) {

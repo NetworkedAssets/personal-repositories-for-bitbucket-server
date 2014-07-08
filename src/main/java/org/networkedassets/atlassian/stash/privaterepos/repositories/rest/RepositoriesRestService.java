@@ -12,6 +12,7 @@ import javax.ws.rs.core.Response;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepositoriesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.atlassian.stash.repository.Repository;
@@ -27,12 +28,8 @@ public class RepositoriesRestService {
 	private final Logger logger = LoggerFactory
 			.getLogger(RepositoriesRestService.class);
 
-	private final PersonalRepositoriesService personalRepositoriesService;
-
-	public RepositoriesRestService(
-			PersonalRepositoriesService personalRepositoriesService) {
-		this.personalRepositoriesService = personalRepositoriesService;
-	}
+	@Autowired
+	private PersonalRepositoriesService personalRepositoriesService;
 
 	@Path("users")
 	@GET

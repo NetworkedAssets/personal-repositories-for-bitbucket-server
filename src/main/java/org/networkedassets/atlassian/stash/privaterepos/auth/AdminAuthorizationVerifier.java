@@ -13,13 +13,8 @@ import com.atlassian.stash.user.PermissionValidationService;
 @Component
 public class AdminAuthorizationVerifier {
 
-	private final PermissionValidationService permissionValidationService;
-
 	@Autowired
-	public AdminAuthorizationVerifier(
-			PermissionValidationService permissionValidationService) {
-		this.permissionValidationService = permissionValidationService;
-	}
+	private PermissionValidationService permissionValidationService;
 
 	public void verify() {
 		try {

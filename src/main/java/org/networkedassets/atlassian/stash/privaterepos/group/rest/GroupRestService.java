@@ -16,6 +16,7 @@ import javax.ws.rs.core.UriInfo;
 import org.networkedassets.atlassian.stash.privaterepos.auth.AdminAuthorizationVerifier;
 import org.networkedassets.atlassian.stash.privaterepos.group.AllowedGroupsService;
 import org.networkedassets.atlassian.stash.privaterepos.util.NamesList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,17 +24,13 @@ import org.springframework.stereotype.Component;
 @Produces({ MediaType.APPLICATION_JSON })
 public class GroupRestService {
 
-	private final AllowedGroupsService allowedGroupsService;
-	private final GroupsInfoBuilder groupsInfoBuilder;
-	private final AdminAuthorizationVerifier authorizationVerifier;
+	@Autowired
+	private AllowedGroupsService allowedGroupsService;
+	@Autowired
+	private GroupsInfoBuilder groupsInfoBuilder;
+	@Autowired
+	private AdminAuthorizationVerifier authorizationVerifier;
 
-	public GroupRestService(AllowedGroupsService allowedGroupsService,
-			GroupsInfoBuilder groupInfoBuilder,
-			AdminAuthorizationVerifier authorizationVerifier) {
-		this.allowedGroupsService = allowedGroupsService;
-		this.groupsInfoBuilder = groupInfoBuilder;
-		this.authorizationVerifier = authorizationVerifier;
-	}
 
 	@Path("list")
 	@GET
