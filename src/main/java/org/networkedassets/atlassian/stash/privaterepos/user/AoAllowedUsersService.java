@@ -1,6 +1,5 @@
-package org.networkedassets.atlassian.stash.privaterepos.ao;
+package org.networkedassets.atlassian.stash.privaterepos.user;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.Lists.newArrayList;
 
 import java.util.ArrayList;
@@ -10,25 +9,23 @@ import java.util.Map;
 
 import net.java.ao.Query;
 
-import org.networkedassets.atlassian.stash.privaterepos.service.AllowedUsersService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
 import com.atlassian.stash.user.StashUser;
 import com.atlassian.stash.user.UserService;
 import com.atlassian.stash.util.PageRequestImpl;
 
+@Component
 public class AoAllowedUsersService implements AllowedUsersService {
 
 	private final static int MAX_FOUND_USERS = 20;
 
-	private final ActiveObjects ao;
-
-	private final UserService userService;
-
-	public AoAllowedUsersService(ActiveObjects ao, UserService userService) {
-		this.userService = userService;
-		this.ao = checkNotNull(ao);
-	}
+	@Autowired
+	private ActiveObjects ao;
+	@Autowired
+	private UserService userService;
 
 	@Override
 	public List<User> all() {
@@ -39,7 +36,7 @@ public class AoAllowedUsersService implements AllowedUsersService {
 	public User allow(String userName) {
 		return addUser(userName);
 	}
-	
+
 	@Override
 	public List<User> allow(List<String> userNames) {
 		List<User> users = new ArrayList<User>();
@@ -48,7 +45,7 @@ public class AoAllowedUsersService implements AllowedUsersService {
 		}
 		return users;
 	}
-	
+
 	private User addUser(String name) {
 		User user = ao.create(User.class);
 		user.setName(name);
@@ -86,18 +83,18 @@ public class AoAllowedUsersService implements AllowedUsersService {
 				key, new PageRequestImpl(0, MAX_FOUND_USERS)).getValues();
 
 		Map<String, StashUser> usersMap = new HashMap<String, StashUser>();
-		
+
 		for (StashUser stashUser : stashUsers) {
 			usersMap.put(stashUser.getName(), stashUser);
 		}
-		
+
 		for (User user : allowedUsers) {
 			usersMap.remove(user.getName());
 		}
 
 		List<StashUser> filtered = new ArrayList<StashUser>();
 		filtered.addAll(usersMap.values());
-		
+
 		return filtered;
 	}
 

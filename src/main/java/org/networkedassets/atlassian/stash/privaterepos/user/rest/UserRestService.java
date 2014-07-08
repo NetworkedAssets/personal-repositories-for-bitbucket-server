@@ -1,4 +1,4 @@
-package org.networkedassets.atlassian.stash.privaterepos.rest;
+package org.networkedassets.atlassian.stash.privaterepos.user.rest;
 
 import java.util.List;
 
@@ -13,24 +13,24 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import org.networkedassets.atlassian.stash.privaterepos.service.AllowedUsersService;
+import org.networkedassets.atlassian.stash.privaterepos.auth.AdminAuthorizationVerifier;
+import org.networkedassets.atlassian.stash.privaterepos.user.AllowedUsersService;
+import org.networkedassets.atlassian.stash.privaterepos.util.NamesList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 @Path("/users/")
 @Produces({ MediaType.APPLICATION_JSON })
 public class UserRestService {
 
-	private final AllowedUsersService allowedUsersService;
-	private final UsersInfoBuilder usersInfoBuilder;
-	private final AuthorizationVerifier authorizationVerifier;
+	@Autowired
+	private AllowedUsersService allowedUsersService;
+	@Autowired
+	private UsersInfoBuilder usersInfoBuilder;
+	@Autowired
+	private AdminAuthorizationVerifier authorizationVerifier;
 
-	public UserRestService(AllowedUsersService allowedUsersService,
-			UsersInfoBuilder usersInfoBuilder,
-			AuthorizationVerifier authorizationVerifier) {
-		this.allowedUsersService = allowedUsersService;
-		this.usersInfoBuilder = usersInfoBuilder;
-		this.authorizationVerifier = authorizationVerifier;
-	}
-	
 	@Path("find/{key}")
 	@GET
 	public List<UserInfo> findUsers(@PathParam("key") String key) {

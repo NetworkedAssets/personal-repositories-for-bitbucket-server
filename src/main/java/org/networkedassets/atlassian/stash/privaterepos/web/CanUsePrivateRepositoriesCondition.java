@@ -2,19 +2,17 @@ package org.networkedassets.atlassian.stash.privaterepos.web;
 
 import java.util.Map;
 
-import org.networkedassets.atlassian.stash.privaterepos.service.UserPermissionsExaminer;
+import org.networkedassets.atlassian.stash.privaterepos.auth.UserPermissionsExaminer;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.atlassian.plugin.PluginParseException;
 import com.atlassian.plugin.web.Condition;
 
 public class CanUsePrivateRepositoriesCondition implements Condition {
 	
-	private final UserPermissionsExaminer userPermissionsExaminer;
+	@Autowired
+	private UserPermissionsExaminer userPermissionsExaminer;
 	
-	public CanUsePrivateRepositoriesCondition(UserPermissionsExaminer userPermissionsExaminer) {
-		this.userPermissionsExaminer = userPermissionsExaminer;
-	}
-
 	@Override
 	public void init(Map<String, String> arg0) throws PluginParseException {
 		

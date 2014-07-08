@@ -1,8 +1,6 @@
-package org.networkedassets.atlassian.stash.privaterepos.service;
+package org.networkedassets.atlassian.stash.privaterepos.user;
 
 import java.util.List;
-
-import org.networkedassets.atlassian.stash.privaterepos.ao.User;
 
 import com.atlassian.activeobjects.tx.Transactional;
 import com.atlassian.stash.user.StashUser;

@@ -12,9 +12,9 @@
 
 	<ao key="ao-module">
 		<description>The AO module for this plugin.</description>
-		<entity>org.networkedassets.atlassian.stash.privaterepos.ao.Group
+		<entity>org.networkedassets.atlassian.stash.privaterepos.group.Group
 		</entity>
-		<entity>org.networkedassets.atlassian.stash.privaterepos.ao.User
+		<entity>org.networkedassets.atlassian.stash.privaterepos.user.User
 		</entity>
 	</ao>
 
@@ -30,49 +30,10 @@
 		location="/i18n" />
 
 	<!-- publish our components -->
-	<component key="allowedGroupsService" name="Allowed Groups Service"
-		class="org.networkedassets.atlassian.stash.privaterepos.ao.AoAllowedGroupsService" />
-
-	<component key="allowedUsersService" name="Allowed Users Service"
-		class="org.networkedassets.atlassian.stash.privaterepos.ao.AoAllowedUsersService" />
-
-	<component key="userPermissionsExaminer" name="User Permissions Examiner"
-		class="org.networkedassets.atlassian.stash.privaterepos.service.UserPermissionsExaminer" />
-
-	<component key="userRestService" name="Users Rest Service"
-		class="org.networkedassets.atlassian.stash.privaterepos.rest.UserRestService" />
-		
-	<component key="groupRestService" name="Groups Rest Service"
-		class="org.networkedassets.atlassian.stash.privaterepos.rest.GroupRestService" />
-		
-	<component key="authorizationVerifier" name="Rest Authorization Verifier"
-		class="org.networkedassets.atlassian.stash.privaterepos.rest.AuthorizationVerifier" />
-
-	<component key="usersInfoBuilder" name="User Info Builder"
-		class="org.networkedassets.atlassian.stash.privaterepos.rest.UsersInfoBuilder" />
-		
-	<component key="groupsInfoBuilder" name="Group Info Builder"
-		class="org.networkedassets.atlassian.stash.privaterepos.rest.GroupsInfoBuilder" />
-
 
 	<!-- import from the product container -->
 	<component-import key="applicationProperties"
 		interface="com.atlassian.sal.api.ApplicationProperties" />
-
-	<servlet-filter name="Private Repository Creation Filter"
-		i18n-name-key="private-repository-creation-filter.name" key="private-repository-creation-filter"
-		class="org.networkedassets.atlassian.stash.privaterepos.servlet.filter.PrivateRepositoryCreationFilter"
-		location="before-decoration" weight="100">
-		<description key="private-repository-creation-filter.description">The Private Repository Creation Filter
-			Plugin
-		</description>
-
-		<url-pattern>/*</url-pattern>
-
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
-		<dispatcher>INCLUDE</dispatcher>
-	</servlet-filter>
 
 	<web-resource key="web-resources">
 		<resource type="download" name="privaterepos.css" location="/css/privaterepos.css" />
@@ -103,6 +64,7 @@
 		<dependency>org.networkedassets.atlassian.stash.privaterepos:web-resources
 		</dependency>
 	</stash-resource>
+	
 	<component-import key="soyTemplateRenderer"
 		interface="com.atlassian.soy.renderer.SoyTemplateRenderer" />
 
@@ -114,7 +76,7 @@
 	</web-item>
 
 	<servlet name="Administration Panel Servlet" key="administrationPanel"
-		class="org.networkedassets.atlassian.stash.privaterepos.servlet.AdministrationPanelServlet">
+		class="org.networkedassets.atlassian.stash.privaterepos.web.AdministrationPanelServlet">
 		<description>Displays private repositories administration panel
 		</description>
 		<url-pattern>/privatereposadmin</url-pattern>
