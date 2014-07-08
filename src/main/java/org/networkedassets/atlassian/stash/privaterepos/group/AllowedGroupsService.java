@@ -2,6 +2,8 @@ package org.networkedassets.atlassian.stash.privaterepos.group;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.atlassian.activeobjects.tx.Transactional;
 
 @Transactional

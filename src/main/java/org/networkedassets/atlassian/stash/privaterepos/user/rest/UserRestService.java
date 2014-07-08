@@ -16,7 +16,9 @@ import javax.ws.rs.core.UriInfo;
 import org.networkedassets.atlassian.stash.privaterepos.auth.AdminAuthorizationVerifier;
 import org.networkedassets.atlassian.stash.privaterepos.user.AllowedUsersService;
 import org.networkedassets.atlassian.stash.privaterepos.util.NamesList;
+import org.springframework.stereotype.Component;
 
+@Component
 @Path("/users/")
 @Produces({ MediaType.APPLICATION_JSON })
 public class UserRestService {

@@ -2,10 +2,12 @@ package org.networkedassets.atlassian.stash.privaterepos.repositories.listeners;
 
 import org.networkedassets.atlassian.stash.privaterepos.auth.UserPermissionsExaminer;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.RepositoryTypeVerifier;
+import org.springframework.stereotype.Component;
 
 import com.atlassian.event.api.EventListener;
 import com.atlassian.stash.event.RepositoryCreationRequestedEvent;
 
+@Component
 public class RepositoryCreationRequestListener {
 
 	private final UserPermissionsExaminer userPermissionsExaminer;

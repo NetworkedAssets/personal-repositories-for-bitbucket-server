@@ -3,6 +3,8 @@ package org.networkedassets.atlassian.stash.privaterepos.repositories;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.stereotype.Component;
+
 import net.java.ao.Query;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
@@ -16,6 +18,7 @@ import com.atlassian.stash.util.Page;
 import com.atlassian.stash.util.PageImpl;
 import com.atlassian.stash.util.PageRequest;
 
+@Component
 public class AoPersonalRepositoriesService implements
 		PersonalRepositoriesService {
 

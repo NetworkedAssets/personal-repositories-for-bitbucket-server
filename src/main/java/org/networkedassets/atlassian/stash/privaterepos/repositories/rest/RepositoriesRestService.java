@@ -12,12 +12,14 @@ import javax.ws.rs.core.Response;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepositoriesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import com.atlassian.stash.repository.Repository;
 import com.atlassian.stash.user.StashUser;
 import com.atlassian.stash.util.Page;
 import com.atlassian.stash.util.PageRequestImpl;
 
+@Component
 @Path("/repositories/")
 @Produces({ MediaType.APPLICATION_JSON })
 public class RepositoriesRestService {

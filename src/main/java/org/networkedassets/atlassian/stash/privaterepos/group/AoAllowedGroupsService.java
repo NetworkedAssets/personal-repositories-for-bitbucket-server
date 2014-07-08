@@ -6,12 +6,15 @@ import static com.google.common.collect.Lists.newArrayList;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import net.java.ao.Query;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
 import com.atlassian.stash.user.UserService;
 import com.atlassian.stash.util.PageRequestImpl;
 
+@Component
 public class AoAllowedGroupsService implements AllowedGroupsService {
 
 	private static final int MAX_FOUND_USERS = 20;

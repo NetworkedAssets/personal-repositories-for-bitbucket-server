@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
 import net.java.ao.Query;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
@@ -15,6 +17,7 @@ import com.atlassian.stash.user.StashUser;
 import com.atlassian.stash.user.UserService;
 import com.atlassian.stash.util.PageRequestImpl;
 
+@Component
 public class AoAllowedUsersService implements AllowedUsersService {
 
 	private final static int MAX_FOUND_USERS = 20;

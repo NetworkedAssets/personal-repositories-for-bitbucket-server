@@ -5,11 +5,13 @@ import java.util.List;
 import org.networkedassets.atlassian.stash.privaterepos.group.AllowedGroupsService;
 import org.networkedassets.atlassian.stash.privaterepos.group.Group;
 import org.networkedassets.atlassian.stash.privaterepos.user.AllowedUsersService;
+import org.springframework.stereotype.Component;
 
 import com.atlassian.stash.user.StashAuthenticationContext;
 import com.atlassian.stash.user.StashUser;
 import com.atlassian.stash.user.UserService;
 
+@Component
 public class UserPermissionsExaminer {
 
 	private final UserService userService;

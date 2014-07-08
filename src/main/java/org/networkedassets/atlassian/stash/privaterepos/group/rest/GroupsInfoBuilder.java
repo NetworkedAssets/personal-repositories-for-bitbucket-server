@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.networkedassets.atlassian.stash.privaterepos.group.AllowedGroupsService;
 import org.networkedassets.atlassian.stash.privaterepos.group.Group;
+import org.springframework.stereotype.Component;
 
 import com.atlassian.stash.nav.NavBuilder;
 
+@Component
 public class GroupsInfoBuilder {
 
 	private final AllowedGroupsService allowedGroupsService;

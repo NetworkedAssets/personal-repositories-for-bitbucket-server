@@ -16,7 +16,9 @@ import javax.ws.rs.core.UriInfo;
 import org.networkedassets.atlassian.stash.privaterepos.auth.AdminAuthorizationVerifier;
 import org.networkedassets.atlassian.stash.privaterepos.group.AllowedGroupsService;
 import org.networkedassets.atlassian.stash.privaterepos.util.NamesList;
+import org.springframework.stereotype.Component;
 
+@Component
 @Path("/groups/")
 @Produces({ MediaType.APPLICATION_JSON })
 public class GroupRestService {
