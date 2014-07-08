@@ -3,10 +3,10 @@ package org.networkedassets.atlassian.stash.privaterepos.repositories;
 import java.util.HashSet;
 import java.util.Set;
 
+import net.java.ao.Query;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import net.java.ao.Query;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
 import com.atlassian.stash.project.Project;
@@ -18,6 +18,7 @@ import com.atlassian.stash.user.UserService;
 import com.atlassian.stash.util.Page;
 import com.atlassian.stash.util.PageImpl;
 import com.atlassian.stash.util.PageRequest;
+import com.atlassian.stash.util.PageRequestImpl;
 
 @Component
 public class AoPersonalRepositoriesService implements
@@ -35,7 +36,7 @@ public class AoPersonalRepositoriesService implements
 	@Override
 	public Page<? extends StashUser> findUsersHavingPersonalRepositories(
 			PageRequest pageRequest) {
-		
+
 		Integer usersCount = getUsersCount();
 		PersonalRepository[] repos = getDistinctPersonalRepositoriesUsers(pageRequest);
 		Iterable<StashUser> users = getUsersFromPersonalRepositories(repos);
@@ -86,17 +87,18 @@ public class AoPersonalRepositoriesService implements
 
 	@Override
 	public PersonalRepository rememberPersonalRepository(Repository repository) {
-		
-		StashUser user = userService.getUserBySlug(getUserSlug(repository.getProject()));
-		
-		PersonalRepository personalRepository = ao.create(PersonalRepository.class);
+		StashUser user = userService.getUserBySlug(getUserSlug(repository
+				.getProject()));
+
+		PersonalRepository personalRepository = ao
+				.create(PersonalRepository.class);
 		personalRepository.setRepositoryId(repository.getId());
 		personalRepository.setUserId(user.getId());
 		personalRepository.save();
-		
+
 		return personalRepository;
 	}
-	
+
 	private String getUserSlug(Project project) {
 		return project.getKey().substring(1);
 	}

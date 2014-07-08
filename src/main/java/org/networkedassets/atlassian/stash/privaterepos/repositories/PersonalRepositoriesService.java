@@ -12,7 +12,7 @@ public interface PersonalRepositoriesService {
 
 	Page<? extends Repository> findUserRepositories(StashUser user,
 			PageRequest pageRequest);
-	
+
 	PersonalRepository rememberPersonalRepository(Repository repository);
 
 }
