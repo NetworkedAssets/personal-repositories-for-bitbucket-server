@@ -17,7 +17,6 @@ public class RepositoryCreatedListener {
 	@Autowired
 	private RepositoryTypeVerifier repositoryTypeVerifier;
 
-
 	@EventListener
 	public void handleCreationEvent(RepositoryCreatedEvent event) {
 		Repository repo = event.getRepository();

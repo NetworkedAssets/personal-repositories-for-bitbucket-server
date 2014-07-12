@@ -1,14 +1,20 @@
 package org.networkedassets.atlassian.stash.privaterepos.repositories;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import net.java.ao.Query;
 
+import org.apache.commons.collections.IteratorUtils;
+import org.networkedassets.atlassian.stash.privaterepos.util.AllPagesIterator;
+import org.networkedassets.atlassian.stash.privaterepos.util.PageProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
+import com.atlassian.activeobjects.tx.Transactional;
 import com.atlassian.stash.project.Project;
 import com.atlassian.stash.project.ProjectService;
 import com.atlassian.stash.repository.Repository;
@@ -18,8 +24,8 @@ import com.atlassian.stash.user.UserService;
 import com.atlassian.stash.util.Page;
 import com.atlassian.stash.util.PageImpl;
 import com.atlassian.stash.util.PageRequest;
-import com.atlassian.stash.util.PageRequestImpl;
 
+@Transactional
 @Component
 public class AoPersonalRepositoriesService implements
 		PersonalRepositoriesService {
@@ -34,28 +40,30 @@ public class AoPersonalRepositoriesService implements
 	private ProjectService projectService;
 
 	@Override
-	public Page<? extends StashUser> findUsersHavingPersonalRepositories(
+	public Page<? extends StashUser> getUsersHavingPersonalRepositories(
 			PageRequest pageRequest) {
 
-		Integer usersCount = getUsersCount();
-		PersonalRepository[] repos = getDistinctPersonalRepositoriesUsers(pageRequest);
-		Iterable<StashUser> users = getUsersFromPersonalRepositories(repos);
-		boolean isLastPage = isLastPage(pageRequest, usersCount);
+		Set<Integer> personalRepositoriesUserIds = getPersonalRepositoriesUserIds(pageRequest);
+		Iterable<StashUser> users = getStashUsersFromUserIds(personalRepositoriesUserIds);
+
+		boolean isLastPage = isLastPage(pageRequest,
+				personalRepositoriesUserIds.size());
 
 		return new PageImpl<StashUser>(pageRequest, users, isLastPage);
 	}
 
-	private Integer getUsersCount() {
-		return ao.count(PersonalRepository.class, "DISTINCT USER_ID");
-	}
+	private Set<Integer> getPersonalRepositoriesUserIds(PageRequest pageRequest) {
+		PersonalRepository[] repos = ao.find(PersonalRepository.class, Query
+				.select("USER_ID").distinct().limit(pageRequest.getLimit())
+				.offset(pageRequest.getStart()));
 
-	private PersonalRepository[] getDistinctPersonalRepositoriesUsers(
-			PageRequest pageRequest) {
-		return ao.find(
-				PersonalRepository.class,
-				Query.select("USER_ID").distinct()
-						.limit(pageRequest.getLimit())
-						.offset(pageRequest.getStart()));
+		Set<Integer> userIds = new HashSet<Integer>();
+
+		for (PersonalRepository repo : repos) {
+			userIds.add(repo.getUserId());
+		}
+
+		return userIds;
 	}
 
 	private boolean isLastPage(PageRequest pageRequest, Integer totalCount) {
@@ -63,44 +71,92 @@ public class AoPersonalRepositoriesService implements
 	}
 
 	@SuppressWarnings("unchecked")
-	private Iterable<StashUser> getUsersFromPersonalRepositories(
-			PersonalRepository[] personalRepositories) {
-		Set<Integer> userIds = new HashSet<Integer>();
-
-		for (PersonalRepository repo : personalRepositories) {
-			userIds.add(repo.getUserId());
-		}
-
+	private Iterable<StashUser> getStashUsersFromUserIds(Set<Integer> userIds) {
 		return (Iterable<StashUser>) userService.getUsersById(userIds);
 	}
 
 	@Override
-	public Page<? extends Repository> findUserRepositories(StashUser user,
-			PageRequest pageRequest) {
-		return repositoryService.findByProjectKey(gePersonalProjectKey(user),
-				pageRequest);
+	public Iterable<? extends Repository> findUserRepositories(StashUser user) {
+		List<? extends Repository> userRepositories = new ArrayList<Repository>();
+		PageProcessor<Repository> pageProcessor = createUserReposPageProcessor(
+				user, userRepositories);
+		AllPagesIterator<Repository> pagesIterator = new AllPagesIterator<Repository>(
+				pageProcessor);
+		pagesIterator.processAllPages();
+
+		return userRepositories;
 	}
 
-	private String gePersonalProjectKey(StashUser user) {
+	private PageProcessor<Repository> createUserReposPageProcessor(
+			final StashUser user,
+			final List<? extends Repository> userRepositories) {
+		return new PageProcessor<Repository>() {
+
+			@Override
+			@SuppressWarnings("unchecked")
+			public void process(Page<? extends Repository> page) {
+				userRepositories.addAll(IteratorUtils.toList(page.getValues()
+						.iterator()));
+			}
+
+			@Override
+			public Page<? extends Repository> fetchPage(PageRequest pageRequest) {
+				return repositoryService.findByProjectKey(
+						getPersonalProjectKey(user), pageRequest);
+			}
+		};
+	}
+
+	private String getPersonalProjectKey(StashUser user) {
 		return "~" + user.getSlug().toUpperCase();
 	}
 
 	@Override
-	public PersonalRepository rememberPersonalRepository(Repository repository) {
-		StashUser user = userService.getUserBySlug(getUserSlug(repository
-				.getProject()));
+	public Iterable<PersonalRepository> rememberUserPersonalRepositories(
+			StashUser user, Iterable<? extends Repository> repositories) {
+
+		List<PersonalRepository> personalRepos = new ArrayList<PersonalRepository>();
+
+		for (Repository repo : repositories) {
+			personalRepos.add(addPersonalRepository(repo, user));
+		}
+
+		return personalRepos;
+	}
+
+	private PersonalRepository addPersonalRepository(Repository repo,
+			StashUser user) {
 
 		PersonalRepository personalRepository = ao
 				.create(PersonalRepository.class);
-		personalRepository.setRepositoryId(repository.getId());
+		personalRepository.setRepositoryId(repo.getId());
 		personalRepository.setUserId(user.getId());
 		personalRepository.save();
 
 		return personalRepository;
 	}
 
-	private String getUserSlug(Project project) {
-		return project.getKey().substring(1);
+	@Override
+	public PersonalRepository rememberPersonalRepository(Repository repository) {
+		StashUser owner = getRepositoryOwner(repository);
+		return addPersonalRepository(repository, owner);
+	}
+
+	private StashUser getRepositoryOwner(Repository repository) {
+		Project project = repository.getProject();
+		return findUserFromProject(project);
+	}
+
+	private StashUser findUserFromProject(Project project) {
+		String userSlug = findUserSlugFromProjectKey(project.getKey());
+		return userService.getUserBySlug(userSlug);
+	}
+
+	/**
+	 * Cut the ~ from the beginning
+	 */
+	private String findUserSlugFromProjectKey(String key) {
+		return key.substring(1);
 	}
 
 }

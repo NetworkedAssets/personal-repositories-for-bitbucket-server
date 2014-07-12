@@ -39,8 +39,8 @@ public class RepositoriesRestService {
 		// this.authorizationVerifier.verify();
 
 		return (Page<StashUser>) personalRepositoriesService
-				.findUsersHavingPersonalRepositories(new PageRequestImpl(
-						offset, limit));
+				.getUsersHavingPersonalRepositories(new PageRequestImpl(offset,
+						limit));
 	}
 
 	@Path("user/{id}")
