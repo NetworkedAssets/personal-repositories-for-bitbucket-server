@@ -28,8 +28,7 @@
 	</component-import>
 
 	<!-- add our i18n resource -->
-	<resource type="i18n" name="i18n"
-		location="/i18n" />
+	<resource type="i18n" name="i18n" location="/i18n" />
 
 	<!-- publish our components -->
 
@@ -47,12 +46,14 @@
 		<resource type="download" name="group-soy.js" location="/templates/group.soy" />
 		<resource type="download" name="model/Group.js" location="/js/model/Group.js" />
 		<resource type="download" name="model/Groups.js" location="/js/model/Groups.js" />
-		<resource type="download" name="model/GroupBatch.js" location="/js/model/GroupBatch.js" />
+		<resource type="download" name="model/GroupBatch.js"
+			location="/js/model/GroupBatch.js" />
 		<resource type="download" name="model/User.js" location="/js/model/User.js" />
 		<resource type="download" name="model/Users.js" location="/js/model/Users.js" />
 		<resource type="download" name="model/UserBatch.js" location="/js/model/UserBatch.js" />
 		<resource type="download" name="view/GroupRow.js" location="/js/view/GroupRow.js" />
-		<resource type="download" name="view/GroupsTable.js" location="/js/view/GroupsTable.js" />
+		<resource type="download" name="view/GroupsTable.js"
+			location="/js/view/GroupsTable.js" />
 		<resource type="download" name="view/UserRow.js" location="/js/view/UserRow.js" />
 		<resource type="download" name="view/UsersTable.js" location="/js/view/UsersTable.js" />
 		<resource type="download" name="view/Table.js" location="/js/view/Table.js" />
@@ -66,7 +67,7 @@
 		<dependency>org.networkedassets.atlassian.stash.privaterepos:web-resources
 		</dependency>
 	</stash-resource>
-	
+
 	<component-import key="soyTemplateRenderer"
 		interface="com.atlassian.soy.renderer.SoyTemplateRenderer" />
 
