@@ -65,6 +65,9 @@ public class PersonalRepositoriesPreScanner {
 			@Override
 			public void process(Page<? extends Repository> page) {
 				log.warn("Processing repositories {}", page.getValues());
+				if (isIterableEmpty(page.getValues())) {
+					return;
+				}
 				personalRepositoriesService.addUserPersonalRepositories(user,
 						page.getValues());
 			}
@@ -77,6 +80,11 @@ public class PersonalRepositoriesPreScanner {
 						pageRequest);
 			}
 		};
+	}
+
+	private boolean isIterableEmpty(
+			@SuppressWarnings("rawtypes") Iterable iterable) {
+		return !iterable.iterator().hasNext();
 	}
 
 }

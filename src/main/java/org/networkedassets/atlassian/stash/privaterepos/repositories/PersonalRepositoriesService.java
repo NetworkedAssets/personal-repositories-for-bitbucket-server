@@ -17,4 +17,6 @@ public interface PersonalRepositoriesService {
 	Iterable<? extends PersonalRepository> getUserPersonalRepositories(
 			StashUser user);
 
+	void deletePersonalRepository(Repository repo);
+
 }

@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.atlassian.event.api.EventListener;
-import com.atlassian.stash.event.RepositoryDeletedEvent;
+import com.atlassian.stash.event.RepositoryCreatedEvent;
 import com.atlassian.stash.repository.Repository;
 
 @Component
-public class RepositoryCreatedListener {
+public class RepositoryDeletedListener {
 
 	@Autowired
 	private PersonalRepositoriesService personalRepositoriesService;
@@ -18,10 +18,10 @@ public class RepositoryCreatedListener {
 	private RepositoryTypeVerifier repositoryTypeVerifier;
 
 	@EventListener
-	public void handleCreationEvent(RepositoryDeletedEvent event) {
+	public void handleDeletionEvent(RepositoryCreatedEvent event) {
 		Repository repo = event.getRepository();
 		if (repositoryTypeVerifier.isPersonal(repo)) {
-			personalRepositoriesService.deletePersonalRepository(repo);
+			personalRepositoriesService.addPersonalRepository(repo);
 		}
 	}
 

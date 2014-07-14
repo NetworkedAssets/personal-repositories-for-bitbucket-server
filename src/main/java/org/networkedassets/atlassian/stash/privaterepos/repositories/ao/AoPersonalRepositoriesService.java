@@ -1,6 +1,5 @@
 package org.networkedassets.atlassian.stash.privaterepos.repositories.ao;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -79,13 +78,15 @@ public class AoPersonalRepositoriesService implements
 	public Iterable<PersonalRepository> addUserPersonalRepositories(
 			StashUser user, Iterable<? extends Repository> repositories) {
 
-		log.warn("Adding user {} personal Repos", user);
-
-		Owner owner = findOrCreateOwner(user);
-
-		log.warn("Owner found/created");
-
 		List<PersonalRepository> personalRepos = new ArrayList<PersonalRepository>();
+
+		if (isIterableEmpty(repositories)) {
+			return personalRepos;
+		}
+
+		log.warn("Adding user {} personal Repos", user);
+		Owner owner = findOrCreateOwner(user);
+		log.warn("Owner found/created {}", owner);
 
 		for (Repository repo : repositories) {
 			personalRepos.add(addPersonalRepository(repo, owner));
@@ -93,6 +94,11 @@ public class AoPersonalRepositoriesService implements
 		updateOwnerRepositoriesSize(owner);
 
 		return personalRepos;
+	}
+
+	private boolean isIterableEmpty(
+			@SuppressWarnings("rawtypes") Iterable iterable) {
+		return !iterable.iterator().hasNext();
 	}
 
 	private Owner findOrCreateOwner(StashUser user) {
@@ -181,6 +187,27 @@ public class AoPersonalRepositoriesService implements
 	 */
 	private String findUserSlugFromProjectKey(String key) {
 		return key.substring(1);
+	}
+
+	@Override
+	public void deletePersonalRepository(Repository repo) {
+		PersonalRepository personalRepo = findPersonalRepository(repo);
+		Owner repoOwner = personalRepo.getOwner();
+		ao.delete(personalRepo);
+		updateOwnerRepositoriesSize(repoOwner);
+	}
+
+	private PersonalRepository findPersonalRepository(Repository repo) {
+		PersonalRepository[] personalRepos = ao.find(PersonalRepository.class,
+				Query.select().where("REPOSITORY_ID = ?", repo.getId()));
+		if (personalRepos.length == 0) {
+			return null;
+		} else if (personalRepos.length > 1) {
+			throw new IllegalStateException(
+					"There should never be two Personal Repository entities with the same Repository Id");
+		} else {
+			return personalRepos[0];
+		}
 	}
 
 }

@@ -22,7 +22,10 @@ import com.atlassian.stash.user.Permission;
 import com.atlassian.stash.user.SecurityService;
 import com.atlassian.stash.user.StashAuthenticationContext;
 import com.atlassian.stash.user.StashUser;
+import com.atlassian.stash.user.UserService;
 import com.atlassian.stash.util.Operation;
+import com.atlassian.stash.util.Page;
+import com.atlassian.stash.util.PageRequestImpl;
 import com.atlassian.stash.util.UncheckedOperation;
 
 @Component
