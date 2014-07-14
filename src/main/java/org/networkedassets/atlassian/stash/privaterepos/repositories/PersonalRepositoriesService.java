@@ -1,8 +1,5 @@
 package org.networkedassets.atlassian.stash.privaterepos.repositories;
 
-import org.networkedassets.atlassian.stash.privaterepos.repositories.ao.Owner;
-import org.networkedassets.atlassian.stash.privaterepos.repositories.ao.PersonalRepository;
-
 import com.atlassian.stash.repository.Repository;
 import com.atlassian.stash.user.StashUser;
 import com.atlassian.stash.util.Page;
@@ -17,6 +14,7 @@ public interface PersonalRepositoriesService {
 
 	Page<? extends Owner> getPersonalRepositoriesOwners(PageRequest pageRequest);
 
-	Iterable<? extends PersonalRepository> getUserPersonalRepositories(StashUser user);
+	Iterable<? extends PersonalRepository> getUserPersonalRepositories(
+			StashUser user);
 
 }

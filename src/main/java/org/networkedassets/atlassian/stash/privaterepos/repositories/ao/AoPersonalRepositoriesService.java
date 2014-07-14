@@ -7,7 +7,11 @@ import java.util.List;
 
 import net.java.ao.Query;
 
+import org.networkedassets.atlassian.stash.privaterepos.repositories.Owner;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepositoriesService;
+import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +40,9 @@ public class AoPersonalRepositoriesService implements
 	private RepositoryService repositoryService;
 	@Autowired
 	private ProjectService projectService;
+
+	private Logger log = LoggerFactory
+			.getLogger(AoPersonalRepositoriesService.class);
 
 	@Override
 	public Page<? extends Owner> getPersonalRepositoriesOwners(
@@ -72,7 +79,11 @@ public class AoPersonalRepositoriesService implements
 	public Iterable<PersonalRepository> addUserPersonalRepositories(
 			StashUser user, Iterable<? extends Repository> repositories) {
 
+		log.warn("Adding user {} personal Repos", user);
+
 		Owner owner = findOrCreateOwner(user);
+
+		log.warn("Owner found/created");
 
 		List<PersonalRepository> personalRepos = new ArrayList<PersonalRepository>();
 
@@ -109,7 +120,7 @@ public class AoPersonalRepositoriesService implements
 
 	private Owner createOwner(StashUser user) {
 		Owner owner = ao.create(Owner.class);
-		owner.setRepositoriesSize(BigInteger.valueOf(0));
+		owner.setRepositoriesSize(Long.valueOf(0));
 		owner.setUserId(user.getId());
 		owner.save();
 		return owner;
@@ -146,9 +157,9 @@ public class AoPersonalRepositoriesService implements
 
 	private void updateOwnerRepositoriesSize(Owner owner) {
 		PersonalRepository[] repositories = owner.getRepositories();
-		BigInteger totalSize = BigInteger.valueOf(0);
+		long totalSize = 0;
 		for (PersonalRepository repo : repositories) {
-			totalSize.add(BigInteger.valueOf(repo.getRepositorySize()));
+			totalSize += repo.getRepositorySize();
 		}
 
 		owner.setRepositoriesSize(totalSize);

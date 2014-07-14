@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 import com.atlassian.stash.repository.Repository;
 import com.atlassian.stash.user.StashUser;
 import com.atlassian.stash.util.Page;
-import com.atlassian.stash.util.PageRequestImpl;
 
 @Component
 @Path("/repositories/")
@@ -38,9 +37,11 @@ public class RepositoriesRestService {
 			@QueryParam("offset") Integer offset) {
 		// this.authorizationVerifier.verify();
 
-		return (Page<StashUser>) personalRepositoriesService
-				.getPersonalRepositoriesOwners(new PageRequestImpl(offset,
-						limit));
+		return null;
+
+		// return (Page<StashUser>) personalRepositoriesService
+		// .getPersonalRepositoriesOwners(new PageRequestImpl(offset,
+		// limit));
 	}
 
 	@Path("user/{id}")

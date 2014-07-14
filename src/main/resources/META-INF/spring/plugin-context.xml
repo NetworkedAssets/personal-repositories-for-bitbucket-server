@@ -9,5 +9,5 @@
 
     <context:component-scan base-package="org.networkedassets.atlassian.stash.privaterepos">
     </context:component-scan>
-
+    
 </beans>

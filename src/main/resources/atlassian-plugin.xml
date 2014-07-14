@@ -16,6 +16,8 @@
 		</entity>
 		<entity>org.networkedassets.atlassian.stash.privaterepos.user.User
 		</entity>
+		<entity>org.networkedassets.atlassian.stash.privaterepos.repositories.Owner
+		</entity>
 		<entity>org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepository
 		</entity>
 	</ao>
