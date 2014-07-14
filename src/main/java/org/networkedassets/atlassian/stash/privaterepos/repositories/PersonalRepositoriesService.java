@@ -7,12 +7,16 @@ import com.atlassian.stash.util.PageRequest;
 
 public interface PersonalRepositoriesService {
 
-	Page<? extends StashUser> findUsersHavingPersonalRepositories(
-			PageRequest pageRequest);
+	PersonalRepository addPersonalRepository(Repository repository);
 
-	Page<? extends Repository> findUserRepositories(StashUser user,
-			PageRequest pageRequest);
-	
-	PersonalRepository rememberPersonalRepository(Repository repository);
+	Iterable<? extends PersonalRepository> addUserPersonalRepositories(
+			StashUser user, Iterable<? extends Repository> repositories);
+
+	Page<? extends Owner> getPersonalRepositoriesOwners(PageRequest pageRequest);
+
+	Iterable<? extends PersonalRepository> getUserPersonalRepositories(
+			StashUser user);
+
+	void deletePersonalRepository(Repository repo);
 
 }
