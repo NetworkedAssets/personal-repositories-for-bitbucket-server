@@ -21,7 +21,7 @@ public class RepositoryCreatedListener {
 	public void handleCreationEvent(RepositoryCreatedEvent event) {
 		Repository repo = event.getRepository();
 		if (repositoryTypeVerifier.isPersonal(repo)) {
-			personalRepositoriesService.rememberPersonalRepository(repo);
+			personalRepositoriesService.addPersonalRepository(repo);
 		}
 	}
 

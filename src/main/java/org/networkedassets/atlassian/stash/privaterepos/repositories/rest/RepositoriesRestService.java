@@ -39,7 +39,7 @@ public class RepositoriesRestService {
 		// this.authorizationVerifier.verify();
 
 		return (Page<StashUser>) personalRepositoriesService
-				.getUsersHavingPersonalRepositories(new PageRequestImpl(offset,
+				.getPersonalRepositoriesOwners(new PageRequestImpl(offset,
 						limit));
 	}
 

@@ -65,13 +65,14 @@ public class PersonalRepositoriesPreScanner {
 			@Override
 			public void process(Page<? extends Repository> page) {
 				log.warn("Processing repositories {}", page.getValues());
-				personalRepositoriesService.rememberUserPersonalRepositories(
-						user, page.getValues());
+				personalRepositoriesService.addUserPersonalRepositories(user,
+						page.getValues());
 			}
 
 			@Override
 			public Page<? extends Repository> fetchPage(PageRequest pageRequest) {
 				log.warn("Fetching repositories for {}", ("~" + user.getSlug()));
+
 				return repositoryService.findByProjectKey("~" + user.getSlug(),
 						pageRequest);
 			}
