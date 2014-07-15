@@ -1,6 +1,6 @@
-define('PrivateRepos', [ 'jquery', 'Router', 'PermissionsController',
-		'RepositoriesController' ], function($, Router, PermissionsController,
-		RepositoriesController) {
+define('PrivateRepos', [ 'underscore', 'jquery', 'Router',
+		'PermissionsController', 'RepositoriesController' ], function(_, $,
+		Router, PermissionsController, RepositoriesController) {
 
 	var constr = function(opts) {
 		this.initialize(opts);
@@ -8,6 +8,11 @@ define('PrivateRepos', [ 'jquery', 'Router', 'PermissionsController',
 
 	_.extend(constr.prototype, {
 		initialize : function(opts) {
+			_.bindAll(this, 'startPermissions', 'startRepositories');
+
+			this.repositoriesController = null;
+			this.permissionsController = null;
+
 			this.router = new Router();
 			this.bindToRouterRoutes();
 		},

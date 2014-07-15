@@ -15,7 +15,7 @@ define('GroupsTable', [ 'Table', 'GroupRow', 'underscore', 'GroupBatch', 'Config
 			return PrivateRepos.groupSearchSelection({group: object})
 		},
 		
-		template : org.netwokerdassets.personalRepos.permissions.table,
+		template : org.networkedassets.personalRepos.permissions.table,
 		itemView : GroupRow,
 		
 		searchUrl : function(term) {

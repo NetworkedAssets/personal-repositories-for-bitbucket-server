@@ -43,6 +43,7 @@
 		<transformation extension="soy">
 			<transformer key="soyTransformer" />
 		</transformation>
+		<!-- Permissions -->
 		<resource type="download" name="permissions-table-soy.js"
 			location="/templates/permissions/table.soy" />
 		<resource type="download" name="permissions-user-soy.js"
@@ -75,8 +76,14 @@
 			location="/js/permissions/view/Table.js" />
 		<resource type="download" name="permissions/PermissionsController.js"
 			location="/js/permissions/PermissionsController.js" />
+		<!-- Repositories -->
+		<resource type="download" name="repositories-table-soy.js"
+			location="/templates/repositories/table.soy" />
 		<resource type="download" name="repositories/RepositoriesController.js"
 			location="/js/repositories/RepositoriesController.js" />
+		<resource type="download" name="repositories/view/Table.js"
+			location="/js/repositories/view/Table.js" />
+		<!-- App -->
 		<resource type="download" name="Router.js" location="/js/Router.js" />
 		<resource type="download" name="App.js" location="/js/App.js" />
 	</web-resource>

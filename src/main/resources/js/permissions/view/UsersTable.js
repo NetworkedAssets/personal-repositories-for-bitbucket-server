@@ -2,7 +2,7 @@ define('UsersTable', [ 'Table', 'UserRow', 'UserBatch', 'Config' ], function(Tab
 		UserRow, UserBatch, Config) {
 	return Table.extend({
 
-		template : org.netwokerdassets.personalRepos.permissions.table,
+		template : org.networkedassets.personalRepos.permissions.table,
 		itemView : UserRow,
 		searchFormatResult : function(object) {
 			return PrivateRepos.userSearchResult({user: object}) 
