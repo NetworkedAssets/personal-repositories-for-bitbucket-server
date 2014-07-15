@@ -23,12 +23,12 @@ class RepositoryOwnerInfoCreator {
 	public List<RepositoryOwnerInfo> create(List<Owner> owners) {
 		List<RepositoryOwnerInfo> ownersInfo = new ArrayList<RepositoryOwnerInfo>();
 		for (Owner owner : owners) {
-			ownersInfo.add(createOwnersInfo(owner));
+			ownersInfo.add(create(owner));
 		}
 		return ownersInfo;
 	}
 
-	private RepositoryOwnerInfo createOwnersInfo(Owner owner) {
+	public RepositoryOwnerInfo create(Owner owner) {
 		RepositoryOwnerInfo ownerInfo = new RepositoryOwnerInfo();
 		usersInfoCreator.fillUserInfoWithStashUserData(ownerInfo,
 				getStashUserFromOwner(owner));
