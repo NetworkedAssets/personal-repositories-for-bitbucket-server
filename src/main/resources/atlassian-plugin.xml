@@ -43,25 +43,40 @@
 		<transformation extension="soy">
 			<transformer key="soyTransformer" />
 		</transformation>
-		<resource type="download" name="permissions-table-soy.js" location="/templates/permissions/table.soy" />
-		<resource type="download" name="permissions-user-soy.js" location="/templates/permissions/user.soy" />
-		<resource type="download" name="permissions-group-soy.js" location="/templates/permissions/group.soy" />
-		<resource type="download" name="permissions-panel-soy.js" location="/templates/permissions/panel.soy" />
-		<resource type="download" name="model/Group.js" location="/js/model/Group.js" />
-		<resource type="download" name="model/Groups.js" location="/js/model/Groups.js" />
-		<resource type="download" name="model/GroupBatch.js"
-			location="/js/model/GroupBatch.js" />
-		<resource type="download" name="model/User.js" location="/js/model/User.js" />
-		<resource type="download" name="model/Users.js" location="/js/model/Users.js" />
-		<resource type="download" name="model/UserBatch.js" location="/js/model/UserBatch.js" />
-		<resource type="download" name="view/GroupRow.js" location="/js/view/GroupRow.js" />
-		<resource type="download" name="view/GroupsTable.js"
-			location="/js/view/GroupsTable.js" />
-		<resource type="download" name="view/UserRow.js" location="/js/view/UserRow.js" />
-		<resource type="download" name="view/UsersTable.js" location="/js/view/UsersTable.js" />
-		<resource type="download" name="view/Table.js" location="/js/view/Table.js" />
-		<resource type="download" name="controller/PermissionsController.js" location="/js/controller/PermissionsController.js" />
-		<resource type="download" name="controller/RepositoriesController.js" location="/js/controller/RepositoriesController.js" />
+		<resource type="download" name="permissions-table-soy.js"
+			location="/templates/permissions/table.soy" />
+		<resource type="download" name="permissions-user-soy.js"
+			location="/templates/permissions/user.soy" />
+		<resource type="download" name="permissions-group-soy.js"
+			location="/templates/permissions/group.soy" />
+		<resource type="download" name="permissions-panel-soy.js"
+			location="/templates/permissions/panel.soy" />
+		<resource type="download" name="permissions/model/Group.js"
+			location="/js/permissions/model/Group.js" />
+		<resource type="download" name="permissions/model/Groups.js"
+			location="/js/permissions/model/Groups.js" />
+		<resource type="download" name="permissions/model/GroupBatch.js"
+			location="/js/permissions/model/GroupBatch.js" />
+		<resource type="download" name="permissions/model/User.js"
+			location="/js/permissions/model/User.js" />
+		<resource type="download" name="permissions/model/Users.js"
+			location="/js/permissions/model/Users.js" />
+		<resource type="download" name="permissions/model/UserBatch.js"
+			location="/js/permissions/model/UserBatch.js" />
+		<resource type="download" name="permissions/view/GroupRow.js"
+			location="/js/permissions/view/GroupRow.js" />
+		<resource type="download" name="permissions/view/GroupsTable.js"
+			location="/js/permissions/view/GroupsTable.js" />
+		<resource type="download" name="permissions/view/UserRow.js"
+			location="/js/permissions/view/UserRow.js" />
+		<resource type="download" name="permissions/view/UsersTable.js"
+			location="/js/permissions/view/UsersTable.js" />
+		<resource type="download" name="permissions/view/Table.js"
+			location="/js/permissions/view/Table.js" />
+		<resource type="download" name="permissions/PermissionsController.js"
+			location="/js/permissions/PermissionsController.js" />
+		<resource type="download" name="repositories/RepositoriesController.js"
+			location="/js/repositories/RepositoriesController.js" />
 		<resource type="download" name="Router.js" location="/js/Router.js" />
 		<resource type="download" name="App.js" location="/js/App.js" />
 	</web-resource>
