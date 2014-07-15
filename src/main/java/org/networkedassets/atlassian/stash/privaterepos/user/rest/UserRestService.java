@@ -42,7 +42,7 @@ public class UserRestService {
 	@GET
 	public List<UserInfo> getUsers() {
 		this.authorizationVerifier.verify();
-		return usersInfoBuilder.build();
+		return usersInfoBuilder.build(allowedUsersService.all());
 	}
 	
 	@Path("list")

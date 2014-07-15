@@ -24,10 +24,6 @@ public class UsersInfoBuilder {
 	@Autowired
 	private NavBuilder navBuilder;
 
-	public List<UserInfo> build() {
-		return build(allowedUsersService.all());
-	}
-
 	public List<UserInfo> build(List<User> users) {
 		return buildFromStashUsers(getStashUsers(users));
 	}
