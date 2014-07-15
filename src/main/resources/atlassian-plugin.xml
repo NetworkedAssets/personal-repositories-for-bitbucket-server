@@ -43,9 +43,10 @@
 		<transformation extension="soy">
 			<transformer key="soyTransformer" />
 		</transformation>
-		<resource type="download" name="table-soy.js" location="/templates/table.soy" />
-		<resource type="download" name="user-soy.js" location="/templates/user.soy" />
-		<resource type="download" name="group-soy.js" location="/templates/group.soy" />
+		<resource type="download" name="permissions-table-soy.js" location="/templates/permissions/table.soy" />
+		<resource type="download" name="permissions-user-soy.js" location="/templates/permissions/user.soy" />
+		<resource type="download" name="permissions-group-soy.js" location="/templates/permissions/group.soy" />
+		<resource type="download" name="permissions-panel-soy.js" location="/templates/permissions/panel.soy" />
 		<resource type="download" name="model/Group.js" location="/js/model/Group.js" />
 		<resource type="download" name="model/Groups.js" location="/js/model/Groups.js" />
 		<resource type="download" name="model/GroupBatch.js"
