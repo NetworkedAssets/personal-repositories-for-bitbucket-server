@@ -59,6 +59,9 @@
 		<resource type="download" name="view/UserRow.js" location="/js/view/UserRow.js" />
 		<resource type="download" name="view/UsersTable.js" location="/js/view/UsersTable.js" />
 		<resource type="download" name="view/Table.js" location="/js/view/Table.js" />
+		<resource type="download" name="controller/PermissionsController.js" location="/js/controller/PermissionsController.js" />
+		<resource type="download" name="controller/RepositoriesController.js" location="/js/controller/RepositoriesController.js" />
+		<resource type="download" name="Router.js" location="/js/Router.js" />
 		<resource type="download" name="App.js" location="/js/App.js" />
 	</web-resource>
 

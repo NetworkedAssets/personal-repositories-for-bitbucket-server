@@ -51,7 +51,7 @@ public class AdministrationPanelServlet extends HttpServlet {
 			soyTemplateRenderer
 					.render(resp.getWriter(),
 							"org.networkedassets.atlassian.stash.privaterepos:templates-soy",
-							"PrivateRepos.adminPage", params);
+							"org.networkedassets.personalRepos.adminPage", params);
 
 		} catch (SoyException e) {
 			Throwable cause = e.getCause();

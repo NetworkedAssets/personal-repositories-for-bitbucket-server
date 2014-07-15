@@ -1,5 +1,6 @@
-define('PrivateRepos', [ 'jquery', 'UsersTable', 'Users', 'GroupsTable',
-		'Groups' ], function($, UsersTable, Users, GroupsTable, Groups) {
+define('PrivateRepos', [ 'jquery', 'Router', 'PermissionsController',
+		'RepositoriesController' ], function($, Router, PermissionsController,
+		RepositoriesController) {
 
 	var constr = function(opts) {
 		this.initialize(opts);
@@ -7,31 +8,37 @@ define('PrivateRepos', [ 'jquery', 'UsersTable', 'Users', 'GroupsTable',
 
 	_.extend(constr.prototype, {
 		initialize : function(opts) {
+			this.router = new Router();
+			this.bindToRouterRoutes();
+		},
+
+		bindToRouterRoutes : function() {
+			this.router.on('route:permissions', this.startPermissions);
+			this.router.on('route:repositories', this.startRepositories);
+		},
+
+		startPermissions : function() {
+			if (this.permissionsController === null) {
+				this.permissionsController = new PermissionsController();
+				this.permissionsController.start();
+			}
+			$('.repositories-section').hide();
+			$('.permissions-section').show();
+		},
+
+		startRepositories : function() {
+			if (this.repositoriesController === null) {
+				this.repositoriesController = new RepositoriesController();
+				this.repositoriesController.start();
+			}
+			$('.permissions-section').hide();
+			$('.repositories-section').show();
 		},
 
 		start : function() {
-			this.startUsersTable();
-			this.startGroupsTable();
-		},
-
-		startUsersTable : function() {
-			var users = new Users();
-			var usersTable = new UsersTable({
-				collection : users
-			});
-			$('#users-table').html(usersTable.render().el);
-			users.fetch();
-		},
-
-		startGroupsTable : function() {
-			var groups = new Groups();
-			var groupsTable = new GroupsTable({
-				collection : groups
-			});
-			$('#groups-table').html(groupsTable.render().el);
-			groups.fetch();
-
+			Backbone.history.start();
 		}
+
 	});
 
 	return constr;

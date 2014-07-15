@@ -1,4 +1,4 @@
-{namespace PrivateRepos}
+{namespace org.netwokerdassets.personalRepos}
 
 /**
  * Displays admin panel
@@ -11,7 +11,7 @@
 <meta name="decorator" content="atl.admin">
 <meta name="activeTab" content="admin-private-repos">
 {webResourceManager_requireResource('com.atlassian.auiplugin:aui-select2')}
-{webResourceManager_requireResource('org.networkedassets.atlassian.stash.privaterepos:web-resources')}
+{webResourceManager_requireResource('org.netwokerdassets.atlassian.stash.privaterepos:web-resources')}
 <title>Private Repositories Permissions</title>
 </head>
 <body>
@@ -24,28 +24,25 @@
 	});
 	{/literal}
 	</script>
-	{call aui.group.group}
-	    {param content}
-	        {call aui.group.item}
-	            {param content}
-	                <h3>Allowed users</h3>
-	            {/param}
-	        {/call}
-	    {/param}
-	{/call}
-	<div id="users-table">
+	
+	<nav class="aui-navgroup aui-navgroup-horizontal">
+	    <div class="aui-navgroup-inner">
+	        <div class="aui-navgroup-primary">
+	            <ul class="aui-nav">
+	                <li><a href="#">Personal repositories</a></li>
+	                <li class="aui-nav-selected"><a href="#">Permissions</a></li>
+	            </ul>
+	        </div>
+	    </div>
+	</nav>
+	
+	<div class="aui-page-panel repositories-section">
 	</div>
-	{call aui.group.group}
-	    {param content}
-	        {call aui.group.item}
-	            {param content}
-	                <h3>Allowed groups</h3>
-	            {/param}
-	        {/call}
-	    {/param}
-	{/call}
-	<div id="groups-table">
+	
+	<div class="aui-page-panel permissions-section">
 	</div>
+	
+	
 </body>
 </html>
 {/template}

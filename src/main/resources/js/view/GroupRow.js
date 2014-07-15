@@ -2,7 +2,7 @@ define('GroupRow', [ 'backbone' ], function(Backbone) {
 	return Backbone.View.extend({
 
 		tagName : 'tr',
-		template : PrivateRepos.groupRow,
+		template : org.netwokerdassets.personalRepos.permissions.groupRow,
 
 		events : {
 			'click .delete-button' : 'onDelete'
