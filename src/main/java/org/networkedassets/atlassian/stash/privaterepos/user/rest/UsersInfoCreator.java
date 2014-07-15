@@ -25,14 +25,14 @@ public class UsersInfoCreator {
 		List<UserInfo> usersInfo = new ArrayList<UserInfo>();
 
 		for (StashUser stashUser : stashUsers) {
-			usersInfo.add(createUserInfo(stashUser));
+			usersInfo.add(create(stashUser));
 		}
 		return usersInfo;
 	}
 
-	private UserInfo createUserInfo(StashUser user) {
+	public UserInfo create(StashUser stashUser) {
 		UserInfo info = new UserInfo();
-		fillUserInfoWithStashUserData(info, user);
+		fillUserInfoWithStashUserData(info, stashUser);
 		return info;
 	}
 
