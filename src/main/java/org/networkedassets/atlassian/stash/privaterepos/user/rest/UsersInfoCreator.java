@@ -15,7 +15,7 @@ import com.atlassian.stash.user.StashUser;
 import com.atlassian.stash.user.UserService;
 
 @Component
-public class UsersInfoBuilder {
+public class UsersInfoCreator {
 
 	@Autowired
 	private AllowedUsersService allowedUsersService;
@@ -24,11 +24,11 @@ public class UsersInfoBuilder {
 	@Autowired
 	private NavBuilder navBuilder;
 
-	public List<UserInfo> build(List<User> users) {
-		return buildFromStashUsers(getStashUsers(users));
+	public List<UserInfo> create(List<User> users) {
+		return createFromStashUsers(getStashUsers(users));
 	}
 
-	public List<UserInfo> buildFromStashUsers(List<StashUser> stashUsers) {
+	public List<UserInfo> createFromStashUsers(List<StashUser> stashUsers) {
 		List<UserInfo> usersInfo = new ArrayList<UserInfo>();
 
 		for (StashUser stashUser : stashUsers) {

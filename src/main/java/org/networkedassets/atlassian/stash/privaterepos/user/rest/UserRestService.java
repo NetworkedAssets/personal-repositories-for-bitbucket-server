@@ -27,7 +27,7 @@ public class UserRestService {
 	@Autowired
 	private AllowedUsersService allowedUsersService;
 	@Autowired
-	private UsersInfoBuilder usersInfoBuilder;
+	private UsersInfoCreator usersInfoBuilder;
 	@Autowired
 	private AdminAuthorizationVerifier authorizationVerifier;
 
@@ -35,14 +35,14 @@ public class UserRestService {
 	@GET
 	public List<UserInfo> findUsers(@PathParam("key") String key) {
 		this.authorizationVerifier.verify();
-		return usersInfoBuilder.buildFromStashUsers(allowedUsersService.findNotAllowed(key));
+		return usersInfoBuilder.createFromStashUsers(allowedUsersService.findNotAllowed(key));
 	}
 
 	@Path("list")
 	@GET
 	public List<UserInfo> getUsers() {
 		this.authorizationVerifier.verify();
-		return usersInfoBuilder.build(allowedUsersService.all());
+		return usersInfoBuilder.create(allowedUsersService.all());
 	}
 	
 	@Path("list")
