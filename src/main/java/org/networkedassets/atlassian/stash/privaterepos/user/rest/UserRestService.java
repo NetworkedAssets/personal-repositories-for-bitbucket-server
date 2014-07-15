@@ -35,16 +35,17 @@ public class UserRestService {
 	@GET
 	public List<UserInfo> findUsers(@PathParam("key") String key) {
 		this.authorizationVerifier.verify();
-		return usersInfoBuilder.createFromStashUsers(allowedUsersService.findNotAllowed(key));
+		return usersInfoBuilder.create(allowedUsersService.findNotAllowed(key));
 	}
 
 	@Path("list")
 	@GET
 	public List<UserInfo> getUsers() {
 		this.authorizationVerifier.verify();
-		return usersInfoBuilder.create(allowedUsersService.all());
+		return usersInfoBuilder.create(allowedUsersService
+				.getStashUsersFromUsers(allowedUsersService.all()));
 	}
-	
+
 	@Path("list")
 	@POST
 	public Response addGroups(NamesList names) {
@@ -52,7 +53,7 @@ public class UserRestService {
 		this.allowedUsersService.allow(names.getNames());
 		return Response.ok().build();
 	}
-	
+
 	@Path("user/{user}")
 	@POST
 	public Response addUser(@Context UriInfo uriInfo,

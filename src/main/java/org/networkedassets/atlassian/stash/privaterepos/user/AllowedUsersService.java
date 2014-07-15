@@ -52,5 +52,13 @@ public interface AllowedUsersService {
 	 * @param names
 	 */
 	List<User> allow(List<String> names);
+	
+	/**
+	 * Gets a list of StashUsers matching provided Users list
+	 * 
+	 * @param users
+	 * @return
+	 */
+	List<StashUser> getStashUsersFromUsers(List<User> users);
 
 }

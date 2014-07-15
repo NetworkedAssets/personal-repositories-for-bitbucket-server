@@ -4,8 +4,10 @@ import static com.google.common.collect.Lists.newArrayList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import net.java.ao.Query;
 
@@ -96,6 +98,19 @@ public class AoAllowedUsersService implements AllowedUsersService {
 		filtered.addAll(usersMap.values());
 
 		return filtered;
+	}
+
+	@Override
+	public List<StashUser> getStashUsersFromUsers(List<User> users) {
+		Set<String> names = new HashSet<String>();
+
+		for (User user : users) {
+			names.add(user.getName());
+		}
+
+		List<StashUser> stashUsers = new ArrayList<StashUser>();
+		stashUsers.addAll(userService.getUsersByName(names));
+		return stashUsers;
 	}
 
 }
