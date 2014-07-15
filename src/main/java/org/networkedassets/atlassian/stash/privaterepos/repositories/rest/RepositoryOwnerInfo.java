@@ -1,11 +1,10 @@
-package org.networkedassets.atlassian.stash.privaterepos.user.rest;
+package org.networkedassets.atlassian.stash.privaterepos.repositories.rest;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-class UserInfo {
-
+public class RepositoryOwnerInfo {
 	@XmlElement
 	private String name;
 	@XmlElement
@@ -16,6 +15,8 @@ class UserInfo {
 	private String profileUrl;
 	@XmlElement
 	private String email;
+	@XmlElement
+	private long repositoriesSize;
 
 	public String getName() {
 		return name;
@@ -56,6 +57,13 @@ class UserInfo {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
+	public long getRepositoriesSize() {
+		return repositoriesSize;
+	}
+
+	public void setRepositoriesSize(long repositoriesSize) {
+		this.repositoriesSize = repositoriesSize;
+	}
 
 }

@@ -43,6 +43,9 @@
 		<transformation extension="soy">
 			<transformer key="soyTransformer" />
 		</transformation>
+		<!-- Components -->
+		<resource type="download" name="user-components.js"
+			location="/templates/user.soy" />
 		<!-- Permissions -->
 		<resource type="download" name="permissions-table-soy.js"
 			location="/templates/permissions/table.soy" />

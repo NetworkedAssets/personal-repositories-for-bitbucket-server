@@ -1,10 +1,12 @@
 define('RepositoriesTable', [ 'backbone', 'underscore' ], function(Backbone, _) {
 	return Backbone.View.extend({
-		tagName : 'table',
-		template : org.networkedassets.personalRepos.repositories.table,
+		tagName : 'tr',
+		template : org.networkedassets.personalRepos.repositories.owner,
 		
 		render : function() {
-			this.el.innerHTML = this.template(); 
+			this.el.innerHTML = this.template({
+				owner : this.model.toJSON()
+			}); 
 			return this;
 		}
 	});

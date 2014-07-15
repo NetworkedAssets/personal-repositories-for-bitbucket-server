@@ -1,0 +1,16 @@
+{namespace org.networkedassets.personalRepos}
+
+/**
+ * User name with avatar
+ * @param user
+ */
+{template .userWithAvatar}
+	<div class="avatar-with-name" title="{$user.displayName}">
+		<span class="aui-avatar aui-avatar-small user-avatar" data-username="{$user.name}">
+			<span class="aui-avatar-inner">
+				<img src="{$user.avatarUrl}" alt="{$user.displayName}">
+			</span>
+		</span>
+		<a href="{$user.profileUrl}">{$user.displayName}</a>
+	</div>
+{/template}

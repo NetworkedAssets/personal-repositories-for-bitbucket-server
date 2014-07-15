@@ -6,14 +6,9 @@
  */
 {template .userRow}
 <td headers="user">
-	<div class="avatar-with-name" title="{$user.displayName}">
-		<span class="aui-avatar aui-avatar-small user-avatar" data-username="{$user.name}">
-			<span class="aui-avatar-inner">
-				<img src="{$user.avatarUrl}" alt="{$user.displayName}">
-			</span>
-		</span>
-		<a href="{$user.profileUrl}">{$user.displayName}</a>
-	</div>
+	{call org.networkedassets.personalRepos.userWithAvatar}
+		{param user}{$user}{/param}
+	{/call}
 </td>
 <td class="actions">
 	<a href="#" class="delete-button" title="Remove user" data-for="{$user.name}"><span class="aui-icon aui-icon-small aui-iconfont-remove"></span></a>
