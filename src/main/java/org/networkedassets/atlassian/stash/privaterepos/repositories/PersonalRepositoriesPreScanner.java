@@ -29,13 +29,13 @@ public class PersonalRepositoriesPreScanner {
 	private RepositoryService repositoryService;
 
 	public void scanPersonalRepositories() {
-		log.debug("Peronal repositories pre-scanning started");
+		log.debug("Personal repositories pre-scanning started");
 
 		// 1000 users at once shouldn't kill us, should it ?
 		new AllPagesIterator.Builder<StashUser>(createUserPageProcessor())
 				.resultsPerPage(1000).build();
 
-		log.debug("Peronal repositories pre scanning finished");
+		log.debug("Personal repositories pre scanning finished");
 	}
 
 	private PageProcessor<StashUser> createUserPageProcessor() {
