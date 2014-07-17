@@ -29,22 +29,25 @@ public class PersonalRepositoriesPreScanner {
 	private RepositoryService repositoryService;
 
 	public void scanPersonalRepositories() {
-		AllPagesIterator<StashUser> iterator = new AllPagesIterator<StashUser>(
-				createUserPageProcessor());
-		iterator.processAllPages();
+		log.debug("Peronal repositories pre-scanning started");
+
+		// 1000 users at once shouldn't kill us, should it ?
+		new AllPagesIterator.Builder<StashUser>(createUserPageProcessor())
+				.resultsPerPage(1000).build();
+
+		log.debug("Peronal repositories pre scanning finished");
 	}
 
 	private PageProcessor<StashUser> createUserPageProcessor() {
 		return new PageProcessor<StashUser>() {
 
 			public Page<? extends StashUser> fetchPage(PageRequest pageRequest) {
-				log.warn("Fetching page {}", pageRequest.getStart());
 				return userService.findUsers(pageRequest);
 			}
 
 			public void process(Page<? extends StashUser> page) {
 				for (StashUser user : page.getValues()) {
-					log.warn("Processing user {}", user.getName());
+					log.debug("Scanning user '{}' repositories", user.getName());
 					scanUserRepositories(user);
 				}
 			}
@@ -52,9 +55,11 @@ public class PersonalRepositoriesPreScanner {
 	}
 
 	private void scanUserRepositories(StashUser user) {
-		PageProcessor<Repository> repositoryPageProcessor = createRepositoryPageProcessor(user);
-		AllPagesIterator<Repository> repoIterator = new AllPagesIterator<Repository>(
-				repositoryPageProcessor);
+		// we should fit in 10000 repositories per user - the idea is to get
+		// them in one hit
+		AllPagesIterator<Repository> repoIterator = new AllPagesIterator.Builder<Repository>(
+				createRepositoryPageProcessor(user)).resultsPerPage(10000)
+				.build();
 		repoIterator.processAllPages();
 	}
 
@@ -64,7 +69,7 @@ public class PersonalRepositoriesPreScanner {
 
 			@Override
 			public void process(Page<? extends Repository> page) {
-				log.warn("Processing repositories {}", page.getValues());
+				log.debug("Found repositories: {}", page.getValues());
 				if (isIterableEmpty(page.getValues())) {
 					return;
 				}
@@ -74,8 +79,6 @@ public class PersonalRepositoriesPreScanner {
 
 			@Override
 			public Page<? extends Repository> fetchPage(PageRequest pageRequest) {
-				log.warn("Fetching repositories for {}", ("~" + user.getSlug()));
-
 				return repositoryService.findByProjectKey("~" + user.getSlug(),
 						pageRequest);
 			}

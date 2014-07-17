@@ -40,7 +40,7 @@ class RepositoryOwnerInfoCreator {
 		return create(owner, getStashUserFromOwner(owner));
 	}
 
-	public RepositoryOwnerInfo create(Owner owner, StashUser user) {
+	private RepositoryOwnerInfo create(Owner owner, StashUser user) {
 		RepositoryOwnerInfo ownerInfo = new RepositoryOwnerInfo();
 		usersInfoCreator.fillUserInfoWithStashUserData(ownerInfo, user);
 		fillOwnerInfoWithOwnerData(ownerInfo, owner);

@@ -1,4 +1,4 @@
-define('RepositoriesTable', [ 'backbone', 'underscore' ], function(Backbone, _) {
+define('RepositoryOwnerView', [ 'backbone', 'underscore' ], function(Backbone, _) {
 	return Backbone.View.extend({
 		tagName : 'tr',
 		template : org.networkedassets.personalRepos.repositories.owner,
