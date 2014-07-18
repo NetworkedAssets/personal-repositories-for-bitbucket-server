@@ -3,14 +3,12 @@ package org.networkedassets.atlassian.stash.privaterepos.repositories.rest;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import org.networkedassets.atlassian.stash.privaterepos.repositories.Owner;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepositoriesService;
@@ -47,7 +45,7 @@ public class RepositoriesRestService {
 			@QueryParam("from") Integer offset) {
 
 		PageRequest pageRequest = new PageRequestImpl(offset, limit);
-		Page<? extends Owner> ownersPage = personalRepositoriesService
+		Page<Owner> ownersPage = personalRepositoriesService
 				.getPersonalRepositoriesOwners(pageRequest);
 
 		ArrayList<Owner> ownersList = Lists
@@ -61,14 +59,6 @@ public class RepositoriesRestService {
 	}
 
 	@Path("user/{id}")
-	@DELETE
-	public Response deleteUserRepositories(@PathParam("userId") Integer userId) {
-		// this.authorizationVerifier.verify();
-		return Response.ok().build();
-
-	}
-
-	@Path("user/{id}")
 	@GET
 	public Page<Repository> getUserRepositories(
 			@PathParam("userId") Integer userId) {
@@ -76,12 +66,4 @@ public class RepositoriesRestService {
 		return null;
 	}
 
-	@Path("repository/{id}")
-	@DELETE
-	public Response deleteRepository(
-			@PathParam("repositoryId") Integer repositoryId) {
-		// this.authorizationVerifier.verify();
-		return Response.ok().build();
-
-	}
 }
