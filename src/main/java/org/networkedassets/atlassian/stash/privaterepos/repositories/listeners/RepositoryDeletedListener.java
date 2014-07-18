@@ -21,7 +21,7 @@ public class RepositoryDeletedListener {
 	public void handleDeletionEvent(RepositoryCreatedEvent event) {
 		Repository repo = event.getRepository();
 		if (repositoryTypeVerifier.isPersonal(repo)) {
-			personalRepositoriesService.addPersonalRepository(repo);
+			personalRepositoriesService.deletePersonalRepository(repo);
 		}
 	}
 

@@ -1,5 +1,7 @@
 package org.networkedassets.atlassian.stash.privaterepos.repositories;
 
+import java.util.List;
+
 import com.atlassian.stash.repository.Repository;
 import com.atlassian.stash.user.StashUser;
 import com.atlassian.stash.util.Page;
@@ -7,15 +9,14 @@ import com.atlassian.stash.util.PageRequest;
 
 public interface PersonalRepositoriesService {
 
-	PersonalRepository addPersonalRepository(Repository repository);
+	PersonalRepository addPersonalRepository(Repository repo);
 
-	Iterable<? extends PersonalRepository> addUserPersonalRepositories(
-			StashUser user, Iterable<? extends Repository> repositories);
+	List<PersonalRepository> addUserPersonalRepositories(StashUser user,
+			Iterable<? extends Repository> repositories);
 
-	Page<? extends Owner> getPersonalRepositoriesOwners(PageRequest pageRequest);
+	Page<Owner> getPersonalRepositoriesOwners(PageRequest pageRequest);
 
-	Iterable<? extends PersonalRepository> getUserPersonalRepositories(
-			StashUser user);
+	List<PersonalRepository> getUserPersonalRepositories(StashUser user);
 
 	void deletePersonalRepository(Repository repo);
 

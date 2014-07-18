@@ -7,7 +7,7 @@ import com.atlassian.stash.util.PageRequestImpl;
 public class AllPagesIterator<T> {
 
 	private final PageProcessor<T> processor;
-	private int resultsPerPage = 100;
+	private int resultsPerPage;
 
 	private AllPagesIterator(Builder<T> builder) {
 		this.processor = builder.processor;
