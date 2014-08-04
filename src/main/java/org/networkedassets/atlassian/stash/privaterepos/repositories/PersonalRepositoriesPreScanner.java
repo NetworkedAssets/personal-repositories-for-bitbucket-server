@@ -17,6 +17,13 @@ import com.atlassian.stash.util.PageRequest;
 @Component
 public class PersonalRepositoriesPreScanner {
 
+	// 1000 users at once shouldn't kill us, should it ?
+	private static final int USERS_PER_PAGE = 1000;
+
+	// we should fit in 10000 repositories per user - the idea is to get
+	// them in one hit
+	private static final int USER_REPOSITORIES_PER_PAGE = 10000;
+
 	Logger log = LoggerFactory.getLogger(PersonalRepositoriesPreScanner.class);
 
 	@Autowired
@@ -31,9 +38,8 @@ public class PersonalRepositoriesPreScanner {
 	public void scanPersonalRepositories() {
 		log.debug("Personal repositories pre-scanning started");
 
-		// 1000 users at once shouldn't kill us, should it ?
 		new AllPagesIterator.Builder<StashUser>(createUserPageProcessor())
-				.resultsPerPage(1000).build();
+				.resultsPerPage(USERS_PER_PAGE).build();
 
 		log.debug("Personal repositories pre scanning finished");
 	}
@@ -55,10 +61,8 @@ public class PersonalRepositoriesPreScanner {
 	}
 
 	private void scanUserRepositories(StashUser user) {
-		// we should fit in 10000 repositories per user - the idea is to get
-		// them in one hit
 		AllPagesIterator<Repository> repoIterator = new AllPagesIterator.Builder<Repository>(
-				createRepositoryPageProcessor(user)).resultsPerPage(10000)
+				createRepositoryPageProcessor(user)).resultsPerPage(USER_REPOSITORIES_PER_PAGE)
 				.build();
 		repoIterator.processAllPages();
 	}

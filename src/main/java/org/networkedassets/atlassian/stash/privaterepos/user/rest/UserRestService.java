@@ -27,22 +27,22 @@ public class UserRestService {
 	@Autowired
 	private AllowedUsersService allowedUsersService;
 	@Autowired
-	private UsersInfoCreator usersInfoBuilder;
+	private UsersStateCreator usersStateCreator;
 	@Autowired
 	private AdminAuthorizationVerifier authorizationVerifier;
 
 	@Path("find/{key}")
 	@GET
-	public List<UserInfo> findUsers(@PathParam("key") String key) {
+	public List<UserState> findUsers(@PathParam("key") String key) {
 		this.authorizationVerifier.verify();
-		return usersInfoBuilder.create(allowedUsersService.findNotAllowed(key));
+		return usersStateCreator.createFrom(allowedUsersService.findNotAllowed(key));
 	}
 
 	@Path("list")
 	@GET
-	public List<UserInfo> getUsers() {
+	public List<UserState> getUsers() {
 		this.authorizationVerifier.verify();
-		return usersInfoBuilder.create(allowedUsersService
+		return usersStateCreator.createFrom(allowedUsersService
 				.getStashUsersFromUsers(allowedUsersService.all()));
 	}
 

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.networkedassets.atlassian.stash.privaterepos.repositories.Owner;
-import org.networkedassets.atlassian.stash.privaterepos.user.rest.UsersInfoCreator;
+import org.networkedassets.atlassian.stash.privaterepos.user.rest.UsersStateCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,41 +15,41 @@ import com.atlassian.stash.user.StashUser;
 import com.atlassian.stash.user.UserService;
 
 @Component
-class RepositoryOwnerInfoCreator {
+class RepositoryOwnerStateCreator {
 
 	@Autowired
 	private UserService userService;
 
 	@Autowired
-	private UsersInfoCreator usersInfoCreator;
+	private UsersStateCreator usersStateCreator;
 
-	public List<RepositoryOwnerInfo> create(List<Owner> owners) {
-		List<RepositoryOwnerInfo> ownersInfo = new ArrayList<RepositoryOwnerInfo>();
+	public List<RepositoryOwnerState> createFrom(List<Owner> owners) {
+		List<RepositoryOwnerState> ownersState = new ArrayList<RepositoryOwnerState>();
 
 		Set<? extends StashUser> stashUsers = getStashUsersFromOwners(owners);
 		Iterator<? extends StashUser> stashUsersIterator = stashUsers
 				.iterator();
 
 		for (Owner owner : owners) {
-			ownersInfo.add(create(owner, stashUsersIterator.next()));
+			ownersState.add(create(owner, stashUsersIterator.next()));
 		}
-		return ownersInfo;
+		return ownersState;
 	}
 
-	public RepositoryOwnerInfo create(Owner owner) {
+	public RepositoryOwnerState createFrom(Owner owner) {
 		return create(owner, getStashUserFromOwner(owner));
 	}
 
-	private RepositoryOwnerInfo create(Owner owner, StashUser user) {
-		RepositoryOwnerInfo ownerInfo = new RepositoryOwnerInfo();
-		usersInfoCreator.fillUserInfoWithStashUserData(ownerInfo, user);
-		fillOwnerInfoWithOwnerData(ownerInfo, owner);
-		return ownerInfo;
+	private RepositoryOwnerState create(Owner owner, StashUser user) {
+		RepositoryOwnerState ownerState = new RepositoryOwnerState();
+		usersStateCreator.fillFrom(ownerState, user);
+		fillFromOwner(ownerState, owner);
+		return ownerState;
 	}
 
-	private void fillOwnerInfoWithOwnerData(RepositoryOwnerInfo ownerInfo,
+	private void fillFromOwner(RepositoryOwnerState ownerState,
 			Owner owner) {
-		ownerInfo.setRepositoriesSize(owner.getRepositoriesSize());
+		ownerState.setRepositoriesSize(owner.getRepositoriesSize());
 	}
 
 	private StashUser getStashUserFromOwner(Owner owner) {

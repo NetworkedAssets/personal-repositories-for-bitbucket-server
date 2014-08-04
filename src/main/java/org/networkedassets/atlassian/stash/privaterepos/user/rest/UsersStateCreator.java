@@ -12,7 +12,7 @@ import com.atlassian.stash.user.StashUser;
 import com.atlassian.stash.user.UserService;
 
 @Component
-public class UsersInfoCreator {
+public class UsersStateCreator {
 
 	@Autowired
 	private AllowedUsersService allowedUsersService;
@@ -21,29 +21,29 @@ public class UsersInfoCreator {
 	@Autowired
 	private NavBuilder navBuilder;
 
-	public List<UserInfo> create(List<StashUser> stashUsers) {
-		List<UserInfo> usersInfo = new ArrayList<UserInfo>();
+	public List<UserState> createFrom(List<StashUser> stashUsers) {
+		List<UserState> usersState = new ArrayList<UserState>();
 
 		for (StashUser stashUser : stashUsers) {
-			usersInfo.add(create(stashUser));
+			usersState.add(createFrom(stashUser));
 		}
-		return usersInfo;
+		return usersState;
 	}
 
-	public UserInfo create(StashUser stashUser) {
-		UserInfo info = new UserInfo();
-		fillUserInfoWithStashUserData(info, stashUser);
-		return info;
+	public UserState createFrom(StashUser stashUser) {
+		UserState state = new UserState();
+		fillFrom(state, stashUser);
+		return state;
 	}
 
-	public void fillUserInfoWithStashUserData(UserInfo userInfo,
+	public void fillFrom(UserState userState,
 			StashUser stashUser) {
-		userInfo.setAvatarUrl(navBuilder.user(stashUser).avatar(64)
+		userState.setAvatarUrl(navBuilder.user(stashUser).avatar(64)
 				.buildAbsolute());
-		userInfo.setName(stashUser.getName());
-		userInfo.setDisplayName(stashUser.getDisplayName());
-		userInfo.setProfileUrl(navBuilder.user(stashUser).buildRelative());
-		userInfo.setEmail(stashUser.getEmailAddress());
+		userState.setName(stashUser.getName());
+		userState.setDisplayName(stashUser.getDisplayName());
+		userState.setProfileUrl(navBuilder.user(stashUser).buildRelative());
+		userState.setEmail(stashUser.getEmailAddress());
 	}
 
 }

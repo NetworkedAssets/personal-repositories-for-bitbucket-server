@@ -82,9 +82,9 @@ public class AoPersonalRepositoriesService implements
 			return personalRepos;
 		}
 
-		log.warn("Adding user {} personal Repos", user);
+		log.debug("Adding user {} personal Repos", user);
 		Owner owner = findOrCreateOwner(user);
-		log.warn("Owner found/created {}", owner);
+		log.debug("Owner found/created {}", owner);
 
 		for (Repository repo : repositories) {
 			personalRepos.add(addPersonalRepository(repo, owner));

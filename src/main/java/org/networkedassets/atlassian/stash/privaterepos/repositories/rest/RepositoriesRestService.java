@@ -29,18 +29,18 @@ import com.google.common.collect.Lists;
 @Produces({ MediaType.APPLICATION_JSON })
 public class RepositoriesRestService {
 
-	private final Logger logger = LoggerFactory
+	private final Logger log = LoggerFactory
 			.getLogger(RepositoriesRestService.class);
 
 	@Autowired
 	private PersonalRepositoriesService personalRepositoriesService;
 
 	@Autowired
-	private RepositoryOwnerInfoCreator repositoryOwnerInfoCreator;
+	private RepositoryOwnerStateCreator repositoryOwnerStateCreator;
 
 	@Path("owners")
 	@GET
-	public Page<RepositoryOwnerInfo> getUsers(
+	public Page<RepositoryOwnerState> getUsers(
 			@QueryParam("limit") Integer limit,
 			@QueryParam("from") Integer offset) {
 
@@ -51,11 +51,13 @@ public class RepositoriesRestService {
 		ArrayList<Owner> ownersList = Lists
 				.newArrayList(ownersPage.getValues());
 
-		List<RepositoryOwnerInfo> ownersInfoList = repositoryOwnerInfoCreator
-				.create(ownersList);
+		List<RepositoryOwnerState> ownersInfoList = repositoryOwnerStateCreator
+				.createFrom(ownersList);
 
-		return new PageImpl<RepositoryOwnerInfo>(pageRequest,
+		return new PageImpl<RepositoryOwnerState>(pageRequest,
 				ownersInfoList.size(), ownersInfoList, false);
+
+		// return repositoryOwnerInfoCreator.getFrom(ownersPage);
 	}
 
 	@Path("user/{id}")
