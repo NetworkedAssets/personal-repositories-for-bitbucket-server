@@ -1,8 +1,5 @@
 package org.networkedassets.atlassian.stash.privaterepos.repositories.rest;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -19,10 +16,8 @@ import org.springframework.stereotype.Component;
 
 import com.atlassian.stash.repository.Repository;
 import com.atlassian.stash.util.Page;
-import com.atlassian.stash.util.PageImpl;
 import com.atlassian.stash.util.PageRequest;
 import com.atlassian.stash.util.PageRequestImpl;
-import com.google.common.collect.Lists;
 
 @Component
 @Path("/repositories/")
@@ -48,16 +43,7 @@ public class RepositoriesRestService {
 		Page<Owner> ownersPage = personalRepositoriesService
 				.getPersonalRepositoriesOwners(pageRequest);
 
-		ArrayList<Owner> ownersList = Lists
-				.newArrayList(ownersPage.getValues());
-
-		List<RepositoryOwnerState> ownersInfoList = repositoryOwnerStateCreator
-				.createFrom(ownersList);
-
-		return new PageImpl<RepositoryOwnerState>(pageRequest,
-				ownersInfoList.size(), ownersInfoList, false);
-
-		// return repositoryOwnerInfoCreator.getFrom(ownersPage);
+		return repositoryOwnerStateCreator.createFrom(ownersPage);
 	}
 
 	@Path("user/{id}")

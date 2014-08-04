@@ -13,6 +13,9 @@ import org.springframework.stereotype.Component;
 
 import com.atlassian.stash.user.StashUser;
 import com.atlassian.stash.user.UserService;
+import com.atlassian.stash.util.Page;
+import com.atlassian.stash.util.PageImpl;
+import com.atlassian.stash.util.PageRequestImpl;
 
 @Component
 class RepositoryOwnerStateCreator {
@@ -23,7 +26,15 @@ class RepositoryOwnerStateCreator {
 	@Autowired
 	private UsersStateCreator usersStateCreator;
 
-	public List<RepositoryOwnerState> createFrom(List<Owner> owners) {
+	public Page<RepositoryOwnerState> createFrom(Page<Owner> owners) {
+		PageRequestImpl pageRequest = new PageRequestImpl(owners.getStart(),
+				owners.getLimit());
+
+		return new PageImpl<RepositoryOwnerState>(pageRequest,
+				createFrom(owners.getValues()), owners.getIsLastPage());
+	}
+
+	public List<RepositoryOwnerState> createFrom(Iterable<Owner> owners) {
 		List<RepositoryOwnerState> ownersState = new ArrayList<RepositoryOwnerState>();
 
 		Set<? extends StashUser> stashUsers = getStashUsersFromOwners(owners);
@@ -47,8 +58,7 @@ class RepositoryOwnerStateCreator {
 		return ownerState;
 	}
 
-	private void fillFromOwner(RepositoryOwnerState ownerState,
-			Owner owner) {
+	private void fillFromOwner(RepositoryOwnerState ownerState, Owner owner) {
 		ownerState.setRepositoriesSize(owner.getRepositoriesSize());
 	}
 
@@ -56,7 +66,8 @@ class RepositoryOwnerStateCreator {
 		return userService.getUserById(owner.getUserId());
 	}
 
-	private Set<? extends StashUser> getStashUsersFromOwners(List<Owner> owners) {
+	private Set<? extends StashUser> getStashUsersFromOwners(
+			Iterable<Owner> owners) {
 		Set<Integer> ids = new HashSet<Integer>();
 		for (Owner owner : owners) {
 			ids.add(owner.getUserId());
