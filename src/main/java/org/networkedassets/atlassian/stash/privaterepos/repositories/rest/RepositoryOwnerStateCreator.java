@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.networkedassets.atlassian.stash.privaterepos.repositories.Owner;
 import org.networkedassets.atlassian.stash.privaterepos.user.rest.UsersStateCreator;
+import org.networkedassets.atlassian.stash.privaterepos.util.RestPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,8 @@ class RepositoryOwnerStateCreator {
 	@Autowired
 	private UsersStateCreator usersStateCreator;
 
-	public RepositoryOwnerStatePage createFrom(Page<Owner> owners) {
-		RepositoryOwnerStatePage resultsPage = new RepositoryOwnerStatePage();
+	public RestPage<RepositoryOwnerState> createFrom(Page<Owner> owners) {
+		RestPage<RepositoryOwnerState> resultsPage = new RestPage<RepositoryOwnerState>();
 		resultsPage.setItems(createFrom(owners.getValues()));
 		return resultsPage;
 	}

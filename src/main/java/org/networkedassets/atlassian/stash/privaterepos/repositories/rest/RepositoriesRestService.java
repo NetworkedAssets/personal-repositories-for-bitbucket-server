@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.networkedassets.atlassian.stash.privaterepos.repositories.Owner;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepositoriesService;
+import org.networkedassets.atlassian.stash.privaterepos.util.RestPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,16 +37,16 @@ public class RepositoriesRestService {
 
 	@Path("owners")
 	@GET
-	public RepositoryOwnerStatePage getUsers(
-			@DefaultValue("50") @QueryParam("limit") int limit,
-			@DefaultValue("0") @QueryParam("from") int offset) {
+	public RestPage<RepositoryOwnerState> getUsers(
+			@DefaultValue("0") @QueryParam("offset") int offset,
+			@DefaultValue("20") @QueryParam("limit") int limit) {
 
 		PageRequest pageRequest = new PageRequestImpl(offset, limit);
 
 		Page<Owner> ownersPage = personalRepositoriesService
 				.getPersonalRepositoriesOwners(pageRequest);
 
-		RepositoryOwnerStatePage ownersStatePage = repositoryOwnerStateCreator
+		RestPage<RepositoryOwnerState> ownersStatePage = repositoryOwnerStateCreator
 				.createFrom(ownersPage);
 
 		int ownersCount = personalRepositoriesService.getOwnersCount();

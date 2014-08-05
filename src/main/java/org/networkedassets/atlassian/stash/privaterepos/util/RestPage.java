@@ -1,4 +1,4 @@
-package org.networkedassets.atlassian.stash.privaterepos.repositories.rest;
+package org.networkedassets.atlassian.stash.privaterepos.util;
 
 import java.util.List;
 
@@ -6,13 +6,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class RepositoryOwnerStatePage {
+public class RestPage<T> {
 
 	@XmlElement(name = "total_items")
 	private int totalItems;
 
 	@XmlElement
-	private List<RepositoryOwnerState> items;
+	private List<T> items;
 
 	public int getTotalItems() {
 		return totalItems;
@@ -22,11 +22,11 @@ public class RepositoryOwnerStatePage {
 		this.totalItems = totalItems;
 	}
 
-	public List<RepositoryOwnerState> getItems() {
+	public List<T> getItems() {
 		return items;
 	}
 
-	public void setItems(List<RepositoryOwnerState> items) {
+	public void setItems(List<T> items) {
 		this.items = items;
 	}
 
