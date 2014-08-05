@@ -8,6 +8,8 @@ import java.util.Set;
 
 import org.networkedassets.atlassian.stash.privaterepos.repositories.Owner;
 import org.networkedassets.atlassian.stash.privaterepos.user.rest.UsersStateCreator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,18 +22,19 @@ import com.atlassian.stash.util.PageRequestImpl;
 @Component
 class RepositoryOwnerStateCreator {
 
+	private final Logger log = LoggerFactory
+			.getLogger(RepositoryOwnerStateCreator.class);
+
 	@Autowired
 	private UserService userService;
 
 	@Autowired
 	private UsersStateCreator usersStateCreator;
 
-	public Page<RepositoryOwnerState> createFrom(Page<Owner> owners) {
-		PageRequestImpl pageRequest = new PageRequestImpl(owners.getStart(),
-				owners.getLimit());
-
-		return new PageImpl<RepositoryOwnerState>(pageRequest,
-				createFrom(owners.getValues()), owners.getIsLastPage());
+	public RepositoryOwnerStatePage createFrom(Page<Owner> owners) {
+		RepositoryOwnerStatePage resultsPage = new RepositoryOwnerStatePage();
+		resultsPage.setItems(createFrom(owners.getValues()));
+		return resultsPage;
 	}
 
 	public List<RepositoryOwnerState> createFrom(Iterable<Owner> owners) {
@@ -41,7 +44,10 @@ class RepositoryOwnerStateCreator {
 		Iterator<? extends StashUser> stashUsersIterator = stashUsers
 				.iterator();
 
+		log.debug("{} StashUsers found", stashUsers.size());
+
 		for (Owner owner : owners) {
+			log.debug("Creating State object from Owner {}", owner);
 			ownersState.add(create(owner, stashUsersIterator.next()));
 		}
 		return ownersState;

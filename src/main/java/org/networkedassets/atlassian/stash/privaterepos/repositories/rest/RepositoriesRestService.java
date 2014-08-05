@@ -1,5 +1,6 @@
 package org.networkedassets.atlassian.stash.privaterepos.repositories.rest;
 
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -35,21 +36,27 @@ public class RepositoriesRestService {
 
 	@Path("owners")
 	@GET
-	public Page<RepositoryOwnerState> getUsers(
-			@QueryParam("limit") Integer limit,
-			@QueryParam("from") Integer offset) {
+	public RepositoryOwnerStatePage getUsers(
+			@DefaultValue("50") @QueryParam("limit") int limit,
+			@DefaultValue("0") @QueryParam("from") int offset) {
 
 		PageRequest pageRequest = new PageRequestImpl(offset, limit);
+
 		Page<Owner> ownersPage = personalRepositoriesService
 				.getPersonalRepositoriesOwners(pageRequest);
 
-		return repositoryOwnerStateCreator.createFrom(ownersPage);
+		RepositoryOwnerStatePage ownersStatePage = repositoryOwnerStateCreator
+				.createFrom(ownersPage);
+
+		int ownersCount = personalRepositoriesService.getOwnersCount();
+		ownersStatePage.setTotalItems(ownersCount);
+
+		return ownersStatePage;
 	}
 
 	@Path("user/{id}")
 	@GET
-	public Page<Repository> getUserRepositories(
-			@PathParam("userId") Integer userId) {
+	public Page<Repository> getUserRepositories(@PathParam("userId") int userId) {
 		// this.authorizationVerifier.verify();
 		return null;
 	}

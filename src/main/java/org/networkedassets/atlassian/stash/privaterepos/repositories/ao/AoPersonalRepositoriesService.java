@@ -208,4 +208,9 @@ public class AoPersonalRepositoriesService implements
 		}
 	}
 
+	@Override
+	public int getOwnersCount() {
+		return ao.count(Owner.class);
+	}
+
 }
