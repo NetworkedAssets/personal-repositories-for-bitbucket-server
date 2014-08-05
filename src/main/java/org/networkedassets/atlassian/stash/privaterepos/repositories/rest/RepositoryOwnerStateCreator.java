@@ -79,7 +79,11 @@ class RepositoryOwnerStateCreator {
 		for (Owner owner : owners) {
 			ids.add(owner.getUserId());
 		}
-		return userService.getUsersById(ids);
+		if (ids.size() > 0) {
+			return userService.getUsersById(ids);
+		}
+		
+		return new HashSet<StashUser>();
 	}
 
 }
