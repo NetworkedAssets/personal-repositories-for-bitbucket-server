@@ -17,8 +17,6 @@ import org.springframework.stereotype.Component;
 import com.atlassian.stash.user.StashUser;
 import com.atlassian.stash.user.UserService;
 import com.atlassian.stash.util.Page;
-import com.atlassian.stash.util.PageImpl;
-import com.atlassian.stash.util.PageRequestImpl;
 
 @Component
 class RepositoryOwnerStateCreator {

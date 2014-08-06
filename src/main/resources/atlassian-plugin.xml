@@ -38,61 +38,20 @@
 	<component-import key="applicationProperties"
 		interface="com.atlassian.sal.api.ApplicationProperties" />
 
-	<web-resource key="web-resources">
-		<resource type="download" name="privaterepos.css" location="/css/privaterepos.css" />
-		<transformation extension="soy">
-			<transformer key="soyTransformer" />
-		</transformation>
-		<!-- Components -->
-		<resource type="download" name="user-components.js"
-			location="/templates/user.soy" />
-		<!-- Permissions -->
-		<resource type="download" name="permissions-table-soy.js"
-			location="/templates/permissions/table.soy" />
-		<resource type="download" name="permissions-user-soy.js"
-			location="/templates/permissions/user.soy" />
-		<resource type="download" name="permissions-group-soy.js"
-			location="/templates/permissions/group.soy" />
-		<resource type="download" name="permissions-panel-soy.js"
-			location="/templates/permissions/panel.soy" />
-		<resource type="download" name="permissions/model/Group.js"
-			location="/js/permissions/model/Group.js" />
-		<resource type="download" name="permissions/model/Groups.js"
-			location="/js/permissions/model/Groups.js" />
-		<resource type="download" name="permissions/model/GroupBatch.js"
-			location="/js/permissions/model/GroupBatch.js" />
-		<resource type="download" name="permissions/model/User.js"
-			location="/js/permissions/model/User.js" />
-		<resource type="download" name="permissions/model/Users.js"
-			location="/js/permissions/model/Users.js" />
-		<resource type="download" name="permissions/model/UserBatch.js"
-			location="/js/permissions/model/UserBatch.js" />
-		<resource type="download" name="permissions/view/GroupRow.js"
-			location="/js/permissions/view/GroupRow.js" />
-		<resource type="download" name="permissions/view/GroupsTable.js"
-			location="/js/permissions/view/GroupsTable.js" />
-		<resource type="download" name="permissions/view/UserRow.js"
-			location="/js/permissions/view/UserRow.js" />
-		<resource type="download" name="permissions/view/UsersTable.js"
-			location="/js/permissions/view/UsersTable.js" />
-		<resource type="download" name="permissions/view/Table.js"
-			location="/js/permissions/view/Table.js" />
-		<resource type="download" name="permissions/PermissionsController.js"
-			location="/js/permissions/PermissionsController.js" />
-		<!-- Repositories -->
-		<resource type="download" name="repositories-table-soy.js"
-			location="/templates/repositories/table.soy" />
-		<resource type="download" name="repositories/RepositoriesController.js"
-			location="/js/repositories/RepositoriesController.js" />
-		<resource type="download" name="repositories/view/Table.js"
-			location="/js/repositories/view/Table.js" />
-		<!-- App -->
-		<resource type="download" name="Router.js" location="/js/Router.js" />
-		<resource type="download" name="App.js" location="/js/App.js" />
-	</web-resource>
+	<stash-resource key="web-resources">
+		<directory location="/js/">
+			<include>/**/*.js</include>
+		</directory>
+		<directory location="/css/">
+			<include>/**/*.css</include>
+		</directory>
+	</stash-resource>
 
 	<stash-resource key="templates-soy" name="Soy Templates">
-		<directory location="/templates/" />
+		<directory location="/templates/">
+			<include>/**/*.soy</include>
+			s
+		</directory>
 		<dependency>com.atlassian.stash.stash-web-plugin:global</dependency>
 		<dependency>com.atlassian.auiplugin:aui-select2</dependency>
 		<dependency>org.networkedassets.atlassian.stash.privaterepos:web-resources
