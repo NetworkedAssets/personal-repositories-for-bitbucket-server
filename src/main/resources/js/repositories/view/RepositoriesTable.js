@@ -1,4 +1,4 @@
-define('RepositoriesTable', [ 'backbone', 'underscore' ], function(Backbone, _) {
+define('RepositoriesTable', [ 'backbone', 'underscore', 'Util' ], function(Backbone, _, Util) {
 	return Backbone.View.extend({
 		
 		initialize : function(opts) {
@@ -7,7 +7,7 @@ define('RepositoriesTable', [ 'backbone', 'underscore' ], function(Backbone, _) 
 		},
 		
 		bindEvents : function() {
-			this.collection.on('sync', this.renderOwners, this);
+			this.collection.on('sync', this.render, this);
 		},
 		
 		tagName : 'table',
@@ -16,14 +16,17 @@ define('RepositoriesTable', [ 'backbone', 'underscore' ], function(Backbone, _) 
 		repositoryTemplate : '',
 		
 		render : function() {
-			this.el.innerHTML = this.template(); 
+			this.el.innerHTML = this.template();
+			this.renderOwners();
 			return this;
 		},
 		
 		renderOwners : function() {
 			var rendered = "";
 			this.collection.each(function(model) {
-				rendered += this.ownerTemplate({owner : model.toJSON()});
+				var modelData = model.toJSON();
+				modelData.repositoriesSize = Util.bytesToSize(modelData.repositoriesSize);
+				rendered += this.ownerTemplate({owner : modelData});
 			}, this);
 			this.$('tbody').html(rendered);
 		}

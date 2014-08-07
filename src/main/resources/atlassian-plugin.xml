@@ -43,6 +43,9 @@
 		<transformation extension="soy">
 			<transformer key="soyTransformer" />
 		</transformation>
+		<!-- Util -->
+		<resource type="download" name="Util.js"
+			location="/js/Util.js" />
 		<!-- Components -->
 		<resource type="download" name="user-components.js"
 			location="/templates/user.soy" />
@@ -97,6 +100,8 @@
 		<!-- App -->
 		<resource type="download" name="Router.js" location="/js/Router.js" />
 		<resource type="download" name="App.js" location="/js/App.js" />
+		
+		<dependency>com.atlassian.auiplugin:aui-experimental-iconfont</dependency>
 	</web-resource>
 
 	<stash-resource key="templates-soy" name="Soy Templates">

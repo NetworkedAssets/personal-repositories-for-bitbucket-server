@@ -9,20 +9,16 @@ define('RepositoriesController', [ 'jquery', 'RepositoriesTable', 'RepositoryOwn
 		},
 
 		start : function() {
-			this.fetchOwners();
 			this.showTable();
-		},
-		
-		fetchOwners : function() {
-			this.repositoryOwners = new RepositoryOwners();
-			this.repositoryOwners.fetch();
 		},
 
 		showTable : function() {
+			this.repositoryOwners = new RepositoryOwners();
 			var repositoriesTable = new RepositoriesTable({
 				collection: this.repositoryOwners
 			});
-			$('.repositories-section').html(repositoriesTable.render().el);
+			$('.repositories-section').html(repositoriesTable.el);
+			this.repositoryOwners.fetch();
 		}
 
 	});
