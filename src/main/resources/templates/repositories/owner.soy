@@ -5,11 +5,13 @@
  * 
  * @param owner
  */
-{template .ownerRow}
+{template .owner}
+	<tr>
         <td>
         	{call org.networkedassets.personalRepos.userWithAvatar}
-        		{param user}{$owner}{/param}
+        		{param user: $owner/}
         	{/call}
         </td>
         <td>{$owner.repositoriesSize}</td>
+    </tr>
 {/template}

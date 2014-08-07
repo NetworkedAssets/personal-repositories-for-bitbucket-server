@@ -19,7 +19,6 @@ define('RepositoriesController', [ 'jquery', 'RepositoriesTable', 'RepositoryOwn
 		},
 
 		showTable : function() {
-			
 			var repositoriesTable = new RepositoriesTable({
 				collection: this.repositoryOwners
 			});

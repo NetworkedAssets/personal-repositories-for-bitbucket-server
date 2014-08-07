@@ -82,8 +82,10 @@
 		<!-- Repositories -->
 		<resource type="download" name="lib/backbone.paginator.min.js"
 			location="/js/lib/backbone.paginator.min.js" />
-		<resource type="download" name="repositories-table-soy.js"
+		<resource type="download" name="templates/repositories-table-soy.js"
 			location="/templates/repositories/table.soy" />
+			<resource type="download" name="templates/repositories-owner-soy.js"
+			location="/templates/repositories/owner.soy" />
 		<resource type="download" name="repositories/model/RepositoryOwner.js"
 			location="/js/repositories/model/RepositoryOwner.js" />
 		<resource type="download" name="repositories/model/RepositoryOwners.js"
