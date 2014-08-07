@@ -6,7 +6,6 @@ import net.java.ao.schema.Unique;
 
 public interface Owner extends Entity {
 
-	@Unique
 	public Integer getUserId();
 
 	public void setUserId(Integer integer);

@@ -38,8 +38,11 @@ public class PersonalRepositoriesPreScanner {
 	public void scanPersonalRepositories() {
 		log.debug("Personal repositories pre-scanning started");
 
-		new AllPagesIterator.Builder<StashUser>(createUserPageProcessor())
-				.resultsPerPage(USERS_PER_PAGE).build();
+		AllPagesIterator<StashUser> pagesIterator = new AllPagesIterator.Builder<StashUser>(
+				createUserPageProcessor()).resultsPerPage(USERS_PER_PAGE)
+				.build();
+
+		pagesIterator.processAllPages();
 
 		log.debug("Personal repositories pre scanning finished");
 	}
@@ -62,8 +65,8 @@ public class PersonalRepositoriesPreScanner {
 
 	private void scanUserRepositories(StashUser user) {
 		AllPagesIterator<Repository> repoIterator = new AllPagesIterator.Builder<Repository>(
-				createRepositoryPageProcessor(user)).resultsPerPage(USER_REPOSITORIES_PER_PAGE)
-				.build();
+				createRepositoryPageProcessor(user)).resultsPerPage(
+				USER_REPOSITORIES_PER_PAGE).build();
 		repoIterator.processAllPages();
 	}
 

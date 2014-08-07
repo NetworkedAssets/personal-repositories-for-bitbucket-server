@@ -61,6 +61,7 @@ public class PluginStartHandler {
 	@EventListener
 	public void onPluginEnabledEvent(PluginEnabledEvent event) {
 		if (event.getPlugin().getKey().equals(PLUGIN_KEY)) {
+			log.debug("Scheduling prescan");
 			schedulePreScan();
 		}
 	}

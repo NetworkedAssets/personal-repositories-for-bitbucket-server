@@ -47,6 +47,7 @@ public class AdministrationPanelServlet extends HttpServlet {
 			HashMap<String, Object> params = new HashMap<String, Object>();
 			String baseApiPath = navBuilder.buildAbsolute() + "/rest/privaterepos/1.0";
 			params.put("baseApiPath", baseApiPath);
+			
 
 			soyTemplateRenderer
 					.render(resp.getWriter(),

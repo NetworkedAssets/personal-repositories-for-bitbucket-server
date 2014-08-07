@@ -6,12 +6,10 @@
  * @param owner
  */
 {template .ownerRow}
-    <tr>
         <td>
         	{call org.networkedassets.personalRepos.userWithAvatar}
         		{param user}{$owner}{/param}
         	{/call}
         </td>
         <td>{$owner.repositoriesSize}</td>
-    </tr>
 {/template}

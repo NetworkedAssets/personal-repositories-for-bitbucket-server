@@ -82,7 +82,7 @@ public class AoPersonalRepositoriesService implements
 			return personalRepos;
 		}
 
-		log.debug("Adding user {} personal Repos", user);
+		log.debug("Adding user {} personal Repos", user.getName());
 		Owner owner = findOrCreateOwner(user);
 		log.debug("Owner found/created {}", owner);
 
@@ -123,6 +123,7 @@ public class AoPersonalRepositoriesService implements
 	}
 
 	private Owner createOwner(StashUser user) {
+		log.debug("Creating repository owner from {}", user.getName());
 		Owner owner = ao.create(Owner.class);
 		owner.setRepositoriesSize(Long.valueOf(0));
 		owner.setUserId(user.getId());

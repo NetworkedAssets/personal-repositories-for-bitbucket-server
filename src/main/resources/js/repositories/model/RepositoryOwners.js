@@ -1,5 +1,5 @@
 define('RepositoryOwners', ['backbone', 'RepositoryOwner', 'Config'], function(Backbone, RepositoryOwner, Config) {
-	return Backbone.Collection.extend({
+	return Backbone.PageableCollection.extend({
 		url : Config.urlBase + '/repositories/owners',
 		model: RepositoryOwner
 	});

@@ -80,12 +80,18 @@
 		<resource type="download" name="permissions/PermissionsController.js"
 			location="/js/permissions/PermissionsController.js" />
 		<!-- Repositories -->
+		<resource type="download" name="lib/backbone.paginator.min.js"
+			location="/js/lib/backbone.paginator.min.js" />
 		<resource type="download" name="repositories-table-soy.js"
 			location="/templates/repositories/table.soy" />
+		<resource type="download" name="repositories/model/RepositoryOwner.js"
+			location="/js/repositories/model/RepositoryOwner.js" />
+		<resource type="download" name="repositories/model/RepositoryOwners.js"
+			location="/js/repositories/model/RepositoryOwners.js" />
+		<resource type="download" name="repositories/view/RepositoriesTable.js"
+			location="/js/repositories/view/RepositoriesTable.js" />
 		<resource type="download" name="repositories/RepositoriesController.js"
 			location="/js/repositories/RepositoriesController.js" />
-		<resource type="download" name="repositories/view/Table.js"
-			location="/js/repositories/view/Table.js" />
 		<!-- App -->
 		<resource type="download" name="Router.js" location="/js/Router.js" />
 		<resource type="download" name="App.js" location="/js/App.js" />
