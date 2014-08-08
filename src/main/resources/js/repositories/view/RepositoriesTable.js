@@ -18,6 +18,7 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util' ], function(Backb
 		render : function() {
 			this.el.innerHTML = this.template();
 			this.renderOwners();
+			this.renderPagination();
 			return this;
 		},
 		
@@ -29,6 +30,13 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util' ], function(Backb
 				rendered += this.ownerTemplate({owner : modelData});
 			}, this);
 			this.$('tbody').html(rendered);
+		},
+		
+		renderPagination : function() {
+			this.$('.pagination-holder').pagination({
+				items: 100,
+		        itemsOnPage: 10,
+			});
 		}
 		
 	});

@@ -85,6 +85,8 @@
 		<!-- Repositories -->
 		<resource type="download" name="lib/backbone.paginator.min.js"
 			location="/js/lib/backbone.paginator.min.js" />
+		<resource type="download" name="lib/jquery.simplePagination.js"
+			location="/js/lib/jquery.simplePagination.js" />
 		<resource type="download" name="templates/repositories-table-soy.js"
 			location="/templates/repositories/table.soy" />
 			<resource type="download" name="templates/repositories-owner-soy.js"
