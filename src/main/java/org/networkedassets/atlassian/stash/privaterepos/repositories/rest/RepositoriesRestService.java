@@ -38,10 +38,11 @@ public class RepositoriesRestService {
 	@Path("owners")
 	@GET
 	public RestPage<RepositoryOwnerState> getUsers(
-			@DefaultValue("0") @QueryParam("offset") int offset,
-			@DefaultValue("20") @QueryParam("limit") int limit) {
+			@DefaultValue("1") @QueryParam("page") int page,
+			@DefaultValue("20") @QueryParam("perPage") int perPage) {
 
-		PageRequest pageRequest = new PageRequestImpl(offset, limit);
+		PageRequest pageRequest = new PageRequestImpl((page - 1) * perPage,
+				perPage);
 
 		Page<Owner> ownersPage = personalRepositoriesService
 				.getPersonalRepositoriesOwners(pageRequest);

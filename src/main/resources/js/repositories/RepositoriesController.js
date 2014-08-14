@@ -18,7 +18,7 @@ define('RepositoriesController', [ 'jquery', 'RepositoriesTable', 'RepositoryOwn
 				collection: this.repositoryOwners
 			});
 			$('.repositories-section').html(repositoriesTable.el);
-			this.repositoryOwners.fetch();
+			this.repositoryOwners.getFirstPage();
 		}
 
 	});

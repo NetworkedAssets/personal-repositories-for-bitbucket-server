@@ -5,6 +5,12 @@ define('RepositoryOwners', ['backbone', 'RepositoryOwner', 'Config'], function(B
 		
 		parseRecords: function (resp, options) {
 			return resp.items;
+		},
+		
+		parseState : function(resp, options) {
+			return {
+				totalRecords : resp.totalItems
+			};
 		}
 	});
 });

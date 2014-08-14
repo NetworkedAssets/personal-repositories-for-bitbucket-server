@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class RestPage<T> {
 
-	@XmlElement(name = "total_items")
+	@XmlElement
 	private int totalItems;
 
 	@XmlElement

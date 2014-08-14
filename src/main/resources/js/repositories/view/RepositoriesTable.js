@@ -11,6 +11,7 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util' ], function(Backb
 		},
 		
 		tagName : 'table',
+		className : 'aui',
 		template : org.networkedassets.personalRepos.repositories.table,
 		ownerTemplate : org.networkedassets.personalRepos.repositories.owner,
 		repositoryTemplate : '',
@@ -34,8 +35,8 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util' ], function(Backb
 		
 		renderPagination : function() {
 			this.$('.pagination-holder').pagination({
-				items: 100,
-		        itemsOnPage: 10,
+				items: this.collection.state.totalRecords,
+		        itemsOnPage: this.collection.state.pageSize
 			});
 		}
 		
