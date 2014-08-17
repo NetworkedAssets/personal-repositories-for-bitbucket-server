@@ -1,6 +1,6 @@
 define('RepositoriesController', [ 'underscore', 'jquery', 'RepositoriesTable',
-		'RepositoryOwners', 'UserRepositories', 'backbone' ], function(_, $, RepositoriesTable,
-		RepositoryOwners, UserRepositories, Backbone) {
+		'RepositoryOwners', 'UserRepositories', 'backbone' ], function(_, $,
+		RepositoriesTable, RepositoryOwners, UserRepositories, Backbone) {
 	var constr = function(opts) {
 		this.initialize(opts);
 	};
@@ -19,9 +19,7 @@ define('RepositoriesController', [ 'underscore', 'jquery', 'RepositoriesTable',
 
 		createModels : function() {
 			this.repositoryOwners = new RepositoryOwners();
-			this.repositoriesEvents = {
-				fetchedRepositories : {}
-			};
+			this.repositoriesEvents = {};
 			_.extend(this.repositoriesEvents, Backbone.Events);
 		},
 
@@ -48,10 +46,6 @@ define('RepositoriesController', [ 'underscore', 'jquery', 'RepositoriesTable',
 		},
 
 		onUserExpanded : function(userId) {
-			var fetchedRepos = this.repositoriesEvents.fetchedRepositories[userId];
-			if (!_.isUndefined(fetchedRepos)) {
-				return fetchedRepos;
-			}
 			var repositories = new UserRepositories([], {
 				userId : userId
 			});
@@ -59,10 +53,10 @@ define('RepositoriesController', [ 'underscore', 'jquery', 'RepositoriesTable',
 				this.notifyAboutFetchedRepositories(userId, repositories);
 			}, this));
 		},
-		
+
 		notifyAboutFetchedRepositories : function(userId, repos) {
 			this.repositoriesEvents.trigger('userRepositoriesFetched', {
-				repositories: repos,
+				repositories : repos,
 				userId : userId
 			});
 		}
