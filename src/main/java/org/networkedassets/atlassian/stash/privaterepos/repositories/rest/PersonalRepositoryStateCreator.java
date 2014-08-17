@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.atlassian.stash.nav.NavBuilder;
 import com.atlassian.stash.repository.Repository;
 import com.atlassian.stash.repository.RepositoryService;
 
@@ -20,6 +21,9 @@ public class PersonalRepositoryStateCreator {
 
 	@Autowired
 	private RepositoryService repositoryService;
+	
+	@Autowired
+	private NavBuilder navBuilder;
 
 	public List<PersonalRepositoryState> createFrom(
 			List<PersonalRepository> userPersonalRepositories) {
@@ -46,6 +50,7 @@ public class PersonalRepositoryStateCreator {
 		PersonalRepositoryState state = new PersonalRepositoryState();
 		state.setRepositorySize(personalRepository.getRepositorySize());
 		state.setRepositoryName(stashRepository.getName());
+		state.setUrl(navBuilder.repo(stashRepository).browse().buildAbsolute());
 		return state;
 	}
 

@@ -8,9 +8,10 @@ public class PersonalRepositoryState {
 
 	@XmlElement
 	private String name;
-
 	@XmlElement
 	private long size;
+	@XmlElement
+	private String url;
 
 	public String getRepositoryName() {
 		return name;
@@ -26,6 +27,14 @@ public class PersonalRepositoryState {
 
 	public void setRepositorySize(long repositorySize) {
 		this.size = repositorySize;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }
