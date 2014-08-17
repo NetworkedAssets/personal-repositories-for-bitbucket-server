@@ -65,9 +65,13 @@ public class AoPersonalRepositoriesService implements
 
 	@Override
 	public List<PersonalRepository> getUserPersonalRepositories(StashUser user) {
-
+		return getUserPersonalRepositories(user.getId());
+	}
+	
+	@Override
+	public List<PersonalRepository> getUserPersonalRepositories(int userId) {
 		PersonalRepository[] repos = ao.find(PersonalRepository.class, Query
-				.select().where("OWNER_ID = ?", user.getId()));
+				.select().where("OWNER_ID = ?", userId));
 
 		return Arrays.asList(repos);
 	}
