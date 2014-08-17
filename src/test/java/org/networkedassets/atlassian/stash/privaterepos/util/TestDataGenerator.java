@@ -23,7 +23,8 @@ public class TestDataGenerator {
 	private final Logger log = LoggerFactory.getLogger(TestDataGenerator.class);
 
 	private static final String REST_API_URL = "http://localhost:7990/stash/rest/api/1.0/";
-	private static final int NUMBER_OF_USERS = 200;
+	private static final int NUMBER_OF_USERS = 100;
+	private static final double HAVING_PERSONAL_REPOSITORY_PROBABILITY = 0.9;
 	private static final int MAX_REPOS_PER_USER = 10;
 	private HttpClient client;
 	private Set<String> userNames;
@@ -81,8 +82,12 @@ public class TestDataGenerator {
 
 	private void createUserRepositories(String userName) {
 		Random rnd = new Random();
-		int numberOfRepos = rnd.nextInt(MAX_REPOS_PER_USER + 1);
-		System.out.println("Number of repositories : " + numberOfRepos);
+		boolean hasPersonalRepos = rnd.nextDouble() < HAVING_PERSONAL_REPOSITORY_PROBABILITY;
+		if (!hasPersonalRepos) {
+			return;
+		}
+		System.out.println(userName + "Has personal repos !");
+		int numberOfRepos = rnd.nextInt(MAX_REPOS_PER_USER) + 1;
 		Set<String> randomReposNames = generateRandomNames(numberOfRepos);
 		for (String repoName : randomReposNames) {
 			System.out.println("Creating user " + userName + " repo "
