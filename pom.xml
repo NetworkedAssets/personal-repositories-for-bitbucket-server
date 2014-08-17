@@ -24,11 +24,26 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	<repositories>
+		<repository>
+			<id>atlassian-public</id>
+			<url>https://maven.atlassian.com/repository/public</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+		</repository>
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>com.atlassian.activeobjects</groupId>
 			<artifactId>activeobjects-plugin</artifactId>
-			<scope>provided</scope>	
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.atlassian.plugins</groupId>
@@ -133,7 +148,7 @@
 						<product>
 							<id>stash</id>
 							<instanceId>stash</instanceId>
-							<version>${stash.version}</version>
+							<version>${stash.runtime.version}</version>
 							<dataVersion>${stash.data.version}</dataVersion>
 						</product>
 					</products>
@@ -221,9 +236,10 @@
 	</build>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<stash.version>2.12.1</stash.version>
-		<stash.data.version>2.12.1</stash.data.version>
-		<amps.version>5.0.3</amps.version>
+		<stash.version>2.12.0</stash.version>
+		<stash.runtime.version>${stash.version}</stash.runtime.version>
+		<stash.data.version>${stash.runtime.version}</stash.data.version>
+		<amps.version>5.0.4</amps.version>
 		<plugin.testrunner.version>1.1.4</plugin.testrunner.version>
 	</properties>
 </project>
