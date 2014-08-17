@@ -6,6 +6,7 @@ define('RepositoriesController', [ 'jquery', 'RepositoriesTable', 'RepositoryOwn
 
 	_.extend(constr.prototype, {
 		initialize : function(opts) {
+			_.bindAll(this, 'onPageSelected');
 		},
 
 		start : function() {
@@ -17,8 +18,13 @@ define('RepositoriesController', [ 'jquery', 'RepositoriesTable', 'RepositoryOwn
 			var repositoriesTable = new RepositoriesTable({
 				collection: this.repositoryOwners
 			});
+			repositoriesTable.on('page-selected', this.onPageSelected);
 			$('.repositories-section').html(repositoriesTable.el);
 			this.repositoryOwners.getFirstPage();
+		},
+		
+		onPageSelected : function(pageNumber) {
+			this.repositoryOwners.getPage(pageNumber);
 		}
 
 	});
