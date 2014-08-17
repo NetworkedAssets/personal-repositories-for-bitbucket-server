@@ -12,6 +12,9 @@ public class PersonalRepositoryState {
 	private long size;
 	@XmlElement
 	private String url;
+	@XmlElement
+	private boolean fork; 
+	
 
 	public String getRepositoryName() {
 		return name;
@@ -35,6 +38,14 @@ public class PersonalRepositoryState {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public boolean isFork() {
+		return fork;
+	}
+
+	public void setFork(boolean fork) {
+		this.fork = fork;
 	}
 
 }

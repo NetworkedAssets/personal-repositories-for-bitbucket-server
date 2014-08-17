@@ -48,3 +48,7 @@
 .repository-name .aui-icon {
 	margin-right: 10px;
 }
+
+.repositories-section .expander {
+	width: 20px;
+}

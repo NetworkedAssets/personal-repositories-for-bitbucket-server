@@ -50,7 +50,10 @@ public class PersonalRepositoryStateCreator {
 		PersonalRepositoryState state = new PersonalRepositoryState();
 		state.setRepositorySize(personalRepository.getRepositorySize());
 		state.setRepositoryName(stashRepository.getName());
-		state.setUrl(navBuilder.repo(stashRepository).browse().buildAbsolute());
+		
+		String url = navBuilder.repo(stashRepository).browse().buildAbsolute();
+		state.setUrl(url);
+		state.setFork(stashRepository.isFork());
 		return state;
 	}
 
