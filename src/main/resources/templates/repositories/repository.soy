@@ -10,7 +10,11 @@
 	<tr class="repo-owner-{$owner.id}">
 		<td>
         </td>
-        <td>{$repository.name}</td>
+        <td>
+        <span class="repository-name">
+        <span class="aui-icon aui-icon-small aui-iconfont-devtools-repository">Repository</span> <a href="">{$repository.name}</a>
+        </span>
+        </td>
         <td>{$repository.size}</td>
     </tr>
 {/template}

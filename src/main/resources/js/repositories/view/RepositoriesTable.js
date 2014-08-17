@@ -78,16 +78,22 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util', 'jquery' ], func
 		showUserRepositories : function(data) {
 			var rendered = '';
 			data.repositories.each(function(repo) {
-				rendered += this.repositoryTemplate({
-					repository : repo.toJSON(),
-					owner : {
-						id : data.userId
-					}
-				});
+				rendered += this.repositoryTemplate(this.prepareRepositoryViewData(data.userId, repo));
 			}, this);
 			
 			this.$('.repository-owner-id-' + data.userId).after(rendered);
-//			this.showRepositoriesLoader();
+			this.hideRepositoriesLoader();
+		},
+		
+		prepareRepositoryViewData : function(userId, repo) {
+			var repoJSON = repo.toJSON();
+			repoJSON.size = Util.bytesToSize(repoJSON.size);
+			return {
+				repository : repoJSON,
+				owner : {
+					id : userId
+				}
+			};
 		},
 		
 		showRepositoriesLoader : function() {
