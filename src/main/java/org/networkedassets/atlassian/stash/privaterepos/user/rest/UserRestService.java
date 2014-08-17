@@ -27,24 +27,25 @@ public class UserRestService {
 	@Autowired
 	private AllowedUsersService allowedUsersService;
 	@Autowired
-	private UsersInfoBuilder usersInfoBuilder;
+	private UsersStateCreator usersStateCreator;
 	@Autowired
 	private AdminAuthorizationVerifier authorizationVerifier;
 
 	@Path("find/{key}")
 	@GET
-	public List<UserInfo> findUsers(@PathParam("key") String key) {
+	public List<UserState> findUsers(@PathParam("key") String key) {
 		this.authorizationVerifier.verify();
-		return usersInfoBuilder.buildFromStashUsers(allowedUsersService.findNotAllowed(key));
+		return usersStateCreator.createFrom(allowedUsersService.findNotAllowed(key));
 	}
 
 	@Path("list")
 	@GET
-	public List<UserInfo> getUsers() {
+	public List<UserState> getUsers() {
 		this.authorizationVerifier.verify();
-		return usersInfoBuilder.build();
+		return usersStateCreator.createFrom(allowedUsersService
+				.getStashUsersFromUsers(allowedUsersService.all()));
 	}
-	
+
 	@Path("list")
 	@POST
 	public Response addGroups(NamesList names) {
@@ -52,7 +53,7 @@ public class UserRestService {
 		this.allowedUsersService.allow(names.getNames());
 		return Response.ok().build();
 	}
-	
+
 	@Path("user/{user}")
 	@POST
 	public Response addUser(@Context UriInfo uriInfo,

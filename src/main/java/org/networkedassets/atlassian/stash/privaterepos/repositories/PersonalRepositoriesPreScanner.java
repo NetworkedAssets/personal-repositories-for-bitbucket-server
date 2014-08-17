@@ -17,6 +17,13 @@ import com.atlassian.stash.util.PageRequest;
 @Component
 public class PersonalRepositoriesPreScanner {
 
+	// 1000 users at once shouldn't kill us, should it ?
+	private static final int USERS_PER_PAGE = 1000;
+
+	// we should fit in 10000 repositories per user - the idea is to get
+	// them in one hit
+	private static final int USER_REPOSITORIES_PER_PAGE = 10000;
+
 	Logger log = LoggerFactory.getLogger(PersonalRepositoriesPreScanner.class);
 
 	@Autowired
@@ -29,22 +36,27 @@ public class PersonalRepositoriesPreScanner {
 	private RepositoryService repositoryService;
 
 	public void scanPersonalRepositories() {
-		AllPagesIterator<StashUser> iterator = new AllPagesIterator<StashUser>(
-				createUserPageProcessor());
-		iterator.processAllPages();
+		log.debug("Personal repositories pre-scanning started");
+
+		AllPagesIterator<StashUser> pagesIterator = new AllPagesIterator.Builder<StashUser>(
+				createUserPageProcessor()).resultsPerPage(USERS_PER_PAGE)
+				.build();
+
+		pagesIterator.processAllPages();
+
+		log.debug("Personal repositories pre scanning finished");
 	}
 
 	private PageProcessor<StashUser> createUserPageProcessor() {
 		return new PageProcessor<StashUser>() {
 
 			public Page<? extends StashUser> fetchPage(PageRequest pageRequest) {
-				log.warn("Fetching page {}", pageRequest.getStart());
 				return userService.findUsers(pageRequest);
 			}
 
 			public void process(Page<? extends StashUser> page) {
 				for (StashUser user : page.getValues()) {
-					log.warn("Processing user {}", user.getName());
+					log.debug("Scanning user '{}' repositories", user.getName());
 					scanUserRepositories(user);
 				}
 			}
@@ -52,9 +64,9 @@ public class PersonalRepositoriesPreScanner {
 	}
 
 	private void scanUserRepositories(StashUser user) {
-		PageProcessor<Repository> repositoryPageProcessor = createRepositoryPageProcessor(user);
-		AllPagesIterator<Repository> repoIterator = new AllPagesIterator<Repository>(
-				repositoryPageProcessor);
+		AllPagesIterator<Repository> repoIterator = new AllPagesIterator.Builder<Repository>(
+				createRepositoryPageProcessor(user)).resultsPerPage(
+				USER_REPOSITORIES_PER_PAGE).build();
 		repoIterator.processAllPages();
 	}
 
@@ -64,7 +76,7 @@ public class PersonalRepositoriesPreScanner {
 
 			@Override
 			public void process(Page<? extends Repository> page) {
-				log.warn("Processing repositories {}", page.getValues());
+				log.debug("Found repositories: {}", page.getValues());
 				if (isIterableEmpty(page.getValues())) {
 					return;
 				}
@@ -74,8 +86,6 @@ public class PersonalRepositoriesPreScanner {
 
 			@Override
 			public Page<? extends Repository> fetchPage(PageRequest pageRequest) {
-				log.warn("Fetching repositories for {}", ("~" + user.getSlug()));
-
 				return repositoryService.findByProjectKey("~" + user.getSlug(),
 						pageRequest);
 			}

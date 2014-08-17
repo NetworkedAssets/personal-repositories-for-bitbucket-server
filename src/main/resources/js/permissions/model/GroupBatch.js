@@ -1,4 +1,4 @@
-define('GroupBatch', ['backbone', 'Config'], function(Backbone, Config) {
+define('GroupBatch', [ 'backbone', 'Config' ], function(Backbone, Config) {
 	return Backbone.Model.extend({
 		defaults : {
 			names : []

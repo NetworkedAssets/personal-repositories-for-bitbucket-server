@@ -24,7 +24,6 @@ public class AoAllowedGroupsService implements AllowedGroupsService {
 	@Autowired
 	private UserService userService;
 
-
 	@Override
 	public List<Group> all() {
 		return newArrayList(ao.find(Group.class, Query.select()));

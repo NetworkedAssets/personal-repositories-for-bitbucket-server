@@ -43,23 +43,67 @@
 		<transformation extension="soy">
 			<transformer key="soyTransformer" />
 		</transformation>
-		<resource type="download" name="table-soy.js" location="/templates/table.soy" />
-		<resource type="download" name="user-soy.js" location="/templates/user.soy" />
-		<resource type="download" name="group-soy.js" location="/templates/group.soy" />
-		<resource type="download" name="model/Group.js" location="/js/model/Group.js" />
-		<resource type="download" name="model/Groups.js" location="/js/model/Groups.js" />
-		<resource type="download" name="model/GroupBatch.js"
-			location="/js/model/GroupBatch.js" />
-		<resource type="download" name="model/User.js" location="/js/model/User.js" />
-		<resource type="download" name="model/Users.js" location="/js/model/Users.js" />
-		<resource type="download" name="model/UserBatch.js" location="/js/model/UserBatch.js" />
-		<resource type="download" name="view/GroupRow.js" location="/js/view/GroupRow.js" />
-		<resource type="download" name="view/GroupsTable.js"
-			location="/js/view/GroupsTable.js" />
-		<resource type="download" name="view/UserRow.js" location="/js/view/UserRow.js" />
-		<resource type="download" name="view/UsersTable.js" location="/js/view/UsersTable.js" />
-		<resource type="download" name="view/Table.js" location="/js/view/Table.js" />
+		<!-- Util -->
+		<resource type="download" name="Util.js"
+			location="/js/Util.js" />
+		<!-- Components -->
+		<resource type="download" name="user-components.js"
+			location="/templates/user.soy" />
+		<!-- Permissions -->
+		<resource type="download" name="permissions-table-soy.js"
+			location="/templates/permissions/table.soy" />
+		<resource type="download" name="permissions-user-soy.js"
+			location="/templates/permissions/user.soy" />
+		<resource type="download" name="permissions-group-soy.js"
+			location="/templates/permissions/group.soy" />
+		<resource type="download" name="permissions-panel-soy.js"
+			location="/templates/permissions/panel.soy" />
+		<resource type="download" name="permissions/model/Group.js"
+			location="/js/permissions/model/Group.js" />
+		<resource type="download" name="permissions/model/Groups.js"
+			location="/js/permissions/model/Groups.js" />
+		<resource type="download" name="permissions/model/GroupBatch.js"
+			location="/js/permissions/model/GroupBatch.js" />
+		<resource type="download" name="permissions/model/User.js"
+			location="/js/permissions/model/User.js" />
+		<resource type="download" name="permissions/model/Users.js"
+			location="/js/permissions/model/Users.js" />
+		<resource type="download" name="permissions/model/UserBatch.js"
+			location="/js/permissions/model/UserBatch.js" />
+		<resource type="download" name="permissions/view/GroupRow.js"
+			location="/js/permissions/view/GroupRow.js" />
+		<resource type="download" name="permissions/view/GroupsTable.js"
+			location="/js/permissions/view/GroupsTable.js" />
+		<resource type="download" name="permissions/view/UserRow.js"
+			location="/js/permissions/view/UserRow.js" />
+		<resource type="download" name="permissions/view/UsersTable.js"
+			location="/js/permissions/view/UsersTable.js" />
+		<resource type="download" name="permissions/view/Table.js"
+			location="/js/permissions/view/Table.js" />
+		<resource type="download" name="permissions/PermissionsController.js"
+			location="/js/permissions/PermissionsController.js" />
+		<!-- Repositories -->
+		<resource type="download" name="lib/backbone.paginator.min.js"
+			location="/js/lib/backbone.paginator.min.js" />
+		<resource type="download" name="lib/jquery.simplePagination.js"
+			location="/js/lib/jquery.simplePagination.js" />
+		<resource type="download" name="templates/repositories-table-soy.js"
+			location="/templates/repositories/table.soy" />
+			<resource type="download" name="templates/repositories-owner-soy.js"
+			location="/templates/repositories/owner.soy" />
+		<resource type="download" name="repositories/model/RepositoryOwner.js"
+			location="/js/repositories/model/RepositoryOwner.js" />
+		<resource type="download" name="repositories/model/RepositoryOwners.js"
+			location="/js/repositories/model/RepositoryOwners.js" />
+		<resource type="download" name="repositories/view/RepositoriesTable.js"
+			location="/js/repositories/view/RepositoriesTable.js" />
+		<resource type="download" name="repositories/RepositoriesController.js"
+			location="/js/repositories/RepositoriesController.js" />
+		<!-- App -->
+		<resource type="download" name="Router.js" location="/js/Router.js" />
 		<resource type="download" name="App.js" location="/js/App.js" />
+		
+		<dependency>com.atlassian.auiplugin:aui-experimental-iconfont</dependency>
 	</web-resource>
 
 	<stash-resource key="templates-soy" name="Soy Templates">

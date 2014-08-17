@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-class UserInfo {
+public class UserState {
 
 	@XmlElement
 	private String name;
@@ -56,5 +56,6 @@ class UserInfo {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
 
 }

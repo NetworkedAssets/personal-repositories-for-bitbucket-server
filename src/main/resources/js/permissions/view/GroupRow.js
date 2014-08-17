@@ -1,8 +1,8 @@
-define('UserRow', [ 'backbone' ], function(Backbone) {
+define('GroupRow', [ 'backbone' ], function(Backbone) {
 	return Backbone.View.extend({
 
 		tagName : 'tr',
-		template : PrivateRepos.userRow,
+		template : org.networkedassets.personalRepos.permissions.groupRow,
 
 		events : {
 			'click .delete-button' : 'onDelete'
@@ -16,7 +16,7 @@ define('UserRow', [ 'backbone' ], function(Backbone) {
 
 		render : function() {
 			this.el.innerHTML = this.template({
-				user : this.model.toJSON()
+				group : this.model.toJSON()
 			});
 			return this;
 		}

@@ -44,8 +44,7 @@ public class AoPersonalRepositoriesService implements
 			.getLogger(AoPersonalRepositoriesService.class);
 
 	@Override
-	public Page<? extends Owner> getPersonalRepositoriesOwners(
-			PageRequest pageRequest) {
+	public Page<Owner> getPersonalRepositoriesOwners(PageRequest pageRequest) {
 
 		int ownersCount = ao.count(Owner.class);
 
@@ -65,8 +64,7 @@ public class AoPersonalRepositoriesService implements
 	}
 
 	@Override
-	public Iterable<? extends PersonalRepository> getUserPersonalRepositories(
-			StashUser user) {
+	public List<PersonalRepository> getUserPersonalRepositories(StashUser user) {
 
 		PersonalRepository[] repos = ao.find(PersonalRepository.class, Query
 				.select().where("OWNER_ID = ?", user.getId()));
@@ -75,8 +73,8 @@ public class AoPersonalRepositoriesService implements
 	}
 
 	@Override
-	public Iterable<PersonalRepository> addUserPersonalRepositories(
-			StashUser user, Iterable<? extends Repository> repositories) {
+	public List<PersonalRepository> addUserPersonalRepositories(StashUser user,
+			Iterable<? extends Repository> repositories) {
 
 		List<PersonalRepository> personalRepos = new ArrayList<PersonalRepository>();
 
@@ -84,9 +82,9 @@ public class AoPersonalRepositoriesService implements
 			return personalRepos;
 		}
 
-		log.warn("Adding user {} personal Repos", user);
+		log.debug("Adding user {} personal Repos", user.getName());
 		Owner owner = findOrCreateOwner(user);
-		log.warn("Owner found/created {}", owner);
+		log.debug("Owner found/created {}", owner);
 
 		for (Repository repo : repositories) {
 			personalRepos.add(addPersonalRepository(repo, owner));
@@ -125,6 +123,7 @@ public class AoPersonalRepositoriesService implements
 	}
 
 	private Owner createOwner(StashUser user) {
+		log.debug("Creating repository owner from {}", user.getName());
 		Owner owner = ao.create(Owner.class);
 		owner.setRepositoriesSize(Long.valueOf(0));
 		owner.setUserId(user.getId());
@@ -208,6 +207,11 @@ public class AoPersonalRepositoriesService implements
 		} else {
 			return personalRepos[0];
 		}
+	}
+
+	@Override
+	public int getOwnersCount() {
+		return ao.count(Owner.class);
 	}
 
 }
