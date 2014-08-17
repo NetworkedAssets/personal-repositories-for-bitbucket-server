@@ -63,6 +63,9 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util', 'jquery' ], func
 		toggleUserRepositories : function(e) {
 			var $el = $(e.currentTarget);
 			var userId = $el.data('user-id');
+			if ($el.hasClass('loading')) {
+				return;
+			}
 			if ($el.hasClass('expanded')) {
 				this.hideUserRepositories(userId);
 			} else {
@@ -73,6 +76,7 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util', 'jquery' ], func
 		
 		hideUserRepositories : function(userId) {
 			this.$('.repo-owner-' + userId).remove();
+			this.enableExpanding(this.findUserRow(userId).find('.expander'));
 		},
 		
 		showUserRepositories : function(data) {
@@ -81,8 +85,9 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util', 'jquery' ], func
 				rendered += this.repositoryTemplate(this.prepareRepositoryViewData(data.userId, repo));
 			}, this);
 			
-			this.$('.repository-owner-id-' + data.userId).after(rendered);
-			this.hideRepositoriesLoader();
+			var userRow = this.findUserRow(data.userId);
+			userRow.after(rendered);
+			this.hideRepositoriesLoader(userRow.find('.expander'));
 		},
 		
 		prepareRepositoryViewData : function(userId, repo) {
@@ -96,9 +101,29 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util', 'jquery' ], func
 			};
 		},
 		
-		showRepositoriesLoader : function() {
-			
+		findUserRow : function(userId) {
+			return this.$('.repository-owner-id-' + userId);
+		},
+		
+		enableExpanding : function(el) {
+			el.removeClass('expanded');
+			this.changeExpanderIcon(el, 'aui-iconfont-expanded', 'aui-iconfont-collapsed');
+		},
+		
+		showRepositoriesLoader : function(el) {
+			el.addClass('loading');
+			this.changeExpanderIcon(el, 'aui-iconfont-collapsed', 'aui-icon-wait');
+		},
+		
+		hideRepositoriesLoader : function(el) {
+			el.removeClass('loading').addClass('expanded');
+			this.changeExpanderIcon(el, 'aui-icon-wait', 'aui-iconfont-expanded');
+		},
+		
+		changeExpanderIcon : function(parentEl, oldClass, newClass) {
+			parentEl.find('.aui-icon').removeClass(oldClass).addClass(newClass);
 		}
+		
 
 	});
 });

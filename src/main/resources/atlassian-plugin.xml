@@ -92,7 +92,7 @@
 
 		<resource type="download" name="templates/repositories-repository-soy.js"
 			location="/templates/repositories/repository.soy" />
-			
+			,
 		<resource type="download" name="repositories/model/RepositoryOwner.js"
 			location="/js/repositories/model/RepositoryOwner.js" />
 		<resource type="download" name="repositories/model/RepositoryOwners.js"
@@ -110,9 +110,6 @@
 		<!-- App -->
 		<resource type="download" name="Router.js" location="/js/Router.js" />
 		<resource type="download" name="App.js" location="/js/App.js" />
-
-		<dependency>com.atlassian.auiplugin:aui-experimental-iconfont
-		</dependency>
 	</web-resource>
 
 	<stash-resource key="templates-soy" name="Soy Templates">
