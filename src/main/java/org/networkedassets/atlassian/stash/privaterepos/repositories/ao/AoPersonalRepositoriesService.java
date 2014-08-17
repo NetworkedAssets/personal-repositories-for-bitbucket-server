@@ -2,13 +2,22 @@ package org.networkedassets.atlassian.stash.privaterepos.repositories.ao;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import net.java.ao.Query;
 
 import org.networkedassets.atlassian.stash.privaterepos.repositories.Owner;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepositoriesService;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepository;
+import org.networkedassets.atlassian.stash.privaterepos.repositories.SortCriteria;
+import org.networkedassets.atlassian.stash.privaterepos.repositories.SortField;
+import org.networkedassets.atlassian.stash.privaterepos.repositories.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,31 +53,100 @@ public class AoPersonalRepositoriesService implements
 			.getLogger(AoPersonalRepositoriesService.class);
 
 	@Override
-	public Page<Owner> getPersonalRepositoriesOwners(PageRequest pageRequest) {
+	public Page<Owner> getPersonalRepositoriesOwners(PageRequest pageRequest,
+			SortCriteria sort) {
+		if (sort.getField().equals(SortField.SIZE)) {
+			return getPersonalRepositoriesOwnersSortedBySize(pageRequest,
+					sort.getDirection());
+		} else {
+			return getPersonalRepositoriesOwnersSortedByName(pageRequest,
+					sort.getDirection());
+		}
+	}
 
+	private Page<Owner> getPersonalRepositoriesOwnersSortedByName(
+			PageRequest pageRequest, SortOrder direction) {
+
+		int ownersCount = ao.count(Owner.class);
+
+		Owner[] allOwners = ao.find(Owner.class);
+		Map<Integer, Owner> ownersByUserIdMap = createOwnersByUserIdMap(allOwners);
+
+		Set<? extends StashUser> stashUsers = userService
+				.getUsersById(getStashUserIds(allOwners));
+
+		List<StashUser> sortedStashUsers = sortStashUsersByName(stashUsers,
+				direction);
+		List<StashUser> sortedStashUsersPage = sortedStashUsers.subList(
+				pageRequest.getStart(),
+				pageRequest.getStart() + pageRequest.getLimit());
+
+		List<Owner> sortedOwnersPage = new ArrayList<Owner>();
+
+		for (StashUser stashUser : sortedStashUsersPage) {
+			sortedOwnersPage.add(ownersByUserIdMap.get(stashUser.getId()));
+		}
+
+		return new PageImpl<Owner>(pageRequest, sortedOwnersPage, isLastPage(
+				pageRequest, ownersCount));
+	}
+
+	private Map<Integer, Owner> createOwnersByUserIdMap(Owner[] owners) {
+		Map<Integer, Owner> ownersMap = new HashMap<Integer, Owner>();
+		for (Owner owner : owners) {
+			ownersMap.put(owner.getUserId(), owner);
+		}
+		return ownersMap;
+	}
+
+	private List<StashUser> sortStashUsersByName(
+			Set<? extends StashUser> stashUsers, SortOrder direction) {
+		List<StashUser> usersList = new ArrayList<StashUser>(stashUsers);
+		Comparator<StashUser> comparator = new Comparator<StashUser>() {
+			@Override
+			public int compare(StashUser o1, StashUser o2) {
+				return o1.getName().compareTo(o2.getName());
+			}
+		};
+		if (direction == SortOrder.DESC) {
+			comparator = Collections.reverseOrder(comparator);
+		}
+		Collections.sort(usersList, comparator);
+		return usersList;
+	}
+
+	private Set<Integer> getStashUserIds(Owner[] owners) {
+		Set<Integer> ids = new HashSet<Integer>();
+		for (Owner owner : owners) {
+			ids.add(owner.getUserId());
+		}
+		return ids;
+	}
+
+	private Page<Owner> getPersonalRepositoriesOwnersSortedBySize(
+			PageRequest pageRequest, SortOrder direction) {
 		int ownersCount = ao.count(Owner.class);
 
 		Owner[] owners = ao.find(
 				Owner.class,
-				Query.select().offset(pageRequest.getStart())
+				Query.select()
+						.order("REPOSITORIES_SIZE " + direction.toString())
+						.offset(pageRequest.getStart())
 						.limit(pageRequest.getLimit()));
 
-		List<Owner> ownersList = Arrays.asList(owners);
-
-		return new PageImpl<Owner>(pageRequest, ownersList, isLastPage(
-				pageRequest, ownersCount));
+		return new PageImpl<Owner>(pageRequest, Arrays.asList(owners),
+				isLastPage(pageRequest, ownersCount));
 	}
 
 	private boolean isLastPage(PageRequest pageRequest, Integer totalCount) {
 		return pageRequest.getStart() + pageRequest.getLimit() <= totalCount;
 	}
 
-	@Override
-	public List<PersonalRepository> getUserPersonalRepositories(StashUser user) {
+	private List<PersonalRepository> getUserPersonalRepositories(StashUser user) {
 		Owner owner = findOwner(user);
 		return Arrays.asList(owner.getRepositories());
 	}
-	
+
 	@Override
 	public List<PersonalRepository> getUserPersonalRepositories(int userId) {
 		StashUser stashUser = userService.getUserById(userId);

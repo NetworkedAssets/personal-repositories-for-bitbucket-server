@@ -19,6 +19,7 @@ define('RepositoriesController', [ 'underscore', 'jquery', 'RepositoriesTable',
 
 		createModels : function() {
 			this.repositoryOwners = new RepositoryOwners();
+			this.repositoryOwners.setSorting('size');
 			this.repositoriesEvents = {};
 			_.extend(this.repositoriesEvents, Backbone.Events);
 		},
