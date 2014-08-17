@@ -19,7 +19,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.atlassian.stash.repository.Repository;
 import com.atlassian.stash.util.Page;
 import com.atlassian.stash.util.PageRequest;
 import com.atlassian.stash.util.PageRequestImpl;
@@ -38,6 +37,7 @@ public class RepositoriesRestService {
 	@Autowired
 	private RepositoryOwnerStateCreator repositoryOwnerStateCreator;
 
+	@Autowired
 	private PersonalRepositoryStateCreator personalRepositoryStateCreator;
 
 	@Path("owners")
@@ -64,9 +64,9 @@ public class RepositoriesRestService {
 	@Path("user/{id}")
 	@GET
 	public List<PersonalRepositoryState> getUserRepositories(
-			@PathParam("userId") int userId) {
-
+			@PathParam("id") int userId) {
 		// this.authorizationVerifier.verify();
+		log.debug("Requested repositories for user {}", userId);
 		List<PersonalRepository> userPersonalRepositories = personalRepositoriesService
 				.getUserPersonalRepositories(userId);
 		return personalRepositoryStateCreator

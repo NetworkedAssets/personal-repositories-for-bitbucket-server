@@ -1,0 +1,16 @@
+{namespace org.networkedassets.personalRepos.repositories}
+
+/**
+ * Repository row
+ * 
+ * @param owner
+ * @param repository
+ */
+{template .repository}
+	<tr class="repo-owner-{$owner.id}">
+		<td>
+        </td>
+        <td>{$repository.name}</td>
+        <td>{$repository.size}</td>
+    </tr>
+{/template}

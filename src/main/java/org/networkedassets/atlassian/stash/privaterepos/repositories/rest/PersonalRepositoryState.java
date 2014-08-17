@@ -7,25 +7,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class PersonalRepositoryState {
 
 	@XmlElement
-	private String repositoryName;
+	private String name;
 
 	@XmlElement
-	private long repositorySize;
+	private long size;
 
 	public String getRepositoryName() {
-		return repositoryName;
+		return name;
 	}
 
 	public void setRepositoryName(String repositoryName) {
-		this.repositoryName = repositoryName;
+		this.name = repositoryName;
 	}
 
 	public long getRepositorySize() {
-		return repositorySize;
+		return size;
 	}
 
 	public void setRepositorySize(long repositorySize) {
-		this.repositorySize = repositorySize;
+		this.size = repositorySize;
 	}
 
 }
