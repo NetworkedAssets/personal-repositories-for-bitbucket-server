@@ -1,0 +1,27 @@
+{namespace org.networkedassets.personalRepos.repositories}
+
+/**
+ * Repository row
+ * 
+ * @param owner
+ * @param repository
+ */
+{template .repository}
+	<tr class="repo-owner-{$owner.id}">
+		<td>
+        </td>
+        <td>
+        <span class="repository-name">
+        <span class="aui-icon aui-icon-small {sp}
+        	{if $repository.fork}
+        		aui-iconfont-devtools-repository-forked
+        	{else}
+        		aui-iconfont-devtools-repository
+        	{/if}
+        	">Repository</span>
+        <a href="{$repository.url}">{$repository.name}</a>
+        </span>
+        </td>
+        <td>{$repository.size}</td>
+    </tr>
+{/template}

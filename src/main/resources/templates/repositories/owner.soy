@@ -6,10 +6,10 @@
  * @param owner
  */
 {template .owner}
-	<tr>
-		<td class="expander">
-			
-        </td>
+	<tr class="repository-owner-id-{$owner.id}">
+		<td class="expander" data-user-id="{$owner.id}">
+			<span class="aui-icon aui-icon-small aui-iconfont-collapsed"></span>
+		</td>
         <td>
         	{call org.networkedassets.personalRepos.userWithAvatar}
         		{param user: $owner/}

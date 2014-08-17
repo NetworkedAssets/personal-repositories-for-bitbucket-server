@@ -44,11 +44,9 @@
 			<transformer key="soyTransformer" />
 		</transformation>
 		<!-- Util -->
-		<resource type="download" name="Util.js"
-			location="/js/Util.js" />
+		<resource type="download" name="Util.js" location="/js/Util.js" />
 		<!-- Components -->
-		<resource type="download" name="user-components.js"
-			location="/templates/user.soy" />
+		<resource type="download" name="user-components.js" location="/templates/user.soy" />
 		<!-- Permissions -->
 		<resource type="download" name="permissions-table-soy.js"
 			location="/templates/permissions/table.soy" />
@@ -89,12 +87,22 @@
 			location="/js/lib/jquery.simplePagination.js" />
 		<resource type="download" name="templates/repositories-table-soy.js"
 			location="/templates/repositories/table.soy" />
-			<resource type="download" name="templates/repositories-owner-soy.js"
+		<resource type="download" name="templates/repositories-owner-soy.js"
 			location="/templates/repositories/owner.soy" />
+
+		<resource type="download" name="templates/repositories-repository-soy.js"
+			location="/templates/repositories/repository.soy" />
+			,
 		<resource type="download" name="repositories/model/RepositoryOwner.js"
 			location="/js/repositories/model/RepositoryOwner.js" />
 		<resource type="download" name="repositories/model/RepositoryOwners.js"
 			location="/js/repositories/model/RepositoryOwners.js" />
+
+		<resource type="download" name="repositories/model/Repository.js"
+			location="/js/repositories/model/Repository.js" />
+		<resource type="download" name="repositories/model/UserRepositories.js"
+			location="/js/repositories/model/UserRepositories.js" />
+
 		<resource type="download" name="repositories/view/RepositoriesTable.js"
 			location="/js/repositories/view/RepositoriesTable.js" />
 		<resource type="download" name="repositories/RepositoriesController.js"
@@ -102,8 +110,6 @@
 		<!-- App -->
 		<resource type="download" name="Router.js" location="/js/Router.js" />
 		<resource type="download" name="App.js" location="/js/App.js" />
-		
-		<dependency>com.atlassian.auiplugin:aui-experimental-iconfont</dependency>
 	</web-resource>
 
 	<stash-resource key="templates-soy" name="Soy Templates">

@@ -1,5 +1,7 @@
 package org.networkedassets.atlassian.stash.privaterepos.repositories.rest;
 
+import java.util.List;
+
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -10,13 +12,13 @@ import javax.ws.rs.core.MediaType;
 
 import org.networkedassets.atlassian.stash.privaterepos.repositories.Owner;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepositoriesService;
+import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepository;
 import org.networkedassets.atlassian.stash.privaterepos.util.RestPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.atlassian.stash.repository.Repository;
 import com.atlassian.stash.util.Page;
 import com.atlassian.stash.util.PageRequest;
 import com.atlassian.stash.util.PageRequestImpl;
@@ -34,6 +36,9 @@ public class RepositoriesRestService {
 
 	@Autowired
 	private RepositoryOwnerStateCreator repositoryOwnerStateCreator;
+
+	@Autowired
+	private PersonalRepositoryStateCreator personalRepositoryStateCreator;
 
 	@Path("owners")
 	@GET
@@ -58,9 +63,14 @@ public class RepositoriesRestService {
 
 	@Path("user/{id}")
 	@GET
-	public Page<Repository> getUserRepositories(@PathParam("userId") int userId) {
+	public List<PersonalRepositoryState> getUserRepositories(
+			@PathParam("id") int userId) {
 		// this.authorizationVerifier.verify();
-		return null;
+		log.debug("Requested repositories for user {}", userId);
+		List<PersonalRepository> userPersonalRepositories = personalRepositoriesService
+				.getUserPersonalRepositories(userId);
+		return personalRepositoryStateCreator
+				.createFrom(userPersonalRepositories);
 	}
 
 }

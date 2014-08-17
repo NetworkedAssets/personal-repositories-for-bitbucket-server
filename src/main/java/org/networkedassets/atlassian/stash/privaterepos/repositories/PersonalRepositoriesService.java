@@ -17,6 +17,8 @@ public interface PersonalRepositoriesService {
 	Page<Owner> getPersonalRepositoriesOwners(PageRequest pageRequest);
 
 	List<PersonalRepository> getUserPersonalRepositories(StashUser user);
+	
+	List<PersonalRepository> getUserPersonalRepositories(int userId);
 
 	void deletePersonalRepository(Repository repo);
 

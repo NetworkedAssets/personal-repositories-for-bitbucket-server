@@ -40,6 +40,7 @@ public class UsersStateCreator {
 			StashUser stashUser) {
 		userState.setAvatarUrl(navBuilder.user(stashUser).avatar(64)
 				.buildAbsolute());
+		userState.setId(stashUser.getId());
 		userState.setName(stashUser.getName());
 		userState.setDisplayName(stashUser.getDisplayName());
 		userState.setProfileUrl(navBuilder.user(stashUser).buildRelative());

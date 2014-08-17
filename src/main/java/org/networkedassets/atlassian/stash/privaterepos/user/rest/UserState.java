@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class UserState {
 
 	@XmlElement
+	private int id;
+	@XmlElement
 	private String name;
 	@XmlElement
 	private String displayName;
@@ -55,6 +57,14 @@ public class UserState {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 
