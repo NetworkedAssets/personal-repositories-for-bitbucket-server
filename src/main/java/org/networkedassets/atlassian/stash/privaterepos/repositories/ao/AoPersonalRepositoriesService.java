@@ -79,7 +79,7 @@ public class AoPersonalRepositoriesService implements
 				direction);
 		List<StashUser> sortedStashUsersPage = sortedStashUsers.subList(
 				pageRequest.getStart(),
-				pageRequest.getStart() + pageRequest.getLimit());
+				Math.min(pageRequest.getStart() + pageRequest.getLimit(), ownersCount));
 
 		List<Owner> sortedOwnersPage = new ArrayList<Owner>();
 
