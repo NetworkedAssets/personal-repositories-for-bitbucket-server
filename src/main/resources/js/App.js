@@ -51,8 +51,8 @@ define('PrivateRepos', [ 'underscore', 'jquery', 'Router',
 		
 		switchActiveTab : function(controllerKey) {
 			var activeTabClass = 'aui-nav-selected';
-			$('.section-tab').removeClass(activeTabClass);
-			$('.section-tab.' + controllerKey).addClass(activeTabClass);
+			$('.sections-menu .section-tab').removeClass(activeTabClass);
+			$('.sections-menu .section-tab.' + controllerKey).addClass(activeTabClass);
 		},
 		
 		closeCurrentController : function() {
