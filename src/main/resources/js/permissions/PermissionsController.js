@@ -32,6 +32,10 @@ define('PermissionsController', [ 'jquery', 'UsersTable', 'Users',
 			$('#groups-table').html(groupsTable.render().el);
 			groups.fetch();
 
+		},
+		
+		close : function() {
+			
 		}
 
 	});

@@ -83,6 +83,10 @@ define('RepositoriesController', [ 'underscore', 'jquery', 'RepositoriesTable',
 			col.getPage(col.state.currentPage, {
 				reset : true
 			});
+		},
+		
+		close : function() {
+			
 		}
 
 	});

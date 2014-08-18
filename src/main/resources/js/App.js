@@ -33,24 +33,32 @@ define('PrivateRepos', [ 'underscore', 'jquery', 'Router',
 		bindToRouterRoutes : function() {
 			_.each(this.controllers, function(value, key) {
 				this.router.on(value.route, _.bind(function() {
-					this.startController(this.controllers[key]);
+					this.startController(key, this.controllers[key]);
 				}, this));
 			}, this);
 		},
 		
-		startController : function(controller) {
+		startController : function(controllerKey, controller) {
+			this.switchActiveTab(controllerKey);
 			if (controller.instance === null) {
 				controller.instance = new controller.constructor();
 			}
 			controller.instance.start();
 			this.closeCurrentController();
 			$(controller.region).show();
-			this.currentController = controller.instance;
+			this.currentController = controller;
+		},
+		
+		switchActiveTab : function(controllerKey) {
+			var activeTabClass = 'aui-nav-selected';
+			$('.section-tab').removeClass(activeTabClass);
+			$('.section-tab.' + controllerKey).addClass(activeTabClass);
 		},
 		
 		closeCurrentController : function() {
 			if (this.currentController !== null) {
-				this.currentController.close();
+				$(this.currentController.region).hide();
+				this.currentController.instance.close();
 			}
 		},
 
