@@ -21,7 +21,8 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util', 'jquery' ], func
 		repositoryTemplate : org.networkedassets.personalRepos.repositories.repository,
 		
 		events : {
-			'click .expander' : 'toggleUserRepositories'
+			'click .expander' : 'toggleUserRepositories',
+			'click .sort-column' : 'changeSort'
 		},
 
 		render : function() {
@@ -35,7 +36,7 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util', 'jquery' ], func
 			}
 			return this;
 		},
-
+		
 		renderOwners : function() {
 			var rendered = "";
 			this.collection.each(function(model) {
@@ -122,8 +123,18 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util', 'jquery' ], func
 		
 		changeExpanderIcon : function(parentEl, oldClass, newClass) {
 			parentEl.find('.aui-icon').removeClass(oldClass).addClass(newClass);
-		}
+		},
 		
+		changeSort : function(e) {
+			$el = $(e.currentTarget);
+			if ($el.hasClass('selected')) {
+				this.trigger('sort-change-order');
+			} else {
+				$el.siblings().removeClass('selected');
+				$el.addClass('selected');
+				this.trigger('sort-change-field', $el.data('sort-by'));
+			}
+		}
 
 	});
 });

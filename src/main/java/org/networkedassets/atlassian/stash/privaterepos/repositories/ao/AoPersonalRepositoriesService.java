@@ -86,7 +86,6 @@ public class AoPersonalRepositoriesService implements
 		for (StashUser stashUser : sortedStashUsersPage) {
 			sortedOwnersPage.add(ownersByUserIdMap.get(stashUser.getId()));
 		}
-
 		return new PageImpl<Owner>(pageRequest, sortedOwnersPage, isLastPage(
 				pageRequest, ownersCount));
 	}

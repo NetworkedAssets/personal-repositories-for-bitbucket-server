@@ -2,6 +2,7 @@ define('RepositoryOwners', ['backbone', 'RepositoryOwner', 'Config'], function(B
 	return Backbone.PageableCollection.extend({
 		url : Config.urlBase + '/repositories/owners',
 		model: RepositoryOwner,
+		mode: "server",
 		
 		parseRecords: function (resp, options) {
 			return resp.items;
@@ -11,6 +12,6 @@ define('RepositoryOwners', ['backbone', 'RepositoryOwner', 'Config'], function(B
 			return {
 				totalRecords : resp.totalItems
 			};
-		}
+		},
 	});
 });

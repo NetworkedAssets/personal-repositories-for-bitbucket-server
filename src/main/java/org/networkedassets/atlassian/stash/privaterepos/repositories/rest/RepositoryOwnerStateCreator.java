@@ -1,10 +1,7 @@
 package org.networkedassets.atlassian.stash.privaterepos.repositories.rest;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.networkedassets.atlassian.stash.privaterepos.repositories.Owner;
 import org.networkedassets.atlassian.stash.privaterepos.user.rest.UsersStateCreator;
@@ -17,8 +14,6 @@ import org.springframework.stereotype.Component;
 import com.atlassian.stash.user.StashUser;
 import com.atlassian.stash.user.UserService;
 import com.atlassian.stash.util.Page;
-import com.atlassian.stash.util.PageImpl;
-import com.atlassian.stash.util.PageRequestImpl;
 
 @Component
 class RepositoryOwnerStateCreator {
@@ -39,19 +34,15 @@ class RepositoryOwnerStateCreator {
 	}
 
 	public List<RepositoryOwnerState> createFrom(Iterable<Owner> owners) {
-		List<RepositoryOwnerState> ownersState = new ArrayList<RepositoryOwnerState>();
 
-		Set<? extends StashUser> stashUsers = getStashUsersFromOwners(owners);
-		Iterator<? extends StashUser> stashUsersIterator = stashUsers
-				.iterator();
-
-		log.debug("{} StashUsers found", stashUsers.size());
+		List<RepositoryOwnerState> ownerStates = new ArrayList<RepositoryOwnerState>();
 
 		for (Owner owner : owners) {
-			log.debug("Creating State object from Owner {}", owner);
-			ownersState.add(create(owner, stashUsersIterator.next()));
+			ownerStates.add(create(owner,
+					userService.getUserById(owner.getUserId())));
 		}
-		return ownersState;
+
+		return ownerStates;
 	}
 
 	public RepositoryOwnerState createFrom(Owner owner) {
@@ -71,19 +62,6 @@ class RepositoryOwnerStateCreator {
 
 	private StashUser getStashUserFromOwner(Owner owner) {
 		return userService.getUserById(owner.getUserId());
-	}
-
-	private Set<? extends StashUser> getStashUsersFromOwners(
-			Iterable<Owner> owners) {
-		Set<Integer> ids = new HashSet<Integer>();
-		for (Owner owner : owners) {
-			ids.add(owner.getUserId());
-		}
-		if (ids.size() > 0) {
-			return userService.getUsersById(ids);
-		}
-		
-		return new HashSet<StashUser>();
 	}
 
 }
