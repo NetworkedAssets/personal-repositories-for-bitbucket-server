@@ -55,6 +55,11 @@
 
 .repositories-section .expander {
 	width: 20px;
+	cursor: pointer;
+}
+
+.repositories-section .sort-column {
+	cursor: pointer;
 }
 
 .repositories-section .sort-column.selected {
@@ -68,10 +73,21 @@
 	display: inline-block;
 	margin-left: 5px;
 	position: relative;
+	opacity: 1;
+}
+
+.repositories-section .sort-column.desc:hover:after,
+.repositories-section .sort-column.desc:after {
 	border-top-color: #333;
 	border-bottom-color: transparent;
-	opacity: 1;
 	top: 2px;
+}
+
+.repositories-section .sort-column.asc:hover:after,
+.repositories-section .sort-column.asc:after {
+	border-bottom-color: #333;
+	border-top-color: transparent;
+	bottom: 2px;
 }
 
 .repositories-section .size-column {

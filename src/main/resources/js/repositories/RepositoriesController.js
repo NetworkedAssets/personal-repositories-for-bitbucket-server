@@ -20,7 +20,7 @@ define('RepositoriesController', [ 'underscore', 'jquery', 'RepositoriesTable',
 
 		createModels : function() {
 			this.repositoryOwners = new RepositoryOwners();
-			this.repositoryOwners.setSorting('size');
+			this.repositoryOwners.setSorting('size', 1);
 			this.repositoriesEvents = {};
 			_.extend(this.repositoriesEvents, Backbone.Events);
 		},
@@ -54,6 +54,8 @@ define('RepositoriesController', [ 'underscore', 'jquery', 'RepositoriesTable',
 			var repositories = new UserRepositories([], {
 				userId : userId
 			});
+			repositories.sortBy(this.repositoryOwners.state.sortKey);
+			repositories.orderBy(this.repositoryOwners.state.order > 0 ? 'desc' : 'asc');
 			repositories.fetch().done(_.bind(function() {
 				this.notifyAboutFetchedRepositories(userId, repositories);
 			}, this));
