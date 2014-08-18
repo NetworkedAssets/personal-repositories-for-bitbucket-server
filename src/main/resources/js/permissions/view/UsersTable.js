@@ -5,11 +5,11 @@ define('UsersTable', [ 'Table', 'UserRow', 'UserBatch', 'Config' ], function(Tab
 		template : org.networkedassets.personalRepos.permissions.table,
 		itemView : UserRow,
 		searchFormatResult : function(object) {
-			return PrivateRepos.userSearchResult({user: object}) 
+			return org.networkedassets.personalRepos.permissions.userSearchResult({user: object}) 
 		},
 		
 		searchFormatSelection : function(object) {
-			return PrivateRepos.userSearchSelection({user: object})
+			return org.networkedassets.personalRepos.permissions.userSearchSelection({user: object})
 		},
 
 		initialize : function() {

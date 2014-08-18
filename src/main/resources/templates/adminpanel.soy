@@ -16,30 +16,29 @@
 </head>
 <body>
 	<script type="text/javascript">
-	{literal}
-	define('Config', [], function() {
-		return {
-			urlBase : "{/literal}{$baseApiPath}{literal}"
-		};
-	});
-	{/literal}
+		{literal}
+		define('Config', [], function() {
+			return {
+				urlBase : "{/literal}{$baseApiPath}{literal}"
+			};
+		});
+		{/literal}
 	</script>
-	
-	<nav class="aui-navgroup aui-navgroup-horizontal">
+	<nav class="sections-menu aui-navgroup aui-navgroup-horizontal">
 	    <div class="aui-navgroup-inner">
 	        <div class="aui-navgroup-primary">
 	            <ul class="aui-nav">
-	                <li><a href="#">Personal repositories</a></li>
-	                <li class="aui-nav-selected"><a href="#">Permissions</a></li>
+	                <li class="section-tab repositories aui-nav-selected"><a href="#repositories">Personal repositories</a></li>
+	                <li class="section-tab permissions"><a href="#permissions">Permissions</a></li>
 	            </ul>
 	        </div>
 	    </div>
 	</nav>
 	
-	<div class="aui-page-panel repositories-section">
+	<div class="repositories-section section">
 	</div>
 	
-	<div class="aui-page-panel permissions-section">
+	<div class="permissions-section section">
 	</div>
 	
 	

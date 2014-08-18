@@ -54,8 +54,8 @@
 			location="/templates/permissions/user.soy" />
 		<resource type="download" name="permissions-group-soy.js"
 			location="/templates/permissions/group.soy" />
-		<resource type="download" name="permissions-panel-soy.js"
-			location="/templates/permissions/panel.soy" />
+		<resource type="download" name="permissions-layout-soy.js"
+			location="/templates/permissions/layout.soy" />
 		<resource type="download" name="permissions/model/Group.js"
 			location="/js/permissions/model/Group.js" />
 		<resource type="download" name="permissions/model/Groups.js"
@@ -68,6 +68,8 @@
 			location="/js/permissions/model/Users.js" />
 		<resource type="download" name="permissions/model/UserBatch.js"
 			location="/js/permissions/model/UserBatch.js" />
+		<resource type="download" name="permissions/view/Layout.js"
+			location="/js/permissions/view/Layout.js" />
 		<resource type="download" name="permissions/view/GroupRow.js"
 			location="/js/permissions/view/GroupRow.js" />
 		<resource type="download" name="permissions/view/GroupsTable.js"

@@ -7,37 +7,61 @@ define('PrivateRepos', [ 'underscore', 'jquery', 'Router',
 	};
 
 	_.extend(constr.prototype, {
+		
+		controllers : {
+			permissions : {
+				instance : null,
+				constructor : PermissionsController,
+				region: '.permissions-section',
+				route : 'route:permissions'
+			},
+			repositories : {
+				instance : null,
+				constructor : RepositoriesController,
+				region: '.repositories-section',
+				route : 'route:repositories'
+			}
+		},
+		
 		initialize : function(opts) {
-			_.bindAll(this, 'startPermissions', 'startRepositories');
-
-			this.repositoriesController = null;
-			this.permissionsController = null;
-
+			_.bindAll(this, 'startController');
+			this.currentController = null;
 			this.router = new Router();
 			this.bindToRouterRoutes();
 		},
-
+		
 		bindToRouterRoutes : function() {
-			this.router.on('route:permissions', this.startPermissions);
-			this.router.on('route:repositories', this.startRepositories);
+			_.each(this.controllers, function(value, key) {
+				this.router.on(value.route, _.bind(function() {
+					this.startController(key, this.controllers[key]);
+				}, this));
+			}, this);
 		},
-
-		startPermissions : function() {
-			if (this.permissionsController === null) {
-				this.permissionsController = new PermissionsController();
-				this.permissionsController.start();
+		
+		startController : function(controllerKey, controller) {
+			this.switchActiveTab(controllerKey);
+			if (controller.instance === null) {
+				controller.instance = new controller.constructor({
+					region: controller.region
+				});
 			}
-			$('.repositories-section').hide();
-			$('.permissions-section').show();
+			controller.instance.start();
+			this.closeCurrentController();
+			$(controller.region).show();
+			this.currentController = controller;
 		},
-
-		startRepositories : function() {
-			if (this.repositoriesController === null) {
-				this.repositoriesController = new RepositoriesController();
-				this.repositoriesController.start();
+		
+		switchActiveTab : function(controllerKey) {
+			var activeTabClass = 'aui-nav-selected';
+			$('.sections-menu .section-tab').removeClass(activeTabClass);
+			$('.sections-menu .section-tab.' + controllerKey).addClass(activeTabClass);
+		},
+		
+		closeCurrentController : function() {
+			if (this.currentController !== null) {
+				$(this.currentController.region).hide();
+				this.currentController.instance.close();
 			}
-			$('.permissions-section').hide();
-			$('.repositories-section').show();
 		},
 
 		start : function() {
