@@ -45,10 +45,52 @@
 	color : #fff;
 }
 
-.repository-name .aui-icon {
+.repositories-section .repository-name {
+	margin-left: 30px;
+}
+
+.repositories-section .repository-name .aui-icon {
 	margin-right: 10px;
 }
 
 .repositories-section .expander {
 	width: 20px;
+	cursor: pointer;
+}
+
+.repositories-section .sort-column {
+	cursor: pointer;
+}
+
+.repositories-section .sort-column.selected {
+	background-color: transparent;
+}
+
+.repositories-section .sort-column.selected:after,
+.repositories-section .sort-column:hover:after {
+	border: 4px solid transparent;
+	content: "";
+	display: inline-block;
+	margin-left: 5px;
+	position: relative;
+	opacity: 1;
+}
+
+.repositories-section .sort-column.desc:hover:after,
+.repositories-section .sort-column.desc:after {
+	border-top-color: #333;
+	border-bottom-color: transparent;
+	top: 2px;
+}
+
+.repositories-section .sort-column.asc:hover:after,
+.repositories-section .sort-column.asc:after {
+	border-bottom-color: #333;
+	border-top-color: transparent;
+	bottom: 2px;
+}
+
+.repositories-section .size-column {
+	width: 150px;
+	text-align: right;
 }

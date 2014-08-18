@@ -13,6 +13,9 @@ import javax.ws.rs.core.MediaType;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.Owner;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepositoriesService;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepository;
+import org.networkedassets.atlassian.stash.privaterepos.repositories.SortCriteria;
+import org.networkedassets.atlassian.stash.privaterepos.repositories.SortField;
+import org.networkedassets.atlassian.stash.privaterepos.repositories.SortOrder;
 import org.networkedassets.atlassian.stash.privaterepos.util.RestPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,13 +47,15 @@ public class RepositoriesRestService {
 	@GET
 	public RestPage<RepositoryOwnerState> getUsers(
 			@DefaultValue("1") @QueryParam("page") int page,
-			@DefaultValue("20") @QueryParam("perPage") int perPage) {
+			@DefaultValue("20") @QueryParam("per_page") int perPage,
+			@DefaultValue("size") @QueryParam("sort_by") String sort,
+			@DefaultValue("desc") @QueryParam("order") String order) {
 
 		PageRequest pageRequest = new PageRequestImpl((page - 1) * perPage,
 				perPage);
-
 		Page<Owner> ownersPage = personalRepositoriesService
-				.getPersonalRepositoriesOwners(pageRequest);
+				.getPersonalRepositoriesOwners(pageRequest,
+						getSortCriteriaFromRequestParams(sort, order));
 
 		RestPage<RepositoryOwnerState> ownersStatePage = repositoryOwnerStateCreator
 				.createFrom(ownersPage);
@@ -64,13 +69,29 @@ public class RepositoriesRestService {
 	@Path("user/{id}")
 	@GET
 	public List<PersonalRepositoryState> getUserRepositories(
-			@PathParam("id") int userId) {
+			@PathParam("id") int userId,
+			@DefaultValue("size") @QueryParam("sort_by") String sort,
+			@DefaultValue("desc") @QueryParam("order") String order) {
 		// this.authorizationVerifier.verify();
 		log.debug("Requested repositories for user {}", userId);
 		List<PersonalRepository> userPersonalRepositories = personalRepositoriesService
 				.getUserPersonalRepositories(userId);
-		return personalRepositoryStateCreator
-				.createFrom(userPersonalRepositories);
+		return personalRepositoryStateCreator.createFrom(
+				userPersonalRepositories, getSortCriteriaFromRequestParams(sort, order));
+	}
+
+	private SortCriteria getSortCriteriaFromRequestParams(String sortParam,
+			String order) {
+		SortOrder sortOrder;
+		if (order.equalsIgnoreCase(SortOrder.ASC.toString())) {
+			sortOrder = SortOrder.ASC;
+		} else {
+			sortOrder = SortOrder.DESC;
+		}
+		if (sortParam.equals("name")) {
+			return new SortCriteria(SortField.NAME, sortOrder);
+		}
+		return new SortCriteria(SortField.SIZE, sortOrder);
 	}
 
 }
