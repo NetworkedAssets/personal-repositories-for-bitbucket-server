@@ -84,7 +84,7 @@ public class PersonalRepositoryStateCreator {
 			@Override
 			public int compare(PersonalRepositoryState o1,
 					PersonalRepositoryState o2) {
-				return o1.getRepositoryName().compareTo(o2.getRepositoryName());
+				return o1.getRepositoryName().compareToIgnoreCase(o2.getRepositoryName());
 			}
 		};
 		return orderComparator(sizeComparator, direction);

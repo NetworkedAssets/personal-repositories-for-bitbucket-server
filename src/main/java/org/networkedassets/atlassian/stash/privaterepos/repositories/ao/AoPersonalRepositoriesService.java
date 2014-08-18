@@ -104,7 +104,7 @@ public class AoPersonalRepositoriesService implements
 		Comparator<StashUser> comparator = new Comparator<StashUser>() {
 			@Override
 			public int compare(StashUser o1, StashUser o2) {
-				return o1.getName().compareTo(o2.getName());
+				return o1.getName().compareToIgnoreCase(o2.getName());
 			}
 		};
 		if (direction == SortOrder.DESC) {
