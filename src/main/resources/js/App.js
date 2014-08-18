@@ -41,7 +41,9 @@ define('PrivateRepos', [ 'underscore', 'jquery', 'Router',
 		startController : function(controllerKey, controller) {
 			this.switchActiveTab(controllerKey);
 			if (controller.instance === null) {
-				controller.instance = new controller.constructor();
+				controller.instance = new controller.constructor({
+					region: controller.region
+				});
 			}
 			controller.instance.start();
 			this.closeCurrentController();
@@ -79,5 +81,5 @@ AJS.$(document).ready(function($) {
 			privateRepos.start();
 		});
 	};
-	go();
+	setTimeout(go, 10);
 }(AJS.$));

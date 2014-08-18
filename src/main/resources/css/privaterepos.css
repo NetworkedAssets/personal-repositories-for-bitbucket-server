@@ -1,3 +1,7 @@
+.section {
+	padding-top: 20px;
+}
+
 #users-table .private-repos-permissions-table,
 #groups-table .private-repos-permissions-table
  {

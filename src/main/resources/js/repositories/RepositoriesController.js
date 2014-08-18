@@ -7,6 +7,7 @@ define('RepositoriesController', [ 'underscore', 'jquery', 'RepositoriesTable',
 
 	_.extend(constr.prototype, {
 		initialize : function(opts) {
+			this.region = $(opts.region);
 			_.bindAll(this, 'onPageSelected', 'onUserExpanded',
 					'onChangeOrder', 'onChangeSort');
 		},
@@ -39,7 +40,7 @@ define('RepositoriesController', [ 'underscore', 'jquery', 'RepositoriesTable',
 		},
 
 		showTable : function() {
-			$('.repositories-section').html(this.repositoriesTable.el);
+			this.region.html(this.repositoriesTable.el);
 		},
 
 		fetchFirstPage : function() {

@@ -1,5 +1,5 @@
-define('PermissionsController', [ 'jquery', 'UsersTable', 'Users',
-		'GroupsTable', 'Groups' ], function($, UsersTable, Users, GroupsTable,
+define('PermissionsController', [ 'jquery', 'PermissionsLayout', 'UsersTable', 'Users',
+		'GroupsTable', 'Groups' ], function($, PermissionsLayout, UsersTable, Users, GroupsTable,
 		Groups) {
 
 	var constr = function(opts) {
@@ -8,11 +8,18 @@ define('PermissionsController', [ 'jquery', 'UsersTable', 'Users',
 
 	_.extend(constr.prototype, {
 		initialize : function(opts) {
+			this.region = $(opts.region);
 		},
 
 		start : function() {
+			this.createlayout();
 			this.startUsersTable();
 			this.startGroupsTable();
+		},
+		
+		createlayout : function() {
+			this.layout = new PermissionsLayout();
+			this.region.html(this.layout.render().el);
 		},
 
 		startUsersTable : function() {

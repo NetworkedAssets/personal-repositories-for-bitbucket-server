@@ -8,11 +8,11 @@ define('GroupsTable', [ 'Table', 'GroupRow', 'underscore', 'GroupBatch', 'Config
 		},
 		
 		searchFormatResult : function(object) {
-			return PrivateRepos.groupSearchResult({group: object}) 
+			return org.networkedassets.personalRepos.permissions.groupSearchResult({group: object}) 
 		},
 		
 		searchFormatSelection : function(object) {
-			return PrivateRepos.groupSearchSelection({group: object})
+			return org.networkedassets.personalRepos.permissions.groupSearchSelection({group: object})
 		},
 		
 		template : org.networkedassets.personalRepos.permissions.table,
