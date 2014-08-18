@@ -7,37 +7,51 @@ define('PrivateRepos', [ 'underscore', 'jquery', 'Router',
 	};
 
 	_.extend(constr.prototype, {
+		
+		controllers : {
+			permissions : {
+				instance : null,
+				constructor : PermissionsController,
+				region: '.permissions-section',
+				route : 'route:permissions'
+			},
+			repositories : {
+				instance : null,
+				constructor : RepositoriesController,
+				region: '.repositories-section',
+				route : 'route:repositories'
+			}
+		},
+		
 		initialize : function(opts) {
-			_.bindAll(this, 'startPermissions', 'startRepositories');
-
-			this.repositoriesController = null;
-			this.permissionsController = null;
-
+			_.bindAll(this, 'startController');
+			this.currentController = null;
 			this.router = new Router();
 			this.bindToRouterRoutes();
 		},
-
+		
 		bindToRouterRoutes : function() {
-			this.router.on('route:permissions', this.startPermissions);
-			this.router.on('route:repositories', this.startRepositories);
+			_.each(this.controllers, function(value, key) {
+				this.router.on(value.route, _.bind(function() {
+					this.startController(this.controllers[key]);
+				}, this));
+			}, this);
 		},
-
-		startPermissions : function() {
-			if (this.permissionsController === null) {
-				this.permissionsController = new PermissionsController();
-				this.permissionsController.start();
+		
+		startController : function(controller) {
+			if (controller.instance === null) {
+				controller.instance = new controller.constructor();
 			}
-			$('.repositories-section').hide();
-			$('.permissions-section').show();
+			controller.instance.start();
+			this.closeCurrentController();
+			$(controller.region).show();
+			this.currentController = controller.instance;
 		},
-
-		startRepositories : function() {
-			if (this.repositoriesController === null) {
-				this.repositoriesController = new RepositoriesController();
-				this.repositoriesController.start();
+		
+		closeCurrentController : function() {
+			if (this.currentController !== null) {
+				this.currentController.close();
 			}
-			$('.permissions-section').hide();
-			$('.repositories-section').show();
 		},
 
 		start : function() {
