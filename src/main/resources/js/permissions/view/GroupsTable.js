@@ -4,7 +4,7 @@ define('GroupsTable', [ 'Table', 'GroupRow', 'underscore', 'GroupBatch', 'Config
 		
 		initialize : function() {
 			Table.prototype.initialize.apply(this, arguments);
-			_.bindAll(this, 'onAllowSuccess', 'handleAllow');
+			_.bindAll(this, 'onAddSuccess', 'handleAdd');
 		},
 		
 		searchFormatResult : function(object) {
@@ -27,17 +27,27 @@ define('GroupsTable', [ 'Table', 'GroupRow', 'underscore', 'GroupBatch', 'Config
 				id: object.name
 			});
 		},
+		
+		prepareTemplateParams : function() {
+			return {
+				mode : this.mode,
+				header : {
+					allow: 'Denied groups',
+					deny: 'Allowed groups'
+				}
+			};
+		},
 
-		handleAllow : function(values) {
+		handleAdd: function(values) {
 			var groupBatch = new GroupBatch({
 				ids : values
 			});
 			groupBatch.save({}, {
-				success : this.onAllowSuccess
+				success : this.onAddSuccess
 			});
 		},
 		
-		onAllowSuccess : function() {
+		onAddSuccess : function() {
 			this.collection.fetch();
 			this.clearSearchInput();
 		}

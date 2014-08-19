@@ -30,6 +30,10 @@
 	margin-top: 20px;
 }
 
+#groups-table {
+	margin-top: 30px;
+}
+
 .private-repos-permissions-table thead .add-form-row {
 	padding: 10px 10px;
 	border-top: 1px solid #c5c5c5;

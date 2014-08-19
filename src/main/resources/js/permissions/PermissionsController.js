@@ -1,5 +1,5 @@
-define('PermissionsController', [ 'jquery', 'PermissionsMode', 'PermissionsLayout', 'UsersTable', 'Users',
-		'GroupsTable', 'Groups' ], function($, PermissionsMode, PermissionsLayout, UsersTable, Users, GroupsTable,
+define('PermissionsController', [ 'underscore', 'jquery', 'PermissionsMode', 'PermissionsLayout', 'UsersTable', 'Users',
+		'GroupsTable', 'Groups' ], function(_, $, PermissionsMode, PermissionsLayout, UsersTable, Users, GroupsTable,
 		Groups) {
 
 	var constr = function(opts) {
@@ -37,26 +37,32 @@ define('PermissionsController', [ 'jquery', 'PermissionsMode', 'PermissionsLayou
 		
 		onModeChange : function(mode) {
 			this.permissionsMode.set('mode', mode);
-			this.permissionsMode.save();
+			this.permissionsMode.save().done(this.switchViewsMode);
+		},
+		
+		switchViewsMode : function() {
+			this.usersTable.switchMode(mode);
+			this.groupsTable.switchMode(mode);
 		},
 
 		startUsersTable : function() {
-			var users = new Users();
-			var usersTable = new UsersTable({
-				collection : users
+			this.users = new Users();
+			this.usersTable = new UsersTable({
+				collection : this.users,
+				mode : this.permissionsMode.get('mode')
 			});
-			$('#users-table').html(usersTable.render().el);
-			users.fetch();
+			$('#users-table').html(this.usersTable.render().el);
+			this.users.fetch();
 		},
 
 		startGroupsTable : function() {
-			var groups = new Groups();
-			var groupsTable = new GroupsTable({
-				collection : groups
+			this.groups = new Groups();
+			this.groupsTable = new GroupsTable({
+				collection : this.groups,
+				mode : this.permissionsMode.get('mode')
 			});
-			$('#groups-table').html(groupsTable.render().el);
-			groups.fetch();
-
+			$('#groups-table').html(this.groupsTable.render().el);
+			this.groups.fetch();
 		},
 		
 		close : function() {

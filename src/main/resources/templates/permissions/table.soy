@@ -2,43 +2,58 @@
 
 /**
  * Groups table
+ * 
+ * @param mode
+ * @param header
  */
 {template .table}
-<thead>
-	<tr>
-		<th colspan="2" class="add-form-row">
-			{call aui.form.form}
-				{param action}{/param}
-				{param method}post{/param}
-				{param content}
-					{call aui.group.group}
-						{param content}
-    						{call aui.group.item}
-    							{param content}
-    								{call aui.form.input}
-    									{param name}search{/param}
-    									{param extraClasses}search-input{/param}
-    								{/call}
-    							{/param}
-    						{/call}
-    						{call aui.group.item}
-    							{param content}
-    								{call aui.form.button}
-    									{param extraClasses}allow-button{/param}
-    									{param name}allow{/param}
-    									{param text}Allow{/param}
-    								{/call}
-    							{/param}
-    							{param extraClasses}actions-item{/param}
-    						{/call}
-    					{/param}
-    					{param extraClasses}aui-group-split{/param}
-					{/call}
-				{/param}
-			{/call}
-		</th>
-	</tr>
-</thead>
-<tbody>
-</tbody>
+{call aui.group.group}
+    {param content}
+        {call aui.group.item}
+            {param content}
+                <h3>{if $mode =='allow'}{$header.allow}{else}{$header.deny}{/if}</h3>
+            {/param}
+        {/call}
+    {/param}
+    {param extraClasses}users-header{/param}
+{/call}
+<table class="private-repos-permissions-table aui">
+	<thead>
+		<tr>
+			<th colspan="2" class="add-form-row">
+				{call aui.form.form}
+					{param action}{/param}
+					{param method}post{/param}
+					{param content}
+						{call aui.group.group}
+							{param content}
+	    						{call aui.group.item}
+	    							{param content}
+	    								{call aui.form.input}
+	    									{param name}search{/param}
+	    									{param extraClasses}search-input{/param}
+	    								{/call}
+	    							{/param}
+	    						{/call}
+	    						{call aui.group.item}
+	    							{param content}
+	    								{call aui.form.button}
+	    									{param extraClasses}add-button{/param}
+	    									{param name}add{/param}
+	    									{param text}{if $mode =='allow'}Deny{else}Allow{/if}{/param}
+	    								{/call}
+	    							{/param}
+	    							{param extraClasses}actions-item{/param}
+	    						{/call}
+	    					{/param}
+	    					{param extraClasses}aui-group-split{/param}
+						{/call}
+					{/param}
+				{/call}
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
 {/template}
