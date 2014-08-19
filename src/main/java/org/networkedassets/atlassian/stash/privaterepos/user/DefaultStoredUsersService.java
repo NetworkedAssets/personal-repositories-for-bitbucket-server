@@ -1,5 +1,6 @@
 package org.networkedassets.atlassian.stash.privaterepos.user;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.networkedassets.atlassian.stash.privaterepos.permissions.PermissionsModeService;
@@ -24,9 +25,11 @@ public class DefaultStoredUsersService implements StoredUsersService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<StashUser> getAll() {
-		Set<? extends StashUser> usersById = userService
-				.getUsersById(userIdsRepository.getAll());
-		return (Set<StashUser>) usersById;
+		Set<Integer> userIds = userIdsRepository.getAll();
+		if (userIds.isEmpty()) {
+			return new HashSet<StashUser>();
+		}
+		return (Set<StashUser>) userService.getUsersById(userIds);
 	}
 
 	@SuppressWarnings("unchecked")

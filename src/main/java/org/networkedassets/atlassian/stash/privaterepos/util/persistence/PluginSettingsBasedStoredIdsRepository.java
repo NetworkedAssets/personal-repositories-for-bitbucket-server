@@ -5,6 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,9 @@ public abstract class PluginSettingsBasedStoredIdsRepository implements
 	public Set<Integer> getAll() {
 		List<Integer> listOfIds = (List<Integer>) pluginSettings
 				.get(getSettingsKey());
+		if (listOfIds == null) {
+			return new LinkedHashSet<Integer>();
+		}
 		return new LinkedHashSet<Integer>(listOfIds);
 	}
 
