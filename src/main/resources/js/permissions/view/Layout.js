@@ -13,6 +13,7 @@ define('PermissionsLayout', [ 'backbone', 'underscore', 'jquery' ], function(Bac
 			if (!this.isPressed($el)) {
 				this.$('.aui-button[aria-pressed="true"]').attr('aria-pressed', 'false');
 				$el.attr('aria-pressed', 'true');
+				this.trigger('mode-changed', $el.hasClass('allow') ? 'allow' : 'deny')
 			}
 		},
 		

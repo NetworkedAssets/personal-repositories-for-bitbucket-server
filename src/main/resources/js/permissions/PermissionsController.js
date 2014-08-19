@@ -19,7 +19,12 @@ define('PermissionsController', [ 'jquery', 'PermissionsLayout', 'UsersTable', '
 		
 		createlayout : function() {
 			this.layout = new PermissionsLayout();
+			this.layout.on('mode-changed', this.onModeChange);
 			this.region.html(this.layout.render().el);
+		},
+		
+		onModeChange : function(mode) {
+			console.log('mode changed to ', mode)
 		},
 
 		startUsersTable : function() {
