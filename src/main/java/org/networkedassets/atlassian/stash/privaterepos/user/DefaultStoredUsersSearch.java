@@ -5,6 +5,8 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +24,9 @@ public class DefaultStoredUsersSearch implements StoredUsersSearch {
 
 	@Autowired
 	private UserService userService;
+
+	private final Logger log = LoggerFactory
+			.getLogger(DefaultStoredUsersSearch.class);
 
 	@Override
 	public Set<StashUser> findNonStoredUsers(String searchKeyword) {
@@ -42,9 +47,12 @@ public class DefaultStoredUsersSearch implements StoredUsersSearch {
 
 	private Map<Integer, StashUser> findUsersByName(String searchKeyword,
 			int page) {
+		int offset = MAX_FOUND_USERS * (page - 1);
+		int limit = offset + MAX_FOUND_USERS;
+		log.debug("Searching for users by {} with limit {} and offset {}",
+				searchKeyword, limit, offset);
 		Iterable<? extends StashUser> stashUsers = userService.findUsersByName(
-				searchKeyword, new PageRequestImpl(0, MAX_FOUND_USERS))
-				.getValues();
+				searchKeyword, new PageRequestImpl(offset, limit)).getValues();
 		Map<Integer, StashUser> usersMap = createUserByIdMap(stashUsers);
 		return usersMap;
 	}

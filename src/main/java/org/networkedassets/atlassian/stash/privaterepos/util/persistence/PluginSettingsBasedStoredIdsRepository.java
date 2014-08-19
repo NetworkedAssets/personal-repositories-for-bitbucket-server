@@ -5,9 +5,10 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
@@ -31,6 +32,9 @@ public abstract class PluginSettingsBasedStoredIdsRepository implements
 	private PluginSettingsFactory pluginSettingsFactory;
 
 	private PluginSettings pluginSettings;
+
+	private final Logger log = LoggerFactory
+			.getLogger(PluginSettingsBasedStoredIdsRepository.class);
 
 	protected abstract String getSettingsKey();
 
@@ -66,7 +70,7 @@ public abstract class PluginSettingsBasedStoredIdsRepository implements
 	public void add(Set<Integer> ids) {
 		Set<Integer> all = getAll();
 		all.addAll(ids);
-		saveSet(ids);
+		saveSet(all);
 	}
 
 	@Override

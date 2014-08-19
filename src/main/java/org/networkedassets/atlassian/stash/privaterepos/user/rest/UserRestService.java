@@ -59,7 +59,7 @@ public class UserRestService {
 		return Response.ok().build();
 	}
 
-	@Path("user/{user}")
+	@Path("user/{id}")
 	@POST
 	public Response addUser(@Context UriInfo uriInfo,
 			@PathParam("id") Integer userId) {
@@ -68,7 +68,7 @@ public class UserRestService {
 		return Response.created(uriInfo.getAbsolutePath()).build();
 	}
 
-	@Path("user/{user}")
+	@Path("user/{id}")
 	@DELETE
 	public Response deleteUser(@PathParam("id") Integer userId) {
 		authorizationVerifier.verify();
