@@ -10,7 +10,7 @@ import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 
 @Component
 public class PluginSettingsBasedPermissionsModeService implements
-		PermissionsModeService {
+		PermissionsModeRepository {
 
 	private final String PERMISSIONS_MODE_KEY = "permissions-mode";
 	private final PermissionsMode DEFAULT_PERMISSIONS_MODE = PermissionsMode.ALLOW;
@@ -38,16 +38,6 @@ public class PluginSettingsBasedPermissionsModeService implements
 	@Override
 	public void setPermissionsMode(PermissionsMode mode) {
 		pluginSettings.put(PERMISSIONS_MODE_KEY, mode.toString());
-	}
-
-	@Override
-	public boolean isAllowMode() {
-		return getPermissionsMode() == PermissionsMode.ALLOW;
-	}
-
-	@Override
-	public boolean isDenyMode() {
-		return getPermissionsMode() == PermissionsMode.DENY;
 	}
 
 }

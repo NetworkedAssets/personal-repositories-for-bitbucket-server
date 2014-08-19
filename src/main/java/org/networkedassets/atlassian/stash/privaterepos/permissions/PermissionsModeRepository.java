@@ -1,9 +1,6 @@
 package org.networkedassets.atlassian.stash.privaterepos.permissions;
 
-public interface PermissionsModeService {
-	boolean isAllowMode();
-
-	boolean isDenyMode();
+public interface PermissionsModeRepository {
 
 	PermissionsMode getPermissionsMode();
 
