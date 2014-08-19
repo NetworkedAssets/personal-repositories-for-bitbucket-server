@@ -8,7 +8,7 @@ define('PermissionsController', [ 'underscore', 'jquery', 'PermissionsMode', 'Pe
 
 	_.extend(constr.prototype, {
 		initialize : function(opts) {
-			_.bindAll(this, 'createViews');
+			_.bindAll(this, 'createViews', 'onModeChange', 'switchMode');
 			this.region = $(opts.region);
 		},
 
@@ -37,12 +37,14 @@ define('PermissionsController', [ 'underscore', 'jquery', 'PermissionsMode', 'Pe
 		
 		onModeChange : function(mode) {
 			this.permissionsMode.set('mode', mode);
-			this.permissionsMode.save().done(this.switchViewsMode);
+			this.permissionsMode.save().done(this.switchMode);
 		},
 		
-		switchViewsMode : function() {
-			this.usersTable.switchMode(mode);
-			this.groupsTable.switchMode(mode);
+		switchMode : function() {
+			this.usersTable.remove();
+			this.groupsTable.remove();
+			this.startUsersTable();
+			this.startGroupsTable();
 		},
 
 		startUsersTable : function() {

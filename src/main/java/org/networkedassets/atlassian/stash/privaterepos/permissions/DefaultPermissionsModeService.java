@@ -2,6 +2,8 @@ package org.networkedassets.atlassian.stash.privaterepos.permissions;
 
 import org.networkedassets.atlassian.stash.privaterepos.group.StoredGroupsService;
 import org.networkedassets.atlassian.stash.privaterepos.user.StoredUsersService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +16,9 @@ public class DefaultPermissionsModeService implements PermissionsModeService {
 	private StoredUsersService userService;
 	@Autowired
 	private StoredGroupsService groupsService;
+	
+	private final Logger log = LoggerFactory
+			.getLogger(DefaultPermissionsModeService.class);
 
 	@Override
 	public boolean isAllowMode() {
@@ -32,7 +37,9 @@ public class DefaultPermissionsModeService implements PermissionsModeService {
 
 	@Override
 	public void setPermissionsMode(PermissionsMode mode) {
+		log.debug("Setting permissions mode to {}", mode);
 		permissionsModeRepository.setPermissionsMode(mode);
+		log.debug("Removing all users and groups");
 		userService.removeAll();
 		groupsService.removeAll();
 	}
