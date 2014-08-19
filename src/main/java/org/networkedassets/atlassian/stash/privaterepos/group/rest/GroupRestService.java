@@ -1,6 +1,6 @@
 package org.networkedassets.atlassian.stash.privaterepos.group.rest;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -14,10 +14,13 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import org.networkedassets.atlassian.stash.privaterepos.auth.AdminAuthorizationVerifier;
-import org.networkedassets.atlassian.stash.privaterepos.group.AllowedGroupsService;
-import org.networkedassets.atlassian.stash.privaterepos.util.rest.NamesList;
+import org.networkedassets.atlassian.stash.privaterepos.group.StoredGroupsSearch;
+import org.networkedassets.atlassian.stash.privaterepos.group.StoredGroupsService;
+import org.networkedassets.atlassian.stash.privaterepos.util.rest.IdsSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.google.common.collect.Sets;
 
 @Component
 @Path("/groups/")
@@ -25,18 +28,19 @@ import org.springframework.stereotype.Component;
 public class GroupRestService {
 
 	@Autowired
-	private AllowedGroupsService allowedGroupsService;
+	private StoredGroupsService storedGroupsService;
+	@Autowired
+	private StoredGroupsSearch storedGroupsSearch;
 	@Autowired
 	private GroupsInfoBuilder groupsInfoBuilder;
 	@Autowired
 	private AdminAuthorizationVerifier authorizationVerifier;
 
-
 	@Path("list")
 	@GET
-	public List<GroupInfo> getGroups() {
+	public Set<GroupInfo> getGroups() {
 		this.authorizationVerifier.verify();
-		return groupsInfoBuilder.build();
+		return groupsInfoBuilder.createFrom(storedGroupsService.getAll());
 	}
 
 	@Path("group/{group}")
@@ -44,15 +48,15 @@ public class GroupRestService {
 	public Response addGroup(@Context UriInfo uriInfo,
 			@PathParam("group") String groupName) {
 		this.authorizationVerifier.verify();
-		this.allowedGroupsService.allow(groupName);
+		this.storedGroupsService.add(Sets.newHashSet(groupName));
 		return Response.created(uriInfo.getAbsolutePath()).build();
 	}
 
 	@Path("list")
 	@POST
-	public Response addGroups(NamesList names) {
+	public Response addGroups(IdsSet<String> names) {
 		this.authorizationVerifier.verify();
-		this.allowedGroupsService.allow(names.getNames());
+		storedGroupsService.add(names.getIds());
 		return Response.ok().build();
 	}
 
@@ -60,16 +64,16 @@ public class GroupRestService {
 	@DELETE
 	public Response deleteGroup(@PathParam("group") String groupName) {
 		this.authorizationVerifier.verify();
-		this.allowedGroupsService.disallow(groupName);
+		storedGroupsService.remove(Sets.newHashSet(groupName));
 		return Response.ok().build();
 	}
 
 	@Path("find/{key}")
 	@GET
-	public List<GroupInfo> findUsers(@PathParam("key") String key) {
+	public Set<GroupInfo> findUsers(@PathParam("key") String key) {
 		this.authorizationVerifier.verify();
-		return groupsInfoBuilder
-				.build(allowedGroupsService.findNotAllowed(key));
+		return groupsInfoBuilder.createFrom(storedGroupsSearch
+				.findNonStoredGroups(key));
 	}
 
 }

@@ -1,9 +1,11 @@
 package org.networkedassets.atlassian.stash.privaterepos.auth;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.Set;
 
-import org.networkedassets.atlassian.stash.privaterepos.group.AllowedGroupsService;
-import org.networkedassets.atlassian.stash.privaterepos.group.Group;
+import org.apache.commons.collections.CollectionUtils;
+import org.networkedassets.atlassian.stash.privaterepos.group.StoredGroupsService;
+import org.networkedassets.atlassian.stash.privaterepos.permissions.PermissionsModeService;
 import org.networkedassets.atlassian.stash.privaterepos.user.StoredUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,9 +22,11 @@ public class UserPermissionsExaminer {
 	@Autowired
 	private StashAuthenticationContext authenthicationContext;
 	@Autowired
-	private AllowedGroupsService allowedGroupsService;
+	private StoredGroupsService storedGroupsService;
 	@Autowired
 	private StoredUsersService storedUsersService;
+	@Autowired
+	private PermissionsModeService permissionsModeService;
 
 	public boolean canUsePrivateRepositories() {
 		StashUser currentUser = authenthicationContext.getCurrentUser();
@@ -48,17 +52,17 @@ public class UserPermissionsExaminer {
 
 	private boolean isUserInAllowedGroup(StashUser user) {
 
-		List<Group> groups = getGroupsAllowedToAccessPrivateRepositories();
+		Set<String> userGroups = storedGroupsService.getUserGroups(user);
+		Set<String> storedGroups = storedGroupsService.getAll();
+		@SuppressWarnings("unchecked")
+		Collection<String> intersection = CollectionUtils.intersection(
+				userGroups, storedGroups);
 
-		for (Group group : groups) {
-			if (userService.isUserInGroup(user, group.getName())) {
-				return true;
-			}
+		if (permissionsModeService.isAllowMode()) {
+			return intersection.size() == 0;
+		} else {
+			return intersection.size() > 0;
 		}
-		return false;
-	}
 
-	private List<Group> getGroupsAllowedToAccessPrivateRepositories() {
-		return allowedGroupsService.all();
 	}
 }

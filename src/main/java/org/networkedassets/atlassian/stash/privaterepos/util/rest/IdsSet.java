@@ -6,18 +6,17 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class IdsSet {
+public class IdsSet<T> {
 
 	@XmlElement
-	private Set<Integer> ids;
+	private Set<T> ids;
 
-	public Set<Integer> getIds() {
+	public Set<T> getIds() {
 		return ids;
 	}
 
-	public void setIds(Set<Integer> ids) {
+	public void setIds(Set<T> ids) {
 		this.ids = ids;
 	}
-
 
 }

@@ -53,7 +53,7 @@ public class UserRestService {
 
 	@Path("list")
 	@POST
-	public Response addUsers(IdsSet ids) {
+	public Response addUsers(IdsSet<Integer> ids) {
 		authorizationVerifier.verify();
 		storedUserService.add(ids.getIds());
 		return Response.ok().build();

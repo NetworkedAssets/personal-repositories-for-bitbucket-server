@@ -2,6 +2,8 @@ package org.networkedassets.atlassian.stash.privaterepos.group;
 
 import java.util.Set;
 
+import com.atlassian.stash.user.StashUser;
+
 public interface StoredGroupsService {
 
 	Set<String> getAll();
@@ -15,5 +17,7 @@ public interface StoredGroupsService {
 	boolean isAllowed(String group);
 
 	boolean isDenied(String group);
+
+	Set<String> getUserGroups(StashUser user);
 
 }
