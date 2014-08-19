@@ -23,7 +23,7 @@ define('UsersTable', [ 'Table', 'UserRow', 'UserBatch', 'Config' ], function(Tab
 
 		handleAllow : function(values) {
 			var userBatch = new UserBatch({
-				names : values
+				ids : values
 			});
 			userBatch.save({}, {
 				success : this.onAllowSuccess

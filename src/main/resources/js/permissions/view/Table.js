@@ -51,7 +51,7 @@ define('Table', [ 'backbone', 'underscore' ], function(Backbone, _) {
 					results : function(data, page) {
 						var results = _.map(data, function(object) {
 							return _.extend(object, {
-								id : object.name
+								id : object.id
 							});
 						});
 						return {

@@ -16,6 +16,7 @@ import javax.ws.rs.core.UriInfo;
 import org.networkedassets.atlassian.stash.privaterepos.auth.AdminAuthorizationVerifier;
 import org.networkedassets.atlassian.stash.privaterepos.user.StoredUsersSearch;
 import org.networkedassets.atlassian.stash.privaterepos.user.StoredUsersService;
+import org.networkedassets.atlassian.stash.privaterepos.util.rest.IdsSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -52,9 +53,9 @@ public class UserRestService {
 
 	@Path("list")
 	@POST
-	public Response addUsers(Set<Integer> ids) {
+	public Response addUsers(IdsSet ids) {
 		authorizationVerifier.verify();
-		storedUserService.add(ids);
+		storedUserService.add(ids.getIds());
 		return Response.ok().build();
 	}
 

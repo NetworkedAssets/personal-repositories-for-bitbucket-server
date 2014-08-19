@@ -42,12 +42,17 @@ public abstract class PluginSettingsBasedStoredIdsRepository implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<Integer> getAll() {
-		List<Integer> listOfIds = (List<Integer>) pluginSettings
+		List<String> idsAsString = (List<String>) pluginSettings
 				.get(getSettingsKey());
-		if (listOfIds == null) {
+
+		if (idsAsString == null) {
 			return new LinkedHashSet<Integer>();
 		}
-		return new LinkedHashSet<Integer>(listOfIds);
+		List<Integer> idsAsInt = new ArrayList<Integer>();
+		for (String string : idsAsString) {
+			idsAsInt.add(Integer.valueOf(string));
+		}
+		return new LinkedHashSet<Integer>(idsAsInt);
 	}
 
 	@Override

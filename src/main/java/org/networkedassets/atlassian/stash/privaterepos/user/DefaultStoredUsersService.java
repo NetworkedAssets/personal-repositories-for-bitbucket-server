@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.networkedassets.atlassian.stash.privaterepos.permissions.PermissionsModeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,10 +24,14 @@ public class DefaultStoredUsersService implements StoredUsersService {
 	@Autowired
 	private PermissionsModeService permissionsModeService;
 
+	private Logger log = LoggerFactory
+			.getLogger(DefaultStoredUsersService.class);
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<StashUser> getAll() {
 		Set<Integer> userIds = userIdsRepository.getAll();
+		log.debug("Stored ids {}", userIds);
 		if (userIds.isEmpty()) {
 			return new HashSet<StashUser>();
 		}
