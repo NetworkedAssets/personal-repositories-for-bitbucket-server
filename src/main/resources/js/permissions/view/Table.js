@@ -1,8 +1,7 @@
 define('Table', [ 'backbone', 'underscore' ], function(Backbone, _) {
 	return Backbone.View.extend({
 
-		tagName : 'table',
-		className : 'private-repos-permissions-table aui',
+		tagName : 'div',
 		
 		searchFormatResult :function(object) {
 			return object.name;
@@ -13,12 +12,13 @@ define('Table', [ 'backbone', 'underscore' ], function(Backbone, _) {
 		},
 
 		events : {
-			'click .allow-button' : 'onAllow'
+			'click .add-button' : 'onAdd'
 		},
 
 		initialize : function(options) {
 			_.bindAll(this, 'addChildView');
 
+			this.mode = options.mode;
 			this.collection = options.collection;
 			this.collection.on('add', this.addChildView);
 			this.collection.on('reset', this.addChildViews);
@@ -38,7 +38,8 @@ define('Table', [ 'backbone', 'underscore' ], function(Backbone, _) {
 		},
 
 		render : function() {
-			this.$el.html(this.template());
+			var me = this;
+			this.$el.html(this.template(this.prepareTemplateParams()));
 
 			var searchInput = this.$('.search-input');
 			searchInput.auiSelect2({
@@ -50,9 +51,7 @@ define('Table', [ 'backbone', 'underscore' ], function(Backbone, _) {
 					dataType : 'json',
 					results : function(data, page) {
 						var results = _.map(data, function(object) {
-							return _.extend(object, {
-								id : object.name
-							});
+							return me.parseSearchResult(object);
 						});
 						return {
 							results : results
@@ -64,15 +63,29 @@ define('Table', [ 'backbone', 'underscore' ], function(Backbone, _) {
 			});
 			return this;
 		},
+		
+		prepareTemplateParams : function() {
+			return {
+				mode : this.mode
+			};
+		},
+		
+		parseSearchResult : function(object) {
+			return object;
+		},
 
-		onAllow : function(e) {
+		onAdd : function(e) {
 			e.preventDefault();
 			var val = this.$('.search-input').select2('val');
-			this.handleAllow(val);
+			this.handleAdd(val);
 		},
 		
 		clearSearchInput : function() {
 			this.$('.search-input').select2('val', null);
+		},
+		
+		switchMode : function() {
+			this.render();
 		}
 
 	});

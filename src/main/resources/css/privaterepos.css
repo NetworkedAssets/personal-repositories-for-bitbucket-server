@@ -2,10 +2,36 @@
 	padding-top: 20px;
 }
 
+.section.permissions-section {
+	padding-top: 0;
+}
+
+.repository-permissions-mode {
+	margin: 0;
+	float: right;
+}
+
+.repository-permissions-mode p.desc {
+	margin-right: 20px;
+	display: inline;
+}
+
+.permissions-section .aui-group.users-header {
+	margin: 0;
+}
+
+.permissions-section .aui-group.users-header .aui-item h3 {
+	margin-top: 0;
+}
+
 #users-table .private-repos-permissions-table,
 #groups-table .private-repos-permissions-table
  {
 	margin-top: 20px;
+}
+
+#groups-table {
+	margin-top: 30px;
 }
 
 .private-repos-permissions-table thead .add-form-row {

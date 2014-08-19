@@ -2,29 +2,20 @@
 
 /**
  * Displays admin panel
+ * @param mode
  */
 {template .layout}
 
-	{call aui.group.group}
-	    {param content}
-	        {call aui.group.item}
-	            {param content}
-	                <h3>Allowed users</h3>
-	            {/param}
-	        {/call}
-	    {/param}
-	{/call}
+	<div class="repository-permissions-mode">
+		<p class="desc">By default:</p>
+		<p class="aui-buttons">
+			<button class="aui-button allow" {if $mode == 'allow'}aria-pressed="true"{/if}>Allow</button>
+			<button class="aui-button deny" {if $mode == 'deny'}aria-pressed="true"{/if}>Deny</button>
+		</p>
+	</div>
+
 	<div id="users-table">
 	</div>
-	{call aui.group.group}
-	    {param content}
-	        {call aui.group.item}
-	            {param content}
-	                <h3>Allowed groups</h3>
-	            {/param}
-	        {/call}
-	    {/param}
-	{/call}
 	<div id="groups-table">
 	</div>
 

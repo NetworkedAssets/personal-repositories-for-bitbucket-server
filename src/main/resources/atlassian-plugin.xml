@@ -12,10 +12,6 @@
 
 	<ao key="ao-module">
 		<description>The AO module for this plugin.</description>
-		<entity>org.networkedassets.atlassian.stash.privaterepos.group.Group
-		</entity>
-		<entity>org.networkedassets.atlassian.stash.privaterepos.user.User
-		</entity>
 		<entity>org.networkedassets.atlassian.stash.privaterepos.repositories.Owner
 		</entity>
 		<entity>org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepository
@@ -56,6 +52,8 @@
 			location="/templates/permissions/group.soy" />
 		<resource type="download" name="permissions-layout-soy.js"
 			location="/templates/permissions/layout.soy" />
+		<resource type="download" name="permissions/model/PermissionsMode.js"
+			location="/js/permissions/model/PermissionsMode.js" />
 		<resource type="download" name="permissions/model/Group.js"
 			location="/js/permissions/model/Group.js" />
 		<resource type="download" name="permissions/model/Groups.js"

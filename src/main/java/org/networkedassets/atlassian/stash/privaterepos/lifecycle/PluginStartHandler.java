@@ -5,9 +5,7 @@ import java.util.TimerTask;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.ws.rs.core.SecurityContext;
 
-import org.joda.time.Seconds;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepositoriesPreScanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +20,7 @@ import com.atlassian.stash.user.Permission;
 import com.atlassian.stash.user.SecurityService;
 import com.atlassian.stash.user.StashAuthenticationContext;
 import com.atlassian.stash.user.StashUser;
-import com.atlassian.stash.user.UserService;
 import com.atlassian.stash.util.Operation;
-import com.atlassian.stash.util.Page;
-import com.atlassian.stash.util.PageRequestImpl;
 import com.atlassian.stash.util.UncheckedOperation;
 
 @Component

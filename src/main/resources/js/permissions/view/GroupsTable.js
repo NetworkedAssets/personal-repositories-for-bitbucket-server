@@ -4,7 +4,7 @@ define('GroupsTable', [ 'Table', 'GroupRow', 'underscore', 'GroupBatch', 'Config
 		
 		initialize : function() {
 			Table.prototype.initialize.apply(this, arguments);
-			_.bindAll(this, 'onAllowSuccess', 'handleAllow');
+			_.bindAll(this, 'onAddSuccess', 'handleAdd');
 		},
 		
 		searchFormatResult : function(object) {
@@ -21,17 +21,33 @@ define('GroupsTable', [ 'Table', 'GroupRow', 'underscore', 'GroupBatch', 'Config
 		searchUrl : function(term) {
 			return Config.urlBase + '/groups/find/' + term;
 		}, 
-
-		handleAllow : function(values) {
-			var groupBatch = new GroupBatch({
-				names : values
-			});
-			groupBatch.save({}, {
-				success : this.onAllowSuccess
+		
+		parseSearchResult : function(object) {
+			return _.extend(object, {
+				id: object.name
 			});
 		},
 		
-		onAllowSuccess : function() {
+		prepareTemplateParams : function() {
+			return {
+				mode : this.mode,
+				header : {
+					allow: 'Denied groups',
+					deny: 'Allowed groups'
+				}
+			};
+		},
+
+		handleAdd: function(values) {
+			var groupBatch = new GroupBatch({
+				ids : values
+			});
+			groupBatch.save({}, {
+				success : this.onAddSuccess
+			});
+		},
+		
+		onAddSuccess : function() {
 			this.collection.fetch();
 			this.clearSearchInput();
 		}

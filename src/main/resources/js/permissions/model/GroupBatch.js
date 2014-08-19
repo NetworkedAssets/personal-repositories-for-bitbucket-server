@@ -1,7 +1,7 @@
 define('GroupBatch', [ 'backbone', 'Config' ], function(Backbone, Config) {
 	return Backbone.Model.extend({
 		defaults : {
-			names : []
+			ids : []
 		},
 		url : Config.urlBase + '/groups/list',
 	});
