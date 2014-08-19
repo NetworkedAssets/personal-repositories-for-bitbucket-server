@@ -40,4 +40,14 @@ public class PluginSettingsBasedPermissionsModeService implements
 		pluginSettings.put(PERMISSIONS_MODE_KEY, mode.toString());
 	}
 
+	@Override
+	public boolean isAllowMode() {
+		return getPermissionsMode() == PermissionsMode.ALLOW;
+	}
+
+	@Override
+	public boolean isDenyMode() {
+		return getPermissionsMode() == PermissionsMode.DENY;
+	}
+
 }

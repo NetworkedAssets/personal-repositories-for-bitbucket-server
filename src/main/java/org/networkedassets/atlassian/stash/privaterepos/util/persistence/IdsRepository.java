@@ -12,8 +12,16 @@ public interface IdsRepository {
 
 	Set<Integer> getAll();
 
-	void add(int userId);
+	void add(Integer userId);
+	
+	void add(Set<Integer> ids);
 
-	void remove(int userId);
+	void remove(Integer id);
+	
+	void remove(Set<Integer> ids);
+	
+	void removeAll();
+	
+	boolean contains(Integer id);
 
 }

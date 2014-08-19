@@ -47,17 +47,44 @@ public abstract class PluginSettingsBasedStoredIdsRepository implements
 	}
 
 	@Override
-	public void add(int userId) {
+	public void add(Integer id) {
 		Set<Integer> all = getAll();
-		all.add(userId);
+		all.add(id);
 		saveSet(all);
 	}
 
 	@Override
-	public void remove(int userId) {
+	public void add(Set<Integer> ids) {
 		Set<Integer> all = getAll();
-		all.remove(userId);
+		all.addAll(ids);
+		saveSet(ids);
+	}
+
+	@Override
+	public void remove(Integer id) {
+		Set<Integer> all = getAll();
+		all.remove(id);
 		saveSet(all);
+	}
+
+	@Override
+	public void remove(Set<Integer> ids) {
+		Set<Integer> all = getAll();
+		all.removeAll(ids);
+		saveSet(all);
+	}
+
+	@Override
+	public void removeAll() {
+		Set<Integer> all = getAll();
+		all.clear();
+		saveSet(all);
+	}
+
+	@Override
+	public boolean contains(Integer id) {
+		Set<Integer> all = getAll();
+		return all.contains(id);
 	}
 
 	private void saveSet(Set<Integer> ids) {
