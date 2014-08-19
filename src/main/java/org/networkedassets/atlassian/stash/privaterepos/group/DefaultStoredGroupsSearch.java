@@ -38,7 +38,6 @@ public class DefaultStoredGroupsSearch implements StoredGroupsSearch {
 			foundGroupsCount = groups.size();
 			groups.removeAll(storedGroups);
 		}
-
 		return groups;
 	}
 
