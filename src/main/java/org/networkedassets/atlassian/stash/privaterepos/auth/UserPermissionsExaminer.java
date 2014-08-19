@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.networkedassets.atlassian.stash.privaterepos.group.AllowedGroupsService;
 import org.networkedassets.atlassian.stash.privaterepos.group.Group;
-import org.networkedassets.atlassian.stash.privaterepos.user.AllowedUsersService;
+import org.networkedassets.atlassian.stash.privaterepos.user.StoredUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +22,7 @@ public class UserPermissionsExaminer {
 	@Autowired
 	private AllowedGroupsService allowedGroupsService;
 	@Autowired
-	private AllowedUsersService allowedUsersService;
+	private StoredUsersService storedUsersService;
 
 	public boolean canUsePrivateRepositories() {
 		StashUser currentUser = authenthicationContext.getCurrentUser();
@@ -43,7 +43,7 @@ public class UserPermissionsExaminer {
 	}
 
 	private boolean isUserAllowed(StashUser stashUser) {
-		return allowedUsersService.isAllowed(stashUser.getName());
+		return storedUsersService.isAllowed(stashUser.getId());
 	}
 
 	private boolean isUserInAllowedGroup(StashUser user) {
