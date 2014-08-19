@@ -36,7 +36,8 @@ define('PermissionsController', [ 'jquery', 'PermissionsMode', 'PermissionsLayou
 		},
 		
 		onModeChange : function(mode) {
-			console.log('mode changed to ', mode)
+			this.permissionsMode.set('mode', mode);
+			this.permissionsMode.save();
 		},
 
 		startUsersTable : function() {
