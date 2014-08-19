@@ -11,10 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
+import com.atlassian.activeobjects.tx.Transactional;
 import com.atlassian.stash.user.UserService;
 import com.atlassian.stash.util.PageRequestImpl;
 
 @Component
+@Transactional
 public class AoAllowedGroupsService implements AllowedGroupsService {
 
 	private static final int MAX_FOUND_USERS = 20;

@@ -1,4 +1,4 @@
-package org.networkedassets.atlassian.stash.privaterepos.util;
+package org.networkedassets.atlassian.stash.privaterepos.util.rest;
 
 import java.util.List;
 

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.networkedassets.atlassian.stash.privaterepos.repositories.Owner;
 import org.networkedassets.atlassian.stash.privaterepos.user.rest.UsersStateCreator;
-import org.networkedassets.atlassian.stash.privaterepos.util.RestPage;
+import org.networkedassets.atlassian.stash.privaterepos.util.rest.RestPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

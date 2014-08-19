@@ -2,9 +2,6 @@ package org.networkedassets.atlassian.stash.privaterepos.group;
 
 import java.util.List;
 
-import com.atlassian.activeobjects.tx.Transactional;
-
-@Transactional
 public interface AllowedGroupsService {
 
 	List<Group> all();

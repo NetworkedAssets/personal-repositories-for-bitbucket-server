@@ -9,7 +9,7 @@ import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 
 @Component
-public class PropertiesBasedPermissionsModeService implements
+public class PluginSettingsBasedPermissionsModeService implements
 		PermissionsModeService {
 
 	private final String PERMISSIONS_MODE_KEY = "permissions-mode";

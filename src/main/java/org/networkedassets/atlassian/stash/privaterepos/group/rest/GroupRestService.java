@@ -15,7 +15,7 @@ import javax.ws.rs.core.UriInfo;
 
 import org.networkedassets.atlassian.stash.privaterepos.auth.AdminAuthorizationVerifier;
 import org.networkedassets.atlassian.stash.privaterepos.group.AllowedGroupsService;
-import org.networkedassets.atlassian.stash.privaterepos.util.NamesList;
+import org.networkedassets.atlassian.stash.privaterepos.util.rest.NamesList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

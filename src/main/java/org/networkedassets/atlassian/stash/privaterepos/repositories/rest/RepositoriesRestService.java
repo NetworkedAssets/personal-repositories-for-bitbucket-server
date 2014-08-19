@@ -16,7 +16,7 @@ import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRep
 import org.networkedassets.atlassian.stash.privaterepos.repositories.SortCriteria;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.SortField;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.SortOrder;
-import org.networkedassets.atlassian.stash.privaterepos.util.RestPage;
+import org.networkedassets.atlassian.stash.privaterepos.util.rest.RestPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

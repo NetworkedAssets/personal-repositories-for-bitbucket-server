@@ -15,11 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
+import com.atlassian.activeobjects.tx.Transactional;
+import com.atlassian.sal.api.usersettings.UserSettingsService;
 import com.atlassian.stash.user.StashUser;
 import com.atlassian.stash.user.UserService;
 import com.atlassian.stash.util.PageRequestImpl;
 
 @Component
+@Transactional
 public class AoAllowedUsersService implements AllowedUsersService {
 
 	private final static int MAX_FOUND_USERS = 20;
@@ -28,6 +31,8 @@ public class AoAllowedUsersService implements AllowedUsersService {
 	private ActiveObjects ao;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private UserSettingsService userSettingsService;
 
 	@Override
 	public List<User> all() {

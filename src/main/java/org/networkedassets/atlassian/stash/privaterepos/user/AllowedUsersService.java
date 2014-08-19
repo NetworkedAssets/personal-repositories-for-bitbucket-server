@@ -2,10 +2,8 @@ package org.networkedassets.atlassian.stash.privaterepos.user;
 
 import java.util.List;
 
-import com.atlassian.activeobjects.tx.Transactional;
 import com.atlassian.stash.user.StashUser;
 
-@Transactional
 public interface AllowedUsersService {
 
 	/**
