@@ -18,15 +18,23 @@ import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
  * IdsRepository implementation based on PluginSettings provided by atlassian.
  * Saves a unique list of ids in plugin settings.
  * 
- * This is an abstract class - concrete classes are obliged to provide only one
- * method implementation and that is getSettingsKey() - returning a key under
- * which the ids will be kept in PluginSettings.
+ * This is an abstract class - concrete classes are obliged to provide two
+ * methods implementation:
+ * 
+ * getSettingsKey - returning a key under which the ids will be kept in
+ * PluginSettings.
+ * 
+ * convertFromString - method enabling to convert the type used for this
+ * instance to String - all values are kept as string
+ * 
+ * Additionally if you want to use something different then a simple toString
+ * for T -> String conversion you can also override convertToString method.
  * 
  * @author holek
  *
  */
-public abstract class PluginSettingsBasedStoredIdsRepository implements
-		IdsRepository {
+public abstract class PluginSettingsBasedStoredIdsRepository<T> implements
+		IdsRepository<T> {
 
 	@Autowired
 	private PluginSettingsFactory pluginSettingsFactory;
@@ -45,63 +53,73 @@ public abstract class PluginSettingsBasedStoredIdsRepository implements
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Set<Integer> getAll() {
+	public Set<T> getAll() {
 		List<String> idsAsString = (List<String>) pluginSettings
 				.get(getSettingsKey());
 
 		if (idsAsString == null) {
-			return new LinkedHashSet<Integer>();
+			return new LinkedHashSet<T>();
 		}
-		List<Integer> idsAsInt = new ArrayList<Integer>();
+		List<T> ids = new ArrayList<T>();
 		for (String string : idsAsString) {
-			idsAsInt.add(Integer.valueOf(string));
+			ids.add(convertFromString(string));
 		}
-		return new LinkedHashSet<Integer>(idsAsInt);
+		return new LinkedHashSet<T>(ids);
+	}
+
+	protected abstract T convertFromString(String value);
+
+	protected String convertToString(T t) {
+		return t.toString();
 	}
 
 	@Override
-	public void add(Integer id) {
-		Set<Integer> all = getAll();
+	public void add(T id) {
+		Set<T> all = getAll();
 		all.add(id);
 		saveSet(all);
 	}
 
 	@Override
-	public void add(Set<Integer> ids) {
-		Set<Integer> all = getAll();
+	public void add(Set<T> ids) {
+		Set<T> all = getAll();
 		all.addAll(ids);
 		saveSet(all);
 	}
 
 	@Override
-	public void remove(Integer id) {
-		Set<Integer> all = getAll();
+	public void remove(T id) {
+		Set<T> all = getAll();
 		all.remove(id);
 		saveSet(all);
 	}
 
 	@Override
-	public void remove(Set<Integer> ids) {
-		Set<Integer> all = getAll();
+	public void remove(Set<T> ids) {
+		Set<T> all = getAll();
 		all.removeAll(ids);
 		saveSet(all);
 	}
 
 	@Override
 	public void removeAll() {
-		Set<Integer> all = getAll();
+		Set<T> all = getAll();
 		all.clear();
 		saveSet(all);
 	}
 
 	@Override
-	public boolean contains(Integer id) {
-		Set<Integer> all = getAll();
+	public boolean contains(T id) {
+		Set<T> all = getAll();
 		return all.contains(id);
 	}
 
-	private void saveSet(Set<Integer> ids) {
-		pluginSettings.put(getSettingsKey(), new ArrayList<Integer>(ids));
+	private void saveSet(Set<T> ids) {
+		ArrayList<String> stringsList = new ArrayList<String>();
+		for (T t : ids) {
+			stringsList.add(convertToString(t));
+		}
+		pluginSettings.put(getSettingsKey(), stringsList);
 	}
 
 }

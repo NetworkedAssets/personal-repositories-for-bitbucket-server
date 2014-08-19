@@ -24,7 +24,7 @@ define('GroupsTable', [ 'Table', 'GroupRow', 'underscore', 'GroupBatch', 'Config
 
 		handleAllow : function(values) {
 			var groupBatch = new GroupBatch({
-				names : values
+				ids : values
 			});
 			groupBatch.save({}, {
 				success : this.onAllowSuccess

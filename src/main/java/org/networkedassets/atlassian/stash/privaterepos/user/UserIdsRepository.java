@@ -4,11 +4,17 @@ import org.networkedassets.atlassian.stash.privaterepos.util.persistence.PluginS
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserIdsRepository extends PluginSettingsBasedStoredIdsRepository {
+public class UserIdsRepository extends
+		PluginSettingsBasedStoredIdsRepository<Integer> {
 
 	@Override
 	protected String getSettingsKey() {
 		return "stored-users";
+	}
+
+	@Override
+	protected Integer convertFromString(String value) {
+		return Integer.valueOf(value);
 	}
 
 }

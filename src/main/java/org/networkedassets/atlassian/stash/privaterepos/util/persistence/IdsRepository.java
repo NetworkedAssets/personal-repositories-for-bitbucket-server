@@ -4,24 +4,24 @@ import java.util.Set;
 
 /**
  * Interface to be implemented by the classes which allow to store and get a
- * list of Integer ids.
+ * list of T ids.
  * 
  * @author holek
  */
-public interface IdsRepository {
+public interface IdsRepository<T> {
 
-	Set<Integer> getAll();
+	Set<T> getAll();
 
-	void add(Integer userId);
-	
-	void add(Set<Integer> ids);
+	void add(T userId);
 
-	void remove(Integer id);
-	
-	void remove(Set<Integer> ids);
-	
+	void add(Set<T> ids);
+
+	void remove(T id);
+
+	void remove(Set<T> ids);
+
 	void removeAll();
-	
-	boolean contains(Integer id);
+
+	boolean contains(T id);
 
 }
