@@ -1,5 +1,5 @@
-define('PermissionsController', [ 'jquery', 'PermissionsLayout', 'UsersTable', 'Users',
-		'GroupsTable', 'Groups' ], function($, PermissionsLayout, UsersTable, Users, GroupsTable,
+define('PermissionsController', [ 'jquery', 'PermissionsMode', 'PermissionsLayout', 'UsersTable', 'Users',
+		'GroupsTable', 'Groups' ], function($, PermissionsMode, PermissionsLayout, UsersTable, Users, GroupsTable,
 		Groups) {
 
 	var constr = function(opts) {
@@ -8,17 +8,29 @@ define('PermissionsController', [ 'jquery', 'PermissionsLayout', 'UsersTable', '
 
 	_.extend(constr.prototype, {
 		initialize : function(opts) {
+			_.bindAll(this, 'createViews');
 			this.region = $(opts.region);
 		},
 
 		start : function() {
+			this.fetchPermissionsMode();
+		},
+		
+		fetchPermissionsMode : function() {
+			this.permissionsMode = new PermissionsMode();
+			this.permissionsMode.fetch().done(this.createViews);
+		},
+		
+		createViews : function() {
 			this.createlayout();
 			this.startUsersTable();
 			this.startGroupsTable();
 		},
 		
 		createlayout : function() {
-			this.layout = new PermissionsLayout();
+			this.layout = new PermissionsLayout({
+				permissionsMode: this.permissionsMode
+			});
 			this.layout.on('mode-changed', this.onModeChange);
 			this.region.html(this.layout.render().el);
 		},

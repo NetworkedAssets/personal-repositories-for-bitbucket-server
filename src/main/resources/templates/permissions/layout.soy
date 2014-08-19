@@ -2,14 +2,15 @@
 
 /**
  * Displays admin panel
+ * @param mode
  */
 {template .layout}
 
 	<div class="repository-permissions-mode">
 		<p class="desc">By default:</p>
 		<p class="aui-buttons">
-			<button class="aui-button allow" aria-pressed="true">Allow</button>
-			<button class="aui-button deny">Deny</button>
+			<button class="aui-button allow" {if $mode == 'allow'}aria-pressed="true"{/if}>Allow</button>
+			<button class="aui-button deny {if $mode == 'deny'}aria-pressed="true"{/if}">Deny</button>
 		</p>
 	</div>
 

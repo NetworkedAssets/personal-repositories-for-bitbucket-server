@@ -56,6 +56,8 @@
 			location="/templates/permissions/group.soy" />
 		<resource type="download" name="permissions-layout-soy.js"
 			location="/templates/permissions/layout.soy" />
+		<resource type="download" name="permissions/model/PermissionsMode.js"
+			location="/js/permissions/model/PermissionsMode.js" />
 		<resource type="download" name="permissions/model/Group.js"
 			location="/js/permissions/model/Group.js" />
 		<resource type="download" name="permissions/model/Groups.js"

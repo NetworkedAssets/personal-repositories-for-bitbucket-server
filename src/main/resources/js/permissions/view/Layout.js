@@ -1,11 +1,14 @@
 define('PermissionsLayout', [ 'backbone', 'underscore', 'jquery' ], function(Backbone, _, $) {
 	return Backbone.View.extend({
 		template : org.networkedassets.personalRepos.permissions.layout,
-		
 		pressedButtonAttr : 'aria-pressed',
 		
 		events : {
 			'click .repository-permissions-mode .aui-button': 'onModeButtonClick'
+		},
+		
+		initialize : function(opts) {
+			this.permissionsMode = opts.permissionsMode;
 		},
 		
 		onModeButtonClick : function(e) {
@@ -22,7 +25,9 @@ define('PermissionsLayout', [ 'backbone', 'underscore', 'jquery' ], function(Bac
 		},
 		
 		render : function() {
-			this.el.innerHTML = this.template();
+			this.el.innerHTML = this.template({
+				mode: this.permissionsMode.get('mode')
+			});
 			return this;
 		}
 
