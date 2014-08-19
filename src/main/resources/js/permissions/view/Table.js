@@ -38,6 +38,7 @@ define('Table', [ 'backbone', 'underscore' ], function(Backbone, _) {
 		},
 
 		render : function() {
+			var me = this;
 			this.$el.html(this.template());
 
 			var searchInput = this.$('.search-input');
@@ -50,9 +51,7 @@ define('Table', [ 'backbone', 'underscore' ], function(Backbone, _) {
 					dataType : 'json',
 					results : function(data, page) {
 						var results = _.map(data, function(object) {
-							return _.extend(object, {
-								id : object.id
-							});
+							return me.parseSearchResult(object);
 						});
 						return {
 							results : results
@@ -63,6 +62,10 @@ define('Table', [ 'backbone', 'underscore' ], function(Backbone, _) {
 				formatSelection : this.searchFormatSelection
 			});
 			return this;
+		},
+		
+		parseSearchResult : function(object) {
+			return object;
 		},
 
 		onAllow : function(e) {

@@ -21,6 +21,12 @@ define('GroupsTable', [ 'Table', 'GroupRow', 'underscore', 'GroupBatch', 'Config
 		searchUrl : function(term) {
 			return Config.urlBase + '/groups/find/' + term;
 		}, 
+		
+		parseSearchResult : function(object) {
+			return _.extend(object, {
+				id: object.name
+			});
+		},
 
 		handleAllow : function(values) {
 			var groupBatch = new GroupBatch({
