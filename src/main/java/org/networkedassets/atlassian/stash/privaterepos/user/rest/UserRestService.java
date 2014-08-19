@@ -1,6 +1,7 @@
 package org.networkedassets.atlassian.stash.privaterepos.user.rest;
 
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -14,10 +15,12 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import org.networkedassets.atlassian.stash.privaterepos.auth.AdminAuthorizationVerifier;
-import org.networkedassets.atlassian.stash.privaterepos.user.AllowedUsersService;
-import org.networkedassets.atlassian.stash.privaterepos.util.rest.NamesList;
+import org.networkedassets.atlassian.stash.privaterepos.user.StoredUsersSearch;
+import org.networkedassets.atlassian.stash.privaterepos.user.StoredUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.google.common.collect.Sets;
 
 @Component
 @Path("/users/")
@@ -25,49 +28,51 @@ import org.springframework.stereotype.Component;
 public class UserRestService {
 
 	@Autowired
-	private AllowedUsersService allowedUsersService;
+	private StoredUsersService storedUserService;
 	@Autowired
 	private UsersStateCreator usersStateCreator;
 	@Autowired
 	private AdminAuthorizationVerifier authorizationVerifier;
+	@Autowired
+	private StoredUsersSearch storedUsersSearch;
 
 	@Path("find/{key}")
 	@GET
-	public List<UserState> findUsers(@PathParam("key") String key) {
+	public Set<UserState> findUsers(@PathParam("key") String key) {
 		this.authorizationVerifier.verify();
-		return usersStateCreator.createFrom(allowedUsersService.findNotAllowed(key));
+		return usersStateCreator.createFrom(storedUsersSearch
+				.findNonStoredUsers(key));
 	}
 
 	@Path("list")
 	@GET
-	public List<UserState> getUsers() {
-		this.authorizationVerifier.verify();
-		return usersStateCreator.createFrom(allowedUsersService
-				.getStashUsersFromUsers(allowedUsersService.all()));
+	public Set<UserState> getUsers() {
+		authorizationVerifier.verify();
+		return usersStateCreator.createFrom(storedUserService.getAll());
 	}
 
 	@Path("list")
 	@POST
-	public Response addGroups(NamesList names) {
-		this.authorizationVerifier.verify();
-		this.allowedUsersService.allow(names.getNames());
+	public Response addUsers(Set<Integer> ids) {
+		authorizationVerifier.verify();
+		storedUserService.add(ids);
 		return Response.ok().build();
 	}
 
 	@Path("user/{user}")
 	@POST
 	public Response addUser(@Context UriInfo uriInfo,
-			@PathParam("user") String userName) {
+			@PathParam("id") Integer userId) {
 		this.authorizationVerifier.verify();
-		allowedUsersService.allow(userName);
+		storedUserService.add(Sets.newHashSet(userId));
 		return Response.created(uriInfo.getAbsolutePath()).build();
 	}
 
 	@Path("user/{user}")
 	@DELETE
-	public Response deleteUser(@PathParam("user") String userName) {
-		this.authorizationVerifier.verify();
-		allowedUsersService.disallow(userName);
+	public Response deleteUser(@PathParam("id") Integer userId) {
+		authorizationVerifier.verify();
+		storedUserService.remove(Sets.newHashSet(userId));
 		return Response.ok().build();
 	}
 
