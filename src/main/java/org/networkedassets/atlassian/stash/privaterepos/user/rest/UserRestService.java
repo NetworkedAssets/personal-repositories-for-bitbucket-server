@@ -1,6 +1,5 @@
 package org.networkedassets.atlassian.stash.privaterepos.user.rest;
 
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.ws.rs.DELETE;
