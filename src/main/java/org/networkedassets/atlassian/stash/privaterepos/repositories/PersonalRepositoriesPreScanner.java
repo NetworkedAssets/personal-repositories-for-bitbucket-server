@@ -38,6 +38,8 @@ public class PersonalRepositoriesPreScanner {
 	public void scanPersonalRepositories() {
 		log.debug("Personal repositories pre-scanning started");
 
+		personalRepositoriesService.purge();
+		
 		AllPagesIterator<StashUser> pagesIterator = new AllPagesIterator.Builder<StashUser>(
 				createUserPageProcessor()).resultsPerPage(USERS_PER_PAGE)
 				.build();

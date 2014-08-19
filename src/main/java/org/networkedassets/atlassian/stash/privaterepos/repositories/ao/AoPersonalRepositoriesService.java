@@ -295,4 +295,10 @@ public class AoPersonalRepositoriesService implements
 		return ao.count(Owner.class);
 	}
 
+	@Override
+	public void purge() {
+		ao.deleteWithSQL(PersonalRepository.class, "ID > ?", 0);
+		ao.deleteWithSQL(Owner.class, "ID > ?", 0);
+	}
+
 }
