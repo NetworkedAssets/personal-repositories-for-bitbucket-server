@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.networkedassets.atlassian.stash.privaterepos.group.StoredGroupsService;
+import org.networkedassets.atlassian.stash.privaterepos.group.UserGroupsService;
 import org.networkedassets.atlassian.stash.privaterepos.permissions.PermissionsModeService;
 import org.networkedassets.atlassian.stash.privaterepos.user.StoredUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class UserPermissionsExaminer {
 	private StoredUsersService storedUsersService;
 	@Autowired
 	private PermissionsModeService permissionsModeService;
+	private UserGroupsService userGroupsService;
 
 	public boolean canUsePrivateRepositories() {
 		StashUser currentUser = authenthicationContext.getCurrentUser();
@@ -52,7 +54,7 @@ public class UserPermissionsExaminer {
 
 	private boolean isUserInAllowedGroup(StashUser user) {
 
-		Set<String> userGroups = storedGroupsService.getUserGroups(user);
+		Set<String> userGroups = userGroupsService.getUserGroups(user);
 		Set<String> storedGroups = storedGroupsService.getAll();
 		@SuppressWarnings("unchecked")
 		Collection<String> intersection = CollectionUtils.intersection(

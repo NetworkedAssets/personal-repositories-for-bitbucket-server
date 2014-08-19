@@ -12,8 +12,6 @@
 
 	<ao key="ao-module">
 		<description>The AO module for this plugin.</description>
-		<entity>org.networkedassets.atlassian.stash.privaterepos.group.Group
-		</entity>
 		<entity>org.networkedassets.atlassian.stash.privaterepos.repositories.Owner
 		</entity>
 		<entity>org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepository

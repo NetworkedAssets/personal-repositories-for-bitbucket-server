@@ -3,16 +3,15 @@ package org.networkedassets.atlassian.stash.privaterepos.group;
 import java.util.Set;
 
 import org.networkedassets.atlassian.stash.privaterepos.permissions.PermissionsModeService;
-import org.networkedassets.atlassian.stash.privaterepos.util.AllPagesIterator;
-import org.networkedassets.atlassian.stash.privaterepos.util.PageProcessor;
-import org.networkedassets.atlassian.stash.privaterepos.util.AllPagesIterator.Builder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.atlassian.stash.user.StashUser;
 import com.atlassian.stash.user.UserService;
 
+@Component
 public class DefaultStoredGroupsService implements StoredGroupsService {
 
 	@Autowired
@@ -61,14 +60,6 @@ public class DefaultStoredGroupsService implements StoredGroupsService {
 	@Override
 	public void removeAll() {
 		groupsRepository.removeAll();
-	}
-
-	@Override
-	public Set<String> getUserGroups(StashUser user) {
-//Builder builder = new AllPagesIterator.Builder(new PageProcessor<String>() {
-//			
-//		}).resultsPerPage(resultsPerPage).;
-		return null;
 	}
 
 }

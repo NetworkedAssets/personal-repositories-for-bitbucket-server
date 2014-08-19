@@ -18,6 +18,4 @@ public interface StoredGroupsService {
 
 	boolean isDenied(String group);
 
-	Set<String> getUserGroups(StashUser user);
-
 }
