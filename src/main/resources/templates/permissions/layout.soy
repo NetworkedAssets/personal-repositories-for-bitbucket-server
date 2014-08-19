@@ -5,6 +5,14 @@
  */
 {template .layout}
 
+	<div class="repository-permissions-mode">
+		<p class="desc">By default:</p>
+		<p class="aui-buttons">
+			<button class="aui-button" aria-pressed="true">Allow</button>
+			<button class="aui-button" aria-disabled="false">Deny</button>
+		</p>
+	</div>
+
 	{call aui.group.group}
 	    {param content}
 	        {call aui.group.item}
@@ -13,6 +21,7 @@
 	            {/param}
 	        {/call}
 	    {/param}
+	    {param extraClasses}users-header{/param}
 	{/call}
 	<div id="users-table">
 	</div>
@@ -24,6 +33,7 @@
 	            {/param}
 	        {/call}
 	    {/param}
+	    {param extraClasses}group-header{/param}
 	{/call}
 	<div id="groups-table">
 	</div>
