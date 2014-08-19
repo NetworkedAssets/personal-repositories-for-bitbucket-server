@@ -21,5 +21,7 @@ public interface PersonalRepositoriesService {
 	void deletePersonalRepository(Repository repo);
 
 	int getOwnersCount();
+	
+	void purge();
 
 }
