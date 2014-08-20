@@ -90,7 +90,7 @@
 
 		<resource type="download" name="templates/repositories-repository-soy.js"
 			location="/templates/repositories/repository.soy" />
-			,
+		,
 		<resource type="download" name="repositories/model/RepositoryOwner.js"
 			location="/js/repositories/model/RepositoryOwner.js" />
 		<resource type="download" name="repositories/model/RepositoryOwners.js"
@@ -116,6 +116,16 @@
 		<dependency>com.atlassian.auiplugin:aui-select2</dependency>
 		<dependency>org.networkedassets.atlassian.stash.privaterepos:web-resources
 		</dependency>
+	</stash-resource>
+
+
+	<!-- <web-resource key="web-resources"> <resource type="download" name="privaterepos.css" 
+		location="/css/privaterepos.css" /> <transformation extension="soy"> <transformer 
+		key="soyTransformer" /> </transformation> </web-resource> -->
+
+	<stash-resource key="post-install-soy-templates" name="Post Install Soy Templates">
+		<resource type="download" name="permissions-table-soy.js"
+			location="/templates/postInstall/postInstall.soy" />
 	</stash-resource>
 
 	<component-import key="soyTemplateRenderer"
@@ -156,5 +166,14 @@
 			class="org.networkedassets.atlassian.stash.privaterepos.web.CanUsePrivateRepositoriesCondition"
 			invert="true" />
 	</web-panel>
+
+	<servlet name="Post Install Information Servlet" key="postInstallPageServlet"
+		class="org.networkedassets.atlassian.stash.privaterepos.web.PostInstallInformationServlet">
+		<description>Displays personal repositories post install information
+		</description>
+		<url-pattern>/postinstall</url-pattern>
+	</servlet>
+	
+	<param key="post-install-url" name="configure.url">/postinstall</param>
 
 </atlassian-plugin>

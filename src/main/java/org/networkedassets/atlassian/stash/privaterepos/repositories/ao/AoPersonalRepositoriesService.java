@@ -25,7 +25,6 @@ import org.springframework.stereotype.Component;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
 import com.atlassian.activeobjects.tx.Transactional;
-import com.atlassian.stash.project.Project;
 import com.atlassian.stash.project.ProjectService;
 import com.atlassian.stash.repository.Repository;
 import com.atlassian.stash.repository.RepositoryService;
