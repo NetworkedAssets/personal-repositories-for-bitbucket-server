@@ -23,5 +23,7 @@ public interface PersonalRepositoriesService {
 	int getOwnersCount();
 	
 	void purge();
+	
+	void updateRepositorySize(Repository repo);
 
 }
