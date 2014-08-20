@@ -280,4 +280,12 @@ public class AoPersonalRepositoriesService implements
 		ao.deleteWithSQL(Owner.class, "ID > ?", 0);
 	}
 
+	@Override
+	public void updateRepositorySize(Repository repo) {
+		PersonalRepository personalRepository = findPersonalRepository(repo);
+		personalRepository.setRepositorySize(calculateRepositorySize(repo));
+		updateOwnerRepositoriesSize(personalRepository.getOwner());
+		personalRepository.save();
+	}
+
 }
