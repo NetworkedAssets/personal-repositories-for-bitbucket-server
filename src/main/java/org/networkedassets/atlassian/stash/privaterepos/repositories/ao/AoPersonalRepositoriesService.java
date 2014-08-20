@@ -78,8 +78,8 @@ public class AoPersonalRepositoriesService implements
 		List<StashUser> sortedStashUsers = sortStashUsersByName(stashUsers,
 				direction);
 		List<StashUser> sortedStashUsersPage = sortedStashUsers.subList(
-				pageRequest.getStart(),
-				Math.min(pageRequest.getStart() + pageRequest.getLimit(), ownersCount));
+				pageRequest.getStart(), Math.min(pageRequest.getStart()
+						+ pageRequest.getLimit(), ownersCount));
 
 		List<Owner> sortedOwnersPage = new ArrayList<Owner>();
 
@@ -231,14 +231,10 @@ public class AoPersonalRepositoriesService implements
 	}
 
 	@Override
-	public PersonalRepository addPersonalRepository(Repository repository) {
-		StashUser user = getRepositoryOwner(repository);
+	public PersonalRepository addPersonalRepository(StashUser user,
+			Repository repository) {
 		Owner owner = findOrCreateOwner(user);
-
-		PersonalRepository personalRepo = addPersonalRepository(repository,
-				owner);
-		updateOwnerRepositoriesSize(owner);
-		return personalRepo;
+		return addPersonalRepository(repository, owner);
 	}
 
 	private void updateOwnerRepositoriesSize(Owner owner) {
@@ -250,23 +246,6 @@ public class AoPersonalRepositoriesService implements
 
 		owner.setRepositoriesSize(totalSize);
 		owner.save();
-	}
-
-	private StashUser getRepositoryOwner(Repository repository) {
-		Project project = repository.getProject();
-		return findUserFromProject(project);
-	}
-
-	private StashUser findUserFromProject(Project project) {
-		String userSlug = findUserSlugFromProjectKey(project.getKey());
-		return userService.getUserBySlug(userSlug);
-	}
-
-	/**
-	 * Cut the ~ from the beginning
-	 */
-	private String findUserSlugFromProjectKey(String key) {
-		return key.substring(1);
 	}
 
 	@Override

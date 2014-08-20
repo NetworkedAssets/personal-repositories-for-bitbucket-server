@@ -57,10 +57,13 @@ public class DefaultStoredUsersService implements StoredUsersService {
 
 	@Override
 	public boolean isAllowed(Integer userId) {
+		log.debug("checking if user {} is allowed", userId);
 		boolean userStored = userIdsRepository.contains(userId);
 		if (permissionsModeService.isAllowMode()) {
+			log.debug("Currently allow mode, user stored {}", userStored);
 			return !userStored;
 		} else {
+			log.debug("Currently deny mode, user stored {}", userStored);
 			return userStored;
 		}
 	}

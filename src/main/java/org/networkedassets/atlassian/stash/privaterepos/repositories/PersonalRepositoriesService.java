@@ -9,7 +9,7 @@ import com.atlassian.stash.util.PageRequest;
 
 public interface PersonalRepositoriesService {
 
-	PersonalRepository addPersonalRepository(Repository repo);
+	PersonalRepository addPersonalRepository(StashUser user, Repository repo);
 
 	List<PersonalRepository> addUserPersonalRepositories(StashUser user,
 			Iterable<? extends Repository> repositories);
