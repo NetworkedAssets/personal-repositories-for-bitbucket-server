@@ -135,6 +135,19 @@
 			<artifactId>soy-template-plugin</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<!-- LICENSING -->
+		<dependency>
+			<groupId>com.atlassian.upm</groupId>
+			<artifactId>licensing-api</artifactId>
+			<version>${upm.license.compatibility.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.atlassian.upm</groupId>
+			<artifactId>upm-api</artifactId>
+			<version>${upm.license.compatibility.version}</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

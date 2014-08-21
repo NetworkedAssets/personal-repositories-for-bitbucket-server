@@ -8,6 +8,9 @@
 		<vendor name="${project.organization.name}" url="${project.organization.url}" />
 		<param name="plugin-icon">images/pluginIcon.png</param>
 		<param name="plugin-logo">images/pluginLogo.png</param>
+		<param name="atlassian-licensing-enabled">true</param>
+		<param key="post-install-url" name="post.install.url">/plugins/servlet/privatereposadmin</param>
+		<param key="configure-url" name="configure.url">/plugins/servlet/privatereposadmin</param>
 	</plugin-info>
 
 	<ao key="ao-module">
@@ -17,6 +20,8 @@
 		<entity>org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepository
 		</entity>
 	</ao>
+	
+	<component-import key="pluginLicenseManager" interface="com.atlassian.upm.api.license.PluginLicenseManager"/>
 
 	<component-import key="ao" name="Active Objects service"
 		interface="com.atlassian.activeobjects.external.ActiveObjects">
@@ -173,7 +178,5 @@
 		</description>
 		<url-pattern>/postinstall</url-pattern>
 	</servlet>
-	
-	<param key="post-install-url" name="post.install.url">/postinstall</param>
 
 </atlassian-plugin>
