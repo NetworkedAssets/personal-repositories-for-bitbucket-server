@@ -9,8 +9,10 @@
 		<param name="plugin-icon">images/pluginIcon.png</param>
 		<param name="plugin-logo">images/pluginLogo.png</param>
 		<param name="atlassian-licensing-enabled">true</param>
-		<param key="post-install-url" name="post.install.url">/plugins/servlet/privatereposadmin</param>
-		<param key="configure-url" name="configure.url">/plugins/servlet/privatereposadmin</param>
+		<param key="post-install-url" name="post.install.url">/plugins/servlet/privatereposadmin
+		</param>
+		<param key="configure-url" name="configure.url">/plugins/servlet/privatereposadmin
+		</param>
 	</plugin-info>
 
 	<ao key="ao-module">
@@ -20,8 +22,9 @@
 		<entity>org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepository
 		</entity>
 	</ao>
-	
-	<component-import key="pluginLicenseManager" interface="com.atlassian.upm.api.license.PluginLicenseManager"/>
+
+	<component-import key="pluginLicenseManager"
+		interface="com.atlassian.upm.api.license.PluginLicenseManager" />
 
 	<component-import key="ao" name="Active Objects service"
 		interface="com.atlassian.activeobjects.external.ActiveObjects">
@@ -123,15 +126,6 @@
 		</dependency>
 	</stash-resource>
 
-
-	<!-- <web-resource key="web-resources"> <resource type="download" name="privaterepos.css" 
-		location="/css/privaterepos.css" /> <transformation extension="soy"> <transformer 
-		key="soyTransformer" /> </transformation> </web-resource> -->
-
-	<stash-resource key="post-install-soy-templates" name="Post Install Soy Templates">
-		<resource type="download" name="permissions-table-soy.js"
-			location="/templates/postInstall/postInstall.soy" />
-	</stash-resource>
 
 	<component-import key="soyTemplateRenderer"
 		interface="com.atlassian.soy.renderer.SoyTemplateRenderer" />
