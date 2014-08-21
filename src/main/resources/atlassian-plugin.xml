@@ -166,11 +166,4 @@
 			invert="true" />
 	</web-panel>
 
-	<servlet name="Post Install Information Servlet" key="postInstallPageServlet"
-		class="org.networkedassets.atlassian.stash.privaterepos.web.PostInstallInformationServlet">
-		<description>Displays personal repositories post install information
-		</description>
-		<url-pattern>/postinstall</url-pattern>
-	</servlet>
-
 </atlassian-plugin>
