@@ -1,0 +1,19 @@
+{namespace org.networkedassets.personalRepos.license}
+
+/**
+ * Displays admin panel
+ * 
+ * @param error
+ */
+{template .errorPage}
+<html>
+<head>
+<meta name="decorator" content="atl.admin">
+<meta name="activeTab" content="admin-private-repos">
+<title>Private Repositories Permissions</title>
+</head>
+<body>
+	Your license is invalid {$error}
+</body>
+</html>
+{/template}

@@ -126,6 +126,11 @@
 		</dependency>
 	</stash-resource>
 
+	<stash-resource key="license-servlet-resources" name="License error resources">
+		<directory location="/templates/license" />
+		<dependency>com.atlassian.stash.stash-web-plugin:global</dependency>
+	</stash-resource>
+
 
 	<component-import key="soyTemplateRenderer"
 		interface="com.atlassian.soy.renderer.SoyTemplateRenderer" />
