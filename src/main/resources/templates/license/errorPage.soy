@@ -3,17 +3,37 @@
 /**
  * Displays admin panel
  * 
- * @param error
+ * @param status
  */
 {template .errorPage}
 <html>
 <head>
 <meta name="decorator" content="atl.admin">
 <meta name="activeTab" content="admin-private-repos">
+{webResourceManager_requireResource('org.networkedassets.atlassian.stash.privaterepos:license-web-resources')}
 <title>Private Repositories Permissions</title>
 </head>
 <body>
-	Your license is invalid {$error}
+	<div class="license-error">
+		<h3>Your license doesn't work :(</h3>
+		<p>
+		{switch $status}
+  			{case 'EXPIRED'}
+				It seems your license expired. You can renew it in the plugin manager.  			
+			{case 'NO_LICENSE'}
+				It seems that you don't have a license. You need one to use this plugin. You can get a Trial or buy a license in plugin manager.
+			{case 'TYPE_MISMATCH'}
+				This plugin doesn't support your license type. You can fix that by getting appropriate license in the plugin manager.
+			{case 'USER_MISMATCH'}
+				You have more users then your license allows. You can upgrade using the plugin manager.
+			{case 'VERSION_MISMATCH'}
+				Your license doesn't support this version of Stash. You can fix that by getting appropriate license in the plugin manager. 
+			{default}
+			Status : {$status}			
+		{/switch}	
+		</p>
+		<a class="aui-button aui-button-primary" href="upm#manage">Go to Plugin Manager</a>
+	</div>
 </body>
 </html>
 {/template}

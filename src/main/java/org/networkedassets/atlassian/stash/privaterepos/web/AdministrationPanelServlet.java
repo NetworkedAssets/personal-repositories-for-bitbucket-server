@@ -62,7 +62,7 @@ public class AdministrationPanelServlet extends SoyTemplateServlet {
 	private void renderLicenseError(HttpServletResponse resp)
 			throws IOException, ServletException {
 		HashMap<String, Object> params = super.getTemplateParams();
-		params.put("error", licenseManager.getLicenseErrorMessage());
+		params.put("status", licenseManager.getLicenseStatus());
 		super.render(resp, licenseErrorTemplateResources,
 				licenseErrorTemplateKey, params);
 	}

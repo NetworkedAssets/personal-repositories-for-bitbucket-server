@@ -125,9 +125,14 @@
 		<dependency>org.networkedassets.atlassian.stash.privaterepos:web-resources
 		</dependency>
 	</stash-resource>
+	
+	<web-resource key="license-web-resources" name="License web resources">
+		<resource type="download" name="license.css" location="/css/license.css" />
+	</web-resource>
 
-	<stash-resource key="license-servlet-resources" name="License error resources">
+	<stash-resource key="license-servlet-resources" name="License template resources">
 		<directory location="/templates/license" />
+		<dependency>org.networkedassets.atlassian.stash.privaterepos:license-web-resources</dependency>
 		<dependency>com.atlassian.stash.stash-web-plugin:global</dependency>
 	</stash-resource>
 

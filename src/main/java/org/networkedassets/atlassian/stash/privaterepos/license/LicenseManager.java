@@ -22,14 +22,17 @@ public class LicenseManager {
 		return licenseOption.get().isValid();
 	}
 
-	public String getLicenseErrorMessage() {
+	public LicenseStatus getLicenseStatus() {
 		Option<PluginLicense> licenseOption = pluginLicenseManager.getLicense();
 		if (licenseOption.isDefined()) {
 			PluginLicense pluginLicense = licenseOption.get();
+			if (pluginLicense.isValid()) {
+				return LicenseStatus.OK;
+			}
 			Option<LicenseError> error = pluginLicense.getError();
-			return error.get().toString();
+			return LicenseStatus.valueOf(error.get().name());
 		} else {
-			return "No license found";
+			return LicenseStatus.NO_LICENSE;
 		}
 	}
 
