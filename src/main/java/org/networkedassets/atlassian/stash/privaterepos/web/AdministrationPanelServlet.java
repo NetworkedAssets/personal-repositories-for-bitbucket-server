@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.networkedassets.atlassian.stash.privaterepos.license.LicenseManager;
-import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepositoriesPreScanner;
+import org.networkedassets.atlassian.stash.privaterepos.repositories.RepositoriesPreScanningScheduler;
 import org.networkedassets.atlassian.stash.privaterepos.state.PluginState;
 import org.networkedassets.atlassian.stash.privaterepos.state.PluginStateManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class AdministrationPanelServlet extends SoyTemplateServlet {
 	@Autowired
 	private PluginStateManager pluginStateManager;
 	@Autowired
-	private PersonalRepositoriesPreScanner repositoriesPreScanner;
+	private RepositoriesPreScanningScheduler repositoriesPreScanningScheduler;
 
 	@Override
 	protected String getTemplateResources() {
@@ -57,7 +57,7 @@ public class AdministrationPanelServlet extends SoyTemplateServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		if (pluginStateManager.getState() == PluginState.SCAN_NEEDED) {
-			repositoriesPreScanner.scanPersonalRepositories();
+			repositoriesPreScanningScheduler.scheduleScan();
 		}
 		super.doGet(req, resp);
 	}
