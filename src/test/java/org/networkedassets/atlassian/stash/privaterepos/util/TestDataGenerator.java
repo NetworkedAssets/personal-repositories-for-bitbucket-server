@@ -1,9 +1,13 @@
 package org.networkedassets.atlassian.stash.privaterepos.util;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.Set;
 
 import org.apache.commons.codec.binary.Base64;
@@ -15,6 +19,7 @@ import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
+import org.eclipse.jetty.util.UrlEncoded;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,7 +57,8 @@ public class TestDataGenerator {
 	}
 
 	private void createUsers() {
-		userNames = generateRandomNames(NUMBER_OF_USERS);
+//		userNames = generateRandomNames(NUMBER_OF_USERS);
+		userNames = readFakeNamesFromFile();
 		System.out.println("Random names generated {}" + userNames);
 		for (String name : userNames) {
 			createUser(name);
@@ -67,11 +73,34 @@ public class TestDataGenerator {
 		return names;
 	}
 
+	private Set<String> readFakeNamesFromFile() {
+		Set<String> names = new LinkedHashSet<String>();
+		try {
+			System.out.println(new File(".").getAbsolutePath());
+			Scanner scanner = new Scanner(new File("src/test/resources/FakeNames.csv"));
+			scanner.useDelimiter(",");
+			while(scanner.hasNextLine()){
+				names.add(scanner.nextLine());
+	        }
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return names;
+	}
+
 	private void createUser(String name) {
-		HttpPost post = new HttpPost(REST_API_URL + "admin/users?name=" + name
-				+ "&password=" + name + "&displayName=" + name
-				+ "&emailAddress=" + name + "@networkedassets.org");
+		String slug = slugifyName(name);
+		HttpPost post = new HttpPost(REST_API_URL + "admin/users?name=" + slug
+				+ "&password=" + slug + "&displayName=" + UrlEncoded.encodeString(name)
+				+ "&emailAddress=" + slug + "@networkedassets.org");
 		makePostAsAdmin(post);
+	}
+	
+	private String slugifyName(String name) {
+		name = name.replace(' ', '_');
+		name = name.toLowerCase();
+		return name;
 	}
 
 	private void createRepositories() {
@@ -88,11 +117,10 @@ public class TestDataGenerator {
 		}
 		System.out.println(userName + "Has personal repos !");
 		int numberOfRepos = rnd.nextInt(MAX_REPOS_PER_USER) + 1;
-		Set<String> randomReposNames = generateRandomNames(numberOfRepos);
-		for (String repoName : randomReposNames) {
-			System.out.println("Creating user " + userName + " repo "
-					+ repoName);
-			createUserRepository(userName, repoName);
+//		Set<String> randomReposNames = generateRandomNames(numberOfRepos);
+		for (int i = 0; i < numberOfRepos; i++) {
+			System.out.println("Creating user " + userName + " repo Repository_" + i);
+			createUserRepository(userName, "Repository_" + i);
 		}
 	}
 
@@ -106,7 +134,8 @@ public class TestDataGenerator {
 					+ "\" }");
 			requestEntity.setContentType("application/json");
 			post.setEntity(requestEntity);
-			makePost(post, userName + ":" + userName);
+			String userSlug = slugifyName(userName);
+			makePost(post, userSlug + ":" + userSlug);
 		} catch (UnsupportedEncodingException e1) {
 			e1.printStackTrace();
 		}

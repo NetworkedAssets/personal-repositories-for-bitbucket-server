@@ -6,6 +6,7 @@ import java.util.Set;
 import org.apache.commons.collections.CollectionUtils;
 import org.networkedassets.atlassian.stash.privaterepos.group.StoredGroupsService;
 import org.networkedassets.atlassian.stash.privaterepos.group.UserGroupsService;
+import org.networkedassets.atlassian.stash.privaterepos.permissions.PermissionsMode;
 import org.networkedassets.atlassian.stash.privaterepos.permissions.PermissionsModeService;
 import org.networkedassets.atlassian.stash.privaterepos.user.StoredUsersService;
 import org.slf4j.Logger;
@@ -50,7 +51,19 @@ public class UserPermissionsExaminer {
 	}
 
 	private boolean userAllowedToUsePrivateRepositories(StashUser currentUser) {
-		return isUserAllowed(currentUser) || isUserInAllowedGroup(currentUser);
+		if (permissionsModeService.getPermissionsMode() == PermissionsMode.ALLOW) {
+			if (isUserAllowed(currentUser)) {
+				return isUserInAllowedGroup(currentUser);
+			} else {
+				return false;
+			}
+		} else {
+			if (isUserAllowed(currentUser)) {
+				return true;
+			} else {
+				return isUserInAllowedGroup(currentUser);
+			}
+		}
 	}
 
 	private boolean isUserAllowed(StashUser stashUser) {
