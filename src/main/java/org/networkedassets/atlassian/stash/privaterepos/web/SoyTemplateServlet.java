@@ -1,6 +1,7 @@
 package org.networkedassets.atlassian.stash.privaterepos.web;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -33,19 +34,20 @@ public abstract class SoyTemplateServlet extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			permissionValidationService.validateForGlobal(Permission.SYS_ADMIN);
-			render(resp);
+			render(resp, getTemplateResources(), getTemplateKey(),
+					getTemplateParams());
 		} catch (AuthorisationException e) {
 			resp.sendRedirect(navBuilder.login().buildAbsolute());
 		}
 	}
 
-	private void render(HttpServletResponse resp) throws IOException,
-			ServletException {
+	protected void render(HttpServletResponse resp, String templateResources,
+			String templateKey, HashMap<String, Object> templateParams)
+			throws IOException, ServletException {
 		try {
 			resp.setContentType("text/html;charset=UTF-8");
-			soyTemplateRenderer.render(resp.getWriter(),
-					getTemplateResources(), getTemplateKey(),
-					getTemplateParams());
+			soyTemplateRenderer.render(resp.getWriter(), templateResources,
+					templateKey, templateParams);
 
 		} catch (SoyException e) {
 			Throwable cause = e.getCause();

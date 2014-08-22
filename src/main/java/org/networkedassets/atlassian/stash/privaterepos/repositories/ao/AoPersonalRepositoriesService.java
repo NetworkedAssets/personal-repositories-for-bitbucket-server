@@ -221,6 +221,8 @@ public class AoPersonalRepositoriesService implements
 		long repositorySize = calculateRepositorySize(repo);
 		personalRepository.setRepositorySize(repositorySize);
 		personalRepository.save();
+		owner.setRepositoriesSize(owner.getRepositoriesSize() + repositorySize);
+		owner.save();
 
 		return personalRepository;
 	}
@@ -242,6 +244,7 @@ public class AoPersonalRepositoriesService implements
 		for (PersonalRepository repo : repositories) {
 			totalSize += repo.getRepositorySize();
 		}
+		log.debug("Updating totat repositories size for {} with {}", owner, totalSize);
 
 		owner.setRepositoriesSize(totalSize);
 		owner.save();
@@ -283,8 +286,8 @@ public class AoPersonalRepositoriesService implements
 	public void updateRepositorySize(Repository repo) {
 		PersonalRepository personalRepository = findPersonalRepository(repo);
 		personalRepository.setRepositorySize(calculateRepositorySize(repo));
-		updateOwnerRepositoriesSize(personalRepository.getOwner());
 		personalRepository.save();
+		updateOwnerRepositoriesSize(personalRepository.getOwner());
 	}
 
 }

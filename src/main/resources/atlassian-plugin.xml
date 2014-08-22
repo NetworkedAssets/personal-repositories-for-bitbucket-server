@@ -8,6 +8,11 @@
 		<vendor name="${project.organization.name}" url="${project.organization.url}" />
 		<param name="plugin-icon">images/pluginIcon.png</param>
 		<param name="plugin-logo">images/pluginLogo.png</param>
+		<param name="atlassian-licensing-enabled">true</param>
+		<param key="post-install-url" name="post.install.url">/plugins/servlet/privatereposadmin
+		</param>
+		<param key="configure-url" name="configure.url">/plugins/servlet/privatereposadmin
+		</param>
 	</plugin-info>
 
 	<ao key="ao-module">
@@ -17,6 +22,9 @@
 		<entity>org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepository
 		</entity>
 	</ao>
+
+	<component-import key="pluginLicenseManager"
+		interface="com.atlassian.upm.api.license.PluginLicenseManager" />
 
 	<component-import key="ao" name="Active Objects service"
 		interface="com.atlassian.activeobjects.external.ActiveObjects">
@@ -117,16 +125,17 @@
 		<dependency>org.networkedassets.atlassian.stash.privaterepos:web-resources
 		</dependency>
 	</stash-resource>
+	
+	<web-resource key="license-web-resources" name="License web resources">
+		<resource type="download" name="license.css" location="/css/license.css" />
+	</web-resource>
 
-
-	<!-- <web-resource key="web-resources"> <resource type="download" name="privaterepos.css" 
-		location="/css/privaterepos.css" /> <transformation extension="soy"> <transformer 
-		key="soyTransformer" /> </transformation> </web-resource> -->
-
-	<stash-resource key="post-install-soy-templates" name="Post Install Soy Templates">
-		<resource type="download" name="permissions-table-soy.js"
-			location="/templates/postInstall/postInstall.soy" />
+	<stash-resource key="license-servlet-resources" name="License template resources">
+		<directory location="/templates/license" />
+		<dependency>org.networkedassets.atlassian.stash.privaterepos:license-web-resources</dependency>
+		<dependency>com.atlassian.stash.stash-web-plugin:global</dependency>
 	</stash-resource>
+
 
 	<component-import key="soyTemplateRenderer"
 		interface="com.atlassian.soy.renderer.SoyTemplateRenderer" />
@@ -166,14 +175,5 @@
 			class="org.networkedassets.atlassian.stash.privaterepos.web.CanUsePrivateRepositoriesCondition"
 			invert="true" />
 	</web-panel>
-
-	<servlet name="Post Install Information Servlet" key="postInstallPageServlet"
-		class="org.networkedassets.atlassian.stash.privaterepos.web.PostInstallInformationServlet">
-		<description>Displays personal repositories post install information
-		</description>
-		<url-pattern>/postinstall</url-pattern>
-	</servlet>
-	
-	<param key="post-install-url" name="configure.url">/postinstall</param>
 
 </atlassian-plugin>
