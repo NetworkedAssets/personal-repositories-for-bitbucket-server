@@ -3,6 +3,7 @@ package org.networkedassets.atlassian.stash.privaterepos.repositories.listeners;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import org.networkedassets.atlassian.stash.privaterepos.license.LicenseManager;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepositoriesService;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.RepositoryTypeVerifier;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class RepositoryModifiedListener {
 	private EventPublisher eventPublisher;
 	@Autowired
 	private StashAuthenticationContext authenticationContext;
+	@Autowired
+	private LicenseManager licenseManager;
 
 	@PostConstruct
 	public void registerEvents() {
@@ -38,6 +41,9 @@ public class RepositoryModifiedListener {
 
 	@EventListener
 	public void handleCreationEvent(RepositoryModifiedEvent event) {
+		if (licenseManager.isLicenseInvalid()) {
+			return;
+		}
 		Repository repo = event.getRepository();
 		if (repositoryTypeVerifier.isPersonal(repo)) {
 			personalRepositoriesService.updateRepositorySize(repo);

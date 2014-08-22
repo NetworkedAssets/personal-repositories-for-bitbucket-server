@@ -159,21 +159,4 @@
 		</description>
 	</rest>
 
-	<web-panel key="button-hiding-web-panel" name="Private Repository Permissions Web Panel"
-		location="stash.user.profile.header" weight="20">
-		<label key="private-repository-button-hiding-web-panel"></label>
-		<resource name="view" type="static">
-			<![CDATA[
-			<script>
-				AJS.toInit(function() {
-					AJS.$('a[href$="/repos?create"], .repository-table, .repository-table-message, .aui-navgroup-inner a').remove();
-				});
-			</script>
-			]]>
-		</resource>
-		<condition key="canUsePrivateRepositoriesCondition"
-			class="org.networkedassets.atlassian.stash.privaterepos.web.CanUsePrivateRepositoriesCondition"
-			invert="true" />
-	</web-panel>
-
 </atlassian-plugin>
