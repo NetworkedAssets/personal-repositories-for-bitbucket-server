@@ -13,7 +13,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import org.networkedassets.atlassian.stash.privaterepos.auth.AdminAuthorizationVerifier;
 import org.networkedassets.atlassian.stash.privaterepos.auth.RestAccessFilter;
 import org.networkedassets.atlassian.stash.privaterepos.user.StoredUsersSearch;
 import org.networkedassets.atlassian.stash.privaterepos.user.StoredUsersService;
