@@ -5,7 +5,8 @@ import javax.annotation.PreDestroy;
 
 import org.networkedassets.atlassian.stash.privaterepos.license.LicenseManager;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepositoriesPreScanner;
-import org.networkedassets.atlassian.stash.privaterepos.state.PluginStateRepository;
+import org.networkedassets.atlassian.stash.privaterepos.state.PluginState;
+import org.networkedassets.atlassian.stash.privaterepos.state.PluginStateManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class PluginDisabledListener {
 	@Autowired
 	private LicenseManager licenseManager;
 	@Autowired
-	private PluginStateRepository pluginStateRepository;
+	private PluginStateManager pluginStateRepository;
 
 	private final Logger log = LoggerFactory
 			.getLogger(PluginDisabledListener.class);
@@ -54,7 +55,7 @@ public class PluginDisabledListener {
 			return;
 		}
 		if (event.getPlugin().getKey().equals(PLUGIN_KEY)) {
-			pluginStateRepository.setPrescanned(false);
+			pluginStateRepository.setState(PluginState.SCAN_NEEDED);
 		}
 	}
 

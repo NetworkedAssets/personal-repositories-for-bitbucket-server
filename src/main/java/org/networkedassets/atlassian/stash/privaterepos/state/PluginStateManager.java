@@ -9,10 +9,10 @@ import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 
 @Component
-public class PluginStateRepository {
+public class PluginStateManager {
 
-	private final String PLUGIN_PRESCANNED_KEY = "plugin-prescanned-status";
-	private final boolean DEFAULT_PRESCAN_STATUS = false;
+	private final String PLUGIN_STATUS_KEY = "plugin-prescanned-status";
+	private final PluginState DEFAULT_STATUS = PluginState.SCAN_NEEDED;
 
 	@Autowired
 	private PluginSettingsFactory pluginSettingsFactory;
@@ -24,17 +24,16 @@ public class PluginStateRepository {
 		pluginSettings = pluginSettingsFactory.createGlobalSettings();
 	}
 
-	public void setPrescanned(boolean status) {
-		pluginSettings.put(PLUGIN_PRESCANNED_KEY, String.valueOf(status));
+	public void setState(PluginState state) {
+		pluginSettings.put(PLUGIN_STATUS_KEY, state.name());
 	}
 
-	public boolean isPrescanned() {
-		String stringStatus = (String) pluginSettings
-				.get(PLUGIN_PRESCANNED_KEY);
+	public PluginState getState() {
+		String stringStatus = (String) pluginSettings.get(PLUGIN_STATUS_KEY);
 		if (stringStatus == null) {
-			return DEFAULT_PRESCAN_STATUS;
+			return DEFAULT_STATUS;
 		}
-		return Boolean.getBoolean(stringStatus);
+		return PluginState.valueOf(stringStatus);
 	}
 
 }
