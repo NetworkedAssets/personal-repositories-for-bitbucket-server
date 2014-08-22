@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import org.networkedassets.atlassian.stash.privaterepos.auth.AdminAuthorizationVerifier;
+import org.networkedassets.atlassian.stash.privaterepos.auth.RestAccessFilter;
 import org.networkedassets.atlassian.stash.privaterepos.user.StoredUsersSearch;
 import org.networkedassets.atlassian.stash.privaterepos.user.StoredUsersService;
 import org.networkedassets.atlassian.stash.privaterepos.util.rest.IdsSet;
@@ -32,14 +33,14 @@ public class UserRestService {
 	@Autowired
 	private UsersStateCreator usersStateCreator;
 	@Autowired
-	private AdminAuthorizationVerifier authorizationVerifier;
+	private RestAccessFilter restAccessFilter;
 	@Autowired
 	private StoredUsersSearch storedUsersSearch;
 
 	@Path("find/{key}")
 	@GET
 	public Set<UserState> findUsers(@PathParam("key") String key) {
-		this.authorizationVerifier.verify();
+		restAccessFilter.run();
 		return usersStateCreator.createFrom(storedUsersSearch
 				.findNonStoredUsers(key));
 	}
@@ -47,14 +48,14 @@ public class UserRestService {
 	@Path("list")
 	@GET
 	public Set<UserState> getUsers() {
-		authorizationVerifier.verify();
+		restAccessFilter.run();
 		return usersStateCreator.createFrom(storedUserService.getAll());
 	}
 
 	@Path("list")
 	@POST
 	public Response addUsers(IdsSet<Integer> ids) {
-		authorizationVerifier.verify();
+		restAccessFilter.run();
 		storedUserService.add(ids.getIds());
 		return Response.ok().build();
 	}
@@ -63,7 +64,7 @@ public class UserRestService {
 	@POST
 	public Response addUser(@Context UriInfo uriInfo,
 			@PathParam("id") Integer userId) {
-		this.authorizationVerifier.verify();
+		restAccessFilter.run();
 		storedUserService.add(Sets.newHashSet(userId));
 		return Response.created(uriInfo.getAbsolutePath()).build();
 	}
@@ -71,7 +72,7 @@ public class UserRestService {
 	@Path("user/{id}")
 	@DELETE
 	public Response deleteUser(@PathParam("id") Integer userId) {
-		authorizationVerifier.verify();
+		restAccessFilter.run();
 		storedUserService.remove(Sets.newHashSet(userId));
 		return Response.ok().build();
 	}

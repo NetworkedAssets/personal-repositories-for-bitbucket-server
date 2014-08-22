@@ -3,6 +3,7 @@ package org.networkedassets.atlassian.stash.privaterepos.auth;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
+import org.networkedassets.atlassian.stash.privaterepos.license.LicenseManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,14 +12,28 @@ import com.atlassian.stash.user.Permission;
 import com.atlassian.stash.user.PermissionValidationService;
 
 @Component
-public class AdminAuthorizationVerifier {
+public class RestAccessFilter {
 
 	@Autowired
 	private PermissionValidationService permissionValidationService;
 
-	public void verify() {
+	@Autowired
+	private LicenseManager licenseManager;
+
+	public void run() {
+		filterNonAdmins();
+		filterInvalidLicense();
+	}
+
+	private void filterInvalidLicense() {
+		if (!licenseManager.isLicenseValid()) {
+			throw new WebApplicationException(Response.Status.FORBIDDEN);
+		}
+	}
+
+	private void filterNonAdmins() {
 		try {
-			permissionValidationService.validateForGlobal(Permission.SYS_ADMIN);
+			permissionValidationService.validateForGlobal(Permission.ADMIN);
 		} catch (AuthorisationException e) {
 			throw new WebApplicationException(Response.Status.UNAUTHORIZED);
 		}

@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import org.networkedassets.atlassian.stash.privaterepos.auth.AdminAuthorizationVerifier;
+import org.networkedassets.atlassian.stash.privaterepos.auth.RestAccessFilter;
 import org.networkedassets.atlassian.stash.privaterepos.group.StoredGroupsSearch;
 import org.networkedassets.atlassian.stash.privaterepos.group.StoredGroupsService;
 import org.networkedassets.atlassian.stash.privaterepos.util.rest.IdsSet;
@@ -34,12 +34,12 @@ public class GroupRestService {
 	@Autowired
 	private GroupsInfoBuilder groupsInfoBuilder;
 	@Autowired
-	private AdminAuthorizationVerifier authorizationVerifier;
+	private RestAccessFilter restAccessFilter;
 
 	@Path("list")
 	@GET
 	public Set<GroupInfo> getGroups() {
-		this.authorizationVerifier.verify();
+		restAccessFilter.run();
 		return groupsInfoBuilder.createFrom(storedGroupsService.getAll());
 	}
 
@@ -47,15 +47,15 @@ public class GroupRestService {
 	@POST
 	public Response addGroup(@Context UriInfo uriInfo,
 			@PathParam("group") String groupName) {
-		this.authorizationVerifier.verify();
-		this.storedGroupsService.add(Sets.newHashSet(groupName));
+		restAccessFilter.run();
+		storedGroupsService.add(Sets.newHashSet(groupName));
 		return Response.created(uriInfo.getAbsolutePath()).build();
 	}
 
 	@Path("list")
 	@POST
 	public Response addGroups(IdsSet<String> names) {
-		this.authorizationVerifier.verify();
+		restAccessFilter.run();
 		storedGroupsService.add(names.getIds());
 		return Response.ok().build();
 	}
@@ -63,7 +63,7 @@ public class GroupRestService {
 	@Path("group/{group}")
 	@DELETE
 	public Response deleteGroup(@PathParam("group") String groupName) {
-		this.authorizationVerifier.verify();
+		restAccessFilter.run();
 		storedGroupsService.remove(Sets.newHashSet(groupName));
 		return Response.ok().build();
 	}
@@ -71,7 +71,7 @@ public class GroupRestService {
 	@Path("find/{key}")
 	@GET
 	public Set<GroupInfo> findUsers(@PathParam("key") String key) {
-		this.authorizationVerifier.verify();
+		restAccessFilter.run();
 		return groupsInfoBuilder.createFrom(storedGroupsSearch
 				.findNonStoredGroups(key));
 	}

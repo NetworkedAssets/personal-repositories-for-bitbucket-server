@@ -10,6 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import org.networkedassets.atlassian.stash.privaterepos.auth.RestAccessFilter;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.Owner;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepositoriesService;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepository;
@@ -43,6 +44,9 @@ public class RepositoriesRestService {
 	@Autowired
 	private PersonalRepositoryStateCreator personalRepositoryStateCreator;
 
+	@Autowired
+	private RestAccessFilter restAccessFilter;
+
 	@Path("owners")
 	@GET
 	public RestPage<RepositoryOwnerState> getUsers(
@@ -50,6 +54,7 @@ public class RepositoriesRestService {
 			@DefaultValue("20") @QueryParam("per_page") int perPage,
 			@DefaultValue("size") @QueryParam("sort_by") String sort,
 			@DefaultValue("desc") @QueryParam("order") String order) {
+		restAccessFilter.run();
 
 		PageRequest pageRequest = new PageRequestImpl((page - 1) * perPage,
 				perPage);
@@ -72,12 +77,14 @@ public class RepositoriesRestService {
 			@PathParam("id") int userId,
 			@DefaultValue("size") @QueryParam("sort_by") String sort,
 			@DefaultValue("desc") @QueryParam("order") String order) {
-		// this.authorizationVerifier.verify();
+		restAccessFilter.run();
+		
 		log.debug("Requested repositories for user {}", userId);
 		List<PersonalRepository> userPersonalRepositories = personalRepositoriesService
 				.getUserPersonalRepositories(userId);
 		return personalRepositoryStateCreator.createFrom(
-				userPersonalRepositories, getSortCriteriaFromRequestParams(sort, order));
+				userPersonalRepositories,
+				getSortCriteriaFromRequestParams(sort, order));
 	}
 
 	private SortCriteria getSortCriteriaFromRequestParams(String sortParam,
