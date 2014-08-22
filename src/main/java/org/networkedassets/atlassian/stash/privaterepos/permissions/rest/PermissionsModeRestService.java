@@ -7,6 +7,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.networkedassets.atlassian.stash.privaterepos.auth.RestAccessFilter;
 import org.networkedassets.atlassian.stash.privaterepos.permissions.PermissionsModeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,10 +24,14 @@ public class PermissionsModeRestService {
 
 	@Autowired
 	private PermissionsModeService permissionsModeService;
+	
+	@Autowired
+	private RestAccessFilter restAccessFilter;
 
 	@GET
 	@Path("/mode")
 	public PermissionsMode getMode() {
+		restAccessFilter.run();
 		return createPermissionModeReponse(permissionsModeService
 				.getPermissionsMode());
 	}
@@ -34,6 +39,7 @@ public class PermissionsModeRestService {
 	@PUT
 	@Path("/mode")
 	public Response putMode(PermissionsMode mode) {
+		restAccessFilter.run();
 		permissionsModeService.setPermissionsMode(parsePermissionModeParam(mode
 				.getMode()));
 		return Response.ok().build();
