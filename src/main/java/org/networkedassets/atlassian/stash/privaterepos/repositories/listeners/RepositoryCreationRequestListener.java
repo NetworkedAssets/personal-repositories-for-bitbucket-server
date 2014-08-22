@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.networkedassets.atlassian.stash.privaterepos.auth.UserPermissionsExaminer;
+import org.networkedassets.atlassian.stash.privaterepos.license.LicenseManager;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.RepositoryTypeVerifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,8 @@ public class RepositoryCreationRequestListener {
 	private RepositoryTypeVerifier repositoryTypeVerifier;
 	@Autowired
 	private EventPublisher eventPublisher;
+	@Autowired
+	private LicenseManager licenseManager;
 
 	private final Logger log = LoggerFactory
 			.getLogger(RepositoryCreationRequestListener.class);
@@ -40,6 +43,9 @@ public class RepositoryCreationRequestListener {
 
 	@EventListener
 	public void handleCreationEvent(RepositoryCreationRequestedEvent event) {
+		if (licenseManager.isLicenseInvalid()) {
+			return;
+		}
 		log.debug("Repository Creation Request received");
 		if (repositoryTypeVerifier.isPersonal(event.getRepository())) {
 			log.debug("Repository is personal");

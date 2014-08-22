@@ -21,6 +21,10 @@ public class LicenseManager {
 		}
 		return licenseOption.get().isValid();
 	}
+	
+	public boolean isLicenseInvalid() {
+		return !isLicenseValid();
+	}
 
 	public LicenseStatus getLicenseStatus() {
 		Option<PluginLicense> licenseOption = pluginLicenseManager.getLicense();

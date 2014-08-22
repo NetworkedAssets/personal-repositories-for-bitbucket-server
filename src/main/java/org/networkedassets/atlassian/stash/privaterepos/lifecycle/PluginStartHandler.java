@@ -6,6 +6,7 @@ import java.util.TimerTask;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import org.networkedassets.atlassian.stash.privaterepos.license.LicenseManager;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepositoriesPreScanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,15 +31,14 @@ public class PluginStartHandler {
 
 	@Autowired
 	private EventPublisher eventPublisher;
-
 	@Autowired
 	private PersonalRepositoriesPreScanner personalRepositoriesPreScanner;
-
 	@Autowired
 	private SecurityService securityService;
-
 	@Autowired
 	private StashAuthenticationContext authenticationContext;
+	@Autowired
+	private LicenseManager licenseManager;
 
 	private final Logger log = LoggerFactory
 			.getLogger(PluginStartHandler.class);
@@ -55,6 +55,9 @@ public class PluginStartHandler {
 
 	@EventListener
 	public void onPluginEnabledEvent(PluginEnabledEvent event) {
+		if (licenseManager.isLicenseInvalid()) {
+			return;
+		}
 		if (event.getPlugin().getKey().equals(PLUGIN_KEY)) {
 			log.debug("Scheduling prescan");
 			schedulePreScan();
