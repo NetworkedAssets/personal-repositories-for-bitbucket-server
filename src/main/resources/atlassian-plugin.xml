@@ -98,7 +98,8 @@
 
 		<resource type="download" name="templates/repositories-repository-soy.js"
 			location="/templates/repositories/repository.soy" />
-		,
+		<resource type="download" name="state/State.js"
+			location="/js/state/State.js" />
 		<resource type="download" name="repositories/model/RepositoryOwner.js"
 			location="/js/repositories/model/RepositoryOwner.js" />
 		<resource type="download" name="repositories/model/RepositoryOwners.js"

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Path("/state")
 @Produces({ MediaType.APPLICATION_JSON })
-public class PluginStateService {
+public class PluginStateRestService {
 
 	@Autowired
 	private RestAccessFilter restAccessFilter;
