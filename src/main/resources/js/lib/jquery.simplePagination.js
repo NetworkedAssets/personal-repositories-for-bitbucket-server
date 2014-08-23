@@ -285,6 +285,7 @@
 			} else {
 				$link = $('<a href="' + o.hrefTextPrefix + (pageIndex + 1) + o.hrefTextSuffix + '">' + (options.text) + '</a>');
 				$link.click(function(event){
+					event.preventDefault();
 					return methods._selectPage.call(self, pageIndex, event);
 				});
 			}
