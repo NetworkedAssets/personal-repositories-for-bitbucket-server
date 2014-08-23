@@ -56,8 +56,10 @@ public class AdministrationPanelServlet extends SoyTemplateServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		if (pluginStateManager.getState() == PluginState.SCAN_NEEDED) {
-			repositoriesPreScanningScheduler.scheduleScan();
+		if (licenseManager.isLicenseValid()) {
+			if (pluginStateManager.getState() == PluginState.SCAN_NEEDED) {
+				repositoriesPreScanningScheduler.scheduleScan();
+			}
 		}
 		super.doGet(req, resp);
 	}

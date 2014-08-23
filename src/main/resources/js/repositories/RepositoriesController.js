@@ -1,6 +1,6 @@
 define('RepositoriesController', [ 'underscore', 'jquery', 'RepositoriesTable',
-		'RepositoryOwners', 'UserRepositories', 'backbone', 'PluginState' ], function(_, $,
-		RepositoriesTable, RepositoryOwners, UserRepositories, Backbone, PluginState) {
+		'RepositoryOwners', 'UserRepositories', 'backbone', 'PluginState', 'RepositoriesLoader' ], function(_, $,
+		RepositoriesTable, RepositoryOwners, UserRepositories, Backbone, PluginState, RepositoriesLoader) {
 	var constr = function(opts) {
 		this.initialize(opts);
 	};
@@ -18,13 +18,13 @@ define('RepositoriesController', [ 'underscore', 'jquery', 'RepositoriesTable',
 		},
 		
 		runPluginStateChecks : function() {
-			this.pluginState.fetch().done(this.onPluginStateFetch)
+			this.pluginState.fetch().done(this.onPluginStateFetch);
 		},
 		
 		onPluginStateFetch : function() {
 			if (this.pluginState.get('state') === 'SCANNING') {
-				displayLoader();
-				setTiemout(this.runPluginStateChecks, 1000);
+				this.displayLoader();
+				setTimeout(_.bind(this.runPluginStateChecks, this), 1000);
 			}
 			else {
 				this.startWhenPluginReady();
@@ -32,7 +32,10 @@ define('RepositoriesController', [ 'underscore', 'jquery', 'RepositoriesTable',
 		},
 		
 		displayLoader : function() {
-			console.log('loader !')
+			if (!this.loader) {
+				this.loader = new RepositoriesLoader();
+				this.region.html(this.loader.render().el);
+			}
 		},
 		
 		startWhenPluginReady : function() {

@@ -254,5 +254,6 @@
 		<stash.data.version>${stash.runtime.version}</stash.data.version>
 		<amps.version>5.0.4</amps.version>
 		<plugin.testrunner.version>1.1.4</plugin.testrunner.version>
+		<upm.license.compatibility.version>2.14.4</upm.license.compatibility.version>
 	</properties>
 </project>

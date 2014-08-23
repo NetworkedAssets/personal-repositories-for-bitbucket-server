@@ -24,7 +24,8 @@ public class PluginStateRestService {
 	public PluginState getState() {
 		restAccessFilter.run();
 		PluginState state = new PluginState();
-		state.setState(pluginStateManager.getState().name());
+//		state.setState(pluginStateManager.getState().name());
+		state.setState(org.networkedassets.atlassian.stash.privaterepos.state.PluginState.SCANNING.name());
 		return state;
 	}
 

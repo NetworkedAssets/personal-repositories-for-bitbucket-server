@@ -95,11 +95,12 @@
 			location="/templates/repositories/table.soy" />
 		<resource type="download" name="templates/repositories-owner-soy.js"
 			location="/templates/repositories/owner.soy" />
+		<resource type="download" name="templates/repositories-loader-soy.js"
+			location="/templates/repositories/loader.soy" />
 
 		<resource type="download" name="templates/repositories-repository-soy.js"
 			location="/templates/repositories/repository.soy" />
-		<resource type="download" name="state/State.js"
-			location="/js/state/State.js" />
+		<resource type="download" name="state/State.js" location="/js/state/State.js" />
 		<resource type="download" name="repositories/model/RepositoryOwner.js"
 			location="/js/repositories/model/RepositoryOwner.js" />
 		<resource type="download" name="repositories/model/RepositoryOwners.js"
@@ -110,6 +111,8 @@
 		<resource type="download" name="repositories/model/UserRepositories.js"
 			location="/js/repositories/model/UserRepositories.js" />
 
+		<resource type="download" name="repositories/view/Loader.js"
+			location="/js/repositories/view/Loader.js" />
 		<resource type="download" name="repositories/view/RepositoriesTable.js"
 			location="/js/repositories/view/RepositoriesTable.js" />
 		<resource type="download" name="repositories/RepositoriesController.js"
@@ -126,14 +129,15 @@
 		<dependency>org.networkedassets.atlassian.stash.privaterepos:web-resources
 		</dependency>
 	</stash-resource>
-	
+
 	<web-resource key="license-web-resources" name="License web resources">
 		<resource type="download" name="license.css" location="/css/license.css" />
 	</web-resource>
 
 	<stash-resource key="license-servlet-resources" name="License template resources">
 		<directory location="/templates/license" />
-		<dependency>org.networkedassets.atlassian.stash.privaterepos:license-web-resources</dependency>
+		<dependency>org.networkedassets.atlassian.stash.privaterepos:license-web-resources
+		</dependency>
 		<dependency>com.atlassian.stash.stash-web-plugin:global</dependency>
 	</stash-resource>
 
