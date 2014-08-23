@@ -254,8 +254,13 @@ public class AoPersonalRepositoriesService implements
 	public void deletePersonalRepository(Repository repo) {
 		PersonalRepository personalRepo = findPersonalRepository(repo);
 		Owner repoOwner = personalRepo.getOwner();
+		boolean lastRepo = (repoOwner.getRepositories().length == 1);
 		ao.delete(personalRepo);
-		updateOwnerRepositoriesSize(repoOwner);
+		if (lastRepo) {
+			ao.delete(repoOwner);
+		} else {
+			updateOwnerRepositoriesSize(repoOwner);
+		}
 	}
 
 	private PersonalRepository findPersonalRepository(Repository repo) {
