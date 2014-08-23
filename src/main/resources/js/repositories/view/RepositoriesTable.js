@@ -69,8 +69,7 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util', 'jquery' ], func
 		},
 		
 		paginationNeeded : function() {
-			return true;
-//			return this.collection.length  > this.collection.state.pageSize;
+			return this.collection.length  > this.collection.state.pageSize;
 		},
 		
 		toggleUserRepositories : function(e) {
