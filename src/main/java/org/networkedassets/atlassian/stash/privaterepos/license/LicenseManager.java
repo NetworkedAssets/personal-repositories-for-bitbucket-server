@@ -24,8 +24,6 @@ public class LicenseManager {
 			log.debug("Checking license validity, license is invalid");
 			return false;
 		}
-		log.debug("{}", licenseOption);
-		log.debug("{}", licenseOption.get());
 		boolean licenseValid = licenseOption.get().isValid();
 		log.debug("Checking license validity, license is {}",
 				licenseValid ? "valid" : "invalid");

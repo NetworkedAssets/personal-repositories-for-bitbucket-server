@@ -6,12 +6,14 @@ import javax.annotation.PreDestroy;
 import org.networkedassets.atlassian.stash.privaterepos.license.LicenseManager;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepositoriesService;
 import org.networkedassets.atlassian.stash.privaterepos.repositories.RepositoryTypeVerifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.atlassian.event.api.EventListener;
 import com.atlassian.event.api.EventPublisher;
-import com.atlassian.stash.event.RepositoryModifiedEvent;
+import com.atlassian.stash.event.RepositoryRefsChangedEvent;
 import com.atlassian.stash.repository.Repository;
 import com.atlassian.stash.user.StashAuthenticationContext;
 
@@ -28,6 +30,9 @@ public class RepositoryModifiedListener {
 	private StashAuthenticationContext authenticationContext;
 	@Autowired
 	private LicenseManager licenseManager;
+	
+	private final Logger log = LoggerFactory
+			.getLogger(RepositoryModifiedListener.class);
 
 	@PostConstruct
 	public void registerEvents() {
@@ -40,12 +45,13 @@ public class RepositoryModifiedListener {
 	}
 
 	@EventListener
-	public void handleCreationEvent(RepositoryModifiedEvent event) {
+	public void handleModifiedEvent(RepositoryRefsChangedEvent event) {
 		if (licenseManager.isLicenseInvalid()) {
 			return;
 		}
 		Repository repo = event.getRepository();
 		if (repositoryTypeVerifier.isPersonal(repo)) {
+			log.debug("Personal repository {} modified", repo);
 			personalRepositoriesService.updateRepositorySize(repo);
 		}
 	}

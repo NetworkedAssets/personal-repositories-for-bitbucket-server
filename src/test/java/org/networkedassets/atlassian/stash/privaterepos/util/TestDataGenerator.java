@@ -131,7 +131,7 @@ public class TestDataGenerator {
 		StringEntity requestEntity = null;
 		try {
 			requestEntity = new StringEntity("{\"name\": \"" + repoName
-					+ "\" }");
+					+ "\"}");
 			requestEntity.setContentType("application/json");
 			post.setEntity(requestEntity);
 			String userSlug = slugifyName(userName);
