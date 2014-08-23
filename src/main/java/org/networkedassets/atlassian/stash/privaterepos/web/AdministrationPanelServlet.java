@@ -4,9 +4,13 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.networkedassets.atlassian.stash.privaterepos.license.LicenseManager;
+import org.networkedassets.atlassian.stash.privaterepos.repositories.RepositoriesPreScanningScheduler;
+import org.networkedassets.atlassian.stash.privaterepos.state.PluginState;
+import org.networkedassets.atlassian.stash.privaterepos.state.PluginStateManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.atlassian.stash.nav.NavBuilder;
@@ -23,9 +27,12 @@ public class AdministrationPanelServlet extends SoyTemplateServlet {
 
 	@Autowired
 	private LicenseManager licenseManager;
-
 	@Autowired
 	private NavBuilder navBuilder;
+	@Autowired
+	private PluginStateManager pluginStateManager;
+	@Autowired
+	private RepositoriesPreScanningScheduler repositoriesPreScanningScheduler;
 
 	@Override
 	protected String getTemplateResources() {
@@ -44,6 +51,17 @@ public class AdministrationPanelServlet extends SoyTemplateServlet {
 				+ "/rest/privaterepos/1.0";
 		params.put("baseApiPath", baseApiPath);
 		return params;
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		if (licenseManager.isLicenseValid()) {
+			if (pluginStateManager.getState() == PluginState.SCAN_NEEDED) {
+				repositoriesPreScanningScheduler.scheduleScan();
+			}
+		}
+		super.doGet(req, resp);
 	}
 
 	@Override

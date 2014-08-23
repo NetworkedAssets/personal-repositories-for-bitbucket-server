@@ -1,3 +1,17 @@
+.loading-screen {
+	margin-top: 30px;
+    display: table;
+    width: 100%;
+}
+
+.loading-message {
+    text-align: center;
+}
+
+.loading-screen h1 {
+    margin: 10px 0;
+}
+
 .section {
 	padding-top: 20px;
 }

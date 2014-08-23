@@ -7,7 +7,7 @@ define('Router', [ 'backbone' ], function(Backbone) {
 		},
 		
 		home : function() {
-			window.location = window.location + '#repositories';
+			window.location = window.location + '#permissions';
 		}
 	});
 });
