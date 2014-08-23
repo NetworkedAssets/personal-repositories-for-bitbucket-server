@@ -139,4 +139,11 @@
 	text-align: right;
 }
 
+.pagination-holder {
+	margin-top: 20px;
+    text-align:center;
+}
 
+.pagination-holder .aui-nav-pagination {
+ 	display:inline-block;
+}
