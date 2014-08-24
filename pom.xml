@@ -10,9 +10,15 @@
 		<name>NetworkedAssets</name>
 		<url>http://www.networkedassets.com/</url>
 	</organization>
-	<name>private-repositories-permissions-plugin</name>
-	<description>Private repositories permissions plugin for Atlassian Stash.</description>
+	<name>Personal Stash</name>
+	<description>
+	Hassle-free personal repositories management.
+	Manage the rights to create personal repositories for selected groups and users.
+	Easily look through existing repositories.
+	</description>
+
 	<packaging>atlassian-plugin</packaging>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
