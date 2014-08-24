@@ -14,7 +14,8 @@
 	<description>
 	Hassle-free personal repositories management.
 	Manage the rights to create personal repositories for selected groups and users.
-	Easily look through existing repositories.
+	Choose a default permission mode, either allow or deny all users by default.
+	Easily look through existing repositories, see the disk space used by users. 
 	</description>
 
 	<packaging>atlassian-plugin</packaging>
