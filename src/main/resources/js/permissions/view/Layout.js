@@ -1,6 +1,6 @@
 define('PermissionsLayout', [ 'backbone', 'underscore', 'jquery' ], function(Backbone, _, $) {
 	return Backbone.View.extend({
-		template : org.networkedassets.personalRepos.permissions.layout,
+		template : org.networkedassets.personalstash.permissions.layout,
 		pressedButtonAttr : 'aria-pressed',
 		
 		events : {

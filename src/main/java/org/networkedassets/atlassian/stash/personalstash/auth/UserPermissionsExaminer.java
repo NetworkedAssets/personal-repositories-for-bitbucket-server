@@ -36,21 +36,21 @@ public class UserPermissionsExaminer {
 	
 	private final Logger log = LoggerFactory.getLogger(UserPermissionsExaminer.class);
 
-	public boolean canUsePrivateRepositories() {
+	public boolean canUsePersonalRepositories() {
 		StashUser currentUser = authenthicationContext.getCurrentUser();
 
 		if (isUserAnonymous(currentUser)) {
 			return false;
 		}
 
-		return userAllowedToUsePrivateRepositories(currentUser);
+		return userAllowedToUsePersonalRepositories(currentUser);
 	}
 
 	private boolean isUserAnonymous(StashUser currentUser) {
 		return (currentUser == null);
 	}
 
-	private boolean userAllowedToUsePrivateRepositories(StashUser currentUser) {
+	private boolean userAllowedToUsePersonalRepositories(StashUser currentUser) {
 		if (permissionsModeService.getPermissionsMode() == PermissionsMode.ALLOW) {
 			if (isUserAllowed(currentUser)) {
 				return isUserInAllowedGroup(currentUser);

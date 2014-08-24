@@ -19,11 +19,11 @@ public class AdministrationPanelServlet extends SoyTemplateServlet {
 
 	private static final long serialVersionUID = 790189345704146559L;
 
-	private String templateResources = "org.networkedassets.atlassian.stash.privaterepos:templates-soy";
-	private String templateKey = "org.networkedassets.personalRepos.adminPage";
+	private String templateResources = "org.networkedassets.atlassian.stash.personalstash:templates-soy";
+	private String templateKey = "org.networkedassets.personalstash.adminPage";
 
-	private String licenseErrorTemplateResources = "org.networkedassets.atlassian.stash.privaterepos:license-servlet-resources";
-	private String licenseErrorTemplateKey = "org.networkedassets.personalRepos.license.errorPage";
+	private String licenseErrorTemplateResources = "org.networkedassets.atlassian.stash.personalstash:license-servlet-resources";
+	private String licenseErrorTemplateKey = "org.networkedassets.personalstash.license.errorPage";
 
 	@Autowired
 	private LicenseManager licenseManager;
@@ -48,7 +48,7 @@ public class AdministrationPanelServlet extends SoyTemplateServlet {
 	protected HashMap<String, Object> getTemplateParams() {
 		HashMap<String, Object> params = super.getTemplateParams();
 		String baseApiPath = navBuilder.buildAbsolute()
-				+ "/rest/privaterepos/1.0";
+				+ "/rest/personalstash/1.0";
 		params.put("baseApiPath", baseApiPath);
 		return params;
 	}

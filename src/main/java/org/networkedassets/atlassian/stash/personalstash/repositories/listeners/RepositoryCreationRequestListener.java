@@ -49,7 +49,7 @@ public class RepositoryCreationRequestListener {
 		log.debug("Repository Creation Request received");
 		if (repositoryTypeVerifier.isPersonal(event.getRepository())) {
 			log.debug("Repository is personal");
-			if (!userPermissionsExaminer.canUsePrivateRepositories()) {
+			if (!userPermissionsExaminer.canUsePersonalRepositories()) {
 				log.debug("User can't use presonal repositories");
 				event.cancel(new KeyedMessage("lol", "You don't have permissions to create personal repositories", "fwefw"));
 			}

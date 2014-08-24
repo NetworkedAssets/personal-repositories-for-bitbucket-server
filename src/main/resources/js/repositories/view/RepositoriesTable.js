@@ -14,10 +14,10 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util', 'jquery' ], func
 			this.repositoriesEvents.on('userRepositoriesFetched', this.showUserRepositories, this);
 		},
 
-		template : org.networkedassets.personalRepos.repositories.table,
-		ownerTemplate : org.networkedassets.personalRepos.repositories.owner,
-		repositoryTemplate : org.networkedassets.personalRepos.repositories.repository,
-		emptyTemplate : org.networkedassets.personalRepos.repositories.empty,
+		template : org.networkedassets.personalstash.repositories.table,
+		ownerTemplate : org.networkedassets.personalstash.repositories.owner,
+		repositoryTemplate : org.networkedassets.personalstash.repositories.repository,
+		emptyTemplate : org.networkedassets.personalstash.repositories.empty,
 		
 		events : {
 			'click .expander' : 'toggleUserRepositories',

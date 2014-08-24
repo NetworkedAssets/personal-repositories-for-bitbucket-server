@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.networkedassets.atlassian.stash.personalstash.license.LicenseManager;
+import org.networkedassets.atlassian.stash.personalstash.plugin.PluginConfig;
 import org.networkedassets.atlassian.stash.personalstash.repositories.PersonalRepositoriesPreScanner;
 import org.networkedassets.atlassian.stash.personalstash.state.PluginState;
 import org.networkedassets.atlassian.stash.personalstash.state.PluginStateManager;
@@ -20,8 +21,6 @@ import com.atlassian.stash.user.StashAuthenticationContext;
 
 @Component
 public class PluginDisabledListener {
-
-	private static final String PLUGIN_KEY = "org.networkedassets.atlassian.stash.privaterepos";
 
 	@Autowired
 	private EventPublisher eventPublisher;
@@ -54,7 +53,7 @@ public class PluginDisabledListener {
 		if (licenseManager.isLicenseInvalid()) {
 			return;
 		}
-		if (event.getPlugin().getKey().equals(PLUGIN_KEY)) {
+		if (event.getPlugin().getKey().equals(PluginConfig.PLUGIN_KEY)) {
 			pluginStateRepository.setState(PluginState.SCAN_NEEDED);
 		}
 	}

@@ -1,7 +1,7 @@
 define('RepositoriesLoader', [ 'backbone', 'underscore', 'jquery' ], function(
 		Backbone, _, $) {
 	return Backbone.View.extend({
-		template : org.networkedassets.personalRepos.repositories.loader,
+		template : org.networkedassets.personalstash.repositories.loader,
 		className : 'loading-screen',
 
 		render : function() {

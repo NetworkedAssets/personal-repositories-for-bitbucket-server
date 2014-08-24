@@ -23,8 +23,6 @@ import com.atlassian.upm.api.license.event.PluginLicenseRemovedEvent;
 @Component
 public class PluginLicenseEventsListener {
 
-	private static final String PLUGIN_KEY = "org.networkedassets.atlassian.stash.privaterepos";
-
 	@Autowired
 	private EventPublisher eventPublisher;
 	@Autowired
