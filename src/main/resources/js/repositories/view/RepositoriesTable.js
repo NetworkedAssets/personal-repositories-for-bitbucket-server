@@ -140,16 +140,9 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util', 'jquery' ], func
 			$el = $(e.currentTarget);
 			if ($el.hasClass('selected')) {
 				$el.toggleClass('asc desc');
-				$el.siblings().toggleClass('asc desc');
 				this.trigger('sort-change-order');
 			} else {
 				var prev = $el.siblings('.selected').removeClass('selected');
-				if (prev.hasClass('desc')) {
-					$el.addClass('desc');
-					prev.removeClass('asc');
-				} else {
-					$el.addClass('asc');
-				}
 				$el.addClass('selected');
 				this.trigger('sort-change-field', $el.data('sort-by'));
 			}

@@ -106,7 +106,11 @@ define('RepositoriesController', [ 'underscore', 'jquery', 'RepositoriesTable',
 
 		onChangeSort : function(sortKey) {
 			var col = this.repositoryOwners;
-			col.setSorting(sortKey);
+			if (sortKey === 'name') {
+				col.setSorting(sortKey, -1);
+			} else {
+				col.setSorting(sortKey, 1);
+			}
 			col.getPage(col.state.currentPage, {
 				reset : true
 			});

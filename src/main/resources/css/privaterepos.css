@@ -110,8 +110,9 @@
 	cursor: pointer;
 }
 
-.repositories-section .sort-column.selected {
-	background-color: transparent;
+.repositories-section .sort-column.selected,
+.repositories-section .sort-column:hover {
+	background-color: #f5f5f5;
 }
 
 .repositories-section .sort-column.selected:after,
@@ -135,7 +136,7 @@
 .repositories-section .sort-column.asc:after {
 	border-bottom-color: #333;
 	border-top-color: transparent;
-	bottom: 2px;
+	top: -2px;
 }
 
 .repositories-section .size-column {
