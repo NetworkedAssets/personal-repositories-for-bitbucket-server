@@ -5,6 +5,8 @@ import java.util.Set;
 
 import org.networkedassets.atlassian.stash.privaterepos.util.AllPagesIterator;
 import org.networkedassets.atlassian.stash.privaterepos.util.PageProcessor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +27,9 @@ public class DefaultUserGroupsService implements UserGroupsService {
 
 	@Autowired
 	private UserService userService;
+	
+	private final Logger log = LoggerFactory
+			.getLogger(DefaultUserGroupsService.class);
 
 	@Override
 	public Set<String> getUserGroups(final StashUser user) {
@@ -42,13 +47,15 @@ public class DefaultUserGroupsService implements UserGroupsService {
 
 			@Override
 			public void process(Page<? extends String> page) {
+				log.debug("Processing fetched groups {}", page.getValues());
 				groups.addAll(Sets.newHashSet(page.getValues()));
 			}
 
 			@Override
 			public Page<? extends String> fetchPage(PageRequest pageRequest) {
+				log.debug("Fetching user {} groups from page {}", user.getName(), pageRequest);
 				return userService
-						.findGroupsByName(user.getName(), pageRequest);
+						.findGroupsByUser(user.getName(), pageRequest);
 			}
 
 		};
