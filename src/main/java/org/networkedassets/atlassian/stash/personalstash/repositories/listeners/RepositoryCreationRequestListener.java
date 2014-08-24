@@ -51,7 +51,7 @@ public class RepositoryCreationRequestListener {
 			log.debug("Repository is personal");
 			if (!userPermissionsExaminer.canUsePersonalRepositories()) {
 				log.debug("User can't use presonal repositories");
-				event.cancel(new KeyedMessage("lol", "You don't have permissions to create personal repositories", "fwefw"));
+				event.cancel(new KeyedMessage("lol", "You are not allowed to create a personal repository.\nYour administrator blocked this feature.\nIf you think you should be able to execute this action, contact your administrator.", "fwefw"));
 			}
 		}
 	}
