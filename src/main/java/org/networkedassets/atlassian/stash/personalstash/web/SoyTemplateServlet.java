@@ -1,7 +1,6 @@
 package org.networkedassets.atlassian.stash.personalstash.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -13,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.atlassian.soy.renderer.SoyException;
 import com.atlassian.soy.renderer.SoyTemplateRenderer;
-import com.atlassian.stash.exception.AuthorisationException;
 import com.atlassian.stash.nav.NavBuilder;
-import com.atlassian.stash.user.Permission;
-import com.atlassian.stash.user.PermissionValidationService;
 
 public abstract class SoyTemplateServlet extends HttpServlet {
 
@@ -25,20 +21,13 @@ public abstract class SoyTemplateServlet extends HttpServlet {
 	@Autowired
 	private SoyTemplateRenderer soyTemplateRenderer;
 	@Autowired
-	private PermissionValidationService permissionValidationService;
-	@Autowired
 	private NavBuilder navBuilder;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		try {
-			permissionValidationService.validateForGlobal(Permission.SYS_ADMIN);
-			render(resp, getTemplateResources(), getTemplateKey(),
-					getTemplateParams());
-		} catch (AuthorisationException e) {
-			resp.sendRedirect(navBuilder.login().buildAbsolute());
-		}
+		render(resp, getTemplateResources(), getTemplateKey(),
+				getTemplateParams());
 	}
 
 	protected void render(HttpServletResponse resp, String templateResources,
