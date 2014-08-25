@@ -93,6 +93,10 @@
 	color : #fff;
 }
 
+.repositories-section {
+	display: none;
+}
+
 .repositories-section .repository-name {
 	margin-left: 30px;
 }
