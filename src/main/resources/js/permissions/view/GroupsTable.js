@@ -8,14 +8,14 @@ define('GroupsTable', [ 'Table', 'GroupRow', 'underscore', 'GroupBatch', 'Config
 		},
 		
 		searchFormatResult : function(object) {
-			return org.networkedassets.personalRepos.permissions.groupSearchResult({group: object}) 
+			return org.networkedassets.personalstash.permissions.groupSearchResult({group: object}) 
 		},
 		
 		searchFormatSelection : function(object) {
-			return org.networkedassets.personalRepos.permissions.groupSearchSelection({group: object})
+			return org.networkedassets.personalstash.permissions.groupSearchSelection({group: object})
 		},
 		
-		template : org.networkedassets.personalRepos.permissions.table,
+		template : org.networkedassets.personalstash.permissions.table,
 		itemView : GroupRow,
 		
 		searchUrl : function(term) {

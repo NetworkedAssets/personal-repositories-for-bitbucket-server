@@ -4,15 +4,22 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.networkedassets.atlassian.stash</groupId>
-	<artifactId>privaterepos</artifactId>
+	<artifactId>personalstash</artifactId>
 	<version>0.9.10</version>
 	<organization>
 		<name>NetworkedAssets</name>
 		<url>http://www.networkedassets.com/</url>
 	</organization>
-	<name>private-repositories-permissions-plugin</name>
-	<description>Private repositories permissions plugin for Atlassian Stash.</description>
+	<name>Personal Stash</name>
+	<description>
+	Hassle-free personal repositories management.
+Manage the rights to create personal repositories for selected groups and users.
+Choose a default permission mode, either allow or deny all users by default.
+Easily look through existing repositories, see the disk space used by users. 
+	</description>
+
 	<packaging>atlassian-plugin</packaging>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

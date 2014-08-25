@@ -2,17 +2,17 @@ define('UsersTable', [ 'Table', 'UserRow', 'UserBatch', 'Config' ], function(
 		Table, UserRow, UserBatch, Config) {
 	return Table.extend({
 
-		template : org.networkedassets.personalRepos.permissions.table,
+		template : org.networkedassets.personalstash.permissions.table,
 		itemView : UserRow,
 		searchFormatResult : function(object) {
-			return org.networkedassets.personalRepos.permissions
+			return org.networkedassets.personalstash.permissions
 					.userSearchResult({
 						user : object
 					})
 		},
 
 		searchFormatSelection : function(object) {
-			return org.networkedassets.personalRepos.permissions
+			return org.networkedassets.personalstash.permissions
 					.userSearchSelection({
 						user : object
 					})

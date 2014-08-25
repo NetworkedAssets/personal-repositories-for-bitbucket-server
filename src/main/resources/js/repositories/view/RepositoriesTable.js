@@ -14,10 +14,10 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util', 'jquery' ], func
 			this.repositoriesEvents.on('userRepositoriesFetched', this.showUserRepositories, this);
 		},
 
-		template : org.networkedassets.personalRepos.repositories.table,
-		ownerTemplate : org.networkedassets.personalRepos.repositories.owner,
-		repositoryTemplate : org.networkedassets.personalRepos.repositories.repository,
-		emptyTemplate : org.networkedassets.personalRepos.repositories.empty,
+		template : org.networkedassets.personalstash.repositories.table,
+		ownerTemplate : org.networkedassets.personalstash.repositories.owner,
+		repositoryTemplate : org.networkedassets.personalstash.repositories.repository,
+		emptyTemplate : org.networkedassets.personalstash.repositories.empty,
 		
 		events : {
 			'click .expander' : 'toggleUserRepositories',
@@ -69,7 +69,7 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util', 'jquery' ], func
 		},
 		
 		paginationNeeded : function() {
-			return this.collection.length  > this.collection.state.pageSize;
+			return this.collection.state.totalRecords  > this.collection.state.pageSize;
 		},
 		
 		toggleUserRepositories : function(e) {
@@ -140,16 +140,9 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util', 'jquery' ], func
 			$el = $(e.currentTarget);
 			if ($el.hasClass('selected')) {
 				$el.toggleClass('asc desc');
-				$el.siblings().toggleClass('asc desc');
 				this.trigger('sort-change-order');
 			} else {
 				var prev = $el.siblings('.selected').removeClass('selected');
-				if (prev.hasClass('desc')) {
-					$el.addClass('desc');
-					prev.removeClass('asc');
-				} else {
-					$el.addClass('asc');
-				}
 				$el.addClass('selected');
 				this.trigger('sort-change-field', $el.data('sort-by'));
 			}

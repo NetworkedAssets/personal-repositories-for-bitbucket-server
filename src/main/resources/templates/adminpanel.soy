@@ -1,4 +1,4 @@
-{namespace org.networkedassets.personalRepos}
+{namespace org.networkedassets.personalstash}
 
 /**
  * Displays admin panel
@@ -9,10 +9,10 @@
 <html>
 <head>
 <meta name="decorator" content="atl.admin">
-<meta name="activeTab" content="admin-private-repos">
+<meta name="activeTab" content="admin-personal-repos">
 {webResourceManager_requireResource('com.atlassian.auiplugin:aui-select2')}
-{webResourceManager_requireResource('org.networkedassets.atlassian.stash.privaterepos:web-resources')}
-<title>Private Repositories Permissions</title>
+{webResourceManager_requireResource('org.networkedassets.atlassian.stash.personalstash:web-resources')}
+<title>Personal Stash - Personal Repositories Management</title>
 </head>
 <body>
 	<script type="text/javascript">
@@ -24,6 +24,13 @@
 		});
 		{/literal}
 	</script>
+	<header class="aui-page-header personal-repositories-header">
+		<div class="aui-page-header-inner">
+			<div class="aui-page-header-main">
+				<h2>Personal Repositories</h2>
+			</div>
+		</div>
+	</header>
 	<nav class="sections-menu aui-navgroup aui-navgroup-horizontal">
 	    <div class="aui-navgroup-inner">
 	        <div class="aui-navgroup-primary">

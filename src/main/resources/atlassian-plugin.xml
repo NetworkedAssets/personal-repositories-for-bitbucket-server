@@ -6,20 +6,26 @@
 		<description>${project.description}</description>
 		<version>${project.version}</version>
 		<vendor name="${project.organization.name}" url="${project.organization.url}" />
-		<param name="plugin-icon">images/pluginIcon.png</param>
+
 		<param name="plugin-logo">images/pluginLogo.png</param>
+		<!-- <param name="plugin-banner">images/pluginBanner.jpg</param> -->
+		<param name="vendor-icon">images/vendorIcon.jpg</param>
+		<param name="vendor-logo">images/vendorLogo.jpg</param>
+
+
 		<param name="atlassian-licensing-enabled">true</param>
-		<param key="post-install-url" name="post.install.url">/plugins/servlet/privatereposadmin
+
+		<param key="post-install-url" name="post.install.url">/plugins/servlet/personalstash/admin
 		</param>
-		<param key="configure-url" name="configure.url">/plugins/servlet/privatereposadmin
+		<param key="configure-url" name="configure.url">/plugins/servlet/personalstash/admin
 		</param>
 	</plugin-info>
 
 	<ao key="ao-module">
 		<description>The AO module for this plugin.</description>
-		<entity>org.networkedassets.atlassian.stash.privaterepos.repositories.Owner
+		<entity>org.networkedassets.atlassian.stash.personalstash.repositories.Owner
 		</entity>
-		<entity>org.networkedassets.atlassian.stash.privaterepos.repositories.PersonalRepository
+		<entity>org.networkedassets.atlassian.stash.personalstash.repositories.PersonalRepository
 		</entity>
 	</ao>
 
@@ -41,7 +47,7 @@
 		interface="com.atlassian.sal.api.ApplicationProperties" />
 
 	<web-resource key="web-resources">
-		<resource type="download" name="privaterepos.css" location="/css/privaterepos.css" />
+		<resource type="download" name="personalstash.css" location="/css/personalstash.css" />
 		<transformation extension="soy">
 			<transformer key="soyTransformer" />
 		</transformation>
@@ -128,7 +134,7 @@
 		<directory location="/templates/" />
 		<dependency>com.atlassian.stash.stash-web-plugin:global</dependency>
 		<dependency>com.atlassian.auiplugin:aui-select2</dependency>
-		<dependency>org.networkedassets.atlassian.stash.privaterepos:web-resources
+		<dependency>org.networkedassets.atlassian.stash.personalstash:web-resources
 		</dependency>
 	</stash-resource>
 
@@ -138,7 +144,7 @@
 
 	<stash-resource key="license-servlet-resources" name="License template resources">
 		<directory location="/templates/license" />
-		<dependency>org.networkedassets.atlassian.stash.privaterepos:license-web-resources
+		<dependency>org.networkedassets.atlassian.stash.personalstash:license-web-resources
 		</dependency>
 		<dependency>com.atlassian.stash.stash-web-plugin:global</dependency>
 	</stash-resource>
@@ -147,22 +153,22 @@
 	<component-import key="soyTemplateRenderer"
 		interface="com.atlassian.soy.renderer.SoyTemplateRenderer" />
 
-	<web-item key="admin-private-repos" name="Admin Menu Web Item"
+	<web-item key="admin-personal-repos" name="Admin Menu Web Item"
 		section="atl.admin/admin-general-section">
-		<description>Manage access right to Private Repositories</description>
-		<label>Private Repositories</label>
-		<link linkId="private_repositories">/plugins/servlet/privatereposadmin</link>
+		<description>Manage Personal Repositories</description>
+		<label>Personal Repositories</label>
+		<link linkId="personal_repositories">/plugins/servlet/personalstash/admin</link>
 	</web-item>
 
 	<servlet name="Administration Panel Servlet" key="administrationPanel"
-		class="org.networkedassets.atlassian.stash.privaterepos.web.AdministrationPanelServlet">
-		<description>Displays private repositories administration panel
+		class="org.networkedassets.atlassian.stash.personalstash.web.AdministrationPanelServlet">
+		<description>Displays Personal Stash administration panel
 		</description>
-		<url-pattern>/privatereposadmin</url-pattern>
+		<url-pattern>/personalstash/admin</url-pattern>
 	</servlet>
 
-	<rest key="privateReposRest" path="/privaterepos" version="1.0">
-		<description>Provides private repositories rest services.
+	<rest key="personalStashRest" path="/personalstash" version="1.0">
+		<description>Provides rest endpoints used by Personal Stash
 		</description>
 	</rest>
 
