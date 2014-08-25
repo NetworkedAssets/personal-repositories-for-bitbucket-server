@@ -13,7 +13,10 @@ import org.networkedassets.atlassian.stash.personalstash.state.PluginState;
 import org.networkedassets.atlassian.stash.personalstash.state.PluginStateManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.atlassian.stash.exception.AuthorisationException;
 import com.atlassian.stash.nav.NavBuilder;
+import com.atlassian.stash.user.Permission;
+import com.atlassian.stash.user.PermissionValidationService;
 
 public class AdministrationPanelServlet extends SoyTemplateServlet {
 
@@ -33,6 +36,8 @@ public class AdministrationPanelServlet extends SoyTemplateServlet {
 	private PluginStateManager pluginStateManager;
 	@Autowired
 	private RepositoriesPreScanningScheduler repositoriesPreScanningScheduler;
+	@Autowired
+	private PermissionValidationService permissionValidationService;
 
 	@Override
 	protected String getTemplateResources() {
@@ -56,12 +61,17 @@ public class AdministrationPanelServlet extends SoyTemplateServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		if (licenseManager.isLicenseValid()) {
-			if (pluginStateManager.getState() == PluginState.SCAN_NEEDED) {
-				repositoriesPreScanningScheduler.scheduleScan();
+		try {
+			permissionValidationService.validateForGlobal(Permission.ADMIN);
+			if (licenseManager.isLicenseValid()) {
+				if (pluginStateManager.getState() == PluginState.SCAN_NEEDED) {
+					repositoriesPreScanningScheduler.scheduleScan();
+				}
 			}
+			super.doGet(req, resp);
+		} catch (AuthorisationException e) {
+			resp.sendRedirect(navBuilder.login().buildAbsolute());
 		}
-		super.doGet(req, resp);
 	}
 
 	@Override
