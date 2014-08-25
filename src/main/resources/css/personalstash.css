@@ -26,7 +26,7 @@
 
 .repository-permissions-mode {
 	margin: 0;
-	float: right;
+	text-align: right;
 }
 
 .repository-permissions-mode p.desc {
