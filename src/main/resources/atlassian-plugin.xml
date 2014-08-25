@@ -38,9 +38,11 @@
 			plugin
 		</description>
 	</component-import>
+	
+	<component-import key="i18nService" interface="com.atlassian.stash.i18n.I18nService"/>
 
 	<!-- add our i18n resource -->
-	<resource type="i18n" name="i18n" location="/i18n" />
+	<resource type="i18n" name="i18n" location="org.networkedassets.atlassian.stash.personalstash.i18n" />
 
 	<!-- import from the product container -->
 	<component-import key="applicationProperties"
@@ -155,8 +157,8 @@
 
 	<web-item key="admin-personal-repos" name="Admin Menu Web Item"
 		section="atl.admin/admin-general-section">
-		<description>Manage Personal Repositories</description>
-		<label>Personal Repositories</label>
+		<description key="org.networkedassets.atlassian.stash.personalstash.webitem.description"/>
+		<label key="org.networkedassets.atlassian.stash.personalstash.webitem.label"/>
 		<link linkId="personal_repositories">/plugins/servlet/personalstash/admin</link>
 	</web-item>
 
