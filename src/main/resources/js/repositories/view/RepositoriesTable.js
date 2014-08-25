@@ -58,7 +58,6 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util', 'jquery' ], func
 		renderPagination : function() {
 			if (this.paginationNeeded()) {
 				this.$('.pagination-holder').pagination({
-					hrefTextPrefix : window.location.href + '/page-',
 					items : this.collection.state.totalRecords,
 					itemsOnPage : this.collection.state.pageSize,
 					onPageClick : _.bind(function(pageNumber) {

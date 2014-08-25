@@ -32,8 +32,8 @@ define('GroupsTable', [ 'Table', 'GroupRow', 'underscore', 'GroupBatch', 'Config
 			return {
 				mode : this.mode,
 				header : {
-					allow: 'Denied groups',
-					deny: 'Allowed groups'
+					allow: AJS.I18n.getText('org.networkedassets.atlassian.stash.personalstash.permissions.groups.header.denied'),
+					deny: AJS.I18n.getText('org.networkedassets.atlassian.stash.personalstash.permissions.groups.header.allowed')
 				}
 			};
 		},

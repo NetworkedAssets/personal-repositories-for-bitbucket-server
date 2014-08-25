@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import com.atlassian.event.api.EventListener;
 import com.atlassian.event.api.EventPublisher;
 import com.atlassian.stash.event.RepositoryCreationRequestedEvent;
+import com.atlassian.stash.i18n.I18nService;
 import com.atlassian.stash.i18n.KeyedMessage;
 
 @Component
@@ -27,6 +28,8 @@ public class RepositoryCreationRequestListener {
 	private EventPublisher eventPublisher;
 	@Autowired
 	private LicenseManager licenseManager;
+	@Autowired
+	I18nService i18nService;
 
 	private final Logger log = LoggerFactory
 			.getLogger(RepositoryCreationRequestListener.class);
@@ -51,7 +54,10 @@ public class RepositoryCreationRequestListener {
 			log.debug("Repository is personal");
 			if (!userPermissionsExaminer.canUsePersonalRepositories()) {
 				log.debug("User can't use presonal repositories");
-				event.cancel(new KeyedMessage("lol", "You are not allowed to create a personal repository.\nYour administrator blocked this feature.\nIf you think you should be able to execute this action, contact your administrator.", "fwefw"));
+				event.cancel(i18nService
+						.getKeyedText(
+								"org.networkedassets.atlassian.stash.personalstash.repository.creationblocked",
+								"You are not allowed to create a personal repository.\nYour administrator blocked this feature.\nIf you think you should be able to execute this action, contact your administrator."));
 			}
 		}
 	}

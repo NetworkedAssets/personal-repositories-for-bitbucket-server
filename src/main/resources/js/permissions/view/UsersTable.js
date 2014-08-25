@@ -31,8 +31,8 @@ define('UsersTable', [ 'Table', 'UserRow', 'UserBatch', 'Config' ], function(
 			return {
 				mode : this.mode,
 				header : {
-					allow : 'Denied users',
-					deny : 'Allowed users'
+					allow : AJS.I18n.getText('org.networkedassets.atlassian.stash.personalstash.permissions.users.header.denied'),
+					deny : AJS.I18n.getText('org.networkedassets.atlassian.stash.personalstash.permissions.users.header.allowed')
 				}
 			};
 		},

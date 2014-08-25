@@ -38,11 +38,13 @@
 			plugin
 		</description>
 	</component-import>
-	
-	<component-import key="i18nService" interface="com.atlassian.stash.i18n.I18nService"/>
+
+	<component-import key="i18nService"
+		interface="com.atlassian.stash.i18n.I18nService" />
 
 	<!-- add our i18n resource -->
-	<resource type="i18n" name="i18n" location="org.networkedassets.atlassian.stash.personalstash.i18n" />
+	<resource type="i18n" name="i18n"
+		location="org.networkedassets.atlassian.stash.personalstash.i18n" />
 
 	<!-- import from the product container -->
 	<component-import key="applicationProperties"
@@ -52,6 +54,9 @@
 		<resource type="download" name="personalstash.css" location="/css/personalstash.css" />
 		<transformation extension="soy">
 			<transformer key="soyTransformer" />
+		</transformation>
+		<transformation extension="js">
+			<transformer key="jsI18n" />
 		</transformation>
 		<!-- Util -->
 		<resource type="download" name="Util.js" location="/js/Util.js" />
@@ -133,6 +138,9 @@
 	</web-resource>
 
 	<stash-resource key="templates-soy" name="Soy Templates">
+		<transformation extension="js">
+			<transformer key="jsI18n" />
+		</transformation>
 		<directory location="/templates/" />
 		<dependency>com.atlassian.stash.stash-web-plugin:global</dependency>
 		<dependency>com.atlassian.auiplugin:aui-select2</dependency>
@@ -145,6 +153,9 @@
 	</web-resource>
 
 	<stash-resource key="license-servlet-resources" name="License template resources">
+		<transformation extension="js">
+			<transformer key="jsI18n" />
+		</transformation>
 		<directory location="/templates/license" />
 		<dependency>org.networkedassets.atlassian.stash.personalstash:license-web-resources
 		</dependency>
@@ -157,8 +168,10 @@
 
 	<web-item key="admin-personal-repos" name="Admin Menu Web Item"
 		section="atl.admin/admin-general-section">
-		<description key="org.networkedassets.atlassian.stash.personalstash.webitem.description"/>
-		<label key="org.networkedassets.atlassian.stash.personalstash.webitem.label"/>
+		<description
+			key="org.networkedassets.atlassian.stash.personalstash.webitem.description" />
+		<label
+			key="org.networkedassets.atlassian.stash.personalstash.webitem.label" />
 		<link linkId="personal_repositories">/plugins/servlet/personalstash/admin</link>
 	</web-item>
 
