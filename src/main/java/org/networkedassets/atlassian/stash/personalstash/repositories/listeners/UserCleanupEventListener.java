@@ -5,22 +5,18 @@ import javax.annotation.PreDestroy;
 
 import org.networkedassets.atlassian.stash.personalstash.license.LicenseManager;
 import org.networkedassets.atlassian.stash.personalstash.repositories.PersonalRepositoriesService;
-import org.networkedassets.atlassian.stash.personalstash.repositories.RepositoryTypeVerifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.atlassian.event.api.EventListener;
 import com.atlassian.event.api.EventPublisher;
-import com.atlassian.stash.event.RepositoryDeletedEvent;
-import com.atlassian.stash.repository.Repository;
+import com.atlassian.stash.event.user.UserCleanupEvent;
 
 @Component
 public class UserCleanupEventListener {
 
 	@Autowired
 	private PersonalRepositoriesService personalRepositoriesService;
-	@Autowired
-	private RepositoryTypeVerifier repositoryTypeVerifier;
 	@Autowired
 	private EventPublisher eventPublisher;
 	@Autowired
@@ -37,14 +33,11 @@ public class UserCleanupEventListener {
 	}
 
 	@EventListener
-	public void handleDeletionEvent(RepositoryDeletedEvent event) {
+	public void handleDeletionEvent(UserCleanupEvent event) {
 		if (licenseManager.isLicenseInvalid()) {
 			return;
 		}
-		Repository repo = event.getRepository();
-		if (repositoryTypeVerifier.isPersonal(repo)) {
-			personalRepositoriesService.deletePersonalRepository(repo);
-		}
+		personalRepositoriesService.deletePersonalRepositoryOwner(event.getDeletedUser());
 	}
 
 }
