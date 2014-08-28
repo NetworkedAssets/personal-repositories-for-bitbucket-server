@@ -295,4 +295,13 @@ public class AoPersonalRepositoriesService implements
 		updateOwnerRepositoriesSize(personalRepository.getOwner());
 	}
 
+	@Override
+	public void deletePersonalRepositoryOwner(StashUser deletedUser) {
+		Owner owner = findOwner(deletedUser);
+		if (owner == null) {
+			return;
+		}
+		ao.delete(owner);
+	}
+
 }

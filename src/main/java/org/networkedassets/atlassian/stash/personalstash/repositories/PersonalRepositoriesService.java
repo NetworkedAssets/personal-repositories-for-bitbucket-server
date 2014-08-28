@@ -26,4 +26,6 @@ public interface PersonalRepositoriesService {
 	
 	void updateRepositorySize(Repository repo);
 
+	void deletePersonalRepositoryOwner(StashUser deletedUser);
+
 }
