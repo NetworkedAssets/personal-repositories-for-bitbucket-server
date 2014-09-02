@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 import com.atlassian.event.api.EventListener;
 import com.atlassian.event.api.EventPublisher;
-import com.atlassian.plugin.event.events.PluginDisabledEvent;
+import com.atlassian.plugin.event.events.BeforePluginDisabledEvent;
 import com.atlassian.stash.user.SecurityService;
 import com.atlassian.stash.user.StashAuthenticationContext;
 
@@ -49,11 +49,12 @@ public class PluginDisabledListener {
 	}
 
 	@EventListener
-	public void onPluginDisabledEvent(PluginDisabledEvent event) {
+	public void onPluginDisabledEvent(BeforePluginDisabledEvent event) {
 		if (licenseManager.isLicenseInvalid()) {
 			return;
 		}
 		if (event.getPlugin().getKey().equals(PluginConfig.PLUGIN_KEY)) {
+			log.info("Plugin disabled event received");
 			pluginStateRepository.setState(PluginState.SCAN_NEEDED);
 		}
 	}

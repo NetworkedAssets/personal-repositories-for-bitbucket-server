@@ -301,6 +301,10 @@ public class AoPersonalRepositoriesService implements
 		if (owner == null) {
 			return;
 		}
+		PersonalRepository[] repositories = owner.getRepositories();
+		if (repositories.length > 0) {
+			ao.delete(owner.getRepositories());
+		}
 		ao.delete(owner);
 	}
 
