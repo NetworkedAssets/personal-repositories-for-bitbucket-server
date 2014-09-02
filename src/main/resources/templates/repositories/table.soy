@@ -1,20 +1,20 @@
-{namespace org.networkedassets.personalRepos.repositories}
+{namespace org.networkedassets.personalstash.repositories}
 
 /**
  * Groups table
  */
 {template .table}
+<table class="aui">
     <thead>
         <tr>
         	<th></th>
-            <th class="sort-column name-column desc" data-sort-by="name">Name</th>
-            <th class="selected sort-column size-column desc" data-sort-by="size">Size on disk</th>
+            <th class="sort-column name-column asc" data-sort-by="name">{getText('org.networkedassets.atlassian.stash.personalstash.permissions.repositories.table.header.name')}</th>
+            <th class="selected sort-column size-column desc" data-sort-by="size">{getText('org.networkedassets.atlassian.stash.personalstash.permissions.repositories.table.header.size')}</th>
         </tr>
     </thead>
     <tbody>
     </tbody>
-    <tfoot>
-    	<td colspan="3" class="pagination-holder">
-		</td>
-    </tfoot>
+</table>
+<div class="pagination-holder">
+</div>
 {/template}

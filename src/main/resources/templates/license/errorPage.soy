@@ -1,4 +1,4 @@
-{namespace org.networkedassets.personalRepos.license}
+{namespace org.networkedassets.personalstash.license}
 
 /**
  * Displays admin panel
@@ -10,8 +10,8 @@
 <head>
 <meta name="decorator" content="atl.admin">
 <meta name="activeTab" content="admin-private-repos">
-{webResourceManager_requireResource('org.networkedassets.atlassian.stash.privaterepos:license-web-resources')}
-<title>Private Repositories Permissions</title>
+{webResourceManager_requireResource('org.networkedassets.atlassian.stash.personalstash:license-web-resources')}
+<title>{getText('org.networkedassets.atlassian.stash.personalstash.page.title')}</title>
 </head>
 <body>
 	<div class="license-error">
@@ -19,20 +19,20 @@
 		<p>
 		{switch $status}
   			{case 'EXPIRED'}
-				It seems your license expired. You can renew it in the plugin manager.  			
+				{getText('org.networkedassets.atlassian.stash.personalstash.license.error.expired')}  			
 			{case 'NO_LICENSE'}
-				It seems that you don't have a license. You need one to use this plugin. You can get a Trial or buy a license in plugin manager.
+				{getText('org.networkedassets.atlassian.stash.personalstash.license.error.no_license')}
 			{case 'TYPE_MISMATCH'}
-				This plugin doesn't support your license type. You can fix that by getting appropriate license in the plugin manager.
+				{getText('org.networkedassets.atlassian.stash.personalstash.license.error.type_mismatch')}
 			{case 'USER_MISMATCH'}
-				You have more users then your license allows. You can upgrade using the plugin manager.
+				{getText('org.networkedassets.atlassian.stash.personalstash.license.error.user_mismatch')}
 			{case 'VERSION_MISMATCH'}
-				Your license doesn't support this version of Stash. You can fix that by getting appropriate license in the plugin manager. 
+				{getText('org.networkedassets.atlassian.stash.personalstash.license.error.version_mismatch')} 
 			{default}
-			Status : {$status}			
+				{getText('org.networkedassets.atlassian.stash.personalstash.license.error.default')} {$status}
 		{/switch}	
 		</p>
-		<a class="aui-button aui-button-primary" href="upm#manage">Go to Plugin Manager</a>
+		<a class="aui-button aui-button-primary" href="../upm#manage">{getText('org.networkedassets.atlassian.stash.personalstash.license.error.upmlink')}</a>
 	</div>
 </body>
 </html>

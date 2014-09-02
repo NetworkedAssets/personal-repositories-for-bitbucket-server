@@ -1,0 +1,158 @@
+.sections-menu {
+	margin-top: 10px;
+}
+
+.loading-screen {
+	margin-top: 30px;
+    display: table;
+    width: 100%;
+}
+
+.loading-message {
+    text-align: center;
+}
+
+.loading-screen h1 {
+    margin: 10px 0;
+}
+
+.section {
+	padding-top: 20px;
+}
+
+.section.permissions-section {
+	padding-top: 0;
+}
+
+.repository-permissions-mode {
+	margin: 0;
+	text-align: right;
+}
+
+.repository-permissions-mode p.desc {
+	margin-right: 20px;
+	display: inline;
+}
+
+.permissions-section .aui-group.users-header {
+	margin: 0;
+}
+
+.permissions-section .aui-group.users-header .aui-item h3 {
+	margin-top: 0;
+}
+
+#users-table .private-repos-permissions-table,
+#groups-table .private-repos-permissions-table
+ {
+	margin-top: 20px;
+}
+
+#groups-table {
+	margin-top: 30px;
+}
+
+.private-repos-permissions-table thead .add-form-row {
+	padding: 10px 10px;
+	border-top: 1px solid #c5c5c5;
+	border-bottom: 1px solid #c5c5c5;
+	background-color: #f5f5f5;
+}
+
+.private-repos-permissions-table thead .add-form-row .search-input {
+	max-width: none;
+	width: 100%;
+}
+
+.private-repos-permissions-table thead .name-column {
+	text-align: left;
+	margin-left: 10px;
+}
+
+.private-repos-permissions-table thead .actions-column {
+	text-align: right;
+	margin-right: 10px;
+}
+
+.private-repos-permissions-table thead .actions-item {
+	width: 80px;
+}
+
+.private-repos-permissions-table tbody .actions {
+	width: 80px;
+	text-align: right;
+}
+
+.select2-result-label .email-address {
+	color: #707070;
+	font-size: 12px;
+	margin-left: 10px;
+}
+
+.select2-highlighted .select2-result-label .email-address {
+	color : #fff;
+}
+
+.repositories-section {
+	display: none;
+}
+
+.repositories-section .repository-name {
+	margin-left: 30px;
+}
+
+.repositories-section .repository-name .aui-icon {
+	margin-right: 10px;
+}
+
+.repositories-section .expander {
+	width: 20px;
+	cursor: pointer;
+}
+
+.repositories-section .sort-column {
+	cursor: pointer;
+}
+
+.repositories-section .sort-column.selected,
+.repositories-section .sort-column:hover {
+	background-color: #f5f5f5;
+}
+
+.repositories-section .sort-column.selected:after,
+.repositories-section .sort-column:hover:after {
+	border: 4px solid transparent;
+	content: "";
+	display: inline-block;
+	margin-left: 5px;
+	position: relative;
+	opacity: 1;
+}
+
+.repositories-section .sort-column.desc:hover:after,
+.repositories-section .sort-column.desc:after {
+	border-top-color: #333;
+	border-bottom-color: transparent;
+	top: 2px;
+}
+
+.repositories-section .sort-column.asc:hover:after,
+.repositories-section .sort-column.asc:after {
+	border-bottom-color: #333;
+	border-top-color: transparent;
+	top: -2px;
+}
+
+.repositories-section .size-column {
+	width: 150px;
+	text-align: right;
+}
+
+.pagination-holder {
+	margin-top: 20px;
+    text-align:center;
+}
+
+.pagination-holder .aui-nav-pagination {
+ 	display:inline-block;
+}

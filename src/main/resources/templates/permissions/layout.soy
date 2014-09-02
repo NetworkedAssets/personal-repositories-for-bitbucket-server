@@ -1,4 +1,4 @@
-{namespace org.networkedassets.personalRepos.permissions}
+{namespace org.networkedassets.personalstash.permissions}
 
 /**
  * Displays admin panel
@@ -7,10 +7,10 @@
 {template .layout}
 
 	<div class="repository-permissions-mode">
-		<p class="desc">By default:</p>
+		<p class="desc">{getText('org.networkedassets.atlassian.stash.personalstash.permissions.mode.default')}</p>
 		<p class="aui-buttons">
-			<button class="aui-button allow" {if $mode == 'allow'}aria-pressed="true"{/if}>Allow</button>
-			<button class="aui-button deny" {if $mode == 'deny'}aria-pressed="true"{/if}>Deny</button>
+			<button class="aui-button allow" {if $mode == 'allow'}aria-pressed="true"{/if}>{getText('org.networkedassets.atlassian.stash.personalstash.permissions.mode.allow')}</button>
+			<button class="aui-button deny" {if $mode == 'deny'}aria-pressed="true"{/if}>{getText('org.networkedassets.atlassian.stash.personalstash.permissions.mode.deny')}</button>
 		</p>
 	</div>
 

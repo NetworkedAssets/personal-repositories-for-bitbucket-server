@@ -1,4 +1,4 @@
-{namespace org.networkedassets.personalRepos.permissions}
+{namespace org.networkedassets.personalstash.permissions}
 
 /**
  * Group table row
@@ -11,7 +11,7 @@
 		<a href="{$group.viewUrl}" title="{$group.name}">{$group.name}</a>
 	</td>
 	<td class="actions">
-		<a href="#" class="delete-button delete-group-link" title="Delete" data-for="{$group.name}">
+		<a href="#" class="delete-button delete-group-link" title="{getText('org.networkedassets.atlassian.stash.personalstash.permissions.groups.delete')}" data-for="{$group.name}">
 			<span class="delete-button delete-group-link aui-icon aui-icon-small aui-iconfont-remove"></span>
 		</a>
 	</td>

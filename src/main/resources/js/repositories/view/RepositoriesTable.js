@@ -14,11 +14,10 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util', 'jquery' ], func
 			this.repositoriesEvents.on('userRepositoriesFetched', this.showUserRepositories, this);
 		},
 
-		tagName : 'table',
-		className : 'aui',
-		template : org.networkedassets.personalRepos.repositories.table,
-		ownerTemplate : org.networkedassets.personalRepos.repositories.owner,
-		repositoryTemplate : org.networkedassets.personalRepos.repositories.repository,
+		template : org.networkedassets.personalstash.repositories.table,
+		ownerTemplate : org.networkedassets.personalstash.repositories.owner,
+		repositoryTemplate : org.networkedassets.personalstash.repositories.repository,
+		emptyTemplate : org.networkedassets.personalstash.repositories.empty,
 		
 		events : {
 			'click .expander' : 'toggleUserRepositories',
@@ -28,6 +27,8 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util', 'jquery' ], func
 		render : function() {
 			if (this.renderedOnce) {
 				this.renderOwners();
+			} else if (this.collection.length === 0) {
+				this.renderEmptyCollectionMessage();
 			} else {
 				this.el.innerHTML = this.template();
 				this.renderPagination();
@@ -49,16 +50,25 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util', 'jquery' ], func
 			}, this);
 			this.$('tbody').html(rendered);
 		},
+		
+		renderEmptyCollectionMessage : function() {
+			this.el.innerHTML = this.emptyTemplate();
+		},
 
 		renderPagination : function() {
-			this.$('.pagination-holder').pagination({
-				hrefTextPrefix : window.location.href + '/page-',
-				items : this.collection.state.totalRecords,
-				itemsOnPage : this.collection.state.pageSize,
-				onPageClick : _.bind(function(pageNumber) {
-					this.trigger('page-selected', pageNumber);
-				}, this)
-			});
+			if (this.paginationNeeded()) {
+				this.$('.pagination-holder').pagination({
+					items : this.collection.state.totalRecords,
+					itemsOnPage : this.collection.state.pageSize,
+					onPageClick : _.bind(function(pageNumber) {
+						this.trigger('page-selected', pageNumber);
+					}, this)
+				});	
+			}
+		},
+		
+		paginationNeeded : function() {
+			return this.collection.state.totalRecords  > this.collection.state.pageSize;
 		},
 		
 		toggleUserRepositories : function(e) {
@@ -129,16 +139,9 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util', 'jquery' ], func
 			$el = $(e.currentTarget);
 			if ($el.hasClass('selected')) {
 				$el.toggleClass('asc desc');
-				$el.siblings().toggleClass('asc desc');
 				this.trigger('sort-change-order');
 			} else {
 				var prev = $el.siblings('.selected').removeClass('selected');
-				if (prev.hasClass('desc')) {
-					$el.addClass('desc');
-					prev.removeClass('asc');
-				} else {
-					$el.addClass('asc');
-				}
 				$el.addClass('selected');
 				this.trigger('sort-change-field', $el.data('sort-by'));
 			}

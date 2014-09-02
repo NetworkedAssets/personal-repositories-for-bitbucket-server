@@ -4,6 +4,10 @@ define('RepositoryOwners', ['backbone', 'RepositoryOwner', 'Config'], function(B
 		model: RepositoryOwner,
 		mode: "server",
 		
+		state : {
+			pageSize : 20
+		},
+		
 		parseRecords: function (resp, options) {
 			return resp.items;
 		},
