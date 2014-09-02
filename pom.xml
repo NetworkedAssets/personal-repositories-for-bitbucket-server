@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.networkedassets.atlassian.stash</groupId>
 	<artifactId>personalstash</artifactId>
-	<version>0.9.10</version>
+	<version>1.0.0</version>
 	<organization>
 		<name>NetworkedAssets</name>
 		<url>http://www.networkedassets.com/</url>
