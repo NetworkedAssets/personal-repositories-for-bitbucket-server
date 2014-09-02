@@ -24,7 +24,8 @@ public class LicenseManager {
 			log.debug("Checking license validity, license is invalid");
 			return false;
 		}
-		boolean licenseValid = licenseOption.get().isValid();
+		PluginLicense pluginLicense = licenseOption.get();
+		boolean licenseValid = pluginLicense.isValid();
 		log.debug("Checking license validity, license is {}",
 				licenseValid ? "valid" : "invalid");
 		return licenseValid;
@@ -36,16 +37,19 @@ public class LicenseManager {
 
 	public LicenseStatus getLicenseStatus() {
 		Option<PluginLicense> licenseOption = pluginLicenseManager.getLicense();
+		LicenseStatus licenseStatus;
 		if (licenseOption.isDefined()) {
 			PluginLicense pluginLicense = licenseOption.get();
 			if (pluginLicense.isValid()) {
-				return LicenseStatus.OK;
+				licenseStatus = LicenseStatus.OK;
 			}
 			Option<LicenseError> error = pluginLicense.getError();
-			return LicenseStatus.valueOf(error.get().name());
+			licenseStatus = LicenseStatus.valueOf(error.get().name());
 		} else {
-			return LicenseStatus.NO_LICENSE;
+			licenseStatus = LicenseStatus.NO_LICENSE;
 		}
+		log.debug("License status {} ", licenseStatus.name());
+		return licenseStatus;
 	}
 
 }
