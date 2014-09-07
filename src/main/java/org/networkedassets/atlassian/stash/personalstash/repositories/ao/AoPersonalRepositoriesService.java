@@ -147,7 +147,7 @@ public class AoPersonalRepositoriesService implements
 
 	@Override
 	public List<PersonalRepository> getUserPersonalRepositories(int userId) {
-		StashUser stashUser = userService.getUserById(userId);
+		StashUser stashUser = userService.getUserById(userId, true);
 		return getUserPersonalRepositories(stashUser);
 	}
 

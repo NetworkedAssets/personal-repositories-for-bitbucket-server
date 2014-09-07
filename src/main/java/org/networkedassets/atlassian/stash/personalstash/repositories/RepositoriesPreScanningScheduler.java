@@ -1,5 +1,6 @@
 package org.networkedassets.atlassian.stash.personalstash.repositories;
 
+import org.networkedassets.atlassian.stash.personalstash.prescan.PersonalRepositoriesPreScanner;
 import org.networkedassets.atlassian.stash.personalstash.state.PluginState;
 import org.networkedassets.atlassian.stash.personalstash.state.PluginStateManager;
 import org.springframework.beans.factory.annotation.Autowired;
