@@ -256,7 +256,7 @@ Easily look through existing repositories, see the disk space used by users.
 	</build>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<stash.version>3.0.1</stash.version>
+		<stash.version>3.0.0</stash.version>
 		<stash.runtime.version>${stash.version}</stash.runtime.version>
 		<stash.data.version>${stash.runtime.version}</stash.data.version>
 		<amps.version>5.0.4</amps.version>
