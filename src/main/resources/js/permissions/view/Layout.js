@@ -51,9 +51,9 @@ define('PermissionsLayout', [ 'backbone', 'underscore', 'jquery' ], function(Bac
 		},
 		
 		render : function() {
-			this.el.innerHTML = this.template({
+			this.$el.html(this.template({
 				mode: this.permissionsMode.get('mode')
-			});
+			}));
 			return this;
 		}
 

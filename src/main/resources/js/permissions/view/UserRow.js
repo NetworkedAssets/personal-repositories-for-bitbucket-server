@@ -15,9 +15,9 @@ define('UserRow', [ 'backbone' ], function(Backbone) {
 		},
 
 		render : function() {
-			this.el.innerHTML = this.template({
+			this.$el.html(this.template({
 				user : this.model.toJSON()
-			});
+			}));
 			return this;
 		}
 	});
