@@ -11,7 +11,7 @@
 				<img src="{$user.avatarUrl}" alt="{$user.displayName}">
 			</span>
 		</span>
-		<a href="{$user.profileUrl}">{$user.displayName}</a>
+		<a class="user-name" href="{$user.profileUrl}">{$user.displayName}</a>
 	</div>
 {/template}
 
@@ -27,6 +27,7 @@
 				<img src="{$user.avatarUrl}" alt="{$user.displayName}">
 			</span>
 		</span>
-		<a href="{$user.profileUrl}">{$user.displayName} [inactive]</a>
+		<a class="user-name" href="{$user.profileUrl}">{$user.displayName}</a>
+		<span class="inactive">[{getText('org.networkedassets.atlassian.stash.personalstash.repositories.user.inactive')}]</span>
 	</div>
 {/template}

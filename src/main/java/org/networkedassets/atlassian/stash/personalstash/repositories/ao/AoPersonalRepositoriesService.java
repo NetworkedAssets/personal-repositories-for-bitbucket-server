@@ -72,7 +72,7 @@ public class AoPersonalRepositoriesService implements
 		Map<Integer, Owner> ownersByUserIdMap = createOwnersByUserIdMap(allOwners);
 
 		Set<? extends StashUser> stashUsers = userService
-				.getUsersById(getStashUserIds(allOwners));
+				.getUsersById(getStashUserIds(allOwners), true);
 
 		List<StashUser> sortedStashUsers = sortStashUsersByName(stashUsers,
 				direction);
