@@ -30,7 +30,7 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util', 'jquery' ], func
 			} else if (this.collection.length === 0) {
 				this.renderEmptyCollectionMessage();
 			} else {
-				this.el.innerHTML = this.template();
+				this.$el.html(this.template());
 				this.renderPagination();
 				this.renderOwners();
 				this.renderedOnce = true;
@@ -52,7 +52,7 @@ define('RepositoriesTable', [ 'backbone', 'underscore', 'Util', 'jquery' ], func
 		},
 		
 		renderEmptyCollectionMessage : function() {
-			this.el.innerHTML = this.emptyTemplate();
+			this.$el.html(this.emptyTemplate());
 		},
 
 		renderPagination : function() {

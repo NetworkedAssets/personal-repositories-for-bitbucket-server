@@ -5,17 +5,17 @@
  * @param group
  */
 {template .groupRow}
-<tr>
-	<td headers="group">
+<td headers="group">
+	<div class="avatar-with-name">
 		<span class="aui-avatar aui-avatar-small group-avatar" data-groupname="{$group.name}"></span>
 		<a href="{$group.viewUrl}" title="{$group.name}">{$group.name}</a>
-	</td>
-	<td class="actions">
-		<a href="#" class="delete-button delete-group-link" title="{getText('org.networkedassets.atlassian.stash.personalstash.permissions.groups.delete')}" data-for="{$group.name}">
-			<span class="delete-button delete-group-link aui-icon aui-icon-small aui-iconfont-remove"></span>
-		</a>
-	</td>
-</tr>
+	</div>
+</td>
+<td class="actions">
+	<a href="#" class="delete-button delete-group-link" title="{getText('org.networkedassets.atlassian.stash.personalstash.permissions.groups.delete')}" data-for="{$group.name}">
+		<span class="delete-button delete-group-link aui-icon aui-icon-small aui-iconfont-remove"></span>
+	</a>
+</td>
 {/template}
 
 /**

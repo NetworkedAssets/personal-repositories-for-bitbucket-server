@@ -5,7 +5,7 @@ define('RepositoriesLoader', [ 'backbone', 'underscore', 'jquery' ], function(
 		className : 'loading-screen',
 
 		render : function() {
-			this.el.innerHTML = this.template();
+			this.$el.html(this.template());
 			return this;
 		}
 	});

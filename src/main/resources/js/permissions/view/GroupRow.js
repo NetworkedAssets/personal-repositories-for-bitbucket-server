@@ -15,9 +15,9 @@ define('GroupRow', [ 'backbone' ], function(Backbone) {
 		},
 
 		render : function() {
-			this.el.innerHTML = this.template({
+			this.$el.html(this.template({
 				group : this.model.toJSON()
-			});
+			}));
 			return this;
 		}
 	});
