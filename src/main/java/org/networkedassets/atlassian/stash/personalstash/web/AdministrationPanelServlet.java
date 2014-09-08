@@ -71,7 +71,7 @@ public class AdministrationPanelServlet extends SoyTemplateServlet {
 				}
 				super.doGet(req, resp);
 			} catch (AuthorisationException e) {
-				resp.sendRedirect(navBuilder.login().buildAbsolute());
+				resp.sendRedirect(navBuilder.login().next().buildAbsolute());
 			}
 		} catch (Exception e) {
 
