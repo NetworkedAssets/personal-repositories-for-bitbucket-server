@@ -5,6 +5,8 @@ import javax.annotation.PreDestroy;
 
 import org.networkedassets.atlassian.stash.personalstash.license.LicenseManager;
 import org.networkedassets.atlassian.stash.personalstash.repositories.PersonalRepositoriesService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +23,9 @@ public class UserCleanupEventListener {
 	private EventPublisher eventPublisher;
 	@Autowired
 	private LicenseManager licenseManager;
+	
+	private final Logger log = LoggerFactory
+			.getLogger(UserCleanupEventListener.class);
 
 	@PostConstruct
 	public void registerEvents() {
@@ -34,9 +39,11 @@ public class UserCleanupEventListener {
 
 	@EventListener
 	public void handleDeletionEvent(UserCleanupEvent event) {
+		log.debug("UserCleanupEvent received");
 		if (licenseManager.isLicenseInvalid()) {
 			return;
 		}
+		log.debug("UserCleanupEvent received, deleting personal repository owner {}", event.getDeletedUser());
 		personalRepositoriesService.deletePersonalRepositoryOwner(event.getDeletedUser());
 	}
 

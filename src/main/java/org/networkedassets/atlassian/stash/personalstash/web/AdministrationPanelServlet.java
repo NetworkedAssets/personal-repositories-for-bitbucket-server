@@ -62,15 +62,19 @@ public class AdministrationPanelServlet extends SoyTemplateServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		try {
-			permissionValidationService.validateForGlobal(Permission.ADMIN);
-			if (licenseManager.isLicenseValid()) {
-				if (pluginStateManager.getState() == PluginState.SCAN_NEEDED) {
-					repositoriesPreScanningScheduler.scheduleScan();
+			try {
+				permissionValidationService.validateForGlobal(Permission.ADMIN);
+				if (licenseManager.isLicenseValid()) {
+					if (pluginStateManager.getState() == PluginState.SCAN_NEEDED) {
+						repositoriesPreScanningScheduler.scheduleScan();
+					}
 				}
+				super.doGet(req, resp);
+			} catch (AuthorisationException e) {
+				resp.sendRedirect(navBuilder.login().next().buildAbsolute());
 			}
-			super.doGet(req, resp);
-		} catch (AuthorisationException e) {
-			resp.sendRedirect(navBuilder.login().buildAbsolute());
+		} catch (Exception e) {
+
 		}
 	}
 

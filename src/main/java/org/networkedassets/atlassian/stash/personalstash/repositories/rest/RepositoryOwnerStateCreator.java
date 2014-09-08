@@ -39,7 +39,7 @@ class RepositoryOwnerStateCreator {
 
 		for (Owner owner : owners) {
 			ownerStates.add(create(owner,
-					userService.getUserById(owner.getUserId())));
+					userService.getUserById(owner.getUserId(), true)));
 		}
 
 		return ownerStates;
@@ -61,7 +61,7 @@ class RepositoryOwnerStateCreator {
 	}
 
 	private StashUser getStashUserFromOwner(Owner owner) {
-		return userService.getUserById(owner.getUserId());
+		return userService.getUserById(owner.getUserId(), true);
 	}
 
 }

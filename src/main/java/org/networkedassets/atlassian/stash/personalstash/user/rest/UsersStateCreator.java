@@ -38,6 +38,7 @@ public class UsersStateCreator {
 		userState.setDisplayName(stashUser.getDisplayName());
 		userState.setProfileUrl(navBuilder.user(stashUser).buildRelative());
 		userState.setEmail(stashUser.getEmailAddress());
+		userState.setActive(stashUser.isActive());
 	}
 
 }

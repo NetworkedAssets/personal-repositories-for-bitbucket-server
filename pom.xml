@@ -177,8 +177,8 @@ Easily look through existing repositories, see the disk space used by users.
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -256,7 +256,7 @@ Easily look through existing repositories, see the disk space used by users.
 	</build>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<stash.version>2.12.0</stash.version>
+		<stash.version>3.0.0</stash.version>
 		<stash.runtime.version>${stash.version}</stash.runtime.version>
 		<stash.data.version>${stash.runtime.version}</stash.data.version>
 		<amps.version>5.0.4</amps.version>

@@ -4,7 +4,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.networkedassets.atlassian.stash.personalstash.license.LicenseManager;
-import org.networkedassets.atlassian.stash.personalstash.repositories.PersonalRepositoriesPreScanner;
+import org.networkedassets.atlassian.stash.personalstash.prescan.PersonalRepositoriesPreScanner;
 import org.networkedassets.atlassian.stash.personalstash.state.PluginState;
 import org.networkedassets.atlassian.stash.personalstash.state.PluginStateManager;
 import org.slf4j.Logger;

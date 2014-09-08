@@ -39,8 +39,9 @@ public class PluginStateManager {
 		PluginState state;
 		if (stringStatus == null) {
 			state = DEFAULT_STATUS;
+		} else {
+			state = PluginState.valueOf(stringStatus);
 		}
-		state = PluginState.valueOf(stringStatus);
 		log.debug("Current plaugin state: {}", state.name());
 		return state;
 	}

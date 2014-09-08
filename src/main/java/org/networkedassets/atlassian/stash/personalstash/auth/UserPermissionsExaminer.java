@@ -16,13 +16,10 @@ import org.springframework.stereotype.Component;
 
 import com.atlassian.stash.user.StashAuthenticationContext;
 import com.atlassian.stash.user.StashUser;
-import com.atlassian.stash.user.UserService;
 
 @Component
 public class UserPermissionsExaminer {
 
-	@Autowired
-	private UserService userService;
 	@Autowired
 	private StashAuthenticationContext authenthicationContext;
 	@Autowired
