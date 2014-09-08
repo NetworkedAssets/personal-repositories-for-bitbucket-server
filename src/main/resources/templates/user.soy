@@ -14,3 +14,19 @@
 		<a href="{$user.profileUrl}">{$user.displayName}</a>
 	</div>
 {/template}
+
+
+/**
+ * User name with avatar
+ * @param user
+ */
+{template .inactiveUserWithAvatar}
+	<div class="avatar-with-name inactive" title="{$user.displayName}">
+		<span class="aui-avatar aui-avatar-small user-avatar" data-username="{$user.name}">
+			<span class="aui-avatar-inner">
+				<img src="{$user.avatarUrl}" alt="{$user.displayName}">
+			</span>
+		</span>
+		<a href="{$user.profileUrl}">{$user.displayName} [inactive]</a>
+	</div>
+{/template}

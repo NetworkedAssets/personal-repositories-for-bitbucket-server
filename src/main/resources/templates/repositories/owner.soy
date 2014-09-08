@@ -11,9 +11,15 @@
 			<span class="aui-icon aui-icon-small aui-iconfont-collapsed"></span>
 		</td>
         <td>
-        	{call org.networkedassets.personalstash.userWithAvatar}
-        		{param user: $owner/}
-        	{/call}
+        	{if $owner.isActive}
+	        	{call org.networkedassets.personalstash.userWithAvatar}
+	        		{param user: $owner/}
+	        	{/call}
+        	{else}
+        		{call org.networkedassets.personalstash.inactiveUserWithAvatar}
+	        		{param user: $owner/}
+	        	{/call}
+        	{/if}
         </td>
         <td class="size-column">{$owner.repositoriesSize}</td>
     </tr>

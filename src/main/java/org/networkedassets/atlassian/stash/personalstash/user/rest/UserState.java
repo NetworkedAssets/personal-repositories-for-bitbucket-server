@@ -18,6 +18,8 @@ public class UserState {
 	private String profileUrl;
 	@XmlElement
 	private String email;
+	@XmlElement
+	private boolean isActive;
 
 	public String getName() {
 		return name;
@@ -65,6 +67,14 @@ public class UserState {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 	
 
