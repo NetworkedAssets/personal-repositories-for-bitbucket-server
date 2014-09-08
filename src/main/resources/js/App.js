@@ -74,6 +74,8 @@ define('PersonalStash', [ 'underscore', 'jquery', 'Router',
 });
 
 AJS.$(document).ready(function($) {
+	
+	$.ajaxSetup({ cache: false });
 
 	var go = function() {
 		require([ "PersonalStash" ], function(PersonalStash) {
