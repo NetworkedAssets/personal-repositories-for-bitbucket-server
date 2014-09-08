@@ -156,3 +156,8 @@
 .pagination-holder .aui-nav-pagination {
  	display:inline-block;
 }
+
+.avatar-with-name .inactive {
+	color: #A0A0A0;
+	margin-left: 10px;
+} 
