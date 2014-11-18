@@ -259,6 +259,7 @@ public class AoPersonalRepositoriesService implements
 		if (lastRepo) {
 			ao.delete(repoOwner);
 		} else {
+			repoOwner = ao.get(Owner.class, repoOwner.getID());
 			updateOwnerRepositoriesSize(repoOwner);
 		}
 	}
