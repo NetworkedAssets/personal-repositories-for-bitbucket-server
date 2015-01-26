@@ -18,8 +18,8 @@
 		<h3>{getText('org.networkedassets.atlassian.stash.personalstash.license.error.header')}</h3>
 		<p>
 		{switch $status}
-  			{case 'EXPIRED'}
-				{getText('org.networkedassets.atlassian.stash.personalstash.license.error.expired')}  			
+			{case 'EXPIRED'}
+				{getText('org.networkedassets.atlassian.stash.personalstash.license.error.expired')}
 			{case 'NO_LICENSE'}
 				{getText('org.networkedassets.atlassian.stash.personalstash.license.error.no_license')}
 			{case 'TYPE_MISMATCH'}
@@ -27,7 +27,7 @@
 			{case 'USER_MISMATCH'}
 				{getText('org.networkedassets.atlassian.stash.personalstash.license.error.user_mismatch')}
 			{case 'VERSION_MISMATCH'}
-				{getText('org.networkedassets.atlassian.stash.personalstash.license.error.version_mismatch')} 
+				{getText('org.networkedassets.atlassian.stash.personalstash.license.error.version_mismatch')}
 			{default}
 				{getText('org.networkedassets.atlassian.stash.personalstash.license.error.default')} {$status}
 		{/switch}	
