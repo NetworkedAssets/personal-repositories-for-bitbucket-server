@@ -8,14 +8,14 @@
  */
 {template .table}
 {call aui.group.group}
-    {param content}
-        {call aui.group.item}
-            {param content}
-                <h3>{if $mode =='allow'}{$header.allow}{else}{$header.deny}{/if}</h3>
-            {/param}
-        {/call}
-    {/param}
-    {param extraClasses}users-header{/param}
+		{param content}
+				{call aui.group.item}
+						{param content}
+								<h3>{if $mode =='allow'}{$header.allow}{else}{$header.deny}{/if}</h3>
+						{/param}
+				{/call}
+		{/param}
+		{param extraClasses}users-header{/param}
 {/call}
 <table class="private-repos-permissions-table aui">
 	<thead>
@@ -27,26 +27,26 @@
 					{param content}
 						{call aui.group.group}
 							{param content}
-	    						{call aui.group.item}
-	    							{param content}
-	    								{call aui.form.input}
-	    									{param name}search{/param}
-	    									{param extraClasses}search-input{/param}
-	    								{/call}
-	    							{/param}
-	    						{/call}
-	    						{call aui.group.item}
-	    							{param content}
-	    								{call aui.form.button}
-	    									{param extraClasses}add-button{/param}
-	    									{param name}add{/param}
-	    									{param text}{if $mode =='allow'}{getText('org.networkedassets.atlassian.stash.personalstash.permissions.mode.deny')}{else}{getText('org.networkedassets.atlassian.stash.personalstash.permissions.mode.allow')}{/if}{/param}
-	    								{/call}
-	    							{/param}
-	    							{param extraClasses}actions-item{/param}
-	    						{/call}
-	    					{/param}
-	    					{param extraClasses}aui-group-split{/param}
+									{call aui.group.item}
+										{param content}
+											{call aui.form.input}
+												{param name}search{/param}
+												{param extraClasses}search-input{/param}
+											{/call}
+										{/param}
+									{/call}
+									{call aui.group.item}
+										{param content}
+											{call aui.form.button}
+												{param extraClasses}add-button{/param}
+												{param name}add{/param}
+												{param text}{if $mode =='allow'}{getText('org.networkedassets.atlassian.stash.personalstash.permissions.mode.deny')}{else}{getText('org.networkedassets.atlassian.stash.personalstash.permissions.mode.allow')}{/if}{/param}
+											{/call}
+										{/param}
+										{param extraClasses}actions-item{/param}
+									{/call}
+								{/param}
+								{param extraClasses}aui-group-split{/param}
 						{/call}
 					{/param}
 				{/call}
