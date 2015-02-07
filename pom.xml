@@ -1,25 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.networkedassets.atlassian.stash</groupId>
 	<artifactId>personalstash</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<organization>
 		<name>NetworkedAssets</name>
 		<url>http://www.networkedassets.com/</url>
 	</organization>
 	<name>Personal Stash</name>
-	<description>
-	Hassle-free personal repositories management.
-Manage the rights to create personal repositories for selected groups and users.
-Choose a default permission mode, either allow or deny all users by default.
-Easily look through existing repositories, see the disk space used by users. 
-	</description>
-
+	<description>Hassle-free personal repositories management. Manage the rights to create personal repositories for selected groups and users. Choose a default permission mode, either allow or deny all users by default. Easily look through existing repositories, see the disk space used by users.</description>
 	<packaging>atlassian-plugin</packaging>
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -47,6 +39,12 @@ Easily look through existing repositories, see the disk space used by users.
 		</repository>
 	</repositories>
 	<dependencies>
+		<dependency>
+		  <groupId>com.atlassian.soy</groupId>
+		  <artifactId>soy-template-renderer-api</artifactId>
+		  <version>1.1.1</version>
+		  <scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>com.atlassian.activeobjects</groupId>
 			<artifactId>activeobjects-plugin</artifactId>
@@ -98,11 +96,6 @@ Easily look through existing repositories, see the disk space used by users.
 			<artifactId>commons-lang</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.atlassian.soy</groupId>
-			<artifactId>soy-template-renderer-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
 		<!-- WIRED TEST RUNNER DEPENDENCIES -->
 		<dependency>
 			<groupId>com.atlassian.plugins</groupId>
@@ -125,6 +118,11 @@ Easily look through existing repositories, see the disk space used by users.
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<scope>1.1.2</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
@@ -206,28 +204,16 @@ Easily look through existing repositories, see the disk space used by users.
 										<versionRange>${amps.version}</versionRange>
 										<goals>
 											<goal>filter-test-plugin-descriptor</goal>
-											<goal>
-												generate-manifest
-											</goal>
-											<goal>
-												filter-plugin-descriptor
-											</goal>
-											<goal>
-												copy-bundled-dependencies
-											</goal>
-											<goal>
-												copy-test-bundled-dependencies
-											</goal>
-											<goal>
-												generate-rest-docs
-											</goal>
-											<goal>
-												compress-resources
-											</goal>
+											<goal>generate-manifest</goal>
+											<goal>filter-plugin-descriptor</goal>
+											<goal>copy-bundled-dependencies</goal>
+											<goal>copy-test-bundled-dependencies</goal>
+											<goal>generate-rest-docs</goal>
+											<goal>compress-resources</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore />
+										<ignore/>
 									</action>
 								</pluginExecution>
 								<pluginExecution>
@@ -244,7 +230,7 @@ Easily look through existing repositories, see the disk space used by users.
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore />
+										<ignore/>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
@@ -256,10 +242,10 @@ Easily look through existing repositories, see the disk space used by users.
 	</build>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<stash.version>3.0.0</stash.version>
+		<stash.version>3.6.1</stash.version>
 		<stash.runtime.version>${stash.version}</stash.runtime.version>
 		<stash.data.version>${stash.runtime.version}</stash.data.version>
-		<amps.version>5.0.4</amps.version>
+		<amps.version>5.0.13</amps.version>
 		<plugin.testrunner.version>1.1.4</plugin.testrunner.version>
 		<upm.license.compatibility.version>2.14.4</upm.license.compatibility.version>
 	</properties>

@@ -2,6 +2,7 @@ package org.networkedassets.atlassian.stash.personalstash.web;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,11 +23,11 @@ public class AdministrationPanelServlet extends SoyTemplateServlet {
 
 	private static final long serialVersionUID = 790189345704146559L;
 
-	private String templateResources = "org.networkedassets.atlassian.stash.personalstash:templates-soy";
-	private String templateKey = "org.networkedassets.personalstash.adminPage";
+	private String templatesResource = "org.networkedassets.atlassian.stash.personalstash:templates-soy";
+	private String templateName = "org.networkedassets.personalstash.adminPanel";
 
-	private String licenseErrorTemplateResources = "org.networkedassets.atlassian.stash.personalstash:license-servlet-resources";
-	private String licenseErrorTemplateKey = "org.networkedassets.personalstash.license.errorPage";
+	private String licenseErrorTemplatesResource = "org.networkedassets.atlassian.stash.personalstash:license-servlet-resources";
+	private String licenseErrorTemplateName = "org.networkedassets.personalstash.license.errorPage";
 
 	@Autowired
 	private LicenseManager licenseManager;
@@ -40,62 +41,50 @@ public class AdministrationPanelServlet extends SoyTemplateServlet {
 	private PermissionValidationService permissionValidationService;
 
 	@Override
-	protected String getTemplateResources() {
-		return templateResources;
-	}
-
-	@Override
-	protected String getTemplateKey() {
-		return templateKey;
-	}
-
-	@Override
-	protected HashMap<String, Object> getTemplateParams() {
-		HashMap<String, Object> params = super.getTemplateParams();
-		String baseApiPath = navBuilder.buildAbsolute()
-				+ "/rest/personalstash/1.0";
-		params.put("baseApiPath", baseApiPath);
-		return params;
-	}
-
-	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		try {
-			try {
-				permissionValidationService.validateForGlobal(Permission.ADMIN);
-				if (licenseManager.isLicenseValid()) {
-					if (pluginStateManager.getState() == PluginState.SCAN_NEEDED) {
-						repositoriesPreScanningScheduler.scheduleScan();
-					}
-				}
-				super.doGet(req, resp);
-			} catch (AuthorisationException e) {
-				resp.sendRedirect(navBuilder.login().next().buildAbsolute());
-			}
+			permissionValidationService.validateForGlobal(Permission.ADMIN);
+			render(resp);
+		} catch (AuthorisationException e) {
+			resp.sendRedirect(navBuilder.login().next().buildAbsolute());
 		} catch (Exception e) {
 
 		}
 	}
 
-	@Override
-	protected void render(HttpServletResponse resp, String templateResources,
-			String templateKey, HashMap<String, Object> templateParams)
-			throws IOException, ServletException {
+	protected void render(HttpServletResponse resp) throws IOException,
+			ServletException {
 		if (licenseManager.isLicenseValid()) {
-			super.render(resp, getTemplateResources(), getTemplateKey(),
-					getTemplateParams());
-			return;
+			scanRepositoriesIfNeeded();
+			renderAdminPanel(resp);
+		} else {
+			renderLicenseError(resp);
 		}
+	}
 
-		renderLicenseError(resp);
+	private void scanRepositoriesIfNeeded() {
+		if (pluginStateManager.getState() == PluginState.SCAN_NEEDED) {
+			repositoriesPreScanningScheduler.scheduleScan();
+		}
+	}
+
+	private void renderAdminPanel(HttpServletResponse resp) throws IOException,
+			ServletException {
+		Map<String, Object> params = new HashMap<String, Object>();
+		String baseApiPath = navBuilder.buildAbsolute()
+				+ "/rest/personalstash/1.0";
+		params.put("baseApiPath", baseApiPath);
+
+		super.render(resp, templatesResource, templateName, params);
 	}
 
 	private void renderLicenseError(HttpServletResponse resp)
 			throws IOException, ServletException {
-		HashMap<String, Object> params = super.getTemplateParams();
+		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("status", licenseManager.getLicenseStatus());
-		super.render(resp, licenseErrorTemplateResources,
-				licenseErrorTemplateKey, params);
+
+		super.render(resp, licenseErrorTemplatesResource,
+				licenseErrorTemplateName, params);
 	}
 }

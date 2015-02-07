@@ -1,7 +1,7 @@
 package org.networkedassets.atlassian.stash.personalstash.web;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.atlassian.soy.renderer.SoyException;
 import com.atlassian.soy.renderer.SoyTemplateRenderer;
-import com.atlassian.stash.nav.NavBuilder;
 
 public abstract class SoyTemplateServlet extends HttpServlet {
 
@@ -20,24 +19,25 @@ public abstract class SoyTemplateServlet extends HttpServlet {
 
 	@Autowired
 	private SoyTemplateRenderer soyTemplateRenderer;
-	@Autowired
-	private NavBuilder navBuilder;
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		render(resp, getTemplateResources(), getTemplateKey(),
-				getTemplateParams());
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp,
+			String templatesResource, String templateName,
+			Map<String, Object> templateParams) throws ServletException,
+			IOException {
+		try {
+			render(resp, templatesResource, templateName, templateParams);
+		} catch (Exception e) {
+
+		}
 	}
 
-	protected void render(HttpServletResponse resp, String templateResources,
-			String templateKey, HashMap<String, Object> templateParams)
-			throws IOException, ServletException {
+	protected void render(HttpServletResponse resp, String templatesResource,
+			String templateName, Map<String, Object> data) throws IOException,
+			ServletException {
+		resp.setContentType("text/html;charset=UTF-8");
 		try {
-			resp.setContentType("text/html;charset=UTF-8");
-			soyTemplateRenderer.render(resp.getWriter(), templateResources,
-					templateKey, templateParams);
-
+			soyTemplateRenderer.render(resp.getWriter(), templatesResource,
+					templateName, data);
 		} catch (SoyException e) {
 			Throwable cause = e.getCause();
 			if (cause instanceof IOException) {
@@ -47,11 +47,4 @@ public abstract class SoyTemplateServlet extends HttpServlet {
 		}
 	}
 
-	protected abstract String getTemplateResources();
-
-	protected abstract String getTemplateKey();
-
-	protected HashMap<String, Object> getTemplateParams() {
-		return new HashMap<String, Object>();
-	}
 }

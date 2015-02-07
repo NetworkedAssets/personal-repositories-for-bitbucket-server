@@ -1,54 +1,58 @@
 {namespace org.networkedassets.personalstash}
-
 /**
  * Displays admin panel
- * 
  * @param baseApiPath
  */
-{template .adminPage}
+{template .adminPanel}
 <html>
-<head>
-<meta name="decorator" content="atl.admin">
-<meta name="activeTab" content="admin-personal-repos">
-{webResourceManager_requireResource('com.atlassian.auiplugin:aui-select2')}
-{webResourceManager_requireResource('org.networkedassets.atlassian.stash.personalstash:web-resources')}
-<title>{getText('org.networkedassets.atlassian.stash.personalstash.page.title')}</title>
-</head>
-<body>
-	<script type="text/javascript">
-		{literal}
-		define('Config', [], function() {
-			return {
-				urlBase : "{/literal}{$baseApiPath}{literal}"
-			};
-		});
-		{/literal}
-	</script>
-	<header class="aui-page-header personal-repositories-header">
-		<div class="aui-page-header-inner">
-			<div class="aui-page-header-main">
-				<h2>{getText('org.networkedassets.atlassian.stash.personalstash.header')}</h2>
+
+	<head>
+		<title>{getText('org.networkedassets.atlassian.stash.personalstash.page.title')}</title>
+		<meta name="decorator" content="atl.admin">
+		<meta name="activeTab" content="admin-personal-repos">
+		{webResourceManager_requireResource('com.atlassian.auiplugin:aui-select2')}
+		{webResourceManager_requireResource('org.networkedassets.atlassian.stash.personalstash:web-resources')}
+	</head>
+
+	<body>
+
+		<script type="text/javascript">
+			{literal}
+			define('Config', [], function() {
+				return {
+					urlBase : "{/literal}{$baseApiPath}{literal}"
+				};
+			});
+			{/literal}
+		</script>
+
+		<header class="aui-page-header personal-repositories-header">
+			<div class="aui-page-header-inner">
+				<div class="aui-page-header-main">
+					<h2>{getText('org.networkedassets.atlassian.stash.personalstash.header')}</h2>
+				</div>
 			</div>
-		</div>
-	</header>
-	<nav class="sections-menu aui-navgroup aui-navgroup-horizontal">
-	    <div class="aui-navgroup-inner">
-	        <div class="aui-navgroup-primary">
-	            <ul class="aui-nav">
-	                <li class="section-tab permissions"><a href="#permissions">{getText('org.networkedassets.atlassian.stash.personalstash.permissions.section.header')}</a></li>
-	                <li class="section-tab repositories"><a href="#repositories">{getText('org.networkedassets.atlassian.stash.personalstash.repositories.header')}</a></li>
-	            </ul>
-	        </div>
-	    </div>
-	</nav>
+		</header>
+
+		<nav class="sections-menu aui-navgroup aui-navgroup-horizontal">
+			<div class="aui-navgroup-inner">
+				<div class="aui-navgroup-primary">
+					<ul class="aui-nav">
+						<li class="section-tab permissions">
+							<a href="#permissions">{getText('org.networkedassets.atlassian.stash.personalstash.permissions.section.header')}</a>
+						</li>
+						<li class="section-tab repositories">
+							<a href="#repositories">{getText('org.networkedassets.atlassian.stash.personalstash.repositories.header')}</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div class="repositories-section section"></div>
 	
-	<div class="repositories-section section">
-	</div>
-	
-	<div class="permissions-section section">
-	</div>
-	
-	
-</body>
+		<div class="permissions-section section"></div>
+
+	</body>
 </html>
 {/template}

@@ -144,8 +144,7 @@
 		<directory location="/templates/" />
 		<dependency>com.atlassian.stash.stash-web-plugin:global</dependency>
 		<dependency>com.atlassian.auiplugin:aui-select2</dependency>
-		<dependency>org.networkedassets.atlassian.stash.personalstash:web-resources
-		</dependency>
+		<dependency>org.networkedassets.atlassian.stash.personalstash:web-resources</dependency>
 	</stash-resource>
 
 	<web-resource key="license-web-resources" name="License web resources">
@@ -157,8 +156,7 @@
 			<transformer key="jsI18n" />
 		</transformation>
 		<directory location="/templates/license" />
-		<dependency>org.networkedassets.atlassian.stash.personalstash:license-web-resources
-		</dependency>
+		<dependency>org.networkedassets.atlassian.stash.personalstash:license-web-resources</dependency>
 		<dependency>com.atlassian.stash.stash-web-plugin:global</dependency>
 	</stash-resource>
 

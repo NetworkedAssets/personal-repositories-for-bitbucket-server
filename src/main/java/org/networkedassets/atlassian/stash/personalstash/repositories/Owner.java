@@ -9,7 +9,7 @@ public interface Owner extends Entity {
 
 	public void setUserId(Integer integer);
 
-	@OneToMany
+	@OneToMany(reverse = "getOwner")
 	public PersonalRepository[] getRepositories();
 
 	public Long getRepositoriesSize();
