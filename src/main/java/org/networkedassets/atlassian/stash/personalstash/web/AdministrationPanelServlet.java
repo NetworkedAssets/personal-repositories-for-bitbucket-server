@@ -21,7 +21,7 @@ import com.atlassian.stash.user.PermissionValidationService;
 
 public class AdministrationPanelServlet extends SoyTemplateServlet {
 
-	private static final long serialVersionUID = 790189345704146559L;
+	private static final long serialVersionUID = 7919713417018246905L;
 
 	private String templatesResource = "org.networkedassets.atlassian.stash.personalstash:templates-soy";
 	private String templateName = "org.networkedassets.personalstash.adminPanel";

@@ -15,7 +15,7 @@ import com.atlassian.soy.renderer.SoyTemplateRenderer;
 
 public abstract class SoyTemplateServlet extends HttpServlet {
 
-	private static final long serialVersionUID = -7773632602555052731L;
+	private static final long serialVersionUID = 6178715628670872080L;
 
 	@Autowired
 	private SoyTemplateRenderer soyTemplateRenderer;
