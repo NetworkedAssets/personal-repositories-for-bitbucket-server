@@ -32,12 +32,12 @@ public abstract class SoyTemplateServlet extends HttpServlet {
 	}
 
 	protected void render(HttpServletResponse resp, String templatesResource,
-			String templateName, Map<String, Object> data) throws IOException,
-			ServletException {
+			String templateName, Map<String, Object> templateParams)
+			throws IOException, ServletException {
 		resp.setContentType("text/html;charset=UTF-8");
 		try {
 			soyTemplateRenderer.render(resp.getWriter(), templatesResource,
-					templateName, data);
+					templateName, templateParams);
 		} catch (SoyException e) {
 			Throwable cause = e.getCause();
 			if (cause instanceof IOException) {
