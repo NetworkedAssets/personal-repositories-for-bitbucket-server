@@ -7,10 +7,11 @@
 		<version>${project.version}</version>
 		<vendor name="${project.organization.name}" url="${project.organization.url}" />
 
-		<param name="plugin-logo">images/pluginLogo.png</param>
 		<!-- <param name="plugin-banner">images/pluginBanner.jpg</param> -->
-		<param name="vendor-icon">images/vendorIcon.jpg</param>
+		<param name="plugin-logo">images/pluginLogo.png</param>
+		<param name="plugin-icon">images/pluginIcon.png</param>
 		<param name="vendor-logo">images/vendorLogo.jpg</param>
+		<param name="vendor-icon">images/vendorIcon.jpg</param>
 
 
 		<param name="atlassian-licensing-enabled">true</param>
