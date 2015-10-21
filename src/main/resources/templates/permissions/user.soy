@@ -1,4 +1,4 @@
-{namespace org.networkedassets.personalstash.permissions}
+{namespace org.networkedassets.personalrepos.permissions}
 
 /**
  * User table row
@@ -6,12 +6,12 @@
  */
 {template .userRow}
 <td headers="user">
-	{call org.networkedassets.personalstash.userWithAvatar}
+	{call org.networkedassets.personalrepos.userWithAvatar}
 		{param user: $user/}
 	{/call}
 </td>
 <td class="actions">
-	<a href="#" class="delete-button" title="{getText('org.networkedassets.atlassian.stash.personalstash.permissions.users.delete')}" data-for="{$user.name}"><span class="aui-icon aui-icon-small aui-iconfont-remove"></span></a>
+	<a href="#" class="delete-button" title="{getText('org.networkedassets.atlassian.bitbucket.personalrepos.permissions.users.delete')}" data-for="{$user.name}"><span class="aui-icon aui-icon-small aui-iconfont-remove"></span></a>
 </td>
 {/template}
 

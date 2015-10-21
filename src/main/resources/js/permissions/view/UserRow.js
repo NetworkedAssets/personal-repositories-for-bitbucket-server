@@ -2,7 +2,7 @@ define('UserRow', [ 'backbone' ], function(Backbone) {
 	return Backbone.View.extend({
 
 		tagName : 'tr',
-		template : org.networkedassets.personalstash.permissions.userRow,
+		template : org.networkedassets.personalrepos.permissions.userRow,
 
 		events : {
 			'click .delete-button' : 'onDelete'

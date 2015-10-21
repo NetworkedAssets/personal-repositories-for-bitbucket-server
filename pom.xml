@@ -2,24 +2,24 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.networkedassets.atlassian.stash</groupId>
-	<artifactId>personalstash</artifactId>
-	<version>1.0.6</version>
+	<groupId>org.networkedassets.atlassian.bitbucket</groupId>
+	<artifactId>personalrepos</artifactId>
+	<version>1.0.7</version>
 	<organization>
 		<name>NetworkedAssets</name>
 		<url>http://www.networkedassets.com/</url>
 	</organization>
-	<name>Personal Stash</name>
+	<name>Personal Repositories</name>
 	<description>Hassle-free personal repositories management. Manage the rights to create personal repositories for selected groups and users. Choose a default permission mode, either allow or deny all users by default. Easily look through existing repositories, see the disk space used by users.</description>
 	<packaging>atlassian-plugin</packaging>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>com.atlassian.stash</groupId>
-				<artifactId>stash-parent</artifactId>
-				<version>${stash.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
+					<groupId>com.atlassian.bitbucket.server</groupId>
+					<artifactId>bitbucket-parent</artifactId>
+					<version>${bitbucket.version}</version>
+					<type>pom</type>
+					<scope>import</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -67,24 +67,24 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.atlassian.stash</groupId>
-			<artifactId>stash-api</artifactId>
-			<scope>provided</scope>
+				<groupId>com.atlassian.bitbucket.server</groupId>
+				<artifactId>bitbucket-api</artifactId>
+				<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.atlassian.stash</groupId>
-			<artifactId>stash-spi</artifactId>
-			<scope>provided</scope>
+				<groupId>com.atlassian.bitbucket.server</groupId>
+				<artifactId>bitbucket-spi</artifactId>
+				<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.atlassian.stash</groupId>
-			<artifactId>stash-page-objects</artifactId>
-			<scope>provided</scope>
+				<groupId>com.atlassian.bitbucket.server</groupId>
+				<artifactId>bitbucket-page-objects</artifactId>
+				<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<scope>provided</scope>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -243,6 +243,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<stash.version>3.6.1</stash.version>
+		<bitbucket.version>4.0.3</bitbucket.version>
 		<stash.runtime.version>${stash.version}</stash.runtime.version>
 		<stash.data.version>${stash.runtime.version}</stash.data.version>
 		<amps.version>5.0.13</amps.version>

@@ -2,17 +2,17 @@ define('UsersTable', [ 'Table', 'UserRow', 'UserBatch', 'Config' ], function(
 		Table, UserRow, UserBatch, Config) {
 	return Table.extend({
 
-		template : org.networkedassets.personalstash.permissions.table,
+		template : org.networkedassets.personalrepos.permissions.table,
 		itemView : UserRow,
 		searchFormatResult : function(object) {
-			return org.networkedassets.personalstash.permissions
+			return org.networkedassets.personalrepos.permissions
 					.userSearchResult({
 						user : object
 					})
 		},
 
 		searchFormatSelection : function(object) {
-			return org.networkedassets.personalstash.permissions
+			return org.networkedassets.personalrepos.permissions
 					.userSearchSelection({
 						user : object
 					})
@@ -31,8 +31,8 @@ define('UsersTable', [ 'Table', 'UserRow', 'UserBatch', 'Config' ], function(
 			return {
 				mode : this.mode,
 				header : {
-					allow : AJS.I18n.getText('org.networkedassets.atlassian.stash.personalstash.permissions.users.header.denied'),
-					deny : AJS.I18n.getText('org.networkedassets.atlassian.stash.personalstash.permissions.users.header.allowed')
+					allow : AJS.I18n.getText('org.networkedassets.atlassian.bitbucket.personalrepos.permissions.users.header.denied'),
+					deny : AJS.I18n.getText('org.networkedassets.atlassian.bitbucket.personalrepos.permissions.users.header.allowed')
 				}
 			};
 		},

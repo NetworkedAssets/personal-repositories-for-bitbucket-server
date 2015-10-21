@@ -16,17 +16,17 @@
 
 		<param name="atlassian-licensing-enabled">true</param>
 
-		<param key="post-install-url" name="post.install.url">/plugins/servlet/personalstash/admin
+		<param key="post-install-url" name="post.install.url">/plugins/servlet/personalrepos/admin
 		</param>
-		<param key="configure-url" name="configure.url">/plugins/servlet/personalstash/admin
+		<param key="configure-url" name="configure.url">/plugins/servlet/personalrepos/admin
 		</param>
 	</plugin-info>
 
 	<ao key="ao-module">
 		<description>The AO module for this plugin.</description>
-		<entity>org.networkedassets.atlassian.stash.personalstash.repositories.Owner
+		<entity>org.networkedassets.atlassian.bitbucket.personalrepos.repositories.Owner
 		</entity>
-		<entity>org.networkedassets.atlassian.stash.personalstash.repositories.PersonalRepository
+		<entity>org.networkedassets.atlassian.bitbucket.personalrepos.repositories.PersonalRepository
 		</entity>
 	</ao>
 
@@ -41,18 +41,18 @@
 	</component-import>
 
 	<component-import key="i18nService"
-		interface="com.atlassian.stash.i18n.I18nService" />
+		interface="com.atlassian.bitbucket.i18n.I18nService" />
 
 	<!-- add our i18n resource -->
 	<resource type="i18n" name="i18n"
-		location="org.networkedassets.atlassian.stash.personalstash.i18n" />
+		location="org.networkedassets.atlassian.bitbucket.personalrepos.i18n" />
 
 	<!-- import from the product container -->
 	<component-import key="applicationProperties"
 		interface="com.atlassian.sal.api.ApplicationProperties" />
 
 	<web-resource key="web-resources">
-		<resource type="download" name="personalstash.css" location="/css/personalstash.css" />
+		<resource type="download" name="personalrepos.css" location="/css/personalrepos.css" />
 		<transformation extension="soy">
 			<transformer key="soyTransformer" />
 		</transformation>
@@ -138,28 +138,28 @@
 		<resource type="download" name="App.js" location="/js/App.js" />
 	</web-resource>
 
-	<stash-resource key="templates-soy" name="Soy Templates">
+	<bitbucket-resource key="templates-soy" name="Soy Templates">
 		<transformation extension="js">
 			<transformer key="jsI18n" />
 		</transformation>
 		<directory location="/templates/" />
-		<dependency>com.atlassian.stash.stash-web-plugin:global</dependency>
+		<dependency>com.atlassian.bitbucket.bitbucket-web-plugin:global</dependency>
 		<dependency>com.atlassian.auiplugin:aui-select2</dependency>
-		<dependency>org.networkedassets.atlassian.stash.personalstash:web-resources</dependency>
-	</stash-resource>
+		<dependency>org.networkedassets.atlassian.bitbucket.personalrepos:web-resources</dependency>
+	</bitbucket-resource>
 
 	<web-resource key="license-web-resources" name="License web resources">
 		<resource type="download" name="license.css" location="/css/license.css" />
 	</web-resource>
 
-	<stash-resource key="license-servlet-resources" name="License template resources">
+	<bitbucket-resource key="license-servlet-resources" name="License template resources">
 		<transformation extension="js">
 			<transformer key="jsI18n" />
 		</transformation>
 		<directory location="/templates/license" />
-		<dependency>org.networkedassets.atlassian.stash.personalstash:license-web-resources</dependency>
-		<dependency>com.atlassian.stash.stash-web-plugin:global</dependency>
-	</stash-resource>
+		<dependency>org.networkedassets.atlassian.bitbucket.personalrepos:license-web-resources</dependency>
+		<dependency>com.atlassian.bitbucket.bitbucket-web-plugin:global</dependency>
+	</bitbucket-resource>
 
 
 	<component-import key="soyTemplateRenderer"
@@ -168,21 +168,21 @@
 	<web-item key="admin-personal-repos" name="Admin Menu Web Item"
 		section="atl.admin/admin-general-section">
 		<description
-			key="org.networkedassets.atlassian.stash.personalstash.webitem.description" />
+			key="org.networkedassets.atlassian.bitbucket.personalrepos.webitem.description" />
 		<label
-			key="org.networkedassets.atlassian.stash.personalstash.webitem.label" />
-		<link linkId="personal_repositories">/plugins/servlet/personalstash/admin</link>
+			key="org.networkedassets.atlassian.bitbucket.personalrepos.webitem.label" />
+		<link linkId="personal_repositories">/plugins/servlet/personalrepos/admin</link>
 	</web-item>
 
 	<servlet name="Administration Panel Servlet" key="administrationPanel"
-		class="org.networkedassets.atlassian.stash.personalstash.web.AdministrationPanelServlet">
-		<description>Displays Personal Stash administration panel
+		class="org.networkedassets.atlassian.bitbucket.personalrepos.web.AdministrationPanelServlet">
+		<description>Displays Personal Repositories administration panel
 		</description>
-		<url-pattern>/personalstash/admin</url-pattern>
+		<url-pattern>/personalrepos/admin</url-pattern>
 	</servlet>
 
-	<rest key="personalStashRest" path="/personalstash" version="1.0">
-		<description>Provides rest endpoints used by Personal Stash
+	<rest key="personalReposRest" path="/personalrepos" version="1.0">
+		<description>Provides rest endpoints used by Personal Repositories
 		</description>
 	</rest>
 

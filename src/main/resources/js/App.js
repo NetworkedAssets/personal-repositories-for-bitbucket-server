@@ -1,4 +1,4 @@
-define('PersonalStash', [ 'underscore', 'jquery', 'Router',
+define('PersonalRepos', [ 'underscore', 'jquery', 'Router',
 		'PermissionsController', 'RepositoriesController' ], function(_, $,
 		Router, PermissionsController, RepositoriesController) {
 
@@ -78,9 +78,9 @@ AJS.$(document).ready(function($) {
 	$.ajaxSetup({ cache: false });
 
 	var go = function() {
-		require([ "PersonalStash" ], function(PersonalStash) {
-			var personalStash = new PersonalStash();
-			personalStash.start();
+		require([ "PersonalRepos" ], function(PersonalRepos) {
+			var personalRepos = new PersonalRepos();
+			personalRepos.start();
 		});
 	};
 	setTimeout(go, 10);

@@ -1,6 +1,6 @@
 define('PermissionsLayout', [ 'backbone', 'underscore', 'jquery' ], function(Backbone, _, $) {
 	return Backbone.View.extend({
-		template : org.networkedassets.personalstash.permissions.layout,
+		template : org.networkedassets.personalrepos.permissions.layout,
 		pressedButtonAttr : 'aria-pressed',
 		
 		events : {
@@ -28,12 +28,12 @@ define('PermissionsLayout', [ 'backbone', 'underscore', 'jquery' ], function(Bac
 			    height: 250, 
 			    closeOnOutsideClick: true
 			});
-			dialog.addHeader(AJS.I18n.getText('org.networkedassets.atlassian.stash.personalstash.permissions.mode.change.confirmation.header'));
-			dialog.addPanel("Panel", AJS.I18n.getText('org.networkedassets.atlassian.stash.personalstash.permissions.mode.change.confirmation.text'), "panel-body");
-			dialog.addButton(AJS.I18n.getText("org.networkedassets.atlassian.stash.personalstash.permissions.mode.change.confirmation.button.cancel"), function (dialog) {
+			dialog.addHeader(AJS.I18n.getText('org.networkedassets.atlassian.bitbucket.personalrepos.permissions.mode.change.confirmation.header'));
+			dialog.addPanel("Panel", AJS.I18n.getText('org.networkedassets.atlassian.bitbucket.personalrepos.permissions.mode.change.confirmation.text'), "panel-body");
+			dialog.addButton(AJS.I18n.getText("org.networkedassets.atlassian.bitbucket.personalrepos.permissions.mode.change.confirmation.button.cancel"), function (dialog) {
 			    dialog.hide();
 			});
-			dialog.addButton(AJS.I18n.getText("org.networkedassets.atlassian.stash.personalstash.permissions.mode.change.confirmation.button.ok"), _.bind(function (dialog) {
+			dialog.addButton(AJS.I18n.getText("org.networkedassets.atlassian.bitbucket.personalrepos.permissions.mode.change.confirmation.button.ok"), _.bind(function (dialog) {
 				dialog.hide();
 				opts.ok();
 			}, this));

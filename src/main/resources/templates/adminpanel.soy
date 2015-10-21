@@ -1,4 +1,4 @@
-{namespace org.networkedassets.personalstash}
+{namespace org.networkedassets.personalrepos}
 /**
  * Displays admin panel
  * @param baseApiPath
@@ -7,11 +7,11 @@
 <html>
 
 	<head>
-		<title>{getText('org.networkedassets.atlassian.stash.personalstash.page.title')}</title>
+		<title>{getText('org.networkedassets.atlassian.bitbucket.personalrepos.page.title')}</title>
 		<meta name="decorator" content="atl.admin">
 		<meta name="activeTab" content="admin-personal-repos">
 		{webResourceManager_requireResource('com.atlassian.auiplugin:aui-select2')}
-		{webResourceManager_requireResource('org.networkedassets.atlassian.stash.personalstash:web-resources')}
+		{webResourceManager_requireResource('org.networkedassets.atlassian.bitbucket.personalrepos:web-resources')}
 	</head>
 
 	<body>
@@ -29,7 +29,7 @@
 		<header class="aui-page-header personal-repositories-header">
 			<div class="aui-page-header-inner">
 				<div class="aui-page-header-main">
-					<h2>{getText('org.networkedassets.atlassian.stash.personalstash.header')}</h2>
+					<h2>{getText('org.networkedassets.atlassian.bitbucket.personalrepos.header')}</h2>
 				</div>
 			</div>
 		</header>
@@ -39,10 +39,10 @@
 				<div class="aui-navgroup-primary">
 					<ul class="aui-nav">
 						<li class="section-tab permissions">
-							<a href="#permissions">{getText('org.networkedassets.atlassian.stash.personalstash.permissions.section.header')}</a>
+							<a href="#permissions">{getText('org.networkedassets.atlassian.bitbucket.personalrepos.permissions.section.header')}</a>
 						</li>
 						<li class="section-tab repositories">
-							<a href="#repositories">{getText('org.networkedassets.atlassian.stash.personalstash.repositories.header')}</a>
+							<a href="#repositories">{getText('org.networkedassets.atlassian.bitbucket.personalrepos.repositories.header')}</a>
 						</li>
 					</ul>
 				</div>

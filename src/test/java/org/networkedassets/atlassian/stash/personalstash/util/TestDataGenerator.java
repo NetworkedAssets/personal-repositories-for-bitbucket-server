@@ -1,4 +1,4 @@
-package org.networkedassets.atlassian.stash.personalstash.util;
+package org.networkedassets.atlassian.bitbucket.personalrepos.util;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,7 +27,7 @@ public class TestDataGenerator {
 
 	private final Logger log = LoggerFactory.getLogger(TestDataGenerator.class);
 
-	private static final String REST_API_URL = "http://localhost:7990/stash/rest/api/1.0/";
+	private static final String REST_API_URL = "http://localhost:7990/bitbucket/rest/api/1.0/";
 	private static final int NUMBER_OF_USERS = 100;
 	private static final double HAVING_PERSONAL_REPOSITORY_PROBABILITY = 0.9;
 	private static final int MAX_REPOS_PER_USER = 10;

@@ -1,4 +1,4 @@
-{namespace org.networkedassets.personalstash.repositories}
+{namespace org.networkedassets.personalrepos.repositories}
 
 /**
  * Groups table
@@ -12,11 +12,11 @@
 		</td>
         <td>
         	{if $owner.isActive}
-	        	{call org.networkedassets.personalstash.userWithAvatar}
+	        	{call org.networkedassets.personalrepos.userWithAvatar}
 	        		{param user: $owner/}
 	        	{/call}
         	{else}
-        		{call org.networkedassets.personalstash.inactiveUserWithAvatar}
+        		{call org.networkedassets.personalrepos.inactiveUserWithAvatar}
 	        		{param user: $owner/}
 	        	{/call}
         	{/if}

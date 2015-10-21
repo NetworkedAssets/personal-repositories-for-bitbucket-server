@@ -1,4 +1,4 @@
-{namespace org.networkedassets.personalstash.license}
+{namespace org.networkedassets.personalrepos.license}
 
 /**
  * Displays admin panel
@@ -10,29 +10,29 @@
 <head>
 <meta name="decorator" content="atl.admin">
 <meta name="activeTab" content="admin-private-repos">
-{webResourceManager_requireResource('org.networkedassets.atlassian.stash.personalstash:license-web-resources')}
-<title>{getText('org.networkedassets.atlassian.stash.personalstash.page.title')}</title>
+{webResourceManager_requireResource('org.networkedassets.atlassian.bitbucket.personalrepos:license-web-resources')}
+<title>{getText('org.networkedassets.atlassian.bitbucket.personalrepos.page.title')}</title>
 </head>
 <body>
 	<div class="license-error">
-		<h3>{getText('org.networkedassets.atlassian.stash.personalstash.license.error.header')}</h3>
+		<h3>{getText('org.networkedassets.atlassian.bitbucket.personalrepos.license.error.header')}</h3>
 		<p>
 		{switch $status}
 			{case 'EXPIRED'}
-				{getText('org.networkedassets.atlassian.stash.personalstash.license.error.expired')}
+				{getText('org.networkedassets.atlassian.bitbucket.personalrepos.license.error.expired')}
 			{case 'NO_LICENSE'}
-				{getText('org.networkedassets.atlassian.stash.personalstash.license.error.no_license')}
+				{getText('org.networkedassets.atlassian.bitbucket.personalrepos.license.error.no_license')}
 			{case 'TYPE_MISMATCH'}
-				{getText('org.networkedassets.atlassian.stash.personalstash.license.error.type_mismatch')}
+				{getText('org.networkedassets.atlassian.bitbucket.personalrepos.license.error.type_mismatch')}
 			{case 'USER_MISMATCH'}
-				{getText('org.networkedassets.atlassian.stash.personalstash.license.error.user_mismatch')}
+				{getText('org.networkedassets.atlassian.bitbucket.personalrepos.license.error.user_mismatch')}
 			{case 'VERSION_MISMATCH'}
-				{getText('org.networkedassets.atlassian.stash.personalstash.license.error.version_mismatch')}
+				{getText('org.networkedassets.atlassian.bitbucket.personalrepos.license.error.version_mismatch')}
 			{default}
-				{getText('org.networkedassets.atlassian.stash.personalstash.license.error.default')} {$status}
+				{getText('org.networkedassets.atlassian.bitbucket.personalrepos.license.error.default')} {$status}
 		{/switch}	
 		</p>
-		<a class="aui-button aui-button-primary" href="../upm#manage">{getText('org.networkedassets.atlassian.stash.personalstash.license.error.upmlink')}</a>
+		<a class="aui-button aui-button-primary" href="../upm#manage">{getText('org.networkedassets.atlassian.bitbucket.personalrepos.license.error.upmlink')}</a>
 	</div>
 </body>
 </html>
