@@ -138,28 +138,28 @@
 		<resource type="download" name="App.js" location="/js/App.js" />
 	</web-resource>
 
-	<bitbucket-resource key="templates-soy" name="Soy Templates">
+	<client-resource key="templates-soy" name="Soy Templates">
 		<transformation extension="js">
 			<transformer key="jsI18n" />
 		</transformation>
 		<directory location="/templates/" />
-		<dependency>com.atlassian.bitbucket.bitbucket-web-plugin:global</dependency>
+		<dependency>com.atlassian.bitbucket.server.bitbucket-web:global</dependency>
 		<dependency>com.atlassian.auiplugin:aui-select2</dependency>
 		<dependency>org.networkedassets.atlassian.bitbucket.personalrepos:web-resources</dependency>
-	</bitbucket-resource>
+	</client-resource>
 
 	<web-resource key="license-web-resources" name="License web resources">
 		<resource type="download" name="license.css" location="/css/license.css" />
 	</web-resource>
 
-	<bitbucket-resource key="license-servlet-resources" name="License template resources">
+	<client-resource key="license-servlet-resources" name="License template resources">
 		<transformation extension="js">
 			<transformer key="jsI18n" />
 		</transformation>
 		<directory location="/templates/license" />
 		<dependency>org.networkedassets.atlassian.bitbucket.personalrepos:license-web-resources</dependency>
-		<dependency>com.atlassian.bitbucket.bitbucket-web-plugin:global</dependency>
-	</bitbucket-resource>
+		<dependency>com.atlassian.bitbucket.server.bitbucket-web:global</dependency>
+	</client-resource>
 
 
 	<component-import key="soyTemplateRenderer"

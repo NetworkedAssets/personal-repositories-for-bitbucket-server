@@ -158,16 +158,16 @@
 		<plugins>
 			<plugin>
 				<groupId>com.atlassian.maven.plugins</groupId>
-				<artifactId>maven-stash-plugin</artifactId>
+				<artifactId>bitbucket-maven-plugin</artifactId>
 				<version>${amps.version}</version>
 				<extensions>true</extensions>
 				<configuration>
 					<products>
 						<product>
-							<id>stash</id>
-							<instanceId>stash</instanceId>
-							<version>${stash.runtime.version}</version>
-							<dataVersion>${stash.data.version}</dataVersion>
+							<id>bitbucket</id>
+							<instanceId>bitbucket</instanceId>
+							<version>${bitbucket.runtime.version}</version>
+							<dataVersion>${bitbucket.data.version}</dataVersion>
 						</product>
 					</products>
 				</configuration>
@@ -219,8 +219,8 @@
 								<pluginExecution>
 									<pluginExecutionFilter>
 										<groupId>com.atlassian.maven.plugins</groupId>
-										<artifactId>maven-stash-plugin</artifactId>
-										<versionRange>[4.2.18,)</versionRange>
+										<artifactId>bitbucket-maven-plugin</artifactId>
+										<versionRange>0.0</versionRange>
 										<goals>
 											<goal>generate-rest-docs</goal>
 											<goal>copy-bundled-dependencies</goal>
@@ -244,9 +244,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<stash.version>3.6.1</stash.version>
 		<bitbucket.version>4.0.3</bitbucket.version>
+        <bitbucket.runtime.version>${bitbucket.version}</bitbucket.runtime.version>
+        <bitbucket.data.version>${bitbucket.runtime.version}</bitbucket.data.version>
 		<stash.runtime.version>${stash.version}</stash.runtime.version>
 		<stash.data.version>${stash.runtime.version}</stash.data.version>
-		<amps.version>5.0.13</amps.version>
+        <amps.version>6.1.0-6cf99b0</amps.version>
 		<plugin.testrunner.version>1.1.4</plugin.testrunner.version>
 		<upm.license.compatibility.version>2.14.4</upm.license.compatibility.version>
 	</properties>
