@@ -248,7 +248,7 @@
         <bitbucket.data.version>${bitbucket.runtime.version}</bitbucket.data.version>
 		<stash.runtime.version>${stash.version}</stash.runtime.version>
 		<stash.data.version>${stash.runtime.version}</stash.data.version>
-        <amps.version>6.1.0-6cf99b0</amps.version>
+        <amps.version>6.1.0</amps.version>
 		<plugin.testrunner.version>1.1.4</plugin.testrunner.version>
 		<upm.license.compatibility.version>2.14.4</upm.license.compatibility.version>
 	</properties>
