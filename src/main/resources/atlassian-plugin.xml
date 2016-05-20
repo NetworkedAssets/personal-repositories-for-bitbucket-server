@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<atlassian-plugin key="${project.groupId}.${project.artifactId}"
+<!-- Please don't change the plugin key, it is needed as it is so the Atlassian Marketplace works -->
+<atlassian-plugin key="org.networkedassets.atlassian.stash.personalstash"
 	name="${project.name}" plugins-version="2">
 	<plugin-info>
 		<description>${project.description}</description>
