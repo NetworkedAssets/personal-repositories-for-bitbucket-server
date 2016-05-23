@@ -166,8 +166,8 @@
 						<product>
 							<id>bitbucket</id>
 							<instanceId>bitbucket</instanceId>
-							<version>${bitbucket.runtime.version}</version>
-							<dataVersion>${bitbucket.data.version}</dataVersion>
+							<version>4.6.1</version>
+							<dataVersion>4.6.1</dataVersion>
 						</product>
 					</products>
 				</configuration>

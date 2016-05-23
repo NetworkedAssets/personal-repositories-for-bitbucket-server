@@ -145,7 +145,7 @@
 		<directory location="/templates/" />
 		<dependency>com.atlassian.bitbucket.server.bitbucket-web:global</dependency>
 		<dependency>com.atlassian.auiplugin:aui-select2</dependency>
-		<dependency>org.networkedassets.atlassian.bitbucket.personalrepos:web-resources</dependency>
+		<dependency>org.networkedassets.atlassian.stash.personalstash:web-resources</dependency>
 	</client-resource>
 
 	<web-resource key="license-web-resources" name="License web resources">
@@ -157,7 +157,7 @@
 			<transformer key="jsI18n" />
 		</transformation>
 		<directory location="/templates/license" />
-		<dependency>org.networkedassets.atlassian.bitbucket.personalrepos:license-web-resources</dependency>
+		<dependency>org.networkedassets.atlassian.stash.personalstash:license-web-resources</dependency>
 		<dependency>com.atlassian.bitbucket.server.bitbucket-web:global</dependency>
 	</client-resource>
 
