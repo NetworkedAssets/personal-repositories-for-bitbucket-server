@@ -14,7 +14,7 @@
 		<param name="vendor-icon">images/vendorIcon.jpg</param>
 
 
-		<param name="atlassian-licensing-enabled">true</param>
+		<param name="atlassian-licensing-enabled">false</param>
 
 		<param key="post-install-url" name="post.install.url">/plugins/servlet/personalrepos/admin
 		</param>
