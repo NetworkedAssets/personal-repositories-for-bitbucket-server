@@ -1,4 +1,4 @@
-# Manage My  Tree
+# Personal Repositories for Bitbucket Server
 
 ## Overview
 Personal Repositories for Bitbucket Server is a plugin for Atlassian Bitbucket Server that helps you organise personal repositories in you Git instance.
